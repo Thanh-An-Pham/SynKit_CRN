@@ -1,0 +1,433 @@
+{
+  "checks": {
+    "deficiency_identity_holds": true,
+    "every_model_parsed": true,
+    "every_reaction_model_round_trips": true,
+    "reaction_free_models_are_flagged": true
+  },
+  "claim_boundary": "This is an interoperability and scale probe over a small, hand-picked sample of curated models. It is not a systematic survey of BioModels and supports no claim about coverage of the repository.",
+  "environment": {
+    "cpu_count": 22,
+    "git_commit": "22b007ed0d93755fcb95291784b39f96ced68e14",
+    "git_dirty": false,
+    "machine": "x86_64",
+    "networkx": "3.5",
+    "numpy": "2.3.3",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.0",
+    "synkit": "1.6.2"
+  },
+  "largest_model_completing_siphons": {
+    "bytes": 1126800,
+    "crnt_seconds": 19.78281813801732,
+    "deficiency": 317,
+    "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000255?filename=BIOMD0000000255_url.xml",
+    "model_id": "BIOMD0000000255",
+    "moiety_error": "timeout",
+    "moiety_seconds": null,
+    "n_complexes": 1087,
+    "n_conserved_moieties": null,
+    "n_linkage_classes": 284,
+    "n_minimal_siphons": 8,
+    "n_reactions": 827,
+    "n_species": 504,
+    "parse_seconds": 0.06737892999080941,
+    "persistence_seconds": null,
+    "persistent": null,
+    "rank": 486,
+    "roundtrip_ok": true,
+    "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+    "roundtrip_seconds": 0.09887619499932043,
+    "selection": {
+      "reason": "analysis ceiling probe",
+      "stratum": "largest"
+    },
+    "sha256": "03aebed53a9331903ccd6b73d0a60c2c588a9bd829ccbf7cb1d7ead785baa457",
+    "siphon_seconds": 43.7607473609969,
+    "warnings": [],
+    "weakly_reversible": false
+  },
+  "models": [
+    {
+      "bytes": 50538,
+      "crnt_seconds": 0.016374768980313092,
+      "deficiency": 0,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000001?filename=BIOMD0000000001_url.xml",
+      "model_id": "BIOMD0000000001",
+      "moiety_seconds": 0.006514229986350983,
+      "n_complexes": 12,
+      "n_conserved_moieties": 1,
+      "n_linkage_classes": 1,
+      "n_minimal_siphons": 1,
+      "n_reactions": 17,
+      "n_species": 12,
+      "parse_seconds": 0.0014708749949932098,
+      "persistence_seconds": 0.008143021987052634,
+      "persistent": false,
+      "rank": 11,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.001994231977732852,
+      "selection": {
+        "reason": "canonical curated model",
+        "stratum": "small"
+      },
+      "sha256": "407fccc883f80e6d120e34d8b0810a206a5cc6535a26d4574611504e683beb08",
+      "siphon_seconds": 0.0012552289990708232,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 29295,
+      "crnt_seconds": 0.009155745996395126,
+      "deficiency": 0,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000010?filename=BIOMD0000000010_url.xml",
+      "model_id": "BIOMD0000000010",
+      "moiety_seconds": 0.0025319929991383106,
+      "n_complexes": 8,
+      "n_conserved_moieties": 3,
+      "n_linkage_classes": 3,
+      "n_minimal_siphons": 3,
+      "n_reactions": 10,
+      "n_species": 8,
+      "parse_seconds": 0.0012249359861016273,
+      "persistence_seconds": 0.0032459009962622076,
+      "persistent": false,
+      "rank": 5,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.0011552500072866678,
+      "selection": {
+        "reason": "small Core reaction model",
+        "stratum": "small"
+      },
+      "sha256": "906964e07ffd570ad94a03c1222e230b54b913cd536b008392bfb6155930a966",
+      "siphon_seconds": 0.00027204398065805435,
+      "warnings": [],
+      "weakly_reversible": true
+    },
+    {
+      "bytes": 125408,
+      "crnt_seconds": 0.049958091985899955,
+      "deficiency": 8,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000051?filename=BIOMD0000000051_url.xml",
+      "model_id": "BIOMD0000000051",
+      "moiety_seconds": 0.021929848997388035,
+      "n_complexes": 30,
+      "n_conserved_moieties": 0,
+      "n_linkage_classes": 4,
+      "n_minimal_siphons": 0,
+      "n_reactions": 48,
+      "n_species": 18,
+      "parse_seconds": 0.004686643980676308,
+      "persistence_seconds": 0.00042641902109608054,
+      "persistent": true,
+      "rank": 18,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.0036879870167467743,
+      "selection": {
+        "reason": "additional small topology",
+        "stratum": "small"
+      },
+      "sha256": "167e78583aa85b49c0e283543f5c80e826a16d23cc06bb34e60c6dfbeb67f3fc",
+      "siphon_seconds": 0.0004134009941481054,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 103423,
+      "crnt_seconds": 0.024968245008494705,
+      "deficiency": 0,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000064?filename=BIOMD0000000064_url.xml",
+      "model_id": "BIOMD0000000064",
+      "moiety_seconds": 0.04445013400982134,
+      "n_complexes": 30,
+      "n_conserved_moieties": 11,
+      "n_linkage_classes": 13,
+      "n_minimal_siphons": 7,
+      "n_reactions": 17,
+      "n_species": 26,
+      "parse_seconds": 0.003438443993218243,
+      "persistence_seconds": 1.3946052470128052,
+      "persistent": false,
+      "rank": 17,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.002492761006578803,
+      "selection": {
+        "reason": "additional small topology",
+        "stratum": "small"
+      },
+      "sha256": "d6a75df939d6707fdb904b44c1f530c8dc3600fd44267ff8e8f38dac560b4361",
+      "siphon_seconds": 1.2181056849949528,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 28014,
+      "crnt_seconds": 0.01575498000602238,
+      "deficiency": 8,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000108?filename=BIOMD0000000108_url.xml",
+      "model_id": "BIOMD0000000108",
+      "moiety_seconds": 0.002613899006973952,
+      "n_complexes": 16,
+      "n_conserved_moieties": 2,
+      "n_linkage_classes": 1,
+      "n_minimal_siphons": 2,
+      "n_reactions": 17,
+      "n_species": 9,
+      "parse_seconds": 0.0015464180032722652,
+      "persistence_seconds": 0.0024340180098079145,
+      "persistent": false,
+      "rank": 7,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.0011416130000725389,
+      "selection": {
+        "reason": "small sparse model",
+        "stratum": "small"
+      },
+      "sha256": "759eeb87fbf2fb97d3017770246d77b76d54aacd612f492557419786f0d4b274",
+      "siphon_seconds": 0.00013079697964712977,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 136641,
+      "crnt_seconds": 0.056056824978441,
+      "deficiency": 13,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000404?filename=BIOMD0000000404_url.xml",
+      "model_id": "BIOMD0000000404",
+      "moiety_seconds": 0.08224071800941601,
+      "n_complexes": 55,
+      "n_conserved_moieties": 10,
+      "n_linkage_classes": 23,
+      "n_minimal_siphons": 6,
+      "n_reactions": 35,
+      "n_species": 29,
+      "parse_seconds": 0.003360948001500219,
+      "persistence_seconds": 1.8266963830101304,
+      "persistent": false,
+      "rank": 19,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.003797452023718506,
+      "selection": {
+        "reason": "mid-sized Core model",
+        "stratum": "medium"
+      },
+      "sha256": "ec4a211cfc5aefa6a7264523b6208caccd6229f8162db9dfbf0250fe48a93075",
+      "siphon_seconds": 1.561339785985183,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 131400,
+      "crnt_seconds": 0.057865998009219766,
+      "deficiency": 0,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000637?filename=BIOMD0000000637_url.xml",
+      "model_id": "BIOMD0000000637",
+      "moiety_seconds": 0.015751958009786904,
+      "n_complexes": 25,
+      "n_conserved_moieties": 6,
+      "n_linkage_classes": 19,
+      "n_minimal_siphons": 3,
+      "n_reactions": 35,
+      "n_species": 12,
+      "parse_seconds": 0.0040694269991945475,
+      "persistence_seconds": 0.017919070000061765,
+      "persistent": false,
+      "rank": 6,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.0031119179911911488,
+      "selection": {
+        "reason": "mid-sized Core model",
+        "stratum": "medium"
+      },
+      "sha256": "c16855da7b78f12b161e125af43c93bc77f9a2d86d9c1ef3aac698c20f2f792a",
+      "siphon_seconds": 0.001134103978984058,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 153594,
+      "crnt_seconds": 0.5435548480018042,
+      "deficiency": 41,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000019?filename=BIOMD0000000019_url.xml",
+      "model_id": "BIOMD0000000019",
+      "moiety_seconds": 3.261151854007039,
+      "n_complexes": 157,
+      "n_conserved_moieties": 19,
+      "n_linkage_classes": 35,
+      "n_minimal_siphons": 7,
+      "n_reactions": 125,
+      "n_species": 100,
+      "parse_seconds": 0.008569321013055742,
+      "persistence_seconds": 11.406343297014246,
+      "persistent": false,
+      "rank": 81,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.013764469011221081,
+      "selection": {
+        "reason": "large curated model",
+        "stratum": "large"
+      },
+      "sha256": "541c2a16196dfcd0649df14cff51fb80fc4157bad041c562b17679552baeff48",
+      "siphon_seconds": 6.962680245982483,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 227645,
+      "crnt_seconds": 0.3953257919929456,
+      "deficiency": 6,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000175?filename=BIOMD0000000175_url.xml",
+      "model_id": "BIOMD0000000175",
+      "moiety_seconds": 5.831323738006176,
+      "n_complexes": 174,
+      "n_conserved_moieties": 30,
+      "n_linkage_classes": 74,
+      "n_minimal_siphons": 9,
+      "n_reactions": 102,
+      "n_species": 120,
+      "parse_seconds": 0.009650001011323184,
+      "persistence_seconds": 8.06409602399799,
+      "persistent": false,
+      "rank": 94,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.07113219998427667,
+      "selection": {
+        "reason": "large curated model",
+        "stratum": "large"
+      },
+      "sha256": "e909b41c2c629cc7a287b5e7fa55c0881b549583f84891877eb811bdea493c6e",
+      "siphon_seconds": 4.013921024976298,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 1126800,
+      "crnt_seconds": 19.78281813801732,
+      "deficiency": 317,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000255?filename=BIOMD0000000255_url.xml",
+      "model_id": "BIOMD0000000255",
+      "moiety_error": "timeout",
+      "moiety_seconds": null,
+      "n_complexes": 1087,
+      "n_conserved_moieties": null,
+      "n_linkage_classes": 284,
+      "n_minimal_siphons": 8,
+      "n_reactions": 827,
+      "n_species": 504,
+      "parse_seconds": 0.06737892999080941,
+      "persistence_seconds": null,
+      "persistent": null,
+      "rank": 486,
+      "roundtrip_ok": true,
+      "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
+      "roundtrip_seconds": 0.09887619499932043,
+      "selection": {
+        "reason": "analysis ceiling probe",
+        "stratum": "largest"
+      },
+      "sha256": "03aebed53a9331903ccd6b73d0a60c2c588a9bd829ccbf7cb1d7ead785baa457",
+      "siphon_seconds": 43.7607473609969,
+      "warnings": [],
+      "weakly_reversible": false
+    },
+    {
+      "bytes": 43033,
+      "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000562?filename=BIOMD0000000562_url.xml",
+      "model_id": "BIOMD0000000562",
+      "n_reactions": 0,
+      "n_species": 0,
+      "parse_seconds": 0.0014993470103945583,
+      "selection": {
+        "reason": "SBML-qual model with no Core reactions",
+        "stratum": "negative-control"
+      },
+      "sha256": "29f773166873fc7441a9241e139adf6a8262a000e8a3eb16cb2b7cb9c425c45d",
+      "skipped": "no reactions declared",
+      "warnings": [
+        "SBML model 'MODEL1411240000' declares no reactions (the model uses the SBML qual package (qualitative species and transitions), which describes a logical model rather than a reaction network); the resulting network is empty."
+      ]
+    }
+  ],
+  "parameters": {
+    "budget_seconds": 120.0,
+    "offline": false
+  },
+  "schema": "synkit.crn-biomodels/1",
+  "selection_protocol": {
+    "kind": "predeclared size-varied interoperability probe",
+    "manifest": {
+      "BIOMD0000000001": {
+        "reason": "canonical curated model",
+        "stratum": "small"
+      },
+      "BIOMD0000000010": {
+        "reason": "small Core reaction model",
+        "stratum": "small"
+      },
+      "BIOMD0000000019": {
+        "reason": "large curated model",
+        "stratum": "large"
+      },
+      "BIOMD0000000051": {
+        "reason": "additional small topology",
+        "stratum": "small"
+      },
+      "BIOMD0000000064": {
+        "reason": "additional small topology",
+        "stratum": "small"
+      },
+      "BIOMD0000000108": {
+        "reason": "small sparse model",
+        "stratum": "small"
+      },
+      "BIOMD0000000175": {
+        "reason": "large curated model",
+        "stratum": "large"
+      },
+      "BIOMD0000000255": {
+        "reason": "analysis ceiling probe",
+        "stratum": "largest"
+      },
+      "BIOMD0000000404": {
+        "reason": "mid-sized Core model",
+        "stratum": "medium"
+      },
+      "BIOMD0000000562": {
+        "reason": "SBML-qual model with no Core reactions",
+        "stratum": "negative-control"
+      },
+      "BIOMD0000000637": {
+        "reason": "mid-sized Core model",
+        "stratum": "medium"
+      }
+    },
+    "strata": [
+      "large",
+      "largest",
+      "medium",
+      "negative-control",
+      "small"
+    ]
+  },
+  "source": {
+    "cache": "Experiment/CRN/data/biomodels",
+    "license": "CC0 1.0 Public Domain Dedication",
+    "note": "BioModels data are CC0. Files are cached locally but excluded from SynKit distributions to keep package artifacts small.",
+    "repository": "EBI BioModels",
+    "terms": "https://www.ebi.ac.uk/biomodels/termsofuse",
+    "url": "https://www.ebi.ac.uk/biomodels/"
+  },
+  "status": "PASS"
+}

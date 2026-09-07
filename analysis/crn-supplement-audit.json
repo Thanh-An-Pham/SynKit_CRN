@@ -1,0 +1,527 @@
+{
+  "checks": {
+    "cofactor_controls": true,
+    "exact_conservation": true,
+    "formose_replay": true,
+    "formose_routes": true,
+    "numerical_subspace_residual": true,
+    "printed_network_dimensions": true,
+    "replay": true,
+    "symmetry_complete": true,
+    "symmetry_counts": true
+  },
+  "environment": {
+    "cpu_count": 22,
+    "git_commit": "6ef7b1140b45fcf863658b41261df12deeb8ca5d",
+    "git_dirty": true,
+    "machine": "x86_64",
+    "networkx": "3.5",
+    "numpy": "2.3.3",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.0",
+    "synkit": "1.6.2"
+  },
+  "equations": {
+    "r1": "A + B >> C + D",
+    "r10": "S + C >> A + T",
+    "r11": "S + U >> T + V",
+    "r12": "A + G >> W + H",
+    "r13": "J + 2X + F >> 2O + R + 2Y",
+    "r14": "A + S >> T + W",
+    "r15": "T >> G",
+    "r16": "Z + C >> A + B + AA",
+    "r17": "Z + AB >> B + AA + AC",
+    "r18": "B + F >> E",
+    "r19": "Z + AD >> B + AA + AE",
+    "r2": "E >> B + F",
+    "r20": "F + H >> K + G",
+    "r21": "J >> I",
+    "r22": "M + N + O >> J + K + L",
+    "r23": "M + O + Q >> J + K + P",
+    "r24": "J + I >> H",
+    "r25": "R + C >> A + M",
+    "r26": "E >> R",
+    "r27": "AF + D >> AA + AG",
+    "r28": "L + AH + D >> N + O + AA + AI",
+    "r29": "P + AH + D >> O + Q + AA + AI",
+    "r3": "C + G >> A + H",
+    "r30": "2X + AH + D >> 2O + 2Y + AA + AI",
+    "r31": "AH + AJ >> AI + AK",
+    "r32": "AG + AL >> AF + AJ",
+    "r33": "L + AK >> N + O + AL",
+    "r34": "AH + AM + D >> AA + AI + AN",
+    "r4": "I >> J",
+    "r5": "J + K + L >> M + N + O",
+    "r6": "J + K + P >> M + O + Q",
+    "r7": "H >> J + I",
+    "r8": "A + M >> R + C",
+    "r9": "R >> E"
+  },
+  "formose_routes": [
+    {
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 2,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C=O": 1,
+          "O=CCO": 1
+        },
+        "max_depth_reached": 1,
+        "realizable": false,
+        "requested_flux": {
+          "r_1": 1,
+          "r_3": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "M1",
+      "target": "T4"
+    },
+    {
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 2,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C=O": 1,
+          "O=CCO": 1
+        },
+        "max_depth_reached": 1,
+        "realizable": false,
+        "requested_flux": {
+          "r_1": 2,
+          "r_3": 1,
+          "r_7": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "M1",
+      "target": "T6"
+    },
+    {
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 2,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C=O": 2,
+          "O=CCO": 1
+        },
+        "max_depth_reached": 1,
+        "realizable": false,
+        "requested_flux": {
+          "r_1": 1,
+          "r_3": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "M2",
+      "target": "T4"
+    },
+    {
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 2,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C=O": 2,
+          "O=CCO": 1
+        },
+        "max_depth_reached": 1,
+        "realizable": false,
+        "requested_flux": {
+          "r_1": 2,
+          "r_3": 1,
+          "r_7": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "M2",
+      "target": "T6"
+    },
+    {
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 2,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C=O": 4,
+          "O=CCO": 1
+        },
+        "max_depth_reached": 1,
+        "realizable": false,
+        "requested_flux": {
+          "r_1": 1,
+          "r_3": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "M3",
+      "target": "T4"
+    },
+    {
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 2,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C=O": 4,
+          "O=CCO": 1
+        },
+        "max_depth_reached": 1,
+        "realizable": false,
+        "requested_flux": {
+          "r_1": 2,
+          "r_3": 1,
+          "r_7": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "M3",
+      "target": "T6"
+    },
+    {
+      "outcome": {
+        "certificate": [
+          "r_1",
+          "r_3"
+        ],
+        "exhaustive": false,
+        "explored_states": 2,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C=O": 2,
+          "O=CCO": 2
+        },
+        "max_depth_reached": 2,
+        "realizable": true,
+        "requested_flux": {
+          "r_1": 1,
+          "r_3": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      },
+      "pool": "M4",
+      "target": "T4"
+    },
+    {
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 4,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C=O": 2,
+          "O=CCO": 2
+        },
+        "max_depth_reached": 2,
+        "realizable": false,
+        "requested_flux": {
+          "r_1": 2,
+          "r_3": 1,
+          "r_7": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "M4",
+      "target": "T6"
+    },
+    {
+      "outcome": {
+        "certificate": [
+          "r_1",
+          "r_3"
+        ],
+        "exhaustive": false,
+        "explored_states": 2,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C=O": 0,
+          "O=CCO": 3
+        },
+        "max_depth_reached": 2,
+        "realizable": true,
+        "requested_flux": {
+          "r_1": 1,
+          "r_3": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      },
+      "pool": "C2-only",
+      "target": "T4"
+    },
+    {
+      "outcome": {
+        "certificate": [
+          "r_1",
+          "r_1",
+          "r_3",
+          "r_7"
+        ],
+        "exhaustive": false,
+        "explored_states": 5,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C=O": 0,
+          "O=CCO": 3
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r_1": 2,
+          "r_3": 1,
+          "r_7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      },
+      "pool": "C2-only",
+      "target": "T6"
+    }
+  ],
+  "numerical_comparison": [
+    {
+      "exact_identity_holds": true,
+      "network": "reversible_isomerization",
+      "nullity": 1,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 1.1102230246251565e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "irreversible_isomerization",
+      "nullity": 1,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 0.0
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "isomerization_cycle",
+      "nullity": 1,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 2.220446049250313e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "disjoint_reversible_blocks",
+      "nullity": 3,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 1.1102230246251565e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "disjoint_blocks_with_stoichiometry",
+      "nullity": 3,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 1.1102230246251565e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "michaelis_menten",
+      "nullity": 2,
+      "rounded_invalid_vectors": 1,
+      "rounded_max_abs_residual": 1,
+      "svd_max_abs_residual": 2.220446049250313e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "reversible_michaelis_menten",
+      "nullity": 2,
+      "rounded_invalid_vectors": 1,
+      "rounded_max_abs_residual": 1,
+      "svd_max_abs_residual": 1.6653345369377348e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "edelstein",
+      "nullity": 1,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 0.0
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "futile_cycle_1_site",
+      "nullity": 3,
+      "rounded_invalid_vectors": 3,
+      "rounded_max_abs_residual": 1,
+      "svd_max_abs_residual": 3.3306690738754696e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "futile_cycle_2_site",
+      "nullity": 3,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 5.273559366969494e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "shinar_feinberg_acr",
+      "nullity": 1,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 1.1102230246251565e-16
+    },
+    {
+      "exact_identity_holds": true,
+      "network": "open_inflow_outflow",
+      "nullity": 0,
+      "rounded_invalid_vectors": 0,
+      "rounded_max_abs_residual": 0,
+      "svd_max_abs_residual": 0.0
+    }
+  ],
+  "numerical_method": "scipy.linalg.null_space(S.T); naive integer reconstruction = rint(1000*basis); exact residual checked on integer matrix",
+  "rank": 23,
+  "routes": [
+    {
+      "atp_tokens": 1,
+      "name": "ATP-dependent",
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 3,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C": 1,
+          "S": 1
+        },
+        "max_depth_reached": 2,
+        "realizable": false,
+        "requested_flux": {
+          "r10": 1,
+          "r15": 1,
+          "r3": 1,
+          "r7": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      }
+    },
+    {
+      "atp_tokens": 1,
+      "name": "ADP-dependent",
+      "outcome": {
+        "certificate": [
+          "r10",
+          "r15",
+          "r12",
+          "r7"
+        ],
+        "exhaustive": false,
+        "explored_states": 4,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C": 1,
+          "S": 1
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r10": 1,
+          "r12": 1,
+          "r15": 1,
+          "r7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      }
+    },
+    {
+      "atp_tokens": 2,
+      "name": "ATP-dependent",
+      "outcome": {
+        "certificate": [
+          "r10",
+          "r15",
+          "r3",
+          "r7"
+        ],
+        "exhaustive": false,
+        "explored_states": 4,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C": 2,
+          "S": 1
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r10": 1,
+          "r15": 1,
+          "r3": 1,
+          "r7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      }
+    },
+    {
+      "atp_tokens": 2,
+      "name": "ADP-dependent",
+      "outcome": {
+        "certificate": [
+          "r10",
+          "r15",
+          "r12",
+          "r7"
+        ],
+        "exhaustive": false,
+        "explored_states": 4,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C": 2,
+          "S": 1
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r10": 1,
+          "r12": 1,
+          "r15": 1,
+          "r7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      }
+    }
+  ],
+  "schema": "synkit.crn-supplement-audit/1",
+  "script_sha256": "2e919d0d800a71e9c421ca6a285b7ba14f38ba9e83ce850dc18a16e5952720b6",
+  "status": "PASS",
+  "symmetry": {
+    "formose": {
+      "automorphism_count": 512,
+      "complete": true
+    },
+    "glycolysis": {
+      "automorphism_count": 2,
+      "complete": true
+    }
+  }
+}

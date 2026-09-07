@@ -1,0 +1,472 @@
+{
+  "checks": {
+    "certificate_matches_requested_flux": true,
+    "deficiency_identity_holds": true,
+    "every_module_analysed": true,
+    "ferredoxin_couple_recovered": true,
+    "glucose_is_a_minimal_siphon": true,
+    "glycolysis_carbon_backbone_recovered": true,
+    "glycolytic_flux_is_realizable": true
+  },
+  "claim_boundary": "Conserved moieties, siphons and persistence are structural properties of the stoichiometry as curated by KEGG. They describe the module as written, not the in vivo pathway, and say nothing about flux magnitude, regulation or kinetics.",
+  "environment": {
+    "cpu_count": 22,
+    "git_commit": "22b007ed0d93755fcb95291784b39f96ced68e14",
+    "git_dirty": false,
+    "machine": "x86_64",
+    "networkx": "3.5",
+    "numpy": "2.3.3",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.0",
+    "synkit": "1.6.2"
+  },
+  "glycolysis_flux": {
+    "certificate": [
+      "R01786",
+      "R13199",
+      "R00756",
+      "R01068",
+      "R01015",
+      "R01061",
+      "R01061",
+      "R01512",
+      "R01512",
+      "R01518",
+      "R00658",
+      "R00200",
+      "R01518",
+      "R00658",
+      "R00200"
+    ],
+    "exhaustive": false,
+    "explored_states": 30,
+    "flux": {
+      "R00200": 2,
+      "R00658": 2,
+      "R00756": 1,
+      "R01015": 1,
+      "R01061": 2,
+      "R01068": 1,
+      "R01512": 2,
+      "R01518": 2,
+      "R01786": 1,
+      "R13199": 1
+    },
+    "initial_marking": {
+      "alpha-D-Glucose": 1
+    },
+    "max_depth_reached": 15,
+    "realizable": true,
+    "seconds": 0.002132321009412408,
+    "status": "realizable",
+    "termination_reason": "certificate"
+  },
+  "modules": [
+    {
+      "deficiency": 1,
+      "module_id": "M00001",
+      "module_name": "Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate",
+      "moieties": [
+        [
+          "Polyphosphate"
+        ],
+        [
+          "Oxidized ferredoxin",
+          "Reduced ferredoxin"
+        ],
+        [
+          "2-Phospho-D-glycerate",
+          "3-Phospho-D-glycerate",
+          "3-Phospho-D-glyceroyl phosphate",
+          "D-Fructose 1,6-bisphosphate",
+          "D-Fructose 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "Glycerone phosphate",
+          "Phosphoenolpyruvate",
+          "Pyruvate",
+          "alpha-D-Glucose",
+          "alpha-D-Glucose 6-phosphate"
+        ]
+      ],
+      "n_complexes": 16,
+      "n_linkage_classes": 4,
+      "n_reactions": 15,
+      "n_species": 14,
+      "persistent": false,
+      "rank": 11,
+      "seconds": 0.044669673981843516,
+      "siphons": [
+        [
+          "alpha-D-Glucose"
+        ],
+        [
+          "Polyphosphate"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ]
+      ],
+      "uncovered_siphons": [
+        [
+          "alpha-D-Glucose"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ]
+      ],
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 1,
+      "module_id": "M00307",
+      "module_name": "Pyruvate oxidation, pyruvate => acetyl-CoA",
+      "moieties": [
+        [
+          "Oxidized flavodoxin",
+          "Reduced flavodoxin"
+        ],
+        [
+          "Oxidized ferredoxin",
+          "Reduced ferredoxin"
+        ],
+        [
+          "CO2",
+          "Pyruvate"
+        ],
+        [
+          "Acetyl-CoA",
+          "CoA"
+        ],
+        [
+          "2-(alpha-Hydroxyethyl)thiamine diphosphate",
+          "Thiamin diphosphate"
+        ],
+        [
+          "Enzyme N6-(dihydrolipoyl)lysine",
+          "Enzyme N6-(lipoyl)lysine",
+          "[Dihydrolipoyllysine-residue acetyltransferase] S-acetyldihydrolipoyllysine"
+        ],
+        [
+          "2-(alpha-Hydroxyethyl)thiamine diphosphate",
+          "Acetyl-CoA",
+          "Pyruvate",
+          "[Dihydrolipoyllysine-residue acetyltransferase] S-acetyldihydrolipoyllysine"
+        ],
+        [
+          "CO2",
+          "CoA",
+          "Enzyme N6-(dihydrolipoyl)lysine",
+          "Enzyme N6-(lipoyl)lysine",
+          "Thiamin diphosphate"
+        ]
+      ],
+      "n_complexes": 14,
+      "n_linkage_classes": 7,
+      "n_reactions": 8,
+      "n_species": 13,
+      "persistent": false,
+      "rank": 6,
+      "seconds": 0.16231590998359025,
+      "siphons": [
+        [
+          "CoA"
+        ],
+        [
+          "Pyruvate"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ],
+        [
+          "Oxidized flavodoxin"
+        ],
+        [
+          "2-(alpha-Hydroxyethyl)thiamine diphosphate",
+          "Thiamin diphosphate"
+        ],
+        [
+          "Enzyme N6-(dihydrolipoyl)lysine",
+          "Enzyme N6-(lipoyl)lysine",
+          "[Dihydrolipoyllysine-residue acetyltransferase] S-acetyldihydrolipoyllysine"
+        ]
+      ],
+      "uncovered_siphons": [
+        [
+          "CoA"
+        ],
+        [
+          "Pyruvate"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ],
+        [
+          "Oxidized flavodoxin"
+        ]
+      ],
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 0,
+      "module_id": "M00009",
+      "module_name": "Citrate cycle (TCA cycle, Krebs cycle)",
+      "moieties": [
+        [
+          "Oxidized ferredoxin",
+          "Reduced ferredoxin"
+        ],
+        [
+          "IDP",
+          "ITP"
+        ],
+        [
+          "Hydroquinone",
+          "Quinone"
+        ],
+        [
+          "GDP",
+          "GTP"
+        ],
+        [
+          "CO2",
+          "Oxidized ferredoxin"
+        ],
+        [
+          "2-Oxoglutarate",
+          "CO2"
+        ],
+        [
+          "2-Oxoglutarate",
+          "Reduced ferredoxin"
+        ],
+        [
+          "Enzyme N6-(dihydrolipoyl)lysine",
+          "Enzyme N6-(lipoyl)lysine",
+          "[Dihydrolipoyllysine-residue succinyltransferase] S-succinyldihydrolipoyllysine"
+        ],
+        [
+          "Acetyl-CoA",
+          "CoA",
+          "Succinyl-CoA"
+        ],
+        [
+          "Acetate",
+          "Acetyl-CoA",
+          "Citrate"
+        ],
+        [
+          "(S)-Malate",
+          "2-Oxoglutarate",
+          "Citrate",
+          "Fumarate",
+          "Oxaloacetate",
+          "Succinate",
+          "Succinyl-CoA",
+          "[Dihydrolipoyllysine-residue succinyltransferase] S-succinyldihydrolipoyllysine"
+        ],
+        [
+          "(S)-Malate",
+          "Citrate",
+          "Fumarate",
+          "Oxaloacetate",
+          "Oxidized ferredoxin",
+          "Succinate",
+          "Succinyl-CoA",
+          "[Dihydrolipoyllysine-residue succinyltransferase] S-succinyldihydrolipoyllysine"
+        ]
+      ],
+      "n_complexes": 23,
+      "n_linkage_classes": 11,
+      "n_reactions": 12,
+      "n_species": 22,
+      "persistent": false,
+      "rank": 12,
+      "seconds": 1.8264053839957342,
+      "siphons": [
+        [
+          "IDP"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ],
+        [
+          "Quinone"
+        ],
+        [
+          "[Dihydrolipoyllysine-residue succinyltransferase] S-succinyldihydrolipoyllysine"
+        ],
+        [
+          "2-Oxoglutarate"
+        ],
+        [
+          "Acetate"
+        ],
+        [
+          "Acetyl-CoA",
+          "CoA",
+          "Succinyl-CoA"
+        ]
+      ],
+      "uncovered_siphons": [
+        [
+          "IDP"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ],
+        [
+          "Quinone"
+        ],
+        [
+          "[Dihydrolipoyllysine-residue succinyltransferase] S-succinyldihydrolipoyllysine"
+        ],
+        [
+          "2-Oxoglutarate"
+        ],
+        [
+          "Acetate"
+        ]
+      ],
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 0,
+      "module_id": "M00004",
+      "module_name": "Pentose phosphate pathway (Pentose phosphate cycle)",
+      "moieties": [
+        [
+          "6-Phospho-D-gluconate",
+          "D-Erythrose 4-phosphate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "D-Ribose 5-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
+          "Sedoheptulose 7-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "CO2",
+          "D-Erythrose 4-phosphate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Ribose 5-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
+          "Sedoheptulose 7-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ]
+      ],
+      "n_complexes": 14,
+      "n_linkage_classes": 4,
+      "n_reactions": 12,
+      "n_species": 12,
+      "persistent": false,
+      "rank": 10,
+      "seconds": 0.0425790449953638,
+      "siphons": [
+        [
+          "6-Phospho-D-gluconate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
+          "Sedoheptulose 7-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Erythrose 4-phosphate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Ribose 5-phosphate",
+          "D-Ribulose 5-phosphate",
+          "Sedoheptulose 7-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Erythrose 4-phosphate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "D-Ribose 5-phosphate",
+          "D-Ribulose 5-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ]
+      ],
+      "uncovered_siphons": [
+        [
+          "6-Phospho-D-gluconate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
+          "Sedoheptulose 7-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Erythrose 4-phosphate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Ribose 5-phosphate",
+          "D-Ribulose 5-phosphate",
+          "Sedoheptulose 7-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Erythrose 4-phosphate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "D-Ribose 5-phosphate",
+          "D-Ribulose 5-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ]
+      ],
+      "weakly_reversible": false
+    }
+  ],
+  "schema": "synkit.crn-kegg/1",
+  "source": {
+    "database": "KEGG MODULE (https://www.kegg.jp/kegg/module.html)",
+    "drop_currency": true,
+    "retrieved": "2026-08-16"
+  },
+  "status": "PASS"
+}

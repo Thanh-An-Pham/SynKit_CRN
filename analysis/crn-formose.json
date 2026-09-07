@@ -1,0 +1,298 @@
+{
+  "carbon_conservation": {
+    "coefficient_equals_carbon_count": true,
+    "entries": [
+      {
+        "carbons": 1,
+        "coefficient": 1,
+        "smiles": "C=O"
+      },
+      {
+        "carbons": 10,
+        "coefficient": 10,
+        "smiles": "O=C(C(O)CO)C(O)C(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 9,
+        "coefficient": 9,
+        "smiles": "O=C(C(O)CO)C(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 8,
+        "coefficient": 8,
+        "smiles": "O=C(C(O)CO)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 7,
+        "coefficient": 7,
+        "smiles": "O=C(C(O)CO)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 6,
+        "coefficient": 6,
+        "smiles": "O=C(C(O)CO)C(O)C(O)CO"
+      },
+      {
+        "carbons": 5,
+        "coefficient": 5,
+        "smiles": "O=C(C(O)CO)C(O)CO"
+      },
+      {
+        "carbons": 9,
+        "coefficient": 9,
+        "smiles": "O=C(CO)C(O)C(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 8,
+        "coefficient": 8,
+        "smiles": "O=C(CO)C(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 7,
+        "coefficient": 7,
+        "smiles": "O=C(CO)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 6,
+        "coefficient": 6,
+        "smiles": "O=C(CO)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 5,
+        "coefficient": 5,
+        "smiles": "O=C(CO)C(O)C(O)CO"
+      },
+      {
+        "carbons": 4,
+        "coefficient": 4,
+        "smiles": "O=C(CO)C(O)CO"
+      },
+      {
+        "carbons": 3,
+        "coefficient": 3,
+        "smiles": "O=C(CO)CO"
+      },
+      {
+        "carbons": 10,
+        "coefficient": 10,
+        "smiles": "O=CC(O)(C(O)CO)C(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 9,
+        "coefficient": 9,
+        "smiles": "O=CC(O)(C(O)CO)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 8,
+        "coefficient": 8,
+        "smiles": "O=CC(O)(C(O)CO)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 7,
+        "coefficient": 7,
+        "smiles": "O=CC(O)(C(O)CO)C(O)C(O)CO"
+      },
+      {
+        "carbons": 6,
+        "coefficient": 6,
+        "smiles": "O=CC(O)(C(O)CO)C(O)CO"
+      },
+      {
+        "carbons": 9,
+        "coefficient": 9,
+        "smiles": "O=CC(O)(CO)C(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 8,
+        "coefficient": 8,
+        "smiles": "O=CC(O)(CO)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 7,
+        "coefficient": 7,
+        "smiles": "O=CC(O)(CO)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 6,
+        "coefficient": 6,
+        "smiles": "O=CC(O)(CO)C(O)C(O)CO"
+      },
+      {
+        "carbons": 5,
+        "coefficient": 5,
+        "smiles": "O=CC(O)(CO)C(O)CO"
+      },
+      {
+        "carbons": 4,
+        "coefficient": 4,
+        "smiles": "O=CC(O)(CO)CO"
+      },
+      {
+        "carbons": 8,
+        "coefficient": 8,
+        "smiles": "O=CC(O)C(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 7,
+        "coefficient": 7,
+        "smiles": "O=CC(O)C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 6,
+        "coefficient": 6,
+        "smiles": "O=CC(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 5,
+        "coefficient": 5,
+        "smiles": "O=CC(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 4,
+        "coefficient": 4,
+        "smiles": "O=CC(O)C(O)CO"
+      },
+      {
+        "carbons": 3,
+        "coefficient": 3,
+        "smiles": "O=CC(O)CO"
+      },
+      {
+        "carbons": 2,
+        "coefficient": 2,
+        "smiles": "O=CCO"
+      },
+      {
+        "carbons": 6,
+        "coefficient": 6,
+        "smiles": "OC=C(O)C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 5,
+        "coefficient": 5,
+        "smiles": "OC=C(O)C(O)C(O)CO"
+      },
+      {
+        "carbons": 4,
+        "coefficient": 4,
+        "smiles": "OC=C(O)C(O)CO"
+      },
+      {
+        "carbons": 3,
+        "coefficient": 3,
+        "smiles": "OC=C(O)CO"
+      },
+      {
+        "carbons": 2,
+        "coefficient": 2,
+        "smiles": "OC=CO"
+      }
+    ],
+    "n_species": 37
+  },
+  "checks": {
+    "conservation_law_is_carbon_count": true,
+    "deficiency_identity_holds": true,
+    "iteration_4_size_is_stable": true,
+    "single_conservation_law": true,
+    "single_minimal_p_semiflow": true,
+    "two_minimal_siphons": true
+  },
+  "claim_boundary": "The expansion enumerates rule applications; it does not model kinetics, selectivity, thermodynamic favourability or yield. Recovering carbon conservation is a statement about the generated stoichiometry, not evidence about prebiotic plausibility.",
+  "environment": {
+    "cpu_count": 22,
+    "git_commit": "22b007ed0d93755fcb95291784b39f96ced68e14",
+    "git_dirty": false,
+    "machine": "x86_64",
+    "networkx": "3.5",
+    "numpy": "2.3.3",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.0",
+    "synkit": "1.6.2"
+  },
+  "growth": [
+    {
+      "iteration": 1,
+      "n_reactions": 1,
+      "n_species": 3,
+      "seconds": 0.04962455699569546
+    },
+    {
+      "iteration": 2,
+      "n_reactions": 4,
+      "n_species": 5,
+      "seconds": 0.07856947398977354
+    },
+    {
+      "iteration": 3,
+      "n_reactions": 10,
+      "n_species": 9,
+      "seconds": 0.12213923002127558
+    },
+    {
+      "iteration": 4,
+      "n_reactions": 44,
+      "n_species": 37,
+      "seconds": 0.2804255800147075
+    }
+  ],
+  "inputs": {
+    "analysed_iteration": 4,
+    "rules": [
+      "[C:1]([C:2]=[O:3])[H:4]>>[C:1]=[C:2][O:3][H:4]",
+      "[C:1]=[C:2][O:3][H:4].[O:5]=[C:6]>>[C:1]([C:2]=[O:3])[C:6][O:5][H:4]",
+      "[C:1]=[C:2][O:3][H:4]>>[C:1]([C:2]=[O:3])[H:4]",
+      "[C:1]([C:2]=[O:3])[C:6][O:5][H:4]>>[C:1]=[C:2][O:3][H:4].[O:5]=[C:6]"
+    ],
+    "seeds": [
+      "C=O",
+      "OCC=O"
+    ]
+  },
+  "schema": "synkit.crn-formose/1",
+  "status": "PASS",
+  "structure": {
+    "deficiency": 1,
+    "minimal_siphons": [
+      [
+        "C=O",
+        "O=CC(O)C(O)C(O)CO",
+        "O=CC(O)CO",
+        "OC=C(O)CO"
+      ],
+      [
+        "O=CC(O)C(O)C(O)C(O)CO",
+        "O=CC(O)C(O)C(O)CO",
+        "O=CC(O)C(O)CO",
+        "O=CC(O)CO",
+        "O=CCO",
+        "OC=C(O)C(O)CO",
+        "OC=C(O)CO",
+        "OC=CO"
+      ]
+    ],
+    "n_complexes": 54,
+    "n_conservation_laws": 1,
+    "n_conserved_moieties": 1,
+    "n_linkage_classes": 17,
+    "n_minimal_p_semiflows": 1,
+    "n_minimal_siphons": 2,
+    "n_minimal_t_semiflows": 7,
+    "n_minimal_traps": 15,
+    "n_reactions": 44,
+    "n_species": 37,
+    "n_terminal_strong_linkage_classes": 29,
+    "persistence_seconds": 2.8179108400072437,
+    "persistent": false,
+    "rank": 36,
+    "reversible": false,
+    "right_nullity": 8,
+    "siphon_seconds": 1.6674715720000677,
+    "t_semiflow_seconds": 0.16080096599762328,
+    "trap_seconds": 1.326831526006572,
+    "weakly_reversible": false
+  }
+}

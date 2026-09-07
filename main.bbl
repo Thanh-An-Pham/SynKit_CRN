@@ -1,0 +1,248 @@
+\begin{thebibliography}{41}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Kanehisa et~al(2025)Kanehisa, Furumichi, Sato, Matsuura, and
+  Ishiguro-Watanabe}]{kanehisa2025kegg}
+Kanehisa M, Furumichi M, Sato Y, Matsuura Y, Ishiguro-Watanabe M (2025) Kegg:
+  biological systems database as a model of the real world. Nucleic Acids
+  Research 53(D1):D672--D677, \doi{10.1093/nar/gkae909}
+
+\bibitem[{Ragueneau et~al(2026)Ragueneau, Gong, Sinquin, Sevilla, Beavers,
+  Grentner, Griss, Hogue, Li, Matthews et~al}]{ragueneau2026reactome}
+Ragueneau E, Gong C, Sinquin P, Sevilla C, Beavers D, Grentner A, Griss J,
+  Hogue GF, Li NT, Matthews L, et~al (2026) The reactome knowledgebase 2026.
+  Nucleic Acids Research 54(D1):D673--D681, \doi{10.1093/nar/gkaf1223}
+
+\bibitem[{Agrawal et~al(2024)Agrawal, Balc{\i}, Hanspers, Coort, Martens,
+  Slenter, Ehrhart, Digles, Waagmeester, Wassink
+  et~al}]{agrawal2024wikipathways}
+Agrawal A, Balc{\i} H, Hanspers K, Coort SL, Martens M, Slenter DN, Ehrhart F,
+  Digles D, Waagmeester A, Wassink I, et~al (2024) Wikipathways 2024: next
+  generation pathway database. Nucleic Acids Research 52(D1):D679--D689,
+  \doi{10.1093/nar/gkad960}
+
+\bibitem[{Andersen et~al(2016)Andersen, Flamm, Merkle, and
+  Stadler}]{andersen2016mod}
+Andersen JL, Flamm C, Merkle D, Stadler PF (2016) A software package for
+  chemically inspired graph transformation. In: International conference on
+  graph transformation, Springer, Lecture Notes in Computer Science, vol 9761,
+  pp 73--88, \doi{10.1007/978-3-319-40530-8_5}
+
+\bibitem[{Franzese et~al(2019)Franzese, Groce, Murali, and
+  Ritz}]{franzese2019hypergraph}
+Franzese N, Groce A, Murali T, Ritz A (2019) Hypergraph-based connectivity
+  measures for signaling pathway topologies. PLoS Computational Biology
+  15(10):e1007,384, \doi{10.1371/journal.pcbi.1007384}
+
+\bibitem[{Andersen et~al(2023)Andersen, Banke, Fagerberg, Flamm, Merkle, and
+  Stadler}]{andersen2023realisability}
+Andersen JL, Banke S, Fagerberg R, Flamm C, Merkle D, Stadler PF (2023) On the
+  realisability of chemical pathways. In: Bioinformatics Research and
+  Applications, International Symposium on Bioinformatics Research and
+  Applications, vol 14248, Springer, pp 409--419,
+  \doi{10.1007/978-981-99-7074-2_32}
+
+\bibitem[{Ebrahim et~al(2013)Ebrahim, Lerman, Palsson, and
+  Hyduke}]{ebrahim2013cobrapy}
+Ebrahim A, Lerman JA, Palsson BO, Hyduke DR (2013) Cobrapy: constraints-based
+  reconstruction and analysis for python. BMC Systems Biology 7:74,
+  \doi{10.1186/1752-0509-7-74}
+
+\bibitem[{Orth et~al(2010)Orth, Thiele, and Palsson}]{orth2010fba}
+Orth JD, Thiele I, Palsson B{\O} (2010) What is flux balance analysis? Nature
+  Biotechnology 28(3):245--248, \doi{10.1038/nbt.1614}
+
+\bibitem[{Schuster and Hilgetag(1994)}]{schuster1994efm}
+Schuster S, Hilgetag C (1994) On elementary flux modes in biochemical reaction
+  systems at steady state. Journal of Biological Systems 2(02):165--182,
+  \doi{10.1142/S0218339094000131}
+
+\bibitem[{Reyes et~al(2020)Reyes, Otero-Muras, Shuen, Tartakovsky, and
+  Petyuk}]{reyes2020crnt4sbml}
+Reyes BC, Otero-Muras I, Shuen MT, Tartakovsky AM, Petyuk VA (2020) Crnt4sbml:
+  a python package for the detection of bistability in biochemical reaction
+  networks. Bioinformatics 36(12):3922--3924,
+  \doi{10.1093/bioinformatics/btaa241}
+
+\bibitem[{Choi et~al(2018)Choi, Medley, K{\"o}nig, Stocking, Smith, Gu, and
+  Sauro}]{choi2018tellurium}
+Choi K, Medley JK, K{\"o}nig M, Stocking K, Smith L, Gu S, Sauro HM (2018)
+  Tellurium: An extensible python-based modeling environment for systems and
+  synthetic biology. BioSystems 171:74--79,
+  \doi{10.1016/j.biosystems.2018.07.006}
+
+\bibitem[{Welsh et~al(2023)Welsh, Xu, Smith, K{\"o}nig, Choi, and
+  Sauro}]{welsh2023libroadrunner}
+Welsh C, Xu J, Smith L, K{\"o}nig M, Choi K, Sauro HM (2023) libroadrunner 2.0:
+  a high performance sbml simulation and analysis library. Bioinformatics
+  39(1):btac770, \doi{10.1093/bioinformatics/btac770}
+
+\bibitem[{Zevedei-Oancea and Schuster(2003)}]{zevedei2003topological}
+Zevedei-Oancea I, Schuster S (2003) Topological analysis of metabolic networks
+  based on {P}etri net theory. In Silico Biology 3(3):323--345
+
+\bibitem[{Murata(1989)}]{murata1989petri}
+Murata T (1989) Petri nets: Properties, analysis and applications. Proceedings
+  of the IEEE 77(4):541--580, \doi{10.1109/5.24143}
+
+\bibitem[{Hucka et~al(2003)Hucka, Finney, Sauro, Bolouri, Doyle, Kitano, Arkin,
+  Bornstein, Bray, Cornish-Bowden et~al}]{hucka2003sbml}
+Hucka M, Finney A, Sauro HM, Bolouri H, Doyle JC, Kitano H, Arkin AP, Bornstein
+  BJ, Bray D, Cornish-Bowden A, et~al (2003) The systems biology markup
+  language (sbml): a medium for representation and exchange of biochemical
+  network models. Bioinformatics 19(4):524--531,
+  \doi{10.1093/bioinformatics/btg015}
+
+\bibitem[{Bergmann et~al(2014)Bergmann, Adams, Moodie, Cooper, Glont,
+  Golebiewski, Hucka, Laibe, Miller, Nickerson et~al}]{bergmann2014combine}
+Bergmann FT, Adams R, Moodie S, Cooper J, Glont M, Golebiewski M, Hucka M,
+  Laibe C, Miller AK, Nickerson DP, et~al (2014) Combine archive and omex
+  format: one file to share all information to reproduce a modeling project.
+  BMC Bioinformatics 15(1):369, \doi{10.1186/s12859-014-0369-z}
+
+\bibitem[{Wrzodek et~al(2011)Wrzodek, Dr{\"a}ger, and
+  Zell}]{wrzodek2011keggtranslator}
+Wrzodek C, Dr{\"a}ger A, Zell A (2011) Keggtranslator: visualizing and
+  converting the kegg pathway database to various formats. Bioinformatics
+  27(16):2314--2315, \doi{10.1093/bioinformatics/btr377}
+
+\bibitem[{Phan et~al(2025)Phan, Gonz{\'a}lez~Laffitte, Weinbauer, Merkle,
+  Andersen, Fagerberg, Gatter, and Stadler}]{phan2025synkit}
+Phan TL, Gonz{\'a}lez~Laffitte ME, Weinbauer K, Merkle D, Andersen JL,
+  Fagerberg R, Gatter T, Stadler PF (2025) Synkit: A graph-based python
+  framework for rule-based reaction modeling and analysis. Journal of Chemical
+  Information and Modeling 65(24):13,012--13,019,
+  \doi{10.1021/acs.jcim.5c02123}
+
+\bibitem[{M{\"u}ller et~al(2022)M{\"u}ller, Flamm, and
+  Stadler}]{muller2022chemical}
+M{\"u}ller S, Flamm C, Stadler PF (2022) What makes a reaction network
+  “chemical”? Journal of Cheminformatics 14(1):63,
+  \doi{10.1186/s13321-022-00621-8}
+
+\bibitem[{Shervashidze et~al(2011)Shervashidze, Schweitzer, Van~Leeuwen,
+  Mehlhorn, and Borgwardt}]{shervashidze2011weisfeiler}
+Shervashidze N, Schweitzer P, Van~Leeuwen EJ, Mehlhorn K, Borgwardt KM (2011)
+  Weisfeiler-lehman graph kernels. Journal of Machine Learning Research
+  12:2539--2561
+
+\bibitem[{Junttila and Kaski(2007)}]{junttila2007bliss}
+Junttila T, Kaski P (2007) Engineering an efficient canonical labeling tool for
+  large and sparse graphs. In: 2007 Proceedings of the Ninth Workshop on
+  Algorithm Engineering and Experiments (ALENEX), SIAM, pp 135--149
+
+\bibitem[{McKay and Piperno(2014)}]{mckay2014practical}
+McKay BD, Piperno A (2014) Practical graph isomorphism, ii. Journal of Symbolic
+  Computation 60:94--112, \doi{10.1016/j.jsc.2013.09.003}
+
+\bibitem[{Colom and Silva(1991)}]{colom1991convex}
+Colom JM, Silva M (1991) Convex geometry and semiflows in {P/T} nets: A
+  comparative study of algorithms for computation of minimal p-semiflows. In:
+  Advances in Petri Nets 1990, Lecture Notes in Computer Science, vol 483,
+  Springer, pp 79--112, \doi{10.1007/3-540-53863-1\_22}
+
+\bibitem[{Famili and Palsson(2003)}]{famili2003leftnullspace}
+Famili I, Palsson BO (2003) The convex basis of the left null space of the
+  stoichiometric matrix leads to the definition of metabolically meaningful
+  pools. Biophysical Journal 85(1):16--26, \doi{10.1016/S0006-3495(03)74450-6}
+
+\bibitem[{Horn and Jackson(1972)}]{horn1972general}
+Horn F, Jackson R (1972) General mass action kinetics. Archive for rational
+  mechanics and analysis 47(2):81--116, \doi{10.1007/BF00251225}
+
+\bibitem[{Feinberg(1987)}]{feinberg1987deficiency}
+Feinberg M (1987) Chemical reaction network structure and the stability of
+  complex isothermal reactors---i. the deficiency zero and deficiency one
+  theorems. Chemical Engineering Science 42(10):2229--2268,
+  \doi{10.1016/0009-2509(87)80099-4}
+
+\bibitem[{Feinberg(1995)}]{feinberg1995existence}
+Feinberg M (1995) The existence and uniqueness of steady states for a class of
+  chemical reaction networks. Archive for Rational Mechanics and Analysis
+  132(4):311--370, \doi{10.1007/BF00375614}
+
+\bibitem[{Gunawardena(2003)}]{gunawardena2003crnt}
+Gunawardena J (2003) Chemical reaction network theory for in-silico biologists
+
+\bibitem[{Craciun and Feinberg(2005)}]{craciun2005injectivity}
+Craciun G, Feinberg M (2005) Multiple equilibria in complex chemical reaction
+  networks: {I}. the injectivity property. SIAM Journal on Applied Mathematics
+  65(5):1526--1546, \doi{10.1137/S0036139904440278}
+
+\bibitem[{Shinar and Feinberg(2012)}]{shinar2012concordant}
+Shinar G, Feinberg M (2012) Concordant chemical reaction networks. Mathematical
+  biosciences 240(2):92--113, \doi{10.1016/j.mbs.2012.05.004}
+
+\bibitem[{Mincheva and Roussel(2007)}]{mincheva2007graph1}
+Mincheva M, Roussel MR (2007) Graph-theoretic methods for the analysis of
+  chemical and biochemical networks. i. multistability and oscillations in
+  ordinary differential equation models. Journal of Mathematical Biology
+  55(1):61--86, \doi{10.1007/s00285-007-0099-1}
+
+\bibitem[{Cordone et~al(2005)Cordone, Ferrarini, and
+  Piroddi}]{cordone2005enumeration}
+Cordone R, Ferrarini L, Piroddi L (2005) Enumeration algorithms for minimal
+  siphons in {P}etri nets based on place constraints. IEEE Transactions on
+  Systems, Man, and Cybernetics -- Part A 35(6):844--854,
+  \doi{10.1109/TSMCA.2005.853504}
+
+\bibitem[{Angeli et~al(2007)Angeli, De~Leenheer, and
+  Sontag}]{angeli2007persistence}
+Angeli D, De~Leenheer P, Sontag ED (2007) A petri net approach to the study of
+  persistence in chemical reaction networks. Mathematical Biosciences
+  210(2):598--618, \doi{10.1016/j.mbs.2007.07.003}
+
+\bibitem[{Edelstein(1970)}]{edelstein1970biochemical}
+Edelstein BB (1970) Biochemical model with multiple steady states and
+  hysteresis. Journal of Theoretical Biology 29(1):57--62,
+  \doi{10.1016/0022-5193(70)90118-9}
+
+\bibitem[{Wang and Sontag(2008)}]{wang2008multisite}
+Wang L, Sontag ED (2008) On the number of steady states in a multiple futile
+  cycle. Journal of Mathematical Biology 57(1):29--52,
+  \doi{10.1007/s00285-007-0145-z}
+
+\bibitem[{Shinar and Feinberg(2010)}]{shinar2010structural}
+Shinar G, Feinberg M (2010) Structural sources of robustness in biochemical
+  reaction networks. Science 327(5971):1389--1391,
+  \doi{10.1126/science.1183372}
+
+\bibitem[{Malik-Sheriff et~al(2020)Malik-Sheriff, Glont, Nguyen, Tiwari,
+  Roberts, Xavier, Vu, Men, Maire, Kananathan, Fairbanks, Meyer, Arankalle,
+  Varusai, Knight-Schrijver, Li, Due{~n}as-Roca, Dass, Keating, Park, Buso,
+  Rodriguez, Hucka, and Hermjakob}]{maliksheriff2020biomodels}
+Malik-Sheriff RS, Glont M, Nguyen TVN, Tiwari K, Roberts MG, Xavier A, Vu MT,
+  Men J, Maire M, Kananathan S, Fairbanks EL, Meyer JP, Arankalle C, Varusai
+  TM, Knight-Schrijver V, Li L, Due{~n}as-Roca C, Dass G, Keating SM, Park YM,
+  Buso N, Rodriguez N, Hucka M, Hermjakob H (2020) Biomodels---15 years of
+  sharing computational models in life science. Nucleic Acids Research
+  48(D1):D407--D415, \doi{10.1093/nar/gkz1055}
+
+\bibitem[{Butlerow(1861)}]{butlerov1861formose}
+Butlerow A (1861) Bildung einer zuckerartigen substanz durch synthese. Justus
+  Liebigs Annalen der Chemie 120(3):295--298, \doi{10.1002/jlac.18611200308}
+
+\bibitem[{Donnell et~al(2014)Donnell, Banaji, Marginean, and
+  Pantea}]{donnell2014control}
+Donnell P, Banaji M, Marginean A, Pantea C (2014) {CoNtRol}: an open source
+  framework for the analysis of chemical reaction networks. Bioinformatics
+  30(11):1633--1634, \doi{10.1093/bioinformatics/btu063}
+
+\bibitem[{Tonello(2016)}]{tonello2016crnpy}
+Tonello E (2016) crnpy: a {P}ython library for the analysis of chemical
+  reaction networks. Zenodo \doi{10.5281/zenodo.30736},
+  \url{https://github.com/etonello/crnpy}
+
+\bibitem[{Phan and Weinbauer(2026)}]{synkit162archive}
+Phan TL, Weinbauer K (2026) {SynKit}, version 1.6.2.
+  \doi{10.5281/zenodo.21991269}, released 18 August 2026. The manuscript source
+  snapshot includes subsequent CRN changes
+
+\end{thebibliography}

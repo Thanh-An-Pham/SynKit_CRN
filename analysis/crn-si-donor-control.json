@@ -1,0 +1,301 @@
+{
+  "checks": {
+    "expected_outcomes": true,
+    "negative_searches_exhaustive": true,
+    "network_size": true,
+    "positive_replays": true
+  },
+  "environment": {
+    "cpu_count": 22,
+    "git_commit": "6ef7b1140b45fcf863658b41261df12deeb8ca5d",
+    "git_dirty": true,
+    "machine": "x86_64",
+    "networkx": "3.5",
+    "numpy": "2.3.3",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.0",
+    "synkit": "1.6.2"
+  },
+  "equations": {
+    "r1": "A + B >> C + D",
+    "r10": "S + C >> A + T",
+    "r11": "S + U >> T + V",
+    "r12": "A + G >> W + H",
+    "r13": "J + 2X + F >> 2O + R + 2Y",
+    "r14": "A + S >> T + W",
+    "r15": "T >> G",
+    "r16": "Z + C >> A + B + AA",
+    "r17": "Z + AB >> B + AA + AC",
+    "r18": "B + F >> E",
+    "r19": "Z + AD >> B + AA + AE",
+    "r2": "E >> B + F",
+    "r20": "F + H >> K + G",
+    "r21": "J >> I",
+    "r22": "M + N + O >> J + K + L",
+    "r23": "M + O + Q >> J + K + P",
+    "r24": "J + I >> H",
+    "r25": "R + C >> A + M",
+    "r26": "E >> R",
+    "r27": "AF + D >> AA + AG",
+    "r28": "L + AH + D >> N + O + AA + AI",
+    "r29": "P + AH + D >> O + Q + AA + AI",
+    "r3": "C + G >> A + H",
+    "r30": "2X + AH + D >> 2O + 2Y + AA + AI",
+    "r31": "AH + AJ >> AI + AK",
+    "r32": "AG + AL >> AF + AJ",
+    "r33": "L + AK >> N + O + AL",
+    "r34": "AH + AM + D >> AA + AI + AN",
+    "r4": "I >> J",
+    "r5": "J + K + L >> M + N + O",
+    "r6": "J + K + P >> M + O + Q",
+    "r7": "H >> J + I",
+    "r8": "A + M >> R + C",
+    "r9": "R >> E"
+  },
+  "routes": [
+    {
+      "name": "ATP-dependent",
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 3,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C": 1,
+          "S": 1
+        },
+        "max_depth_reached": 2,
+        "realizable": false,
+        "requested_flux": {
+          "r10": 1,
+          "r15": 1,
+          "r3": 1,
+          "r7": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "one_atp"
+    },
+    {
+      "name": "ADP-dependent",
+      "outcome": {
+        "certificate": [
+          "r10",
+          "r15",
+          "r12",
+          "r7"
+        ],
+        "exhaustive": false,
+        "explored_states": 4,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C": 1,
+          "S": 1
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r10": 1,
+          "r12": 1,
+          "r15": 1,
+          "r7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      },
+      "pool": "one_atp"
+    },
+    {
+      "name": "ATP-dependent",
+      "outcome": {
+        "certificate": [
+          "r10",
+          "r15",
+          "r3",
+          "r7"
+        ],
+        "exhaustive": false,
+        "explored_states": 4,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C": 2,
+          "S": 1
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r10": 1,
+          "r15": 1,
+          "r3": 1,
+          "r7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      },
+      "pool": "two_atp"
+    },
+    {
+      "name": "ADP-dependent",
+      "outcome": {
+        "certificate": [
+          "r10",
+          "r15",
+          "r12",
+          "r7"
+        ],
+        "exhaustive": false,
+        "explored_states": 4,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C": 2,
+          "S": 1
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r10": 1,
+          "r12": 1,
+          "r15": 1,
+          "r7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      },
+      "pool": "two_atp"
+    },
+    {
+      "name": "ATP-dependent",
+      "outcome": {
+        "certificate": null,
+        "exhaustive": true,
+        "explored_states": 5,
+        "independent_replay_ok": null,
+        "initial_marking": {
+          "C": 1,
+          "G": 1,
+          "S": 1
+        },
+        "max_depth_reached": 2,
+        "realizable": false,
+        "requested_flux": {
+          "r10": 1,
+          "r15": 1,
+          "r3": 1,
+          "r7": 1
+        },
+        "status": "unrealizable",
+        "termination_reason": "exhausted"
+      },
+      "pool": "added_f6p"
+    },
+    {
+      "name": "ADP-dependent",
+      "outcome": {
+        "certificate": [
+          "r10",
+          "r12",
+          "r15",
+          "r7"
+        ],
+        "exhaustive": false,
+        "explored_states": 5,
+        "independent_replay_ok": true,
+        "initial_marking": {
+          "C": 1,
+          "G": 1,
+          "S": 1
+        },
+        "max_depth_reached": 4,
+        "realizable": true,
+        "requested_flux": {
+          "r10": 1,
+          "r12": 1,
+          "r15": 1,
+          "r7": 1
+        },
+        "status": "realizable",
+        "termination_reason": "certificate"
+      },
+      "pool": "added_f6p"
+    }
+  ],
+  "schema": "synkit.crn-si-donor-control/1",
+  "source_sha256": {
+    "Experiment/CRN/review_experiments.py": "d3eff9cac5131b7c4db40edefe82a0cf212f75eb8c0d8d7e34901c09b76589cd",
+    "Experiment/CRN/si_donor_control.py": "0fa3f91eb513aa93011c17afaac7143bee7d2a5d7873005c7226501cced12fdb",
+    "synkit/CRN/Benchmark/__init__.py": "6a4a23d42fc6047a48ca44db994f8984e0c1949d8993dc3fcd8f5096080c4c10",
+    "synkit/CRN/Benchmark/crosschecks.py": "bf1f1204851b4aee62e718d0a5e803f485ebad33814e7f85cc4fb624550e97ce",
+    "synkit/CRN/Benchmark/kegg.py": "9f82a4fae36e4bf63bd448106933ca2d7c55ecadde302be2f9141f8cb6edde32",
+    "synkit/CRN/Benchmark/networks.py": "9e369c23ede3f2c4ddf7f2d64dbb22bc383645ead718d73d5e83b7b960aa96c6",
+    "synkit/CRN/Benchmark/scaling.py": "b319e80888cfc702fd37ed5793ad0a8dbfb4ecf32e56aa408117a93bb1626c3d",
+    "synkit/CRN/Benchmark/validate.py": "432efb8b21c9f9ff571ab2372eee67f57277701b6314b17826abfb9999487b8f",
+    "synkit/CRN/Construct/__init__.py": "14f8ae6c795b70dbb0265402765af51a7a648789713c66a1cb84a931a2c4b10d",
+    "synkit/CRN/Construct/abstract.py": "6811698d53ccc98ab1f5347e354b3c3cd75c72a983ba5934e7b06282f4e1b90c",
+    "synkit/CRN/Construct/arity.py": "edf28cde6873dbe0001809ed2fce5d621f1b2947baaecf51dcea460591801317",
+    "synkit/CRN/Construct/builder.py": "1f423b2468569e30235e19f2849e0bfdbea91de701a4c474f88ffbfa0e24b85c",
+    "synkit/CRN/Construct/derivation.py": "1d3061715d909f91f95aa96622133cba9bd0a85e312ca790623a8ae54732d130",
+    "synkit/CRN/Construct/flattener.py": "3382eb24cac4adcdf8a8e564ab0985a4b5f6f275e4cc58fa158829499004a390",
+    "synkit/CRN/Construct/keys.py": "12818a058801ec2d6d71212e9f1a8845e544fb5a75f7f8cda39e80248972b218",
+    "synkit/CRN/Construct/mixtures.py": "e6a296858a0715e5a676c4eb713c9065a5c91ee5224e49e2f22b59042e67fb07",
+    "synkit/CRN/Construct/smiles.py": "966a38f2d12ed65cc372b992857b449185dd8f69c6621402f5e380b369568334",
+    "synkit/CRN/Construct/state.py": "7f1797d59a95829fc049d068209427fbd5c13dd12bc476f555aef109a9295994",
+    "synkit/CRN/Construct/strategy.py": "49a380213dff7a06a9f0a8b01056adae5c111d558877ab0ff5b4d9f7acb257b3",
+    "synkit/CRN/Construct/worker.py": "81fb6672950cd68a307bec8006ef5228f9927f964a55f73621d8f6f01e3803b9",
+    "synkit/CRN/IO/__init__.py": "3af7709aa85afc36e4e3c2d8b41dc510c838a6dc36e07d6b1817afce9fdb562c",
+    "synkit/CRN/IO/sbml.py": "06ad8af10490630b9ccf9f4635f3cb51eebe2f8ce69f79ff9319df97d178690a",
+    "synkit/CRN/Pathway/__init__.py": "781d3d1d8fb1246660f40272391abba5b86856338d3cd268a2ae84dcd4081eec",
+    "synkit/CRN/Pathway/_adapter.py": "a82ab3eda84e3241aba2dc01b8cdc5879ab4020595f1cfdd0c430cb505d6b37e",
+    "synkit/CRN/Pathway/pathfinder.py": "6fe20bdbc24572526419ddc7934be5a0203a37e34c552d74bcc8a8a4ce88bb44",
+    "synkit/CRN/Pathway/reachability.py": "97cf2b6950fa5de5acd3717b958e769ac47d0df4439c0408380a897af2d296fa",
+    "synkit/CRN/Pathway/realizability.py": "3f154581843739ce0dfe29c8d3d2835b80995f0bc1cccfd06f8d29003a500b99",
+    "synkit/CRN/Petrinet/__init__.py": "740f28ca9b3d27bc11e76265b6b011e93d99b5d7a12b02055923e2fbad006345",
+    "synkit/CRN/Petrinet/analyzer.py": "a2f189454fdd584cbd7e6e52949eea7ec30980d2c3335d589d3c82fec4d0e5da",
+    "synkit/CRN/Petrinet/minimal_semiflows.py": "bcc575331d4598c44d9d1202c4e7fd2f79f8990e03719ff006ca369bc1283856",
+    "synkit/CRN/Petrinet/net.py": "46d78db0a123fe60178fdf11c34a10c8463a21cec350ee8450f38d361180ec3d",
+    "synkit/CRN/Petrinet/persistence.py": "8b98d04406b6e85ea5901d88c0f64a55bffdb4c0b395de45160a695a45139ac4",
+    "synkit/CRN/Petrinet/semiflows.py": "c25b7e37ddc478de2ba0c1ddba7f426b4214ac79798ae1fbefe41ede3f3d92e3",
+    "synkit/CRN/Petrinet/siphon_search.py": "b704a542b35d5fd8b2d9c226bc31f9ee9963132620fc5cd456747ebbcf32342b",
+    "synkit/CRN/Petrinet/structure.py": "e0f46523cdc64c292f63127f67206f2c7cc492ebcb9ba9c02ca90281901e7ed8",
+    "synkit/CRN/Props/__init__.py": "9cbedc217d7685ed13be853f6ce7b84bbaa3a2b85596bc49aa178bdb4d8ea82e",
+    "synkit/CRN/Props/deficiency.py": "25e431fd1c2ce30057e1290bd815a7194973bd44d871bedffb1ff9be206bfbd1",
+    "synkit/CRN/Props/dynamics.py": "d054f139b9dd5ec31febd9267ad95805bf4c63f89ac95bd4f562012e959da7db",
+    "synkit/CRN/Props/helper.py": "f2873a694a07ac8b7320cc175c39a6d1f4a1283d56718601cc384f7da2aa283b",
+    "synkit/CRN/Props/stoich.py": "f7d86d5240289410d49b3ac016689a6945035abfdc657ded4efe10f163b77bc2",
+    "synkit/CRN/Props/thermo.py": "d26680f18c03a31e958da036443e13cd57b56211c069331943c30386f3b815e3",
+    "synkit/CRN/Query/__init__.py": "809b78e61c6ca93ed4ee5b67a989eaea56c16caec51576924a03231f8b2a8e6e",
+    "synkit/CRN/Query/kegg_api.py": "ab7eee99c95ddf3d73fb4c369f7b454972aafab253b000ec9505ed2319906258",
+    "synkit/CRN/Query/kegg_extract.py": "e60b0b4d258efe652da9d34c5d358dfc4d114c74e48b25b4610dec0419be1efa",
+    "synkit/CRN/Query/kegg_impute.py": "ae64a59647e94b860d3fd59313e21a5d36c693968544b49710fc1198df76aaa5",
+    "synkit/CRN/Query/kegg_parse.py": "76447a4988ab8960c9a7deffb57cce1ba64fbe5fa7a0799f50847a31fc44fd07",
+    "synkit/CRN/Query/to_syncrn.py": "b3a5dc534a83af397bb88525479856c0c452eb4cd56a381a988caf1471a8df9e",
+    "synkit/CRN/Structure/__init__.py": "af1cf348946d45fe5b0db687979f9b6ac11f15c0a263ef467aa96caa9c14631a",
+    "synkit/CRN/Structure/_graph_io.py": "36b217f77def1493390753907125fedca86641d374862306895e15bc58d6cbe6",
+    "synkit/CRN/Structure/_matrices.py": "13de57dafcca48247a49f5f66ff6d5b0698068046604422d5aa6eac4aa56db72",
+    "synkit/CRN/Structure/_parse.py": "7690b23f84738fd12fa86c40e25d33aadead67a042c71bacc1725a3d6ad3ed66",
+    "synkit/CRN/Structure/reaction.py": "4f3053ef3e7f1dc3479252197b4fa5612686a16a670842cff74c6d5dd925e1f5",
+    "synkit/CRN/Structure/rule.py": "a203689a2dd7f9c33bb315371f9e95983bd4f4f25ae776b3228e567ad84377d1",
+    "synkit/CRN/Structure/species.py": "8771672d5227e345944b8f6a47b98280dcaab20685515fb2d3c7ca7510d92e60",
+    "synkit/CRN/Structure/syncrn.py": "2f746e412d6f3f0a2f3b46395229c66ff39652ddbfeaa028f370c6717d0ed496",
+    "synkit/CRN/Symmetry/__init__.py": "b03086768da3b83d68a6fafb9ba3b88d9508d6524b339a0fc569213e2696995c",
+    "synkit/CRN/Symmetry/_common.py": "8b45ba1f5b08d655f7a96360d6e74adb7e2e130bcf63034df86c44be6fe81772",
+    "synkit/CRN/Symmetry/_ir.py": "654942296d194bf5bd14f0e5f1e79dd8eebd36365d7e4e3cb0389a4f227abfac",
+    "synkit/CRN/Symmetry/automorphism.py": "58c1fec884385d637219da3f311f92629c339f4d0b644fb26cc199efcdf179f1",
+    "synkit/CRN/Symmetry/canon.py": "80964ed756f7bcd5db55a4d8bb248f8cdeae90851b6a9afc9ad9847ddf2f25a7",
+    "synkit/CRN/Symmetry/isomorphism.py": "21f88b2982642740af0597251fa3ca6cafb29a7d83b76247bff8b1c0eea1cb57",
+    "synkit/CRN/Symmetry/symmetry.py": "3f3a2f0de6b19eb78187a209a7661c971ab0fbe1d5137f4c5d3f57c33de32883",
+    "synkit/CRN/Symmetry/wl_canon.py": "358eb1b8a52dd94f437b54c1b2f069068924446b6caceff63360246825a03f4c",
+    "synkit/CRN/Visualize/__init__.py": "ce9a7cbe54f5983dbc2e34743b17089f4ef914b99e7c8272ddee03093e37c644",
+    "synkit/CRN/Visualize/labels.py": "f8a4cdd587507a5d00557ae9ee84895d106fc4a5c3a1ed52137f2d87c6190dc8",
+    "synkit/CRN/Visualize/layout.py": "fcce5ce293d375e80aceb868dac99c813c968d7de1939f8437b61564c06719c5",
+    "synkit/CRN/Visualize/palette.py": "02606244496c30cf33216f835dc526fc0755e5afbb76ec7f5b571edac7f23992",
+    "synkit/CRN/Visualize/validation.py": "1edc528335569d8e3ca4d4fe793191f893e3db7d19fad5af9203520bc817eaa7",
+    "synkit/CRN/Visualize/vis.py": "b846e9fefa4f41b84481e74f2bfab5ad5bfdae7ef76fcfcdb3c2cab0146951cd",
+    "synkit/CRN/__init__.py": "c418026ab7c02bba253ed545f6caea4fe86de25ec424df9ff90d01927d4c98d7",
+    "synkit/CRN/kinds.py": "9ecd9eeb965a67be3e0d8f0e77b2d9737268f5346471b97f63958002fcdff5dc"
+  },
+  "status": "PASS"
+}

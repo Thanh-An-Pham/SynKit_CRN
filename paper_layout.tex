@@ -1,0 +1,33 @@
+% A4 review layout: use the page instead of the class's small-format text block.
+% Keep review line spacing; limit whitespace around figures and the title.
+\geometry{reset,a4paper,left=22mm,right=24mm,top=20mm,bottom=22mm,
+          bindingoffset=0mm,footskip=10mm}
+\raggedbottom
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{.95}
+\renewcommand{\bottomfraction}{.90}
+\renewcommand{\textfraction}{.05}
+\renewcommand{\floatpagefraction}{.80}
+\makeatletter
+% Float-only pages start at the top instead of being vertically centred.
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{10pt plus 2pt minus 2pt}
+\usepackage{etoolbox}
+\patchcmd{\@maketitle}{\vskip21pt}{\vskip0pt}{}{}
+% The class also inserts an empty opening box and an unused article-type row.
+\patchcmd{\@maketitle}{\newpage\null}{\newpage}{}{\PackageError{synkit-layout}{Cannot remove title opening box}{Check the class title definition.}}
+\patchcmd{\@maketitle}{{\hbox to \textwidth{{\Artcatfont\ArtType\hfill}\par}}}{}{}{\PackageError{synkit-layout}{Cannot remove unused article-type row}{Check the class title definition.}}
+\patchcmd{\@maketitle}{\vskip20pt}{\vskip0pt}{}{\PackageError{synkit-layout}{Cannot remove title padding}{Check the class title definition.}}
+\pretocmd{\Titlefont}{\def\baselinestretch{1}}{}{}
+\patchcmd{\@maketitle}{\vskip36pt}{\vskip12pt}{}{}
+\makeatother
+
+% Capability marks for the software-scope table.  Defined here, in the shared
+% preamble, because xr-hyper imports main.aux (and its caption) into the SI.
+% Shape carries the meaning; the marks are distinguishable without colour.
+\newcommand{\yes}{\ensuremath{\checkmark}}
+\newcommand{\no}{\ensuremath{\times}}
+\newcommand{\pmark}{\ensuremath{(\checkmark)}}
+\newcommand{\rot}[1]{\rotatebox[origin=l]{90}{#1}}

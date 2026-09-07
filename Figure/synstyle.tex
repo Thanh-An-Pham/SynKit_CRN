@@ -1,0 +1,195 @@
+% ---------------------------------------------------------------------------
+% synstyle.tex --- shared look for every TikZ figure of the SynKit CRN paper.
+%
+% Input it from a figure file:
+%     \IfFileExists{synstyle.tex}{\input{synstyle}}{\input{Figure/synstyle}}
+% so that the figure compiles both from Figure/ and from the paper root.
+%
+% The visual vocabulary follows ../../../../Style/style.tex: the
+% colour-blind-safe Okabe--Ito accents, quiet neutral rules and wash, circular
+% panel badges, and a compact technical type scale are shared by the companion
+% papers.  Semantic aliases below keep the CRN meaning explicit.
+%
+% DESIGN CONTRACT -----------------------------------------------------------
+% 1. Geometry.  Every figure is laid out on a canvas exactly \scW wide (the
+%    sn-jnl text width, 372 pt) and is included unscaled, so one point of type
+%    is the same physical size in all five figures.  Open each picture with
+%    \scCanvas{<height in cm>} to pin the bounding box.
+% 2. Colour is semantic, never decorative.  Four roles only:
+%       scAccent (green)       structure, the normal/expected path
+%       scMark   (orange)      catalyst, certificate, or highlight
+%       scAlert  (vermillion)  failure, violation, or uncovered set
+%       scRef    (blue)        secondary or reference series
+%    A panel gets at most one accent.  Titles are always ink; panel identity
+%    is also encoded by a letter inside a circular badge, not by colour alone.
+% 3. Type scale.  Three sizes, no others, and nothing below 6 pt:
+%       \scTitle (7 pt bold)  panel titles
+%       \scBody  (6.5 pt)     labels, values, in-figure prose
+%       \scSmall (6 pt)       units, footnotes, dense graph labels
+% ---------------------------------------------------------------------------
+% Load guard.  The paper inputs every figure source inline, so this file is
+% reached once per figure; without the guard the second \newlength below
+% would abort the run.
+\ifdefined\SynKitStyleLoaded\endinput\fi
+\newcommand{\SynKitStyleLoaded}{}
+
+\usetikzlibrary{positioning,calc,fit,backgrounds,arrows.meta,shapes.geometric,
+                shapes.misc,decorations.pathreplacing,patterns,math}
+
+% --- canvas ---------------------------------------------------------------
+% 372 pt text width minus the 1 pt standalone border on each side.
+\newlength{\scW}\setlength{\scW}{13.0326cm}
+\providecommand{\scWnum}{13.0326}
+% \scCanvas{<height>} pins the picture to the full text width, y running down
+% from 0, so every figure shares one coordinate convention.  It *sets* the
+% bounding box rather than contributing to it, so the emitted page is exactly
+% the text width and every figure is included at 1:1 -- otherwise a stray
+% invisible extent (pgfplots reserves a little around an axis) rescales one
+% figure relative to the others and the same \scSmall prints at two sizes.
+% Anything drawn outside the canvas is therefore cropped: keep content inside,
+% and check with
+%     \providecommand{\scCanvas}[1]{\path[draw=red] (0,0) rectangle (\scWnum,-#1);}
+\providecommand{\scCanvas}[1]{%
+  \path[use as bounding box] (0,0) rectangle (\scWnum,-#1);}
+
+% --- palette --------------------------------------------------------------
+% Canonical companion-paper values (../../../../Style/style.tex).
+\definecolor{npgOrange}{HTML}{E69F00}
+\definecolor{npgSky}{HTML}{56B4E9}
+\definecolor{npgGreen}{HTML}{009E73}
+\definecolor{npgYellow}{HTML}{F0E442}
+\definecolor{npgBlue}{HTML}{0072B2}
+\definecolor{npgVermillion}{HTML}{E64B35}
+\definecolor{npgPurple}{HTML}{CC79A7}
+\definecolor{figInk}{HTML}{1A1A1A}
+\definecolor{figMuted}{HTML}{666666}
+\definecolor{figHair}{HTML}{D9D9D9}
+\definecolor{figWash}{HTML}{F7F7F7}
+
+\colorlet{scInk}{figInk}              % primary text
+\colorlet{scInkM}{figMuted}           % secondary text
+\colorlet{scPaper}{figWash}           % quiet cards and note strips
+\colorlet{scSpF}{npgSky!12}           % species fill
+\colorlet{scSpE}{npgBlue}             % species edge
+\colorlet{scRxF}{npgOrange!12}        % reaction fill
+\colorlet{scRxE}{npgOrange!88!black}  % reaction edge
+\colorlet{scReac}{npgBlue!78!black}   % reactant edge
+\colorlet{scProd}{npgGreen!82!black}  % product edge
+\colorlet{scHiF}{npgOrange!13}        % highlight fill
+\colorlet{scHiE}{npgOrange!82!black}  % highlight edge
+% Stage / accent tints.  stDE remains available for the fifth plot series.
+\colorlet{stAF}{npgGreen!9}\colorlet{stAE}{npgGreen}
+\colorlet{stBF}{npgOrange!11}\colorlet{stBE}{npgOrange}
+\colorlet{stCF}{npgBlue!9}\colorlet{stCE}{npgBlue}
+\colorlet{stDF}{npgPurple!10}\colorlet{stDE}{npgPurple!85!black}
+\colorlet{stEF}{npgVermillion!9}\colorlet{stEE}{npgVermillion}
+
+% Semantic aliases.  Figures should speak in these, not in stAE/stBE/...
+\colorlet{scAccent}{stAE}\colorlet{scAccentF}{stAF}   % structure / normal
+\colorlet{scMark}{stBE}\colorlet{scMarkF}{stBF}       % highlight / certificate
+\colorlet{scRef}{stCE}\colorlet{scRefF}{stCF}         % secondary series
+\colorlet{scAlert}{stEE}\colorlet{scAlertF}{stEF}     % failure / violation
+\colorlet{scRule}{figHair}                            % card and axis hairlines
+\colorlet{scRuleL}{figHair!55}                        % grid, dividers
+
+% --- text styles ----------------------------------------------------------
+% Three sizes, fixed in points so they do not drift with the document class.
+% Latin Modern Sans is scalable at the half-point body size.  It preserves the
+% compact technical character of Style/abstract.tex without the 6.5 -> 6 pt
+% Computer Modern substitution that otherwise changes layout between builds.
+\providecommand{\scTitle}{\fontfamily{lmss}\fontsize{7}{8.4}\selectfont\bfseries\color{scInk}}
+\providecommand{\scBody}{\fontfamily{lmss}\fontsize{6.5}{7.8}\selectfont\color{scInkM}}
+\providecommand{\scSmall}{\fontfamily{lmss}\fontsize{6}{7.2}\selectfont\color{scInkM}}
+\providecommand{\scSub}[1]{{\scSmall\itshape #1}}
+\providecommand{\scPanel}[1]{{\scTitle(#1)}}
+% Numerals that carry a result: ink, not colour, so the eye reads the value.
+\providecommand{\scNum}{\fontfamily{lmss}\fontsize{10}{11}\selectfont\bfseries\color{scInk}}
+
+% --- shared TikZ styles ---------------------------------------------------
+\tikzset{
+  % text never hyphenates inside a figure
+  every node/.append style={execute at begin node={%
+      \hyphenpenalty=10000 \exhyphenpenalty=10000 \hbadness=10000 }},
+  syn/.style={font=\fontfamily{lmss}\selectfont,color=scInk,
+              >={Stealth[round,length=2.4mm,width=1.9mm]}},
+  % containers ------------------------------------------------------------
+  % One card chrome for the whole paper: white, 3 pt radius, one hairline.
+  panel/.style={rounded corners=2.5pt,fill=none,draw=scRule,line width=0.45pt},
+  card/.style={rounded corners=2.2pt,fill=scPaper,draw=scRule,line width=0.45pt,
+               inner sep=5pt,align=left,anchor=north west},
+  % a quiet strip for a panel's closing fact
+  note/.style={rounded corners=2.5pt,fill=scPaper,draw=scRuleL,line width=0.4pt,
+               inner xsep=6pt,inner ysep=3.5pt,align=left,font=\scSmall},
+  % small labelled value pill
+  chip/.style={rounded corners=2pt,fill=scPaper,draw=scRule,line width=0.4pt,
+               inner xsep=4pt,inner ysep=2pt,font=\scSmall},
+  % Circular letter badge: the same accessible panel marker used in Style/*.
+  hbullet/.style={circle,fill=scInk,text=white,draw=none,
+                  font=\fontfamily{lmss}\fontsize{6}{6}\selectfont\bfseries,
+                  minimum size=4.2mm,inner sep=0pt},
+  ctag/.style={font=\scTitle,anchor=north west,text=scInk},
+  % CRN primitives --------------------------------------------------------
+  species/.style={rounded rectangle,fill=scSpF,draw=scSpE,line width=0.45pt,
+                  inner xsep=2.4pt,inner ysep=1.6pt,font=\scSmall,
+                  text=scInk,minimum height=3.6mm},
+  cofactor/.style={species,fill=scRefF,draw=scRef},
+  catalyst/.style={species,fill=scHiF,draw=scHiE},
+  rxn/.style={rectangle,fill=scRxF,draw=scRxE,line width=0.45pt,
+              inner sep=1.2pt,font=\scSmall,text=scInk,
+              minimum width=3.0mm,minimum height=3.0mm},
+  place/.style={circle,fill=scSpF,draw=scSpE,line width=0.45pt,
+                minimum size=4.0mm,inner sep=0pt},
+  trans/.style={rectangle,fill=scRxE,draw=scRxE,minimum width=1.1mm,
+                minimum height=3.6mm,inner sep=0pt},
+  token/.style={circle,fill=scInk,minimum size=1.1mm,inner sep=0pt},
+  % edges -----------------------------------------------------------------
+  reac/.style={->,line width=0.5pt,draw=scReac,shorten >=0.8pt,shorten <=0.8pt},
+  prod/.style={->,line width=0.5pt,draw=scProd,shorten >=0.8pt,shorten <=0.8pt},
+  cat/.style={->,line width=0.5pt,draw=scHiE,shorten >=0.8pt,shorten <=0.8pt},
+  flow/.style={-{Stealth[round,length=2.2mm,width=1.8mm]},line width=1.1pt,
+               draw=scInkM!45},
+  flab/.style={font=\scSmall,text=scInkM,inner sep=2pt},
+  stoi/.style={font=\scSmall,text=scInkM,inner sep=0.8pt},
+  % verdict marks: shape carries the meaning, colour only reinforces it
+  vpass/.style={circle,fill=scAccentF,draw=scAccent,text=scAccent,
+                font=\fontsize{6}{6}\selectfont\bfseries,
+                minimum size=3.2mm,inner sep=0pt},
+  vfail/.style={circle,fill=scAlertF,draw=scAlert,text=scAlert,
+                font=\fontsize{6}{6}\selectfont\bfseries,
+                minimum size=3.2mm,inner sep=0pt},
+  callout/.style={font=\scSmall,text=scInkM,align=left},
+}
+
+% \scHead[<badge colour>]{<anchor coord>}{<letter>}{<title>}{<subtitle or empty>}
+% One header treatment for every panel in the paper.
+\providecommand{\scHead}[5][scInk]{%
+  \node[hbullet,fill=#1,anchor=north west] (scbadge#3) at ($#2+(0,-0.015)$)
+    {\MakeUppercase{#3}};
+  \node[ctag,anchor=west] at ($(scbadge#3.east)+(0.14,0)$) {#4};
+  \ifx\relax#5\relax\else
+    \node[anchor=north west,font=\scSmall,text=scInkM]
+      at ($#2+(0.56,-0.245)$) {#5};
+  \fi}
+
+% --- shared pgfplots look (only if the figure loaded pgfplots) ------------
+\ifdefined\pgfplotsset
+  \pgfplotsset{compat=1.18}
+  \pgfplotsset{
+    synaxis/.style={
+      scale only axis,
+      tick align=outside, tick pos=left,
+      axis line style={draw=scInkM!55,line width=0.4pt},
+      % One grid, on the value axis only.  No minor grid: at these sizes it
+      % turns the plot frame into a grey wash.
+      ymajorgrids=true, xmajorgrids=false,
+      major grid style={draw=scRuleL,line width=0.3pt},
+      major tick length=1.6pt,
+      label style={font=\scBody,color=scInk},
+      tick label style={font=\scSmall,color=scInkM},
+      legend style={font=\scSmall,draw=none,fill=none,inner sep=1pt,
+                    row sep=0.4pt,legend columns=1},
+      legend cell align=left,
+      every axis plot/.append style={line width=0.7pt,mark size=1.2pt},
+    },
+  }
+\fi
