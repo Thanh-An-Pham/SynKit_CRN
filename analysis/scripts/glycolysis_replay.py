@@ -5,6 +5,7 @@ import argparse
 import json
 from pathlib import Path
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 from matplotlib.patches import Rectangle
 from result_style import configure, INK, BLUE, GREEN, ORANGE, GRAY, HAIR, PALE, save
 
@@ -38,16 +39,19 @@ def main():
     rows = run["trajectory"]
     assert len(rows) == len(run["certificate"]) + 1
     configure()
+    # This panel is embedded in Figure/glycolysis.tex; match its Arial labels.
+    font_manager.findfont("Arial", fallback_to_default=False)
+    plt.rcParams.update({"font.family": "Arial", "text.color": "black"})
     fig, ax = plt.subplots(figsize=(7.2, 2.8))
     fig.subplots_adjust(left=0.025, right=0.98, top=0.95, bottom=0.04)
     ax.set(xlim=(-3.0, 15.6), ylim=(13.6, -2.6))
     ax.axis("off")
-    ax.text(-2.9, -2.02, "C", fontsize=10, color=BLUE, weight="bold")
+    ax.text(-2.9, -2.02, "c", fontsize=9, color="black", weight="bold")
     ax.text(
         -1.95,
         -2.02,
         "Certificate replay: every marking and firing",
-        fontsize=10,
+        fontsize=9,
         weight="bold",
     )
     ax.text(
@@ -56,7 +60,7 @@ def main():
         f"{len(run['certificate'])} firings · {run['explored_states']} states searched",
         fontsize=8,
         ha="right",
-        color=GRAY,
+        color="black",
     )
     for j, row in enumerate(rows):
         assert row["step"] == j and row["nonnegative"]
@@ -67,7 +71,7 @@ def main():
             sum(marking.get(k, 0) * v for k, v in weights.items())
             == row["backbone_invariant"]
         )
-        ax.text(j, -0.97, str(j), ha="center", fontsize=8, color=GRAY)
+        ax.text(j, -0.97, str(j), ha="center", fontsize=8, color="black")
         for i, (key, label) in enumerate(SPECIES):
             value = marking.get(key, 0)
             ax.add_patch(
@@ -75,7 +79,7 @@ def main():
                     (j - 0.47, i - 0.45),
                     0.94,
                     0.90,
-                    facecolor=PALE if value == 0 else "#D6E8F2" if value == 1 else BLUE,
+                    facecolor=PALE if value == 0 else "#D6E8F2" if value == 1 else "#80B8D4",
                     edgecolor="none",
                 )
             )
@@ -87,7 +91,7 @@ def main():
                     ha="center",
                     va="center",
                     fontsize=8,
-                    color="white" if value == 2 else INK,
+                    color="black",
                     weight="bold",
                 )
         for yy, key, color in (
@@ -110,8 +114,7 @@ def main():
     ax.text(
         -0.68, 12.68, "Weighted pool", ha="right", va="center", fontsize=8, color=GREEN
     )
-    ax.text(-0.68, -0.97, "Step", ha="right", fontsize=8, color=GRAY)
-    ax.plot([-0.5, 15.5], [10.95, 10.95], color=HAIR, lw=0.8)
+    ax.text(-0.68, -0.97, "Step", ha="right", fontsize=8, color="black")
     # Aldolase is the observed first increase in molecule count.
     split = next(
         r["step"] for r in rows if r["molecule_tokens"] > rows[0]["molecule_tokens"]

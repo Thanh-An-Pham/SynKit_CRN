@@ -18,6 +18,7 @@ from result_style import (
     arrow,
     configure,
     heading,
+    plain_heading,
     save,
     verdict,
 )
@@ -61,27 +62,34 @@ def formose_route(ax, supplement):
     assert outcome["requested_flux"] == {"r_1": 2, "r_3": 1, "r_7": 1}
     ax.set(xlim=(0, 12), ylim=(0, 2.65))
     ax.axis("off")
-    heading(ax, "A", "A selected route from C₂ to C₆", y=1.01)
+    plain_heading(ax, "a", r"A selected route from $\mathbf{C_2}$ to $\mathbf{C_6}$", y=1.01)
+    # Subscripts extend below the title; align its baseline with the panel letter.
+    for text in ax.texts[-2:]:
+        text.set_verticalalignment("baseline")
     # Condensed structures retain hydroxyl and carbonyl identities without
     # assigning a stereoisomer to the constitution-only generated targets.
-    ax.text(0.0, 1.97, "2 × HOCH₂–CHO", fontsize=9, weight="bold")
+    ax.text(0.0, 1.97, r"2 × $\mathbf{HOCH_2}$–CHO", fontsize=9, weight="bold")
     arrow(ax, (3.0, 2.07), (4.0, 2.07), ORANGE, 1.2)
-    ax.text(3.5, 2.4, "r₁ × 2", fontsize=8, ha="center", color=ORANGE)
+    ax.annotate(
+        r"$\mathrm{r}_1$ × 2", (3.5, 2.07), xytext=(0, 3),
+        textcoords="offset points", fontsize=8, ha="center", va="bottom", color=ORANGE,
+    )
     ax.text(4.15, 1.97, "2 × HO–CH=CH–OH", fontsize=9, weight="bold")
-    ax.text(8.25, 1.97, "two enediol donors", fontsize=8, color=GRAY)
+    ax.text(8.25, 1.97, "two enediol donors", fontsize=8, color="black")
     # Each aldol addition consumes one of the two enediols above.
     positions = [
         (1.1, 2, "Glycolaldehyde"),
-        (5.6, 4, "T₄ aldotetrose"),
-        (10.3, 6, "T₆ aldohexose"),
+        (5.6, 4, r"$\mathrm{T}_4$ aldotetrose"),
+        (10.3, 6, r"$\mathrm{T}_6$ aldohexose"),
     ]
     for x, n, label in positions:
         carbon_chain(ax, x, 0.85, n, spacing=0.26)
         ax.text(x, 0.31, label, fontsize=8.5, ha="center")
-    for xa, xb, rid in [(2.0, 4.7, "r₃"), (6.7, 9.3, "r₇")]:
+    for xa, xb, rid in [(2.0, 4.7, r"$\mathrm{r}_3$"), (6.7, 9.3, r"$\mathrm{r}_7$")]:
         arrow(ax, (xa, 0.85), (xb, 0.85), GREEN, 1.4)
-        ax.text(
-            (xa + xb) / 2, 1.18, "+ one enediol", fontsize=8, ha="center", color=ORANGE
+        ax.annotate(
+            "+ one enediol", ((xa + xb) / 2, 0.85), xytext=(0, 3),
+            textcoords="offset points", fontsize=8, ha="center", va="bottom", color=ORANGE,
         )
         ax.text(
             (xa + xb) / 2,
@@ -89,7 +97,7 @@ def formose_route(ax, supplement):
             f"Aldol addition · {rid}",
             fontsize=7.5,
             ha="center",
-            color=GRAY,
+            color="black",
         )
 
 

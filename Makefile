@@ -1,6 +1,8 @@
 SYNKIT_ROOT ?= ../..
 PYTHON ?= python
 MPL_CACHE ?= /tmp/synkit-crn-matplotlib
+# The TikZ figures use the installed Arial family through fontspec.
+LATEXMK_FLAGS := -xelatex -interaction=nonstopmode -halt-on-error
 ANALYSIS_EVIDENCE := $(wildcard analysis/crn-*.json)
 REVIEW_ASSETS := Figure/visual_abstract.pdf \
 	Figure/representation_sensitivity.pdf Figure/scaling.pdf Figure/formose.pdf \
@@ -25,7 +27,7 @@ Figure/analysis_overview.pdf: analysis/scripts/analysis_overview.py analysis/scr
 	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) analysis/scripts/analysis_overview.py --evidence-dir analysis --output Figure/analysis_overview.pdf
 
 $(REPLAY_ASSETS): analysis/scripts/glycolysis_replay.py analysis/scripts/result_style.py Figure/glycolysis_analysis.json
-	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) analysis/scripts/glycolysis_replay.py --output-dir Figure --json Figure/glycolysis_analysis.json
+	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) analysis/scripts/glycolysis_replay.py --output-dir Figure --input Figure/glycolysis_analysis.json
 
 Figure/performance_diagnostics.pdf: analysis/scripts/performance_diagnostics.py analysis/crn-scaling.json
 	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) $< --evidence analysis/crn-scaling.json --output $@
@@ -34,13 +36,13 @@ Figure/structural_landscape.pdf: analysis/scripts/structural_landscape.py $(ANAL
 	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) $< --evidence-dir analysis --output $@
 
 main.pdf: main.tex paper_layout.tex refs.bib $(FIGURE_SOURCES)
-	latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+	latexmk $(LATEXMK_FLAGS) main.tex
 
 SI/si.pdf: SI/si.tex paper_layout.tex main.pdf $(FIGURE_SOURCES)
-	latexmk -pdf -interaction=nonstopmode -halt-on-error -cd SI/si.tex
+	latexmk $(LATEXMK_FLAGS) -cd SI/si.tex
 
 final-main: SI/si.pdf
-	latexmk -g -pdf -interaction=nonstopmode -halt-on-error main.tex
+	latexmk -g $(LATEXMK_FLAGS) main.tex
 
 evidence-check:
 	MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) verify_revision.py

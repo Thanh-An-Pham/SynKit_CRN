@@ -19,6 +19,19 @@
   \IfFileExists{Figure/glycolysis_analysis.tex}{\input{Figure/glycolysis_analysis}}{%
     \input{../Figure/glycolysis_analysis}}}
 
+\begingroup
+% Use the full 16.40 cm manuscript width without stretching text or symbols.
+\colorlet{scInk}{black}
+\colorlet{scInkM}{black}
+\renewcommand{\scTitle}{\scArial\fontsize{8}{9.6}\selectfont\bfseries\color{black}}
+\renewcommand{\scBody}{\scArial\fontsize{7}{8.4}\selectfont\color{black}}
+\renewcommand{\scSmall}{\scArial\fontsize{6.5}{7.8}\selectfont\color{black}}
+\renewcommand{\scHead}[5][scInk]{%
+  \node[anchor=north west,font=\scTitle,inner sep=0pt] at #2 {#3};
+  \node[anchor=north west,font=\scTitle,inner sep=0pt]
+    at ($#2+(0.32,0)$) {#4};
+  \node[anchor=north west,font=\scSmall,inner sep=0pt]
+    at ($#2+(0.32,-0.30)$) {#5};}
 \tikzset{
   gmet/.style={rounded rectangle,fill=scSpF,draw=scSpE,line width=0.5pt,
                font=\scBody,text=scInk,minimum height=4.2mm,
@@ -33,7 +46,7 @@
   glabel/.style={font=\scSmall,text=scInkM,fill=white,inner sep=0.9pt},
   % one treatment for all four invariants --- they are the same kind of fact
   statcard/.style={rounded corners=2.5pt,fill=scPaper,draw=scRule,
-                   line width=0.4pt,minimum width=1.36cm,minimum height=8.4mm,
+                   line width=0.4pt,minimum width=1.65cm,minimum height=8.4mm,
                    align=center,inner sep=2pt},
   stagecard/.style={rounded corners=2.5pt,fill=scAccentF,draw=scAccent!45,
                     line width=0.5pt,minimum height=7.0mm,align=center,
@@ -42,31 +55,24 @@
   scovered/.style={rounded rectangle,fill=scPaper,draw=scRule,line width=0.4pt,
                    font=\scSmall,text=scInkM,inner xsep=3.4pt,inner ysep=1.8pt},
   suncov/.style={rounded rectangle,fill=scAlertF,draw=scAlert!60,line width=0.4pt,
-                 font=\scSmall,text=scAlert,inner xsep=3.4pt,inner ysep=1.8pt,
+                 font=\scSmall,text=black,inner xsep=3.4pt,inner ysep=1.8pt,
                  execute at begin node={\bfseries}},
   % \hfill only distributes inside a node that has a text width
   verdict/.style={rounded corners=2.5pt,line width=0.4pt,inner xsep=6pt,
-                  inner ysep=3.5pt,font=\scSmall,text width=5.55cm,
+                  inner ysep=3.5pt,font=\scSmall,text width=7.1cm,
                   anchor=north west},
 }
 
 \def\pw{6.415}
-\def\rowa{4.42}\def\rowb{4.46}
 \def\qx{6.615}          % left edge of the right-hand column
-\def\ry{-4.62}          % top edge of the bottom row
+\def\ry{-5.10}          % top edge of the bottom row
 
-\begin{tikzpicture}[syn]
-\scCanvas{9.75}
-
-\begin{scope}[on background layer]
-  \path[panel] (0,0)      rectangle (\pw,-\rowa);
-  \path[panel] (\qx,0)    rectangle (\qx+\pw,-\rowa);
-  \path[panel] (0,\ry)    rectangle (\qx+\pw,-9.75);
-\end{scope}
+\begin{tikzpicture}[syn,x=1.258384cm]
+\scCanvas{11.55}
 
 % =========================================================================
 % (a) module topology
-%     header -0.62 | upper chain -1.48 | lower chain -3.05 | note -3.80
+%     upper chain -1.48 | lower chain -3.05 | note -3.95
 % =========================================================================
 \scHead{(0.22,-0.16)}{a}{glycolytic reactions}%
        {currency metabolites omitted; multiplicity retained}
@@ -101,22 +107,22 @@
 \draw[gpath] (pg2) -- (pep) node[glabel,midway,yshift=3.2mm] {ENO};
 \draw[gpath] (pep) -- (pyr) node[glabel,midway,yshift=3.2mm] {PK};
 
-\node[catalyst,font=\scSmall,text=scHiE] (poly) at (0.66,-2.42) {PolyP};
+\node[catalyst,font=\scSmall,text=black] (poly) at (0.66,-2.42) {PolyP};
 \draw[cat,dashed] (poly.north) to[out=80,in=-100] ($(glc)!0.50!(g6p)$);
-\node[font=\scSmall,text=scHiE,anchor=west] at (1.18,-2.42) {shared PolyP};
+\node[font=\scSmall,text=black,anchor=west] at (1.18,-2.42) {shared PolyP};
 
 \draw[gbypass] (gap.south) to[out=-80,in=18,looseness=1.1] (pg3.east);
-\node[font=\scSmall,text=scRef,fill=white,inner sep=1pt] at (4.58,-3.52)
+\node[font=\scSmall,text=black,fill=white,inner sep=1pt] at (4.58,-3.52)
   {Fd$_{\rm ox}\!\to$Fd$_{\rm red}$ bypass};
 
-\node[note,anchor=north west,text width=5.55cm,align=left] at (0.22,-3.80)
+\node[note,anchor=north west,text width=7.1cm,align=left] at (0.22,-3.95)
   {\textbf{\textcolor{scInk}{KEGG M00001}}\hfill\GlySpecies\ species
    \ \ $\cdot$\ \ \GlyReactions\ reactions};
 
 % =========================================================================
 % (b) exact structural fingerprint
-%     header -0.62 | stats -1.22 | moieties -1.95..-2.80 | law -3.00
-%     | siphons -3.68 | verdict -3.88
+%     stats -1.22 | moieties -2.28..-3.00 | law -3.20
+%     | siphons -4.10 | verdict -4.40
 % =========================================================================
 \scHead{(\qx+0.22,-0.16)}{b}{conserved pools and structure}%
        {carbohydrate, ferredoxin, and polyphosphate pools}
@@ -127,7 +133,7 @@
                           3/\GlyDeficiency/{deficiency $\delta$}} {
   \pgfmathsetmacro{\sxx}{\qx+0.86+\i*1.56}
   \node[statcard] at (\sxx,-1.22)
-    {{\fontfamily{lmss}\fontsize{9}{10}\selectfont\bfseries\color{scInk}\val}\\[0.5pt]
+    {{\scArial\fontsize{9}{10}\selectfont\bfseries\color{scInk}\val}\\[0.5pt]
      {\scSmall\lab}};
 }
 
@@ -140,32 +146,33 @@
 \foreach \i/\nm/\len/\val in {0/{carbon backbone}/3.15/\GlyBackboneSupport,
                               1/{Fd$_{\rm ox}$\,/\,Fd$_{\rm red}$}/0.573/2,
                               2/{PolyP}/0.286/1} {
-  \pgfmathsetmacro{\byy}{-2.28-\i*0.28}
+  \pgfmathsetmacro{\byy}{-2.28-\i*0.36}
   \node[anchor=base east,font=\scSmall,text=scInkM] at (\qx+1.90,\byy) {\nm};
   \path[rounded corners=1.2pt,fill=scAccentF,draw=scAccent!45,line width=0.35pt]
     (\qx+2.00,\byy-0.030) rectangle (\qx+2.00+\len,\byy+0.140);
-  \node[anchor=base west,font=\scSmall,text=scAccent]
+  \node[anchor=base west,font=\scSmall,text=black]
     at (\qx+2.10+\len,\byy) {\bfseries\val};
 }
 
-\node[note,anchor=north west,text width=5.55cm,align=left]
-  at (\qx+0.22,-3.00)
+\node[note,anchor=north west,text width=7.1cm,align=left]
+  at (\qx+0.22,-3.20)
   {backbone law:\ $2\!\times$hexose $+\,1\!\times$triose\hfill
    $y^{\mathsf T}\mathbf S=0$ exactly};
 
-\node[anchor=base west,font=\scBody,text=scInk] at (\qx+0.24,-3.70)
+\node[anchor=base west,font=\scBody,text=scInk] at (\qx+0.24,-4.10)
   {\bfseries\GlySiphons\ minimal siphons};
-\node[suncov]   at (\qx+2.66,-3.67) {Glc};
-\node[scovered] at (\qx+3.56,-3.67) {PolyP};
-\node[suncov]   at (\qx+4.46,-3.67) {Fd$_{\rm ox}$};
-\node[anchor=base west,font=\scSmall,text=scAlert] at (\qx+4.92,-3.70)
+\node[suncov]   at (\qx+2.66,-4.07) {Glc};
+\node[scovered] at (\qx+3.56,-4.07) {PolyP};
+\node[suncov]   at (\qx+4.46,-4.07) {Fd$_{\rm ox}$};
+\node[anchor=base west,font=\scSmall,text=black] at (\qx+4.92,-4.10)
   {\GlyUncovered\ uncovered};
 
-\node[verdict,fill=scAlertF,draw=scAlert!40,text=scAlert]
-  at (\qx+0.22,-3.86)
+\node[verdict,fill=scAlertF,draw=scAlert!40,text=black]
+  at (\qx+0.22,-4.40)
   {\textbf{coverage: incomplete}\hfill\textcolor{scInkM}{no persistence certificate}};
 
 % (c) Full-width token map generated from the recorded certificate trajectory.
 \node[anchor=north west,inner sep=0pt] at (0,\ry)
-  {\includegraphics[width=13.03cm]{Figure/glycolysis_replay.pdf}};
+  {\includegraphics[width=16.4cm]{Figure/glycolysis_replay.pdf}};
 \end{tikzpicture}
+\endgroup

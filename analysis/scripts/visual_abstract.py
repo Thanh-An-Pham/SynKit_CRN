@@ -8,6 +8,8 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
+from matplotlib.transforms import Affine2D
 from matplotlib.patches import (
     Circle,
     Rectangle,
@@ -28,12 +30,27 @@ PALE = "#F1F6F8"
 
 
 def render_visual_abstract(out):
+    font_manager.findfont("Arial", fallback_to_default=False)
     plt.rcParams.update(
-        {"font.family": "DejaVu Sans", "pdf.fonttype": 42, "svg.fonttype": "none"}
+        {
+            "font.family": "Arial",
+            "mathtext.fontset": "custom",
+            "mathtext.rm": "Arial",
+            "mathtext.it": "Arial:italic",
+            "mathtext.bf": "Arial:bold",
+            "mathtext.sf": "Arial",
+            "pdf.fonttype": 42,
+            "svg.fonttype": "none",
+        }
     )
-    fig, ax = plt.subplots(figsize=(7.2, 4.15))
+    # Lower the central diagram to the middle connector row, preserving its
+    # internal layout and leaving room for the derived views and key below it.
+    connector_rows = (6.95, 4.49, 2.2)
+    connector_y = connector_rows[1]
+    central_offset_y = connector_y - 5.65
+    fig, ax = plt.subplots(figsize=(7.2, 4.65))
     fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
-    ax.set(xlim=(0, 16.5), ylim=(0, 9.25), aspect="equal")
+    ax.set(xlim=(0, 16.5), ylim=(central_offset_y, 9.25), aspect="equal")
     ax.axis("off")
 
     def label(x, y, value, size=10, color=INK, weight="normal", ha="center"):
@@ -46,7 +63,7 @@ def render_visual_abstract(out):
             [a[0], b[0]], [a[1], b[1]], color=color, lw=lw, solid_capstyle="round", **kw
         )
 
-    def arrow(a, b, color=MUTED, lw=1.2, rad=0, shrink=0):
+    def arrow(a, b, color=MUTED, lw=1.2, rad=0, shrink=0, shrink_end=None):
         ax.add_patch(
             FancyArrowPatch(
                 a,
@@ -57,7 +74,7 @@ def render_visual_abstract(out):
                 color=color,
                 connectionstyle=f"arc3,rad={rad}",
                 shrinkA=shrink,
-                shrinkB=shrink,
+                shrinkB=shrink if shrink_end is None else shrink_end,
             )
         )
 
@@ -165,14 +182,16 @@ def render_visual_abstract(out):
     )
     label(x, 1.31, "Rules", 10, INK, "bold")
 
-    # Input convergence feeds the shared reaction object.
-    for yy in (6.95, 4.49, 2.2):
-        line((3.12, yy), (3.56, yy), MUTED, 1)
-        line((3.56, yy), (4.03, 5.35), MUTED, 1)
-    arrow((4.03, 5.35), (4.66, 5.35), BLUE, 1.6)
+    # Three grey input branches join a vertical stem; only the combined
+    # input is a blue arrow, aligned with the middle branch.
+    for yy in connector_rows:
+        line((3.12, yy), (4.03, yy), MUTED, 1)
+    line((4.03, min(connector_rows)), (4.03, max(connector_rows)), MUTED, 1)
+    arrow((4.03, connector_y), (4.66, connector_y), BLUE, 1.6)
 
     # Enzyme binding and product release: E+S <-> ES -> E+P.
     # Three transition nodes preserve the actual reactant/product incidence.
+    existing_artists = set(ax.get_children())
     ax.add_patch(
         FancyBboxPatch(
             (4.85, 3.95),
@@ -215,10 +234,10 @@ def render_visual_abstract(out):
     positions = {
         "S": (5.5, 5.65),
         "E": (8.0, 7.06),
-        "ES": (8.0, 5.65),
+        "ES": (8.3, 5.65),
         "P": (10.42, 5.65),
     }
-    bind, unbind, release = (6.65, 5.65), (6.65, 4.65), (9.2, 5.65)
+    bind, unbind, release = (6.65, 5.65), (6.65, 4.65), (9.5, 5.65)
     for a, b in [
         (positions["S"], bind),
         (positions["E"], bind),
@@ -235,6 +254,8 @@ def render_visual_abstract(out):
             ORANGE if b == positions["E"] or a == positions["E"] else BLUE,
             1.3,
             shrink=9,
+            # Keep the incoming arrowhead outside the complex's circular edge.
+            shrink_end=14 if b == positions["ES"] else None,
         )
     arrow(unbind, positions["E"], ORANGE, 1.1, rad=-0.75, shrink=9)
     enzyme(*positions["E"])
@@ -259,7 +280,7 @@ def render_visual_abstract(out):
         reaction(*pos)
     label(8.0, 7.60, "Enzyme", 8.5, ORANGE)
     label(5.50, 5.03, "Substrate", 8)
-    label(8.15, 5.04, "Complex", 8)
+    label(positions["ES"][0] + 0.15, 5.04, "Complex", 8)
     label(10.40, 5.03, "Product", 8)
     label(8.0, 4.20, r"$E+S\rightleftharpoons ES\rightarrow E+P$", 10)
 
@@ -311,10 +332,17 @@ def render_visual_abstract(out):
     arrow((10.16, 2.4), (10.39, 2.4), BLUE, 0.95)
     label(10.05, 1.31, "Petri net", 9)
 
+    # Translate the whole central group in data coordinates. The substrate,
+    # complex, product, and forward reactions now share connector_y exactly.
+    central_transform = Affine2D().translate(0, central_offset_y) + ax.transData
+    for artist in ax.get_children():
+        if artist not in existing_artists:
+            artist.set_transform(central_transform)
+
     # A common output stem fans out to three distinct mathematical questions.
-    line((11.14, 5.6), (11.62, 5.6), MUTED, 1)
-    line((11.62, 2.2), (11.62, 6.95), MUTED, 1)
-    for yy in (6.95, 4.49, 2.2):
+    line((11.14, connector_y), (11.62, connector_y), MUTED, 1)
+    line((11.62, min(connector_rows)), (11.62, max(connector_rows)), MUTED, 1)
+    for yy in connector_rows:
         arrow((11.62, yy), (12.27, yy), GREEN, 1.3)
 
     # A conserved enzyme pool redistributes between free and bound forms.
@@ -367,10 +395,11 @@ def render_visual_abstract(out):
     label(14.0, 1.31, "Reaction sequences", 10, INK, "bold")
 
     # A compact key defines the central graph symbols.
-    species(6.17, 0.46, r=0.1)
-    label(6.42, 0.46, "Species", 8, ha="left")
-    reaction(8.60, 0.46, 0.12, 0.2)
-    label(8.85, 0.46, "Reaction", 8, ha="left")
+    key_y = 0.46 + central_offset_y
+    species(6.17, key_y, r=0.1)
+    label(6.42, key_y, "Species", 8, ha="left")
+    reaction(8.60, key_y, 0.12, 0.2)
+    label(8.85, key_y, "Reaction", 8, ha="left")
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     fig.savefig(

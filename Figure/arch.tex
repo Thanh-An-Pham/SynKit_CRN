@@ -75,7 +75,7 @@
 % --- IO: an XML tag
 \node[rounded corners=1pt,fill=scRefF,draw=scRef,line width=0.4pt,
       font=\scSmall,text=scRef,inner xsep=2.5pt,inner ysep=1.5pt]
-  at (\ax+\icon,\ryb) {\texttt{<xml>}};
+  at (\ax+\icon,\ryb) {<xml>};
 \node[rowname]  at (\ax+\name,\ryb+0.04) {IO};
 \node[rowgloss] at (\ax+\name,\ryb-0.22) {SBML L3 Core};
 
@@ -97,7 +97,7 @@
 \path[panel] (\bx,0) rectangle (\bx+\bw,-\rowh);
 \scHead[scMark]{(\bx+0.22,-0.16)}{b}{reaction records}{}
 \node[anchor=north east,font=\scBody,text=scInk] at (\bx+\bw-0.22,-0.155)
-  {\textbf{\texttt{SynCRN}}};
+  {\textbf{SynCRN}};
 
 % One reaction with two substrates, one with a catalyst that is consumed and
 % returned.  Both are exactly what a net-stoichiometry view would lose.

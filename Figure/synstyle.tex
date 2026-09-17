@@ -33,6 +33,17 @@
 \ifdefined\SynKitStyleLoaded\endinput\fi
 \newcommand{\SynKitStyleLoaded}{}
 
+% Load in the document preamble. XeLaTeX/LuaLaTeX and an installed Arial
+% family are required; fontspec reports an error instead of substituting.
+\RequirePackage[no-math]{fontspec}
+\newfontfamily\scArial{Arial}[NFSSFamily=scArial,Ligatures=TeX]
+% Keep manuscript mathematics unchanged; select Arial letters and numerals
+% only inside figures. TeX supplies specialist mathematical symbols.
+\RequirePackage[subdued,italic]{mathastext}
+\MTDeclareVersion{synarial}{TU}{scArial}{m}{n}
+\SetMathAlphabet{\Mathsf}{synarial}{TU}{scArial}{m}{n}
+\SetMathAlphabet{\Mathtt}{synarial}{TU}{scArial}{m}{n}
+
 \usetikzlibrary{positioning,calc,fit,backgrounds,arrows.meta,shapes.geometric,
                 shapes.misc,decorations.pathreplacing,patterns,math}
 
@@ -94,23 +105,22 @@
 
 % --- text styles ----------------------------------------------------------
 % Three sizes, fixed in points so they do not drift with the document class.
-% Latin Modern Sans is scalable at the half-point body size.  It preserves the
-% compact technical character of Style/abstract.tex without the 6.5 -> 6 pt
-% Computer Modern substitution that otherwise changes layout between builds.
-\providecommand{\scTitle}{\fontfamily{lmss}\fontsize{7}{8.4}\selectfont\bfseries\color{scInk}}
-\providecommand{\scBody}{\fontfamily{lmss}\fontsize{6.5}{7.8}\selectfont\color{scInkM}}
-\providecommand{\scSmall}{\fontfamily{lmss}\fontsize{6}{7.2}\selectfont\color{scInkM}}
+% Arial is shared by labels, headings, panel badges, and chemistry labels.
+\providecommand{\scTitle}{\scArial\fontsize{7}{8.4}\selectfont\bfseries\color{scInk}}
+\providecommand{\scBody}{\scArial\fontsize{6.5}{7.8}\selectfont\color{scInkM}}
+\providecommand{\scSmall}{\scArial\fontsize{6}{7.2}\selectfont\color{scInkM}}
 \providecommand{\scSub}[1]{{\scSmall\itshape #1}}
 \providecommand{\scPanel}[1]{{\scTitle(#1)}}
 % Numerals that carry a result: ink, not colour, so the eye reads the value.
-\providecommand{\scNum}{\fontfamily{lmss}\fontsize{10}{11}\selectfont\bfseries\color{scInk}}
+\providecommand{\scNum}{\scArial\fontsize{10}{11}\selectfont\bfseries\color{scInk}}
 
 % --- shared TikZ styles ---------------------------------------------------
 \tikzset{
   % text never hyphenates inside a figure
   every node/.append style={execute at begin node={%
       \hyphenpenalty=10000 \exhyphenpenalty=10000 \hbadness=10000 }},
-  syn/.style={font=\fontfamily{lmss}\selectfont,color=scInk,
+  syn/.style={font=\scArial,color=scInk,
+              execute at begin picture={\MTversion*{synarial}},
               >={Stealth[round,length=2.4mm,width=1.9mm]}},
   % containers ------------------------------------------------------------
   % One card chrome for the whole paper: white, 3 pt radius, one hairline.
@@ -125,7 +135,7 @@
                inner xsep=4pt,inner ysep=2pt,font=\scSmall},
   % Circular letter badge: the same accessible panel marker used in Style/*.
   hbullet/.style={circle,fill=scInk,text=white,draw=none,
-                  font=\fontfamily{lmss}\fontsize{6}{6}\selectfont\bfseries,
+                  font=\scArial\fontsize{6}{6}\selectfont\bfseries,
                   minimum size=4.2mm,inner sep=0pt},
   ctag/.style={font=\scTitle,anchor=north west,text=scInk},
   % CRN primitives --------------------------------------------------------

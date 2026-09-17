@@ -6,21 +6,19 @@ import json
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.path import Path as MarkerPath
 from matplotlib.patches import Rectangle
 from result_style import (
-    INK,
     BLUE,
     GREEN,
     ORANGE,
     RED,
-    GRAY,
     HAIR,
     PALE,
     configure,
-    heading,
-    clean,
-    verdict,
+    plain_heading as heading,
     save,
 )
 
@@ -111,7 +109,13 @@ def validation_panel(ax, validation, external):
             7, i, s=26, facecolor=BLUE if wr else "white", edgecolor=BLUE, lw=0.8
         )
         ok = row["passed"] and not row["mismatches"] and not row["crosscheck_failures"]
-        verdict(ax, 8.4, i, ok, 11)
+        # Draw the check as a vector: Arial does not contain this glyph.
+        if ok:
+            check = MarkerPath([(-0.45, 0), (-0.12, -0.3), (0.5, 0.4)])
+            ax.scatter(8.4, i, marker=check, s=70, facecolor="none",
+                       edgecolor=GREEN, linewidths=1.2)
+        else:
+            ax.scatter(8.4, i, marker="x", s=42, color=RED, linewidths=1.2)
         ext = external_by_name[row["name"]]
         matches = sum(ext["synkit"][k] == ext["crnt4sbml"][k] for k in SHARED)
         ax.text(
@@ -121,19 +125,10 @@ def validation_panel(ax, validation, external):
             ha="center",
             va="center",
             fontsize=8,
-            color=GREEN if matches == len(SHARED) else RED,
+            color="black",
             weight="bold",
         )
-        ax.plot([-4.7, 10.55], [i + 0.5, i + 0.5], color=HAIR, lw=0.45)
-    heading(ax, "A", "Reference checks and independent SBML comparison", y=1.02)
-    ax.text(
-        0,
-        -0.09,
-        "Colour scaled within each count column; WR: ● yes / ○ no; external: shared quantities agreeing.",
-        transform=ax.transAxes,
-        fontsize=7.5,
-        color=GRAY,
-    )
+    heading(ax, "a", "Reference checks and independent SBML comparison", y=1.02)
 
 
 def biomodels_panel(ax, evidence):
@@ -145,7 +140,7 @@ def biomodels_panel(ax, evidence):
         siph = row["siphon_seconds"]
         moiety = row["moiety_seconds"]
         if moiety is not None:
-            ax.plot([siph, moiety], [i, i], color=HAIR, lw=1.2, zorder=1)
+            ax.plot([siph, moiety], [i, i], color=HAIR, lw=1.2, ls="--", zorder=1)
         ax.scatter(siph, i, s=23, marker="s", color=GREEN, zorder=3)
         if moiety is not None:
             ax.scatter(moiety, i, s=25, marker="o", color=BLUE, zorder=3)
@@ -160,36 +155,45 @@ def biomodels_panel(ax, evidence):
                 textcoords="offset points",
                 ha="right",
                 fontsize=8,
-                color=RED,
+                color="black",
             )
     ax.set(
         xscale="log",
         xlim=(5e-5, 400),
         ylim=(len(models) - 0.5, -0.6),
         yticks=range(len(models)),
-        yticklabels=[f"{r['model_id'][-4:]} · {r['n_species']}" for r in models],
+        yticklabels=[],
         xlabel="Wall time (s)",
     )
     ax.set_xticks([1e-4, 1e-2, 1, 100])
+    ax.minorticks_off()
     ax.tick_params(axis="y", length=0, pad=4)
-    clean(ax, "x")
-    heading(ax, "B", "BioModels analysis costs", y=1.20)
-    ax.text(
-        -0.28,
-        1.04,
-        "ID suffix · species",
-        transform=ax.transAxes,
-        fontsize=7.5,
-        color=GRAY,
-    )
+    # Separate columns keep identifiers and differently sized counts aligned.
+    id_x, species_x = -0.29, -0.10
+    for i, row in enumerate(models):
+        ax.text(id_x, i, row["model_id"][-4:],
+                transform=ax.get_yaxis_transform(), ha="left", va="center",
+                fontsize=8, color="black", clip_on=False)
+        ax.text(species_x, i, str(row["n_species"]),
+                transform=ax.get_yaxis_transform(), ha="center", va="center",
+                fontsize=8, color="black", clip_on=False)
+    ax.grid(False, which="both", axis="both")
+    heading(ax, "b", "BioModels analysis costs", y=1.20)
+    for x, title, alignment in [(id_x, "ID\nsuffix", "left"),
+                                 (species_x, "Species", "center")]:
+        ax.text(x, 1.04, title, transform=ax.transAxes, ha=alignment,
+                fontsize=7.5, color="black", clip_on=False)
     ax.scatter([], [], color=GREEN, marker="s", s=23, label="Siphons")
     ax.scatter([], [], color=BLUE, marker="o", s=25, label="Moieties")
+    ax.scatter([], [], marker=">", s=35, facecolor="white", edgecolor=RED,
+               label="Timeout (120 s)")
     ax.legend(
         loc="lower left",
-        bbox_to_anchor=(0.07, 1.005),
+        bbox_to_anchor=(0, 1.005),
         fontsize=7.5,
-        ncol=2,
+        ncol=3,
         frameon=False,
+        handlelength=1.2,
         handletextpad=0.4,
         columnspacing=0.8,
     )
@@ -200,7 +204,7 @@ def biomodels_panel(ax, evidence):
         transform=ax.transAxes,
         ha="center",
         fontsize=8,
-        color=GREEN,
+        color="black",
         weight="bold",
     )
 
@@ -213,14 +217,13 @@ def kegg_panel(ax, evidence):
         "M00004": "Pentose phosphate",
     }
     modules = evidence["modules"]
-    ax.set(xlim=(0, 11.5), ylim=(-2.15, 9.0))
+    ax.set(xlim=(0, 11.5), ylim=(-2.75, 9.0))
     ax.axis("off")
-    heading(ax, "C", "Conserved pools in KEGG", y=1.15)
-    ax.text(0, 8.8, "One circle = one minimal conserved pool", fontsize=7.5, color=GRAY)
+    heading(ax, "c", "Conserved pools in KEGG", y=1.1111)
     for i, row in enumerate(modules):
-        y = 7.4 - i * 2.6
+        y = 8.9 - i * 3.0
         ax.text(0, y + 0.20, names[row["module_id"]], fontsize=9, weight="bold")
-        ax.text(11.5, y + 0.20, row["module_id"], ha="right", fontsize=7.5, color=GRAY)
+        ax.text(11.5, y + 0.20, row["module_id"], ha="right", fontsize=7.5, color="black")
         # Pool counts alone hide how much network each pool has to cover, so
         # name the reduced model size that the supports are drawn from.
         ax.text(
@@ -229,12 +232,12 @@ def kegg_panel(ax, evidence):
             f"{row['n_species']} species · {row['n_reactions']} reactions · "
             f"δ = {row['deficiency']}",
             fontsize=7.5,
-            color=GRAY,
+            color="black",
         )
         for j, pool in enumerate(sorted(row["moieties"], key=len, reverse=True)):
-            x = 0.50 + j * 0.88
+            x = 0.50 + j * 0.96
             ax.scatter(
-                x, y - 1.15, s=105, color=GREEN, alpha=0.20, edgecolor=GREEN, lw=0.7
+                x, y - 1.15, s=125, color=GREEN, alpha=0.20, edgecolor=GREEN, lw=0.7
             )
             ax.text(
                 x,
@@ -243,19 +246,8 @@ def kegg_panel(ax, evidence):
                 ha="center",
                 va="center",
                 fontsize=7.5,
-                color=INK,
+                color="black",
             )
-        ax.plot([0, 11.5], [y - 1.55, y - 1.55], color=HAIR, lw=0.6)
-    # Aligned with panel B's closing note now that this panel's box is taller.
-    ax.text(
-        0.5,
-        -0.19,
-        "Numbers = species in each pool",
-        transform=ax.transAxes,
-        ha="center",
-        fontsize=8,
-        color=GRAY,
-    )
 
 
 def main():
@@ -266,6 +258,21 @@ def main():
     )
     args = parser.parse_args()
     configure()
+    font_manager.findfont("Arial", fallback_to_default=False)
+    plt.rcParams.update({
+        "font.family": "Arial",
+        "mathtext.fontset": "custom",
+        "mathtext.rm": "Arial",
+        "mathtext.it": "Arial:italic",
+        "mathtext.bf": "Arial:bold",
+        "mathtext.sf": "Arial",
+        "text.color": "black",
+        "axes.labelcolor": "black",
+        "axes.edgecolor": "black",
+        "xtick.color": "black",
+        "ytick.color": "black",
+        "axes.grid": False,
+    })
     e = args.evidence_dir
     validation = load(e / "crn-validation.json")
     external = load(e / "crn-external-crnt4sbml.json")
@@ -274,7 +281,7 @@ def main():
     fig = plt.figure(figsize=(7.2, 6.9))
     a = fig.add_axes([0.045, 0.525, 0.925, 0.40])
     b = fig.add_axes([0.145, 0.115, 0.355, 0.275])
-    c = fig.add_axes([0.585, 0.085, 0.385, 0.320])
+    c = fig.add_axes([0.585, 0.045, 0.385, 0.360])
     validation_panel(a, validation, external)
     biomodels_panel(b, biomodels)
     kegg_panel(c, kegg)
