@@ -1,5 +1,6 @@
 {
   "checks": {
+    "all_enumerations_complete": true,
     "certificate_matches_requested_flux": true,
     "deficiency_identity_holds": true,
     "every_module_analysed": true,
@@ -11,8 +12,37 @@
   "claim_boundary": "Conserved moieties, siphons and persistence are structural properties of the stoichiometry as curated by KEGG. They describe the module as written, not the in vivo pathway, and say nothing about flux magnitude, regulation or kinetics.",
   "environment": {
     "cpu_count": 22,
-    "git_commit": "22b007ed0d93755fcb95291784b39f96ced68e14",
-    "git_dirty": false,
+    "crn_backend": {
+      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
+      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "native_operations": {
+        "crnt": 4,
+        "pathway": 1,
+        "semiflows": 4,
+        "structural_sets": 4
+      },
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
     "machine": "x86_64",
     "networkx": "3.5",
     "numpy": "2.3.3",
@@ -21,7 +51,7 @@
     "python": "3.11.0",
     "rdkit": "2025.09.3",
     "scipy": "1.16.0",
-    "synkit": "1.6.2"
+    "synkit": "1.6.5"
   },
   "glycolysis_flux": {
     "certificate": [
@@ -60,7 +90,7 @@
     },
     "max_depth_reached": 15,
     "realizable": true,
-    "seconds": 0.002132321009412408,
+    "seconds": 0.0020684890041593462,
     "status": "realizable",
     "termination_reason": "certificate"
   },
@@ -97,7 +127,8 @@
       "n_species": 14,
       "persistent": false,
       "rank": 11,
-      "seconds": 0.044669673981843516,
+      "seconds": 0.006305545975919813,
+      "siphon_termination_reason": "complete",
       "siphons": [
         [
           "alpha-D-Glucose"
@@ -109,6 +140,7 @@
           "Oxidized ferredoxin"
         ]
       ],
+      "siphons_complete": true,
       "uncovered_siphons": [
         [
           "alpha-D-Glucose"
@@ -169,19 +201,11 @@
       "n_species": 13,
       "persistent": false,
       "rank": 6,
-      "seconds": 0.16231590998359025,
+      "seconds": 0.0047205940063577145,
+      "siphon_termination_reason": "complete",
       "siphons": [
         [
           "CoA"
-        ],
-        [
-          "Pyruvate"
-        ],
-        [
-          "Oxidized ferredoxin"
-        ],
-        [
-          "Oxidized flavodoxin"
         ],
         [
           "2-(alpha-Hydroxyethyl)thiamine diphosphate",
@@ -191,8 +215,18 @@
           "Enzyme N6-(dihydrolipoyl)lysine",
           "Enzyme N6-(lipoyl)lysine",
           "[Dihydrolipoyllysine-residue acetyltransferase] S-acetyldihydrolipoyllysine"
+        ],
+        [
+          "Pyruvate"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ],
+        [
+          "Oxidized flavodoxin"
         ]
       ],
+      "siphons_complete": true,
       "uncovered_siphons": [
         [
           "CoA"
@@ -284,33 +318,22 @@
       "n_species": 22,
       "persistent": false,
       "rank": 12,
-      "seconds": 1.8264053839957342,
+      "seconds": 0.005561297992244363,
+      "siphon_termination_reason": "complete",
       "siphons": [
         [
-          "IDP"
-        ],
-        [
-          "Oxidized ferredoxin"
-        ],
-        [
-          "Quinone"
-        ],
-        [
-          "[Dihydrolipoyllysine-residue succinyltransferase] S-succinyldihydrolipoyllysine"
-        ],
-        [
-          "2-Oxoglutarate"
-        ],
-        [
-          "Acetate"
+          "(S)-Malate",
+          "CoA",
+          "Fumarate",
+          "Oxaloacetate",
+          "Succinate",
+          "Succinyl-CoA"
         ],
         [
           "Acetyl-CoA",
           "CoA",
           "Succinyl-CoA"
-        ]
-      ],
-      "uncovered_siphons": [
+        ],
         [
           "IDP"
         ],
@@ -328,6 +351,41 @@
         ],
         [
           "Acetate"
+        ],
+        [
+          "GDP"
+        ]
+      ],
+      "siphons_complete": true,
+      "uncovered_siphons": [
+        [
+          "(S)-Malate",
+          "CoA",
+          "Fumarate",
+          "Oxaloacetate",
+          "Succinate",
+          "Succinyl-CoA"
+        ],
+        [
+          "IDP"
+        ],
+        [
+          "Oxidized ferredoxin"
+        ],
+        [
+          "Quinone"
+        ],
+        [
+          "[Dihydrolipoyllysine-residue succinyltransferase] S-succinyldihydrolipoyllysine"
+        ],
+        [
+          "2-Oxoglutarate"
+        ],
+        [
+          "Acetate"
+        ],
+        [
+          "GDP"
         ]
       ],
       "weakly_reversible": false
@@ -370,14 +428,16 @@
       "n_species": 12,
       "persistent": false,
       "rank": 10,
-      "seconds": 0.0425790449953638,
+      "seconds": 0.004236307984683663,
+      "siphon_termination_reason": "complete",
       "siphons": [
         [
           "6-Phospho-D-gluconate",
+          "D-Erythrose 4-phosphate",
           "D-Fructose 6-phosphate",
           "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Ribose 5-phosphate",
           "D-Ribulose 5-phosphate",
-          "D-Xylulose 5-phosphate",
           "Sedoheptulose 7-phosphate",
           "alpha-D-Glucose 6-phosphate",
           "beta-D-Glucose 6-phosphate"
@@ -386,19 +446,8 @@
           "6-Phospho-D-gluconate",
           "D-Fructose 6-phosphate",
           "D-Glucono-1,5-lactone 6-phosphate",
-          "D-Glyceraldehyde 3-phosphate",
           "D-Ribulose 5-phosphate",
           "D-Xylulose 5-phosphate",
-          "alpha-D-Glucose 6-phosphate",
-          "beta-D-Glucose 6-phosphate"
-        ],
-        [
-          "6-Phospho-D-gluconate",
-          "D-Erythrose 4-phosphate",
-          "D-Fructose 6-phosphate",
-          "D-Glucono-1,5-lactone 6-phosphate",
-          "D-Ribose 5-phosphate",
-          "D-Ribulose 5-phosphate",
           "Sedoheptulose 7-phosphate",
           "alpha-D-Glucose 6-phosphate",
           "beta-D-Glucose 6-phosphate"
@@ -411,17 +460,29 @@
           "D-Glyceraldehyde 3-phosphate",
           "D-Ribose 5-phosphate",
           "D-Ribulose 5-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
           "alpha-D-Glucose 6-phosphate",
           "beta-D-Glucose 6-phosphate"
         ]
       ],
+      "siphons_complete": true,
       "uncovered_siphons": [
         [
           "6-Phospho-D-gluconate",
+          "D-Erythrose 4-phosphate",
           "D-Fructose 6-phosphate",
           "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Ribose 5-phosphate",
           "D-Ribulose 5-phosphate",
-          "D-Xylulose 5-phosphate",
           "Sedoheptulose 7-phosphate",
           "alpha-D-Glucose 6-phosphate",
           "beta-D-Glucose 6-phosphate"
@@ -430,19 +491,8 @@
           "6-Phospho-D-gluconate",
           "D-Fructose 6-phosphate",
           "D-Glucono-1,5-lactone 6-phosphate",
-          "D-Glyceraldehyde 3-phosphate",
           "D-Ribulose 5-phosphate",
           "D-Xylulose 5-phosphate",
-          "alpha-D-Glucose 6-phosphate",
-          "beta-D-Glucose 6-phosphate"
-        ],
-        [
-          "6-Phospho-D-gluconate",
-          "D-Erythrose 4-phosphate",
-          "D-Fructose 6-phosphate",
-          "D-Glucono-1,5-lactone 6-phosphate",
-          "D-Ribose 5-phosphate",
-          "D-Ribulose 5-phosphate",
           "Sedoheptulose 7-phosphate",
           "alpha-D-Glucose 6-phosphate",
           "beta-D-Glucose 6-phosphate"
@@ -455,6 +505,16 @@
           "D-Glyceraldehyde 3-phosphate",
           "D-Ribose 5-phosphate",
           "D-Ribulose 5-phosphate",
+          "alpha-D-Glucose 6-phosphate",
+          "beta-D-Glucose 6-phosphate"
+        ],
+        [
+          "6-Phospho-D-gluconate",
+          "D-Fructose 6-phosphate",
+          "D-Glucono-1,5-lactone 6-phosphate",
+          "D-Glyceraldehyde 3-phosphate",
+          "D-Ribulose 5-phosphate",
+          "D-Xylulose 5-phosphate",
           "alpha-D-Glucose 6-phosphate",
           "beta-D-Glucose 6-phosphate"
         ]

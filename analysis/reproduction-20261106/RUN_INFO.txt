@@ -1,0 +1,37 @@
+Full paper reproduction: PASS (6 November 2026)
+
+RESULTS.json records the checks and their limits. comparison.json compares the
+fresh evidence with baseline/. Runtime and environment fields are excluded;
+structural sets and the glycolysis trajectory are compared exactly.
+
+All ten studies were reproduced, including a fresh isolated CRNT4SBML run.
+964 tests and 482 subtests passed, with no failures or skips. All six notebook
+code cells executed under Jupyter. Main and supplementary PDFs are under paper/.
+The original working manuscript was not overwritten by this reproduction.
+Working-file edits made after the snapshot are listed in RESULTS.json.
+
+The analysis imported SynKit 1.6.5 from the source checkout through PYTHONPATH.
+The unrelated installed SynKit distribution listed in the analysis environment
+freeze was not the source used for the run; see environment-notes.json.
+The fresh C++ binaries and legacy Python environment remain under /tmp. Their
+build identifiers and source hashes are retained in reports/ and RESULTS.json.
+
+The primary manuscript evidence keeps its archived-comparator format for the
+existing verifier. external/ contains the additional fresh comparator execution,
+all twelve SBML inputs, the raw worker result and eight-field comparisons.
+From external/, the isolated legacy Python can rerun the retained worker with:
+  /tmp/synkit-crnt4sbml-reproduction-20261106/bin/python crnt4sbml_worker.py manifest.json crnt4sbml-rerun.json
+Its pinned packages are in external/requirements.txt.
+
+To rerun the full SynKit evidence without changing this saved bundle, copy paper/
+to a new temporary directory and run its analysis/scripts/regenerate_evidence.py
+with SYNKIT_ROOT=/home/lolo/Documents/TACsy/SynEco/SynKit, a new --work-dir,
+and --rdkit-dir /home/lolo/.cache/synkit/rdkit-cpp-2026.03.1. The interpreter used
+here was /home/lolo/miniforge3/envs/synedu/bin/python. Build the copied paper with
+make all PYTHON=/home/lolo/miniforge3/envs/synedu/bin/python and SYNKIT_ROOT set.
+Saved commands are in commands/; comparison helpers are beside this file.
+
+LaTeX completed without undefined references. Font substitutions, one small SI
+overfull box, and cross-document page-link warnings remain recorded in the logs.
+
+To verify the bundle files: sha256sum -c SHA256SUMS

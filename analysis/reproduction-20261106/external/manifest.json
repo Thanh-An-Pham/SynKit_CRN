@@ -1,0 +1,52 @@
+{
+  "networks": [
+    {
+      "name": "reversible_isomerization",
+      "path": "sbml/reversible_isomerization.xml"
+    },
+    {
+      "name": "irreversible_isomerization",
+      "path": "sbml/irreversible_isomerization.xml"
+    },
+    {
+      "name": "isomerization_cycle",
+      "path": "sbml/isomerization_cycle.xml"
+    },
+    {
+      "name": "disjoint_reversible_blocks",
+      "path": "sbml/disjoint_reversible_blocks.xml"
+    },
+    {
+      "name": "disjoint_blocks_with_stoichiometry",
+      "path": "sbml/disjoint_blocks_with_stoichiometry.xml"
+    },
+    {
+      "name": "michaelis_menten",
+      "path": "sbml/michaelis_menten.xml"
+    },
+    {
+      "name": "reversible_michaelis_menten",
+      "path": "sbml/reversible_michaelis_menten.xml"
+    },
+    {
+      "name": "edelstein",
+      "path": "sbml/edelstein.xml"
+    },
+    {
+      "name": "futile_cycle_1_site",
+      "path": "sbml/futile_cycle_1_site.xml"
+    },
+    {
+      "name": "futile_cycle_2_site",
+      "path": "sbml/futile_cycle_2_site.xml"
+    },
+    {
+      "name": "shinar_feinberg_acr",
+      "path": "sbml/shinar_feinberg_acr.xml"
+    },
+    {
+      "name": "open_inflow_outflow",
+      "path": "sbml/open_inflow_outflow.xml"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+[NbConvertApp] Converting notebook Experiment/CRN/notebooks/crn_glycolysis_case_study.ipynb to notebook
+/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/localinterfaces.py:58: UserWarning: Unexpected error discovering local network interfaces: [Errno 1] Operation not permitted
+  ret = f(**kwargs)
+[NbConvertApp] ERROR | [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/manager.py", line 88, in wrapper
+    out = await method(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/manager.py", line 436, in _async_start_kernel
+    kernel_cmd, kw = await self._async_pre_start_kernel(**kw)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/manager.py", line 401, in _async_pre_start_kernel
+    kw = await self.provisioner.pre_launch(**kw)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/provisioning/local_provisioner.py", line 191, in pre_launch
+    km.shell_port = lpc.find_available_port(km.ip)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/connect.py", line 703, in find_available_port
+    tmp_sock = socket.socket()
+               ^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/socket.py", line 232, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/__main__.py", line 5, in <module>
+    main()
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_core/application.py", line 284, in launch_instance
+    super().launch_instance(argv=argv, **kwargs)
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/traitlets/config/application.py", line 1075, in launch_instance
+    app.start()
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 420, in start
+    self.convert_notebooks()
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 597, in convert_notebooks
+    self.convert_single_notebook(notebook_filename)
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 563, in convert_single_notebook
+    output, resources = self.export_single_notebook(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/nbconvertapp.py", line 487, in export_single_notebook
+    output, resources = self.exporter.from_filename(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 201, in from_filename
+    return self.from_file(f, resources=resources, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 220, in from_file
+    return self.from_notebook_node(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/exporters/notebook.py", line 36, in from_notebook_node
+    nb_copy, resources = super().from_notebook_node(nb, resources, **kw)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 154, in from_notebook_node
+    nb_copy, resources = self._preprocess(nb_copy, resources)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/exporters/exporter.py", line 353, in _preprocess
+    nbc, resc = preprocessor(nbc, resc)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/preprocessors/base.py", line 48, in __call__
+    return self.preprocess(nb, resources)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbconvert/preprocessors/execute.py", line 97, in preprocess
+    with self.setup_kernel():
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbclient/client.py", line 600, in setup_kernel
+    self.start_new_kernel(**kwargs)
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/asyncio/base_events.py", line 650, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/nbclient/client.py", line 550, in async_start_new_kernel
+    await ensure_async(self.km.start_kernel(extra_arguments=self.extra_arguments, **kwargs))
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 214, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/manager.py", line 97, in wrapper
+    raise e
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/manager.py", line 88, in wrapper
+    out = await method(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/manager.py", line 436, in _async_start_kernel
+    kernel_cmd, kw = await self._async_pre_start_kernel(**kw)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/manager.py", line 401, in _async_pre_start_kernel
+    kw = await self.provisioner.pre_launch(**kw)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/provisioning/local_provisioner.py", line 191, in pre_launch
+    km.shell_port = lpc.find_available_port(km.ip)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/jupyter_client/connect.py", line 703, in find_available_port
+    tmp_sock = socket.socket()
+               ^^^^^^^^^^^^^^^
+  File "/home/lolo/miniforge3/envs/synedu/lib/python3.11/socket.py", line 232, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted

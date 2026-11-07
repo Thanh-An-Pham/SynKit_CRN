@@ -1,0 +1,6 @@
+{"phase": "generation_complete", "mode": "python-explicit", "depth": 2, "repeat": 0, "seconds": 0.004386031010653824, "native_request_seconds": null}
+{"phase": "generation_complete", "mode": "python-explicit", "depth": 2, "repeat": 1, "seconds": 0.0013693890068680048, "native_request_seconds": null}
+{"phase": "generation_complete", "mode": "python-explicit", "depth": 2, "repeat": 2, "seconds": 0.0013112040178384632, "native_request_seconds": null}
+{"phase": "generation_complete", "mode": "python-explicit", "depth": 2, "repeat": 3, "seconds": 0.0012790159962605685, "native_request_seconds": null}
+{"phase": "generation_complete", "mode": "python-explicit", "depth": 2, "repeat": 4, "seconds": 0.0012837499962188303, "native_request_seconds": null}
+{"phase": "generation_complete", "mode": "python-explicit", "depth": 2, "repeat": 5, "seconds": 0.0013166269927751273, "native_request_seconds": null}

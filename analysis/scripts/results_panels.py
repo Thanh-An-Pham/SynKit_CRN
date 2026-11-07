@@ -2,10 +2,10 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
-from matplotlib.patches import Circle, Rectangle, FancyBboxPatch
+from matplotlib.patches import Rectangle
 from matplotlib.ticker import NullFormatter
 from biochemical_schemes import carbon_chain, formose_route
+from schematics import arc, minimal_siphons, place
 from result_style import (
     INK,
     BLUE,
@@ -16,8 +16,8 @@ from result_style import (
     HAIR,
     PALE,
     configure,
-    heading,
     plain_heading,
+    inset_label,
     clean,
     arrow,
     verdict,
@@ -26,22 +26,8 @@ from result_style import (
 
 
 def configure_arial():
+    """Historical name: the result plots now share the serif print style."""
     configure()
-    font_manager.findfont("Arial", fallback_to_default=False)
-    plt.rcParams.update({
-        "font.family": "Arial",
-        "mathtext.fontset": "custom",
-        "mathtext.rm": "Arial",
-        "mathtext.it": "Arial:italic",
-        "mathtext.bf": "Arial:bold",
-        "mathtext.sf": "Arial",
-        "text.color": "black",
-        "axes.labelcolor": "black",
-        "axes.edgecolor": "black",
-        "xtick.color": "black",
-        "ytick.color": "black",
-        "axes.grid": False,
-    })
 
 
 def representation(out, report):
@@ -53,120 +39,168 @@ def representation(out, report):
         and rep["reaction_order_unchanged"]
     )
     arms = {(r["arm"], r["catalyst_tokens"]): r for r in rep["catalyst_arms"]}
-    fig = plt.figure(figsize=(7.2, 4.9))
-    a = fig.add_axes([0.045, 0.55, 0.91, 0.37])
+    fig = plt.figure(figsize=(7.2, 4.6))
+    a = fig.add_axes([0.045, 0.56, 0.91, 0.38])
     a.set(xlim=(0, 10), ylim=(0, 3))
     a.axis("off")
-    plain_heading(a, "a", "Glucose phosphorylation with a shared PolyP species")
+    plain_heading(a, "a")
     # Display the actual reaction equations; orange participant is retained twice.
     for xx, key, title in ((0, "intact", "Retained"), (5.4, "cancelled", "Cancelled")):
-        a.text(xx + 2.18, 2.6, title, ha="center", weight="bold", fontsize=10)
+        a.text(xx + 2.18, 2.6, title, ha="center", fontsize=10, style="italic")
         carbon_chain(a, xx + 0.63, 1.94, 6, spacing=0.18)
         carbon_chain(a, xx + 3.85, 1.94, 6, spacing=0.18, phosphates=1)
         a.text(xx + 0.63, 1.52, "Glc", fontsize=9, ha="center")
         a.text(xx + 3.85, 1.52, "G6P", fontsize=9, ha="center")
-        arrow(a, (xx + 1.35, 1.86), (xx + 3.0, 1.86), BLUE, 1.4)
+        arrow(a, (xx + 1.35, 1.86), (xx + 3.0, 1.86), GRAY, 1.4)
         if key == "intact":
             for px in (xx + 0.62, xx + 3.82):
                 a.text(px, 1.23, "+ PolyP", color=ORANGE, fontsize=10, ha="center")
-            a.text(xx + 2.18, 2.07, "R02189", color="black", fontsize=8, ha="center")
-        else:
-            a.text(
-                xx + 2.18,
-                1.20,
-                "PolyP incidence removed",
-                color="black",
-                fontsize=8,
-                ha="center",
-            )
         row = arms[(key, 0)]
-        a.text(
-            xx + 2.18,
-            0.53,
-            f"{row['n_complexes']} complexes   ·   {row['n_linkage_classes']} classes   ·   δ = {row['deficiency']}",
-            ha="center",
-            fontsize=9,
-        )
-    # Anchor the separator halfway between the two diagram column centres.
-    midpoint = 2.18 + 5.4 / 2
-    a.text(midpoint - 0.24, -0.02,
-           r"$S_{\mathrm{retained}}=S_{\mathrm{cancelled}}$",
-           ha="right", va="baseline", fontsize=9)
-    a.text(midpoint, -0.02, r"$\bullet$",
-           ha="center", va="baseline", fontsize=9)
-    a.text(midpoint + 0.24, -0.02, "14 species × 15 reactions",
-           ha="left", va="baseline", fontsize=9, weight="bold")
 
-    b = fig.add_axes([0.045, 0.13, 0.43, 0.28])
-    b.set(xlim=(0, 4), ylim=(0, 2.2))
+    # (b) R02189 as a Petri net under each condition.  Places are circles with
+    # their tokens, the transition is the orange bar; the retained arm keeps
+    # PolyP on both sides, so it needs a PolyP token to fire.
+    b = fig.add_axes([0.045, 0.06, 0.42, 0.34])
+    b.set(xlim=(0, 4.2), ylim=(0, 2.5))
     b.axis("off")
-    plain_heading(b, "b", "Single-reaction enabling", y=1.16)
-    b.text(2.8, 2.28, "Initial PolyP tokens", ha="center", fontsize=8)
-    for x, tokens in ((2.25, 0), (3.35, 1)):
-        b.text(x, 1.94, str(tokens), ha="center", fontsize=9, weight="bold")
-    for y, key, title in (
-        (1.23, "intact", "Retained"),
-        (0.42, "cancelled", "Cancelled"),
-    ):
-        b.text(0.03, y, title, va="center", fontsize=9)
-        for x, tokens in ((2.25, 0), (3.35, 1)):
-            ok = arms[(key, tokens)]["outcome"]["status"] == "realizable"
-            b.add_patch(
-                Rectangle(
-                    (x - 0.40, y - 0.30),
-                    0.8,
-                    0.6,
-                    facecolor="#E5F2ED" if ok else "#FAEAE5",
-                    edgecolor="none",
-                )
-            )
-            verdict(b, x, y, ok, 16, vector=True)
+    plain_heading(b, "b", y=1.0)
+    columns = ((1.6, 0), (3.25, 1))
+    for cx, tokens in columns:
+        b.text(cx + 0.1, 2.3, f"{tokens} PolyP", ha="center", fontsize=8.5)
 
-    c = fig.add_axes([0.565, 0.13, 0.39, 0.28])
-    c.set(xlim=(0, 16), ylim=(0, 2.2))
-    c.axis("off")
-    plain_heading(c, "c", "Full glycolytic flux", y=1.16)
-    c.text(0, 2.23, "Initial inventory: one glucose", fontsize=8, color="black")
-    for y, row in zip((1.25, 0.35), rep["currency_arms"]):
-        reduced = row["drop_currency"]
-        ok = row["outcome"]["status"] == "realizable"
-        c.text(
-            0,
-            y + 0.34,
-            f"Currency metabolites {'removed' if reduced else 'retained'} · {row['n_species']}",
-            fontsize=8,
+    def place(ax, x, y, tokens=0, active=True):
+        ax.scatter(
+            x,
+            y,
+            s=120,
+            facecolor="white",
+            edgecolor=BLUE if active else HAIR,
+            lw=1.1,
+            zorder=3,
         )
-        # Indent each consequence beneath its condition and connect the two.
-        c.plot([0.25, 0.25], [y + 0.22, y], color=GRAY, lw=0.8)
-        arrow(c, (0.25, y), (0.95, y), GRAY, 0.8)
+        if tokens:
+            ax.scatter(x, y, s=9, color="black", zorder=4)
+
+    for cy, key, title in (
+        (1.6, "intact", "Retained"),
+        (0.55, "cancelled", "Cancelled"),
+    ):
+        b.text(0.0, cy, title, va="center", fontsize=8.5)
+        for cx, tokens in columns:
+            glc, poly, tr, g6p = (
+                (cx - 0.5, cy + 0.27),
+                (cx - 0.5, cy - 0.27),
+                (cx, cy),
+                (cx + 0.5, cy),
+            )
+            retained = key == "intact"
+            place(b, *glc, 1)
+            place(b, *poly, tokens, active=retained)
+            place(b, *g6p)
+            b.plot(*tr, marker="|", ms=15, mew=3, color=INK, zorder=3)
+            arrow(b, glc, tr, GRAY, 0.8, shrink=5)
+            arrow(b, tr, g6p, GRAY, 0.8, shrink=5)
+            if retained:
+                arrow(b, poly, tr, GRAY, 0.8, shrink=5)
+                arrow(b, tr, poly, GRAY, 0.8, rad=-0.6, shrink=5)
+            ok = arms[(key, tokens)]["outcome"]["status"] == "realizable"
+            verdict(b, cx + 0.8, cy, ok, 11, vector=True)
+
+    # (c) The prescribed glycolytic flux from one glucose, one dot per firing.
+    # With currency metabolites kept but not supplied, hexokinase, the only
+    # reaction that consumes glucose, lacks ATP, so nothing fires.
+    c = fig.add_axes([0.62, 0.15, 0.36, 0.25])
+    c.set(xlim=(-0.8, 17.5), ylim=(-0.6, 1.7))
+    plain_heading(c, "c", y=1.0, x=-0.42)
+    for y, row in zip((1.0, 0.0), rep["currency_arms"]):
+        ok = row["outcome"]["status"] == "realizable"
         n = len(row["outcome"]["certificate"] or [])
+        c.text(
+            -0.04,
+            y,
+            "cofactors\nremoved" if row["drop_currency"] else "cofactors\nkept",
+            transform=c.get_yaxis_transform(),
+            ha="right",
+            va="center",
+            fontsize=8,
+            linespacing=1.0,
+        )
         if ok:
-            for step in range(n):
-                c.add_patch(
-                    Rectangle(
-                        (1.25 + step * 0.8, y - 0.11),
-                        0.58,
-                        0.22,
-                        facecolor=GREEN,
-                        edgecolor="none",
-                    )
-                )
-            c.text(13.6, y, str(n), color="black", va="center", weight="bold")
+            c.plot(
+                range(n + 1),
+                [y] * (n + 1),
+                color=GREEN,
+                lw=1,
+                marker="o",
+                ms=3.2,
+                zorder=3,
+            )
         else:
-            verdict(c, 1.54, y, False, 15, vector=True)
-            c.text(2.5, y, "No first firing", color="black", va="center", fontsize=8)
+            c.plot([0], [y], color=GRAY, marker="o", ms=3.2)
+            verdict(c, 1.0, y, False, 9, vector=True)
+    c.set_yticks([])
+    c.set_xticks([0, 5, 10, 15])
+    c.set_xlabel("Firing step")
+    c.tick_params(axis="y", which="both", left=False, right=False)
     save(fig, out, "representation_sensitivity")
+
+
+def search_panel(ax):
+    """Exhaustive subset testing against implication propagation (panel a).
+
+    In the reversible chain S0 <=> S1 <=> ... every producer of a selected
+    species consumes a neighbour, so one selection forces the whole chain,
+    which is the only minimal siphon.
+    """
+    chain = [f"S{i}" for i in range(4)]
+    reactions = [({a: 1}, {b: 1}) for a, b in zip(chain, chain[1:])]
+    reactions += [({b: 1}, {a: 1}) for a, b in zip(chain, chain[1:])]
+    assert minimal_siphons(chain, reactions) == [set(chain)]
+    ax.set(xlim=(-0.3, 13.7), ylim=(-0.95, 1.38), aspect="equal")
+    ax.axis("off")
+    plain_heading(ax, "a", y=0.97)
+    # Left: every non-empty subset of three species is a candidate.
+    levels = [["0", "1", "2"], ["01", "02", "12"], ["012"]]
+    xy = {}
+    for row, names in enumerate(levels):
+        for k, name in enumerate(names):
+            xy[name] = (1.1 + (k - (len(names) - 1) / 2) * 1.15 + 1.2, -0.75 + row * 0.85)
+    for name, (x, y) in xy.items():
+        for other, (u, v) in xy.items():
+            if len(other) == len(name) + 1 and set(name) <= set(other):
+                ax.plot([x, u], [y, v], color="black", lw=0.5, zorder=1)
+    for name, (x, y) in xy.items():
+        place(ax, x, y, "", r=0.13, fill="black")
+        ax.text(x + 0.2, y, "{" + ",".join(name) + "}", fontsize=6.5,
+                va="center", ha="left")
+    # Right: selecting S0 forces S1, which forces S2, and so on.
+    x0 = 7.0
+    for i, name in enumerate(chain):
+        place(ax, x0 + 1.6 * i, -0.2, f"$S_{i}$", r=0.24, fill=PALE if i == 0 else "white",
+              fontsize=8)
+    for i in range(len(chain) - 1):
+        a, b = (x0 + 1.6 * i, -0.2), (x0 + 1.6 * (i + 1), -0.2)
+        arc(ax, (a[0], a[1] + 0.07), (b[0], b[1] + 0.07), shrink_a=8, shrink_b=8)
+        arc(ax, (b[0], b[1] - 0.07), (a[0], a[1] - 0.07), shrink_a=8, shrink_b=8)
+        ax.annotate("", (b[0] - 0.05, 0.12), (a[0] + 0.05, 0.12),
+                    arrowprops=dict(arrowstyle="-|>", lw=0.5, ls="--", color="black",
+                                    connectionstyle="arc3,rad=-0.55",
+                                    shrinkA=4, shrinkB=4, mutation_scale=6))
+    ax.text(x0 + 2.4, 1.15, "selecting $S_0$ forces each neighbour", ha="center",
+            fontsize=7.5)
 
 
 def scaling(out, review, archived):
     configure_arial()
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 4.0))
-    fig.subplots_adjust(left=0.10, right=0.97, bottom=0.20, top=0.76, wspace=0.40)
+    fig = plt.figure(figsize=(7.2, 4.5))
+    search_panel(fig.add_axes([0.02, 0.70, 0.96, 0.28]))
+    axes = [fig.add_axes([0.10, 0.10, 0.37, 0.55]),
+            fig.add_axes([0.61, 0.10, 0.37, 0.55])]
     ax = axes[0]
     medians = {}
-    for alg, label, color, marker in (
-        ("exhaustive", "Exhaustive", RED, "o"),
-        ("closure", "Closure", GREEN, "s"),
+    for alg, label, color, marker, face, dash in (
+        ("exhaustive", "Exhaustive", "black", "o", "white", "--"),
+        ("closure", "Pruned", "black", "s", "black", "-"),
     ):
         rows = sorted(
             (r for r in review["paired_siphon_timings"] if r["algorithm"] == alg),
@@ -187,9 +221,14 @@ def scaling(out, review, archived):
             yerr=errors,
             color=color,
             marker=marker,
-            ms=5,
-            lw=1.4,
-            capsize=4,
+            mfc=face,
+            mec="black",
+            ms=4.5,
+            lw=0.8,
+            ls=dash,
+            elinewidth=0.6,
+            capsize=2.5,
+            capthick=0.6,
             label=label,
             zorder=3,
         )
@@ -198,69 +237,51 @@ def scaling(out, review, archived):
                 row["n_species"]
                 + np.linspace(-0.20, 0.20, len(row["samples_seconds"])),
                 row["samples_seconds"],
-                s=9,
-                alpha=0.55,
-                color=color,
-                zorder=4,
+                s=5,
+                color=GRAY,
+                lw=0,
+                zorder=2,
             )
-        last = rows[-1]
-        labelval = (
-            f"{last['median_seconds']:.2f} s"
-            if alg == "exhaustive"
-            else f"{last['median_seconds']*1000:.2f} ms"
-        )
         ax.annotate(
-            labelval,
-            (x[-1], y[-1]),
-            xytext=(-5, 10 if alg == "exhaustive" else -17),
+            label,
+            (x[1], y[1]),
+            xytext=(-9, 2) if alg == "exhaustive" else (0, -13),
             textcoords="offset points",
-            ha="right",
-            color="black",
-            fontsize=9,
-            weight="bold",
+            ha="right" if alg == "exhaustive" else "center",
+            fontsize=8.5,
         )
-    # The gap between the two curves is the quantity of interest, so name it
-    # once per size instead of leaving readers to subtract log decades.
-    for size in sorted(medians["exhaustive"]):
-        slow = medians["exhaustive"][size]
-        fast = medians["closure"][size]
-        ratio = slow / fast
-        digits = 0 if ratio < 100 else -(len(f"{ratio:.0f}") - 2)
-        ax.text(
-            size,
-            np.sqrt(slow * fast),
-            f"{round(ratio, digits):.0f}×",
-            ha="center",
-            va="center",
-            fontsize=7.5,
-            color="black",
-            bbox=dict(facecolor="white", edgecolor="none", pad=0.8),
-            zorder=5,
-        )
+    # Shade the gap between the medians; one bracket names the final ratio.
+    sizes = sorted(medians["exhaustive"])
+    slow = np.array([medians["exhaustive"][s] for s in sizes])
+    fast = np.array([medians["closure"][s] for s in sizes])
+    ax.fill_between(sizes, fast, slow, color=PALE, lw=0, zorder=1)
+    ratio = slow[-1] / fast[-1]
+    ax.annotate(
+        "",
+        (21.55, slow[-1]),
+        (21.55, fast[-1]),
+        arrowprops=dict(arrowstyle="<->", color="black", lw=0.5, shrinkA=0, shrinkB=0),
+    )
+    ax.text(
+        21.75, np.sqrt(slow[-1] * fast[-1]), f"{ratio:.2g}×", va="center", fontsize=8.5
+    )
     ax.set(
-        xlim=(10, 22),
+        xlim=(10, 23.2),
         xticks=[11, 15, 19, 21],
         yscale="log",
         xlabel="Species",
         ylabel="Wall time (s)",
     )
-    plain_heading(ax, "a", "Paired siphon search", y=1.27)
-    ax.legend(
-        frameon=False,
-        fontsize=8,
-        ncol=2,
-        loc="lower left",
-        bbox_to_anchor=(-0.02, 1.01),
-        handlelength=1.3,
-        columnspacing=1,
-    )
+    inset_label(ax, "b")
     ax = axes[1]
+    ends = []
     for task, label, color, marker in (
-        ("conserved_moieties", "Moieties", RED, "o"),
-        ("canonical_form", "Canonical", ORANGE, "D"),
-        ("crnt_summary", "CRNT", "#9063A5", "^"),
-        ("minimal_siphons", "Siphons", GREEN, "s"),
-        ("rank", "Num. rank", BLUE, "P"),
+        # Highlight conserved pools; direct labels identify every measured task.
+        ("conserved_moieties", "Conserved pools", "black", "o"),
+        ("canonical_form", "Canonical", "white", "D"),
+        ("crnt_summary", "CRNT", "white", "^"),
+        ("minimal_siphons", "Siphons", "white", "s"),
+        ("rank", "Exact rank", "white", "v"),
     ):
         rows = sorted(
             (
@@ -276,24 +297,23 @@ def scaling(out, review, archived):
             [r["n_species"] for r in rows],
             [r["seconds"] for r in rows],
             label=label,
-            color=color,
+            color="black",
             marker=marker,
+            mfc=color,
+            mec="black",
+            mew=0.6,
             ms=4,
-            lw=1.2,
+            lw=0.7,
+            ls="-" if color == "black" else (0, (3, 1.5)),
         )
+        ends.append([np.log10(rows[-1]["seconds"]), label, "black"])
     ax.set(xscale="log", yscale="log", xlabel="Species", ylabel="Wall time (s)")
     ax.set_xticks([51, 101, 201, 401], labels=["51", "101", "201", "401"])
     ax.xaxis.set_minor_formatter(NullFormatter())
-    plain_heading(ax, "b", "Larger reversible chains", y=1.27)
-    ax.legend(
-        frameon=False,
-        fontsize=7.6,
-        ncol=3,
-        loc="lower left",
-        bbox_to_anchor=(-0.02, 1.0),
-        handlelength=1,
-        columnspacing=0.7,
-    )
+    inset_label(ax, "c")
+    ax.legend(loc="upper left", bbox_to_anchor=(0.0, 0.90), handlelength=2.6,
+              borderpad=0.4, labelspacing=0.3, fontsize=8)
+    ax.set_xlim(44, 470)
     for ax in axes:
         ax.grid(False, which="both", axis="both")
         ax.minorticks_off()
@@ -302,39 +322,40 @@ def scaling(out, review, archived):
 
 def formose_figure(out, evidence, supplement):
     configure_arial()
-    fig = plt.figure(figsize=(7.2, 6.8))
-    route = fig.add_axes([0.095, 0.75, 0.855, 0.19])
+    fig = plt.figure(figsize=(7.2, 4.0))
+    route = fig.add_axes([0.06, 0.61, 0.90, 0.35])
     formose_route(route, supplement)
-    a = fig.add_axes([0.095, 0.405, 0.36, 0.28])
-    b = fig.add_axes([0.59, 0.405, 0.36, 0.28])
+    a = fig.add_axes([0.075, 0.11, 0.235, 0.44])
+    b = fig.add_axes([0.415, 0.11, 0.235, 0.44])
     growth = evidence["growth"]
-    for key, label, color, marker in [
-        ("n_species", "Species", BLUE, "o"),
-        ("n_reactions", "Reactions", ORANGE, "s"),
+    for key, label, color, marker, face, dash in [
+        ("n_species", "Species", "black", "o", "black", "-"),
+        ("n_reactions", "Reactions", "black", "s", "white", "--"),
     ]:
         x = [r["iteration"] for r in growth]
         y = [r[key] for r in growth]
-        a.plot(x, y, color=color, marker=marker, lw=1.4, label=label)
+        a.plot(x, y, color=color, marker=marker, mfc=face, mec="black", ms=4,
+               lw=0.8, ls=dash, label=label)
         a.annotate(
             str(y[-1]),
             (x[-1], y[-1]),
-            xytext=(6, 2 if key == "n_reactions" else -9),
+            xytext=(-7, 2) if key == "n_reactions" else (7, -3),
             textcoords="offset points",
-            color="black",
-            weight="bold",
-            fontsize=10,
+            ha="right" if key == "n_reactions" else "left",
+            color=color,
+            fontsize=8,
         )
     a.set(
-        xlabel="Rule-expansion iteration",
+        xlabel="Expansion iteration",
         ylabel="Count",
         xticks=[1, 2, 3, 4],
-        xlim=(0.8, 4.55),
+        xlim=(0.8, 4.25),
         ylim=(0, 51),
     )
-    a.legend(frameon=False, fontsize=8, loc="upper left")
-    a.grid(False)
+    a.legend(loc="upper left", handlelength=2.2,
+             borderpad=0.4, fontsize=8)
     a.minorticks_off()
-    plain_heading(a, "b", "Network growth")
+    plain_heading(a, "b", y=1.02)
     entries = evidence["carbon_conservation"]["entries"]
     # A separate small point for each species avoids hiding multiplicities.
     # Horizontal offsets separate coincident observations; vertical values are exact.
@@ -345,67 +366,75 @@ def formose_figure(out, evidence, supplement):
         b.scatter(
             carbon + np.array(offsets),
             [row["coefficient"] for row in rows],
-            s=15,
-            color=GREEN,
-            edgecolor="white",
-            lw=0.35,
+            s=10,
+            color="black",
+            lw=0,
             zorder=3,
         )
     b.set(
-        xlabel="Carbon atoms per molecule",
-        ylabel="Integer conservation coefficient",
+        xlabel="Carbon atoms in species",
+        ylabel="Conservation law weight",
         xlim=(0, 11),
         ylim=(0, 11),
         xticks=[2, 4, 6, 8, 10],
         yticks=[2, 4, 6, 8, 10],
     )
     b.text(
-        0.04,
+        0.05,
         0.95,
-        f"{sum(r['coefficient'] == r['carbons'] for r in entries)}/{len(entries)} exact matches",
+        f"weight = carbons\nfor {sum(r['coefficient'] == r['carbons'] for r in entries)}/{len(entries)} species",
         transform=b.transAxes,
         va="top",
-        fontsize=9,
-        color=GREEN,
-        weight="bold",
+        fontsize=8,
     )
-    b.grid(False)
     b.minorticks_off()
-    plain_heading(b, "c", "Carbon conservation")
-    c = fig.add_axes([0.095, 0.065, 0.855, 0.23])
-    c.set(xlim=(0, 10), ylim=(0, 4.2))
-    c.axis("off")
-    plain_heading(c, "d", "Equal carbon, different precursor supply", y=1.04)
-    c.text(1.8, 3.63, "Initial inventory", fontsize=9, weight="bold", ha="center")
-    c.text(5.0, 3.63, "Total C", fontsize=9, weight="bold", ha="center")
-    c.text(7.0, 3.63, "Tetrose route", fontsize=9, weight="bold", ha="center")
-    c.text(9.1, 3.63, "Hexose route", fontsize=9, weight="bold", ha="center")
+    plain_heading(b, "c", y=1.02)
+
+    # (d) Initial inventories in precursor space.  Dashed lines join inventories
+    # of equal carbon; each inventory carries a T4 (left) and T6 (right) mark.
+    c = fig.add_axes([0.755, 0.11, 0.225, 0.44])
+    for carbon in (3, 4, 6):
+        xs = np.array([0, carbon])
+        c.plot(xs, (carbon - xs) / 2, ls="--", lw=0.5, color="black", zorder=1)
+        lx = {3: 0.25, 4: 0.25, 6: 1.0}[carbon]
+        c.text(
+            lx,
+            (carbon - lx) / 2 + 0.08,
+            f"{carbon} C",
+            fontsize=7.5,
+            ha="left",
+            va="bottom",
+        )
     rows = supplement["formose_routes"]
-    pools = list(dict.fromkeys(row["pool"] for row in rows))
-    for i, pool in enumerate(pools):
-        y = 3.03 - i * 0.59
+    for pool in dict.fromkeys(row["pool"] for row in rows):
         by_target = {r["target"]: r for r in rows if r["pool"] == pool}
         marking = by_target["T4"]["outcome"]["initial_marking"]
-        c1 = marking["C=O"]
-        c2 = marking["O=CCO"]
-        if i % 2 == 0:
-            c.add_patch(
-                Rectangle(
-                    (-0.2, y - 0.26), 10.3, 0.52, facecolor=PALE, edgecolor="none"
-                )
-            )
-        # One dot = formaldehyde; a joined pair = glycolaldehyde. Counts are molecules.
-        for j in range(c1):
-            c.scatter(0.18 + j * 0.29, y, s=24, color=ORANGE, zorder=3)
-        for j in range(c2):
-            x = 1.80 + j * 0.54
-            c.plot([x, x + 0.16], [y, y], color=BLUE, lw=1.5)
-            c.scatter([x, x + 0.16], [y, y], s=24, color=BLUE, zorder=3)
-        c.text(3.8, y, f"{c1} + {c2}", fontsize=8, ha="center", va="center", color="black")
-        c.text(5.0, y, str(c1 + 2 * c2), ha="center", va="center", fontsize=9)
-        for x, target in ((7.0, "T4"), (9.1, "T6")):
+        x, y = marking["C=O"], marking["O=CCO"]
+        for dx, target in ((-0.17, "T4"), (0.17, "T6")):
             outcome = by_target[target]["outcome"]
             ok = outcome["status"] == "realizable"
             assert outcome["independent_replay_ok"] if ok else outcome["exhaustive"]
-            verdict(c, x, y, ok, 15, vector=True)
+            c.scatter(
+                x + dx,
+                y,
+                s=26,
+                marker="s",
+                zorder=3,
+                facecolor="black" if ok else "white",
+                edgecolor="black",
+                lw=0.6,
+            )
+    c.set(
+        xlim=(-0.6, 4.8),
+        ylim=(-0.2, 3.75),
+        xticks=[0, 1, 2, 3, 4],
+        yticks=[0, 1, 2, 3],
+        xlabel="Formaldehyde (C$_1$)",
+        ylabel="Glycolaldehyde (C$_2$)",
+    )
+    # Name the two marks once, on the inventory that runs both routes.
+    for dx, name, ha in ((-0.1, "T$_4$", "right"), (0.1, "T$_6$", "left")):
+        c.text(dx, 3.24, name, ha=ha, va="bottom", fontsize=7.5)
+    c.minorticks_off()
+    plain_heading(c, "d", y=1.02)
     save(fig, out, "formose")

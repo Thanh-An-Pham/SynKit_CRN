@@ -1,0 +1,90 @@
+% ---------------------------------------------------------------------------
+% formose_chemistry.tex --- constitutional structures of the audited formose
+% routes: tautomerization, the tetrose aldol, and the hexose aldol.
+%
+% Source fragment: loaded by SI/si.tex, exported standalone by
+% Figure/export_tikz.py.
+%
+% Skeletal structures, hydrogens on carbon implicit.  No atom mapping and no
+% stereochemical outcome is asserted: the rule-generated network does not
+% assign stereocentres.  Colour follows the shared contract --- orange marks
+% the enediol that every aldol step needs, green marks the route that reaches
+% a target, and each panel carries a single accent.
+%
+% Width: laid out on the 16.40 cm text block of this manuscript (see
+% Figure/arch.tex) and included unscaled, so its type matches every other
+% figure.
+% ---------------------------------------------------------------------------
+% Figure styles are supplied by the manuscript preamble.
+
+\begingroup
+\setchemfig{atom sep=17pt,bond style={line width=0.5pt},bond offset=1.1pt}
+\renewcommand*\printatom[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\mfont}{\fontsize{6.5}{7.5}\selectfont\color{scInk}}
+\newcommand{\mlab}[1]{\node[font=\scSmall,text=scInkM,anchor=north]}
+% the three species of the audited routes
+\newcommand{\glycolald}{\chemfig{HO-[:30]-[:-30](-[:30]H)=[:-90]O}}
+\newcommand{\enediol}{\chemfig{HO-[:30]=[:-30]-[:30]OH}}
+\newcommand{\tetrose}{\chemfig{HO-[:30]-[:-30](-[:-90]OH)-[:30](-[:90]OH)-[:-30](-[:30]H)=[:-90]O}}
+\newcommand{\hexose}{\chemfig{HO-[:30]-[:-30](-[:-90]OH)-[:30](-[:90]OH)-[:-30](-[:-90]OH)-[:30](-[:90]OH)-[:-30](-[:30]H)=[:-90]O}}
+
+\begin{tikzpicture}[syn]
+\def\W{16.40}
+\path[use as bounding box] (0,0) rectangle (\W,-8.45);
+
+\tikzset{
+  rxstep/.style={-{Stealth[round,length=2.3mm,width=1.9mm]},line width=0.9pt},
+  slab/.style={font=\scSmall,inner sep=1.6pt},          % arrow label
+  sname/.style={font=\scSmall,text=scInkM,anchor=north},% species name
+  mult/.style={font=\scBody,text=scInk,anchor=center},  % stoichiometric factor
+}
+
+% =========================================================================
+% A  tautomerization
+% =========================================================================
+\def\ya{-0.02}
+\draw[panel] (0,\ya) rectangle (\W,\ya-2.45);
+\scHead{(0.22,\ya-0.04)}{a}{Supply the enediol}{keto--enol tautomerization $r_1$, fired twice}
+\node[mult] at (2.05,\ya-1.46) {$2\times$};
+\node[anchor=center] at (3.95,\ya-1.40) {\mfont\glycolald};
+\node[sname] at (3.95,\ya-1.99) {glycolaldehyde};
+\draw[rxstep,draw=scMark] (6.35,\ya-1.40) -- (9.15,\ya-1.40);
+\node[slab,text=scMark,anchor=south] at (7.75,\ya-1.34) {$r_1\times 2$};
+\node[mult] at (10.55,\ya-1.46) {$2\times$};
+\node[anchor=center] at (12.45,\ya-1.40) {\mfont\enediol};
+\node[sname,text=scMark] at (12.45,\ya-1.99) {enediol};
+
+% =========================================================================
+% B  tetrose aldol
+% =========================================================================
+\def\yb{-2.65}
+\draw[panel] (0,\yb) rectangle (\W,\yb-2.70);
+\scHead{(0.22,\yb-0.04)}{b}{Form the aldotetrose}{aldol coupling $r_3$ --- two glycolaldehyde molecules, two firings}
+\node[anchor=center] at (2.10,\yb-1.48) {\mfont\glycolald};
+\node[sname] at (2.10,\yb-2.07) {glycolaldehyde};
+\node[mult] at (3.95,\yb-1.48) {$+$};
+\node[anchor=center] at (5.80,\yb-1.48) {\mfont\enediol};
+\node[sname,text=scMark] at (5.80,\yb-2.07) {enediol};
+\draw[rxstep,draw=scAccent] (7.60,\yb-1.48) -- (9.40,\yb-1.48);
+\node[slab,text=scAccent,anchor=south] at (8.50,\yb-1.42) {$r_3$};
+\node[anchor=center] at (12.20,\yb-1.42) {\mfont\tetrose};
+\node[sname,text=scAccent] at (12.20,\yb-2.24) {$T_4$, four carbons};
+
+% =========================================================================
+% C  hexose aldol
+% =========================================================================
+\def\yc{-5.55}
+\draw[panel] (0,\yc) rectangle (\W,\yc-2.75);
+\scHead{(0.22,\yc-0.04)}{c}{Extend to the aldohexose}{second aldol coupling $r_7$ --- three glycolaldehyde molecules, four firings}
+\node[anchor=center] at (2.60,\yc-1.48) {\mfont\tetrose};
+\node[sname,text=scAccent] at (2.60,\yc-2.30) {$T_4$};
+\node[mult] at (4.80,\yc-1.48) {$+$};
+\node[anchor=center] at (6.50,\yc-1.48) {\mfont\enediol};
+\node[sname,text=scMark] at (6.50,\yc-2.07) {enediol};
+\draw[rxstep,draw=scAccent] (8.20,\yc-1.48) -- (9.60,\yc-1.48);
+\node[slab,text=scAccent,anchor=south] at (8.90,\yc-1.42) {$r_7$};
+\node[anchor=center] at (12.70,\yc-1.48) {\mfont\hexose};
+\node[sname,text=scAccent] at (12.70,\yc-2.30) {$T_6$, six carbons};
+
+\end{tikzpicture}
+\endgroup

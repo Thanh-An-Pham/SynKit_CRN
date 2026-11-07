@@ -1,0 +1,72 @@
+Formose expansion comparison, 7 November 2026
+
+Evidence
+  comparison.json: all wall-time samples, medians, inclusive quartiles,
+    completion states, worker limits, versions, and network identity hashes.
+  runs/: per-tool/depth stdout and full canonical species/reaction snapshots.
+  route-comparison.json: the ten fixed-multiset decisions and positive orders.
+  variants.json: matched Python/RDKit explicit-H and native explicit-H
+    controls, plus a repeated native Lewis-H control at depth six. Native
+    request times include protocol/transport; the residual is Python-side
+    construction time. Both use the original benchmark's CPU and limits.
+  verification.json: saved-snapshot hash checks, carbon-balance checks, native
+    truncation checks, cross-tool equality, and route agreement.
+  provenance.json: Python versions and SynKit checkout identity.
+  mod-environment.txt: exact Conda package URLs.
+  molfoundry-requirements.txt: pinned Python dependencies.
+
+Install in separate environments (the system environment is not modified):
+  mamba create -y -p /tmp/formose-mod-env --file analysis/formose-expansion/mod-environment.txt
+  uv venv /tmp/formose-comparison-env --python 3.12
+  uv pip install --python /tmp/formose-comparison-env/bin/python --extra-index-url https://py.molfoundry.de/dl/ -r analysis/formose-expansion/molfoundry-requirements.txt
+
+SynKit requires its 1.6.5 checkout, its Python dependencies, and a verified
+native expander. The existing paper expander was used, with RDKit C++ 2026.03.1.
+Its complete content-addressed build manifest is in each SynKit run JSON.
+To rebuild, use synkit.CRN.Construct.native_expand.build_native_expander with
+an RDKit C++ SDK prefix and an output directory; pass the returned executable
+to --expander below. Build/initialization time is not benchmarked.
+
+From the paper directory, adjust the SynKit interpreter, checkout, and native
+executable paths to your installation, then run:
+  python analysis/scripts/benchmark_formose_expansion.py --synkit-python /path/to/synkit/python --mod-python /tmp/formose-mod-env/bin/python --molfoundry-python /tmp/formose-comparison-env/bin/python --synkit-root /path/to/SynKit --expander /path/to/synkit_crn_expand
+
+Defaults are depths 1 through 7, five measured runs after one warm-up,
+180 seconds per worker, and an 8 GiB address-space limit per process.
+The wall budget includes startup, warm-up, timed generation and identity audits.
+Workers run sequentially, all pinned to the same logical CPU; internal BLAS
+and OpenMP thread counts are one. The generator has no molecular-size cutoff.
+No-self-mixtures is retained from the paper's original generation policy.
+It does not forbid subsequent use of multiple tokens of a species in a route.
+
+Generation times include rule/seed parsing and each library's network-building
+interface. Imports, runtime warm-up, the fixed representation translation,
+cross-tool canonicalization audits and CRNT analyses are excluded. SynKit
+uses Lewis hydrogen counts; MØD and MolFoundry use explicit hydrogen vertices.
+Thus these are interface-level timings, not isolated graph-matching timings.
+Canonical molecular identity uses RDKit with no stereochemistry. Reactions
+retain directed reactant/product multisets and all stoichiometric coefficients.
+Atom-level derivation multiplicity and rule annotations are not compared.
+
+For the finite-inventory checks, using the MolFoundry environment:
+  /tmp/formose-comparison-env/bin/python analysis/scripts/compare_formose_routes.py
+
+After the original tool benchmark finishes, run the implementation/H controls:
+  python analysis/scripts/benchmark_formose_variants.py
+
+This reads interpreter and native-executable paths from comparison.json.
+Use --wait-pid PID when the original benchmark is still running; controls
+wait until that process exits, so timed workers do not run concurrently.
+Both native hydrogen controls use the same RDKit C++ 2026.03.1 build. The
+Python/RDKit baseline uses the existing paper analysis environment's RDKit
+2025.09.3, so its comparison with the native controller includes a version
+difference as well as an implementation difference.
+
+With the normal manuscript analysis environment:
+  PYTHONPATH=analysis/scripts python analysis/scripts/formose_expansion_assets.py
+  make sync-values
+  make all
+
+The asset script verifies saved evidence and renders Figure/formose_expansion.pdf.
+Incomplete depth-seven attempts are kept in the logs and comparison rather
+than being treated as complete generation or as negative chemical conclusions.

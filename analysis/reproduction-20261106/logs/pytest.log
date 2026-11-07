@@ -1,0 +1,38 @@
+...................................................... [  5%]
+................................................................................................ [ 15%]
+........................................................................ [ 23%]
+........................................................................ [ 30%]
+........................................................................ [ 37%]
+................................ [ 41%]
+......................................................................................................... [ 52%]
+........................................................................ [ 59%]
+........................................................................ [ 67%]
+........................................................................ [ 74%]
+........................................................................ [ 82%]
+............................................................................................................ [ 93%]
+........................................................... [ 99%]
+......                                                                   [100%]
+=============================== warnings summary ===============================
+../../../../miniforge3/envs/synedu/lib/python3.11/site-packages/rxnmapper/batched_mapper.py:4
+  /home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/rxnmapper/batched_mapper.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+    import pkg_resources
+
+../../../../miniforge3/envs/synedu/lib/python3.11/site-packages/pkg_resources/__init__.py:3146
+  /home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/pkg_resources/__init__.py:3146: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('sphinxcontrib')`.
+  Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+    declare_namespace(pkg)
+
+Test/CRN/Benchmark/test_kegg_case_study.py:8
+  /home/lolo/Documents/TACsy/SynEco/SynKit/Test/CRN/Benchmark/test_kegg_case_study.py:8: DeprecationWarning: synkit.CRN.Benchmark.kegg moved to Experiment.CRN.benchmarks.kegg; research helpers require a source checkout
+    from synkit.CRN.Benchmark.kegg import (
+
+Test/CRN/Benchmark/test_scaling.py:5
+  /home/lolo/Documents/TACsy/SynEco/SynKit/Test/CRN/Benchmark/test_scaling.py:5: DeprecationWarning: synkit.CRN.Benchmark.scaling moved to Experiment.CRN.benchmarks.scaling; research helpers require a source checkout
+    from synkit.CRN.Benchmark.scaling import (
+
+Test/CRN/Benchmark/test_validation.py:12: 24 warnings
+  /home/lolo/Documents/TACsy/SynEco/SynKit/Test/CRN/Benchmark/test_validation.py:12: DeprecationWarning: synkit.CRN.Benchmark moved to Experiment.CRN.benchmarks; research helpers require a source checkout
+    from synkit.CRN.Benchmark import (
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+964 passed, 28 warnings, 482 subtests passed in 90.63s (0:01:30)

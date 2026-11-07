@@ -1,0 +1,253 @@
+{
+  "checked_at_utc": "2026-11-06T11:26:51.820582+00:00",
+  "checks": {
+    "biomodels_reaction_bearing": 10,
+    "external_comparator": "SynKit recalculated; 12 byte-identical exported SBML inputs compared with recorded CRNT4SBML outputs. CRNT4SBML interpreter not rerun.",
+    "fresh_report_errors": [],
+    "glycolysis_certificate_firings": 15,
+    "glycolysis_explored_states": 30,
+    "glycolysis_final_inventory": {
+      "Pyruvate": 2
+    },
+    "local_studies_rerun": 9,
+    "notebook": {
+      "code_cells": 6,
+      "execution": "code_cells_in_order_in_one_python_namespace; no Jupyter rendering",
+      "status": "PASS"
+    },
+    "paper_report_errors": [],
+    "production_native_build": "Full workload reused the paper's verified analysis library and expander. Notebook separately built an analysis library from current sources.",
+    "scaling_configurations": 60,
+    "structural_crosscheck_networks": 31,
+    "verify_revision_exit_code": 0
+  },
+  "comparison_exclusions": {
+    "key_patterns": [
+      "*seconds*"
+    ],
+    "keys": [
+      "claim_boundary",
+      "closure_iqr",
+      "closure_median",
+      "crn_backend",
+      "crn_expander",
+      "elapsed_seconds",
+      "environment",
+      "exhaustive_iqr",
+      "exhaustive_median",
+      "external_execution",
+      "independent_search_source",
+      "median",
+      "median_speedup",
+      "native_backend",
+      "q1",
+      "q3",
+      "ratio_of_medians",
+      "samples",
+      "script_sha256",
+      "seconds",
+      "source",
+      "source_sha256",
+      "speedup",
+      "verification_source"
+    ],
+    "reason": "Exclude runtime, environment, provenance and timing summaries; compare scientific fields, checks, counts and decisions. Structural and trajectory payloads additionally compared without numerical normalization."
+  },
+  "comparisons": [
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-biomodels.json",
+      "paper_report": "analysis/crn-biomodels.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-external-crnt4sbml.json",
+      "paper_report": "analysis/crn-external-crnt4sbml.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-formose.json",
+      "paper_report": "analysis/crn-formose.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-hydrogen.json",
+      "paper_report": "analysis/crn-hydrogen.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-kegg.json",
+      "paper_report": "analysis/crn-kegg.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-representation.json",
+      "paper_report": "analysis/crn-review-experiments.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-scaling.json",
+      "paper_report": "analysis/crn-scaling.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-glycolysis-donors.json",
+      "paper_report": "analysis/crn-si-donor-control.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-supplementary.json",
+      "paper_report": "analysis/crn-supplement-audit.json"
+    },
+    {
+      "differences": [],
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/crn-validation.json",
+      "paper_report": "analysis/crn-validation.json"
+    },
+    {
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/structural-verification.json",
+      "paper_report": "analysis/structural-verification.json",
+      "scientific_payload_identical": true
+    },
+    {
+      "fresh_report": "/tmp/synkit-crn-recheck-20261106/glycolysis_analysis.json",
+      "paper_report": "analysis/glycolysis_analysis.json",
+      "scientific_payload_identical": true
+    }
+  ],
+  "evidence_directory": "/tmp/synkit-crn-recheck-20261106",
+  "findings": [
+    {
+      "evidence": "Reads SynKit/Experiment/CRN/results/full/crn-external-crnt4sbml.json. results/ is ignored and excluded from the source distribution. A checksum-identical archive already exists at paper/analysis/reference-1.6.3/crn-external-crnt4sbml.json but is not used as an input by this script.",
+      "impact": "A clean SynKit checkout plus the manuscript files cannot replay the recorded comparison through this script without first provisioning the ignored archive or rerunning the isolated legacy tool.",
+      "location": "analysis/scripts/regenerate_evidence.py:70",
+      "priority": "high",
+      "suggested_change": "Resolve the archived comparator report from the manuscript evidence bundle, or accept an explicit archive path and validate its hash.",
+      "title": "Recorded comparator replay depends on an ignored local result file"
+    },
+    {
+      "counterexample": "/tmp/synkit-crn-recheck-20261106/missing-hydrogen-summary.json",
+      "evidence": "ALL_STUDIES includes nine studies. run_all.py:213 adds hydrogen only when a native expander is available, without recording its absence in omitted_studies. Removing hydrogen from the valid paper summary still yields no errors with require_all=True.",
+      "impact": "A verified all-results report can omit the hydrogen results used in the paper abstract and SI.",
+      "location": "/home/lolo/Documents/TACsy/SynEco/SynKit/Experiment/CRN/tools/check_reports.py:18",
+      "priority": "high",
+      "suggested_change": "Define a paper-complete workload that requires hydrogen and native expansion, and verify omissions explicitly.",
+      "title": "Full-report verification does not require the hydrogen study"
+    },
+    {
+      "evidence": "The 31-network structural audit and complete plotted glycolysis trajectory are produced by manuscript-side helpers rather than Experiment/CRN/run_all.py. The notebook covers the principal glycolysis result, but is a separate execution.",
+      "impact": "Experiment/CRN alone covers the main studies but not every paper claim check and generated artifact.",
+      "location": "analysis/scripts/regenerate_evidence.py:212",
+      "priority": "medium",
+      "suggested_change": "Document the experiment and manuscript stages explicitly; keep reusable scientific report generation in experiment studies and document rendering with the manuscript.",
+      "title": "The experiment runner does not produce the complete paper evidence bundle"
+    },
+    {
+      "evidence": "The saved full summary records version 1.6.3, commit c31b47a1abd9adb1774849aded2cc7f86e29da55. The manuscript and its analysis/ reports record 1.6.5, commit 5951b401b161187cb62095ddb136ee354a40c101.",
+      "impact": "A historical PASS from results/full is not evidence that the current checkout reproduced the current paper. Fresh reruns in this audit do match.",
+      "location": "/home/lolo/Documents/TACsy/SynEco/SynKit/Experiment/CRN/results/full/summary.json",
+      "priority": "medium",
+      "title": "Saved full experiment reports describe SynKit 1.6.3 rather than the paper version"
+    },
+    {
+      "evidence": "The local README lists seven core and two optional studies and omits native rule expansion's RDKit C++ SDK/C++20 setup. The README is ignored by the repository-wide Experiment README rule. The workflow installs Boost and runs a quick profile without provisioning an RDKit C++ SDK.",
+      "impact": "The documented and CI execution can omit a study included in the manuscript.",
+      "location": "/home/lolo/Documents/TACsy/SynEco/SynKit/Experiment/CRN/README.md:11",
+      "priority": "medium",
+      "suggested_change": "Publish current setup instructions and a workflow or documented command for the full paper workload.",
+      "title": "Local reproduction instructions and CI do not provision the hydrogen workload"
+    },
+    {
+      "evidence": "The report requires deepest speedup > 1.0 from a single session with fixed explicit-then-Lewis order.",
+      "impact": "Scheduling and measurement noise can fail a scientifically correct reproduction. This audit passed the condition.",
+      "location": "/home/lolo/Documents/TACsy/SynEco/SynKit/Experiment/CRN/studies/hydrogen_accounting.py:212",
+      "priority": "low",
+      "suggested_change": "Separate scientific equality/balance checks from performance observations, or use repeated paired measurements.",
+      "title": "A one-shot speed comparison is part of the scientific PASS condition"
+    }
+  ],
+  "fresh_environment": {
+    "cpu_count": 22,
+    "crn_backend": {
+      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
+      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "native_operations": {},
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
+    "machine": "x86_64",
+    "networkx": "3.6.1",
+    "numpy": "2.4.4",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.12.12",
+    "rdkit": "2026.03.1",
+    "scipy": "1.18.1",
+    "synkit": "1.6.5"
+  },
+  "fresh_summary": "/tmp/synkit-crn-recheck-20261106/summary-with-recorded-comparator.json",
+  "manuscript_or_experiment_sources_modified": false,
+  "paper_environment": {
+    "cpu_count": 22,
+    "crn_backend": {
+      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
+      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "native_operations": {},
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
+    "machine": "x86_64",
+    "networkx": "3.5",
+    "numpy": "2.3.3",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.0",
+    "synkit": "1.6.5"
+  },
+  "schema": "synkit.paper-reproducibility-audit/1",
+  "scientific_reproduction": "PASS",
+  "scope": "Local manuscript and SI, source and report provenance, full default study workload, recorded external comparison, 31-network structural audit, glycolysis replay and notebook code. External literature and software feature-table claims were not re-audited.",
+  "source_files_checked": 116,
+  "source_hashes_match_paper_and_fresh_run": true,
+  "standalone_experiment_directory_reproduces_every_paper_artifact": false
+}

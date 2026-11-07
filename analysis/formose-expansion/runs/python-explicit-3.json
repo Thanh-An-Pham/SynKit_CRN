@@ -1,0 +1,224 @@
+{
+  "component_samples": [
+    {
+      "native_request_including_transport_seconds": null,
+      "python_construction_seconds": null,
+      "total_seconds": 0.003354893997311592
+    },
+    {
+      "native_request_including_transport_seconds": null,
+      "python_construction_seconds": null,
+      "total_seconds": 0.003646429016953334
+    },
+    {
+      "native_request_including_transport_seconds": null,
+      "python_construction_seconds": null,
+      "total_seconds": 0.0030226539820432663
+    },
+    {
+      "native_request_including_transport_seconds": null,
+      "python_construction_seconds": null,
+      "total_seconds": 0.003038774011656642
+    },
+    {
+      "native_request_including_transport_seconds": null,
+      "python_construction_seconds": null,
+      "total_seconds": 0.003153669007588178
+    }
+  ],
+  "depth": 3,
+  "mode": "python-explicit",
+  "n_reactions": 10,
+  "n_species": 9,
+  "native_report": null,
+  "rdkit_python_version": "2026.03.1",
+  "samples": [
+    0.003354893997311592,
+    0.003646429016953334,
+    0.0030226539820432663,
+    0.003038774011656642,
+    0.003153669007588178
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
+    "species": [
+      "C=O",
+      "O=CC(O)C(O)C(O)C(O)CO",
+      "O=CC(O)C(O)C(O)CO",
+      "O=CC(O)C(O)CO",
+      "O=CC(O)CO",
+      "O=CCO",
+      "OC=C(O)C(O)CO",
+      "OC=C(O)CO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete",
+  "synkit_version": "1.6.5"
+}

@@ -1,0 +1,23 @@
+{
+  "SI/si.pdf": "97c674430e2697b78abf7c93c236b7e543dcc81cf0ffdc9a64d316b2fe3d2d9f",
+  "SI/si.tex": "254cb4cc2edf79f0f1a082ba8870a04f267c860d18fa0f6ae8b3ac3a8726f6b9",
+  "analysis/crn-biomodels.json": "385c2f3569acfd36b03f3d726b4cb3c94d88be303cb1a84e970ba1eb1adcbf8f",
+  "analysis/crn-external-crnt4sbml.json": "d503517298e80aeab5914b94bca00fb564762f110cc0e587130af06bf1a9ba87",
+  "analysis/crn-formose.json": "bf0787ae0a273c7e25d070e48342afa51b8c777ed15812d137a5ab77ab1c27ca",
+  "analysis/crn-hydrogen.json": "4cafe5c2fa2ef517a0d7e09fed9ff7bfa6c2ef90ef3d2e2670e20fd1cd1d26be",
+  "analysis/crn-kegg.json": "3839cb60bacb99a7568133b570fb2ea69f03178309ebda631957d05878c83108",
+  "analysis/crn-review-experiments.json": "f494844fa7efe2c2a225615a92da8cf3057c95a901f314e1ff08c3290ea4ae6d",
+  "analysis/crn-scaling.json": "fabde4961643319685b442f03e264df67c019d89918e46e7d5fa627f0ea89bdc",
+  "analysis/crn-si-donor-control.json": "93d160e396befece365adadf0ef87c4af11706e743a2890d16857cfb9f135cc0",
+  "analysis/crn-supplement-audit.json": "91c2949b500be3485f30b5ced7334281d67794308578dbe34ac023e18d5c5c0b",
+  "analysis/crn-validation.json": "e413ffb7c46c5a6c3c057c3494f140f2fcb3277452a549510df88b2f468404e8",
+  "analysis/glycolysis_analysis.json": "bb61f363211ae76c05491f6d8bd21ccecb9ee02a280c7064a553a18908477851",
+  "analysis/native-build.json": "394f6ff43bd6eacfb2a3f2ae8889c4e933608ba58d977c641e435214ed255b7f",
+  "analysis/reproducibility-audit-20261106.json": "170217b5d7b035729f4b22219c345bcfe689f6de95483c9f69105c5615c893f1",
+  "analysis/source-before-run.json": "3e4c8d26e23cfa2d0fb3edfd4a1247dee3920cdd84af3b24e87d15bfe57660ee",
+  "analysis/structural-verification.json": "ef29f56336121adf7ad89be71e97e73b852f4782d30dc2a63e9cd3d07dba8632",
+  "analysis/summary.json": "c9784391ad1b6f14dd5f3cd7818e5a7a197fc0eaf557311fa9cde271cbd9e277",
+  "analysis/version-comparison.json": "e553fae8d2217f0011d3539798b4865876754ff35ccf07fe2dd8c5350029ceb2",
+  "main.pdf": "df7ad4e717cba993e8c1060ca082a4fb483183e217cbcde012772bcc2a9fe2e7",
+  "main.tex": "00dcbd74c6ad037366f8aca6c1667bc854d0d0a0f988fc1606b777ea1ae9dcc3"
+}

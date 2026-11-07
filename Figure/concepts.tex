@@ -1,0 +1,289 @@
+% ---------------------------------------------------------------------------
+% concepts.tex --- the Implementation section worked on one toy network.
+%
+% Source fragment: loaded directly by main.tex (Section 2).
+%
+%   r1: 2A -> B     r2: B + E -> C + E     r3: C -> 2A     r4: C -> D
+%
+% (a) Petri net, (b) S^-, S^+ and the net S (the catalyst row cancels),
+% (c) P- and T-semiflows, (d) minimal siphons and coverage,
+% (e) one requested flux under three finite inventories.
+%
+% Every number is hand-checkable:
+%   y1 = (1,2,2,2,0), y2 = (0,0,0,0,1)    y^T S = 0
+%   x  = (1,1,1,0)                        S x  = 0
+%   minimal siphons {E} (trap, covered) and {A,B,C} (not a trap, uncovered)
+%
+% Colour follows Fig. 1 (visual_abstract.py): blue species, orange enzyme,
+% green verified, gray arrows.  A muted red marks blocked or uncovered.
+% ---------------------------------------------------------------------------
+
+\begingroup
+\definecolor{cInk}{HTML}{193342}
+\definecolor{cBlue}{HTML}{0072B2}
+\definecolor{cLBlue}{HTML}{9CC5E3}
+\definecolor{cSpF}{HTML}{E4F0F8}
+\definecolor{cOrange}{HTML}{D89915}
+\definecolor{cOrF}{HTML}{FCE3A6}
+\definecolor{cGreen}{HTML}{008564}
+\definecolor{cMuted}{HTML}{81939D}
+\definecolor{cPale}{HTML}{EEF3F6}
+\definecolor{cRed}{HTML}{C8553D}
+\definecolor{cRedF}{HTML}{F7DCD5}
+\newcommand{\cB}{\scSans\fontsize{7}{8.4}\selectfont\color{cInk}}
+\newcommand{\cS}{\scSans\fontsize{6.5}{7.8}\selectfont\color{cInk}}
+\newcommand{\cT}{\scSans\fontsize{5.5}{6}\selectfont\color{cMuted}}
+\tikzset{
+  csyn/.style={font=\scSans,color=cInk,
+               execute at begin picture={\MTversion*{synsans}}},
+  cpl/.style={circle,draw=cBlue,fill=cSpF,line width=0.6pt,
+              minimum size=5.0mm,inner sep=0pt,font=\cB},
+  cplS/.style={cpl,fill=cLBlue},
+  cplR/.style={cpl,draw=cRed,fill=cRedF},
+  cplE/.style={cpl,draw=cOrange,fill=cOrF},
+  ctr/.style={rectangle,fill=cInk,draw=none,minimum width=1.2mm,
+              minimum height=4.4mm,inner sep=0pt},
+  ctrG/.style={ctr,fill=cMuted!50},
+  carc/.style={-{Stealth[length=1.7mm,width=1.4mm]},line width=0.7pt,
+               draw=cMuted,shorten >=0.4pt,shorten <=0.4pt},
+  carcE/.style={carc,draw=cOrange},
+  carcT/.style={carc,draw=cBlue,line width=1.3pt},
+  carcR/.style={carc,draw=cRed,line width=1.3pt},
+  carcG/.style={carc,draw=cMuted!45},
+  cwt/.style={font=\cS,inner sep=0.6pt,fill=white},
+  crl/.style={font=\cS,inner sep=0.8pt},
+  ctxt/.style={font=\cB,align=left,anchor=north west,inner sep=0pt},
+  chd/.style={font=\scSans\fontsize{7.5}{9}\selectfont\bfseries\color{cInk},
+              anchor=north west,inner sep=0pt},
+  cmk/.style={rectangle,rounded corners=2pt,draw=cMuted,fill=white,
+              line width=0.6pt,minimum width=1.10cm,minimum height=0.66cm,
+              inner sep=0pt},
+}
+\newcommand{\cpanel}[3]{% coordinate, letter, title
+  \node[anchor=base west,inner sep=0pt,
+        font=\scSans\fontsize{9}{9}\selectfont\bfseries\color{cInk}] (cp#2)
+        at ($#1+(0,-0.28)$) {#2};
+  \node[chd,anchor=base west] at ($(cp#2.base east)+(0.18,0)$) {#3};}
+
+% \toynet{<prefix>}  places A..D on one line, E above r2, r3 below.
+\newcommand{\toynet}[1]{%
+  \node[cpl]  (#1A) at (0,0)      {$A$};
+  \node[ctr]  (#1r1) at (0.75,0)  {};
+  \node[cpl]  (#1B) at (1.5,0)    {$B$};
+  \node[ctr]  (#1r2) at (2.25,0)  {};
+  \node[cpl]  (#1C) at (3.0,0)    {$C$};
+  \node[ctr]  (#1r4) at (3.75,0)  {};
+  \node[cpl]  (#1D) at (4.5,0)    {$D$};
+  \node[cplE] (#1E) at (2.25,0.95) {$E$};
+  \node[ctr,rotate=90] (#1r3) at (1.5,-0.80) {};
+  \draw[carc] (#1A) -- (#1r1) node[cwt,midway,above=0.5pt] {2};
+  \draw[carc] (#1r1) -- (#1B);
+  \draw[carc] (#1B) -- (#1r2);
+  \draw[carc] (#1r2) -- (#1C);
+  \draw[carc] (#1C) -- (#1r4);
+  \draw[carc] (#1r4) -- (#1D);
+  \draw[carcE] (#1E) to[bend right=28] (#1r2);
+  \draw[carcE] (#1r2) to[bend right=28] (#1E);
+  \draw[carc] (#1C) |- (#1r3);
+  \draw[carc] (#1r3) -| (#1A) node[cwt,pos=0.78,left=0.5pt] {2};
+  \node[crl,below=1.2pt] at (#1r1.south) {$r_1$};
+  \node[crl,below=1.2pt] at (#1r2.south) {$r_2$};
+  \node[crl] at ($(#1r3)+(0,-0.22)$) {$r_3$};
+  \node[crl,below=1.2pt] at (#1r4.south) {$r_4$};
+}
+
+% \csign=-1 paints the positive entries of S^- as consumption (dark blue)
+% heat-map matrix, 5 species x 4 reactions.  Negative entries dark blue,
+% positive light blue, zeros pale; the enzyme row (index 4) orange.
+\def\cw{0.37}\def\rh{0.33}
+\newcommand{\cmat}[4]{% x0, y0 (centre of first cell), header, rows
+  \node[font=\cB,anchor=south] at ({#1+1.5*\cw},{#2+0.36}) {#3};
+  \foreach \lab [count=\j from 0] in {r_1,r_2,r_3,r_4}
+    \node[font=\cT] at ({#1+\j*\cw},{#2+0.26}) {$\lab$};
+  \foreach \row [count=\i from 0] in {#4} {
+    \foreach \v [count=\j from 0] in \row {
+      \ifnum\v=0
+        \node[fill=cPale,minimum width=0.34cm,minimum height=0.30cm,inner sep=0pt]
+          at ({#1+\j*\cw},{#2-\i*\rh}) {};
+      \else
+        \ifnum\i=4
+          \node[fill=cOrF,draw=cOrange,line width=0.5pt,minimum width=0.34cm,
+            minimum height=0.30cm,inner sep=0pt,font=\cS]
+            at ({#1+\j*\cw},{#2-\i*\rh}) {$\v$};
+        \else\ifnum\numexpr\v*\csign\relax<0
+          \node[fill=cBlue,minimum width=0.34cm,minimum height=0.30cm,inner sep=0pt,
+            font=\cS,text=white] at ({#1+\j*\cw},{#2-\i*\rh}) {$\v$};
+        \else
+          \node[fill=cLBlue,minimum width=0.34cm,minimum height=0.30cm,inner sep=0pt,
+            font=\cS] at ({#1+\j*\cw},{#2-\i*\rh}) {$\v$};
+        \fi\fi
+      \fi}}
+}
+
+% a marking: five slots A..E, n tokens per slot (0, 1 or 2)
+\newcommand{\cmark}[7]{% name, centre, nA, nB, nC, nD, nE
+  \node[cmk] (#1) at #2 {};
+  \foreach \n/\col [count=\k from 0] in {#3/cBlue,#4/cBlue,#5/cBlue,#6/cBlue,#7/cOrange} {
+    \pgfmathsetmacro\sx{-0.42+\k*0.21}
+    \ifnum\n>0 \fill[\col] ($(#1.center)+(\sx,0.07)$) circle (0.06); \fi
+    \ifnum\n>1 \fill[\col] ($(#1.center)+(\sx,0.21)$) circle (0.06); \fi
+  }
+  \foreach \lab [count=\k from 0] in {A,B,C,D,E} {
+    \pgfmathsetmacro\sx{-0.42+\k*0.21}
+    \node[font=\cT] at ($(#1.center)+(\sx,-0.19)$) {$\lab$};}
+}
+\newcommand{\cyes}{\tikz[baseline=-0.6ex,-]{\draw[cGreen,line width=1.1pt,
+  line cap=round,line join=round] (-0.085,0.0) -- (-0.02,-0.07) -- (0.10,0.08);}}
+\newcommand{\cno}{\tikz[baseline=-0.6ex,-]{\draw[cRed,line width=1.1pt,line cap=round]
+  (-0.07,-0.07) -- (0.07,0.07) (-0.07,0.07) -- (0.07,-0.07);}}
+
+\begin{tikzpicture}[csyn]
+\path[use as bounding box] (0,0) rectangle (16.40,-10.05);
+
+% =========================================================================
+% (a) the toy network as a Petri net
+% =========================================================================
+\cpanel{(0.05,-0.05)}{a}{Reaction network}
+\begin{scope}[shift={(0.45,-2.10)}]
+  \toynet{a}
+\end{scope}
+\node[ctxt] at (0.30,-3.65) {%
+  $r_1\colon 2A\to B$\qquad\ \ $r_2\colon B+E\to C+E$\\[1pt]
+  $r_3\colon C\to 2A$\qquad\ \ $r_4\colon C\to D$};
+
+% =========================================================================
+% (b) reactant, product and net incidence
+% =========================================================================
+\cpanel{(5.60,-0.05)}{b}{Incidence and net stoichiometry}
+\def\my{-1.70}
+% the catalyst row: present in S^- and S^+, cancelled in S
+\fill[cOrF!45,rounded corners=1.5pt] (5.78,{\my-4*\rh+0.21}) rectangle (11.35,{\my-4*\rh-0.21});
+\foreach \s [count=\i from 0] in {A,B,C,D}
+  \node[font=\cB,anchor=east] at (6.12,{\my-\i*\rh}) {$\s$};
+\node[font=\cB,anchor=east,text=cOrange] at (6.12,{\my-4*\rh}) {$E$};
+\def\csign{-1}\cmat{6.40}{\my}{$\mathbf S^-$}{{2,0,0,0},{0,1,0,0},{0,0,1,1},{0,0,0,0},{0,1,0,0}}
+\def\csign{1}\cmat{8.20}{\my}{$\mathbf S^+$}{{0,0,2,0},{1,0,0,0},{0,1,0,0},{0,0,0,1},{0,1,0,0}}
+\cmat{10.00}{\my}{$\mathbf S$}{{-2,0,2,0},{1,-1,0,0},{0,1,-1,-1},{0,0,0,1},{0,0,0,0}}
+\node[font=\cB] at (8.57,-3.55) {$\mathbf S=\mathbf S^+-\mathbf S^-$};
+
+% =========================================================================
+% (c) P- and T-semiflows
+% =========================================================================
+\cpanel{(11.45,-0.05)}{c}{Semiflows}
+\begin{scope}[shift={(11.85,-1.40)},x=0.86cm]
+  \node[cplS] (pA) at (0,0)   {$A$};
+  \node[ctr]  (p1) at (0.75,0) {};
+  \node[cplS] (pB) at (1.5,0) {$B$};
+  \node[ctr]  (p2) at (2.25,0) {};
+  \node[cplS] (pC) at (3.0,0) {$C$};
+  \node[ctr]  (p4) at (3.75,0) {};
+  \node[cplS] (pD) at (4.5,0) {$D$};
+  \node[cplE,double,double distance=0.8pt] (pE) at (2.25,0.80) {$E$};
+  \draw[carc] (pA) -- (p1); \draw[carc] (p1) -- (pB);
+  \draw[carc] (pB) -- (p2); \draw[carc] (p2) -- (pC);
+  \draw[carc] (pC) -- (p4); \draw[carc] (p4) -- (pD);
+  \draw[carcE] (pE) to[bend right=28] (p2);
+  \draw[carcE] (p2) to[bend right=28] (pE);
+  \foreach \n/\w in {pA/1,pB/2,pC/2,pD/2}
+    \node[font=\cS,text=cBlue,below=1.0pt] at (\n.south) {$\times\w$};
+\end{scope}
+\node[ctxt] at (11.70,-2.15) {%
+  P-semiflows $y^{\mathsf T}\mathbf S=0$, $y\ge0$:\\
+  \textcolor{cBlue}{$y_1$: $A+2B+2C+2D$}\\
+  \textcolor{cOrange}{$y_2$: $E$}};
+\begin{scope}[shift={(11.85,-3.70)},x=0.86cm]
+  \node[cpl] (tA) at (0,0)   {$A$};
+  \node[ctr] (t1) at (0.75,0) {};
+  \node[cpl] (tB) at (1.5,0) {$B$};
+  \node[ctr] (t2) at (2.25,0) {};
+  \node[cpl] (tC) at (3.0,0) {$C$};
+  \node[ctrG] (t4) at (3.75,0) {};
+  \node[cpl,draw=cMuted!50,fill=white,text=cMuted!70] (tD) at (4.5,0) {$D$};
+  \node[ctr,rotate=90] (t3) at (1.5,-0.62) {};
+  \draw[carcT] (tA) -- (t1); \draw[carcT] (t1) -- (tB);
+  \draw[carcT] (tB) -- (t2); \draw[carcT] (t2) -- (tC);
+  \draw[carcT] (tC) |- (t3); \draw[carcT] (t3) -| (tA);
+  \draw[carcG] (tC) -- (t4); \draw[carcG] (t4) -- (tD);
+  \node[crl,above=1.2pt] at (t1.north) {$r_1$};
+  \node[crl,above=1.2pt] at (t2.north) {$r_2$};
+  \node[crl] at ($(t3)+(0,0.22)$) {$r_3$};
+  \node[crl,above=1.2pt,text=cMuted] at (t4.north) {$r_4$};
+\end{scope}
+\node[ctxt] at (11.70,-4.60) {%
+  T-semiflow $\mathbf Sx=0$, $x\ge0$:\\
+  \textcolor{cBlue}{$x=(1,1,1,0)$}};
+
+% =========================================================================
+% (d) minimal siphons and coverage
+% =========================================================================
+\cpanel{(0.05,-5.45)}{d}{Siphons and traps}
+\begin{scope}[shift={(0.45,-7.05)}]
+  \node[cplR] (dA) at (0,0)      {$A$};
+  \node[ctr]  (d1) at (0.75,0)   {};
+  \node[cplR] (dB) at (1.5,0)    {$B$};
+  \node[ctr]  (d2) at (2.25,0)   {};
+  \node[cplR] (dC) at (3.0,0)    {$C$};
+  \node[ctr]  (d4) at (3.75,0)   {};
+  \node[cpl]  (dD) at (4.5,0)    {$D$};
+  \node[cplE,double,double distance=0.8pt] (dE) at (2.25,0.95) {$E$};
+  \node[ctr,rotate=90] (d3) at (1.5,-0.80) {};
+  \draw[carc] (dA) -- (d1); \draw[carc] (d1) -- (dB);
+  \draw[carc] (dB) -- (d2); \draw[carc] (d2) -- (dC);
+  \draw[carcE] (dE) to[bend right=28] (d2);
+  \draw[carcE] (d2) to[bend right=28] (dE);
+  \draw[carc] (dC) |- (d3); \draw[carc] (d3) -| (dA);
+  \draw[carcR] (dC) -- (d4); \draw[carcR] (d4) -- (dD);
+  \node[crl,above=1.2pt,text=cRed] at (d4.north) {$r_4$};
+\end{scope}
+\node[font=\cS] (tab) at (2.70,-9.05) {%
+  \setlength{\tabcolsep}{4pt}\begin{tabular}{@{}lccc@{}}
+    \toprule
+    minimal siphon & siphon & trap & covered\\
+    \midrule
+    \textcolor{cOrange}{$\{E\}$} & \cyes & \cyes & \cyes\\
+    \textcolor{cRed}{$\{A,B,C\}$} & \cyes & \cno & \cno\\
+    \bottomrule
+  \end{tabular}};
+
+% =========================================================================
+% (e) one requested flux, three inventories
+% =========================================================================
+\cpanel{(5.60,-5.45)}{e}{Pathway realizability of $f=(1,1,0,1)$}
+\def\xa{7.45}\def\xb{9.05}\def\xc{10.65}\def\xd{12.25}
+\def\xq{14.15}\def\xf{15.65}
+\node[font=\cS,align=center] at (6.10,-6.30) {initial\\marking $m$};
+\node[font=\cS,align=center] at (\xq,-6.30) {$D$ reachable\\(qualitative)};
+\node[font=\cS,align=center] at (\xf,-6.30) {$f$ realizable\\(tokens)};
+% row i: realizable, with certificate
+\def\ya{-7.05}
+\node[font=\cB,anchor=west] at (5.80,\ya) {$2A{+}E$};
+\cmark{m11}{(\xa,\ya)}{2}{0}{0}{0}{1}
+\cmark{m12}{(\xb,\ya)}{0}{1}{0}{0}{1}
+\cmark{m13}{(\xc,\ya)}{0}{0}{1}{0}{1}
+\cmark{m14}{(\xd,\ya)}{0}{0}{0}{1}{1}
+\draw[carc] (m11) -- (m12) node[crl,midway,above=1pt] {$r_1$};
+\draw[carc] (m12) -- (m13) node[crl,midway,above=1pt] {$r_2$};
+\draw[carc] (m13) -- (m14) node[crl,midway,above=1pt] {$r_4$};
+\node[font=\cB] at (\xq,\ya) {\cyes};
+\node[font=\cB] at (\xf,\ya) {\cyes};
+% row ii: too few A for r1
+\def\yb{-8.15}
+\node[font=\cB,anchor=west] at (5.80,\yb) {$A{+}E$};
+\cmark{m21}{(\xa,\yb)}{1}{0}{0}{0}{1}
+\draw[carc,draw=cRed] (m21) -- ++(1.00,0) node[crl,pos=0.45,above=1pt] {$r_1$}
+  node[font=\cB,anchor=west,inner sep=1pt,xshift=2pt] {\cno\ \ $m_A=1<2=s^-_{A r_1}$};
+\node[font=\cB] at (\xq,\yb) {\cyes};
+\node[font=\cB] at (\xf,\yb) {\cno};
+% row iii: no enzyme, the empty siphon {E} blocks r2
+\def\yc{-9.25}
+\node[font=\cB,anchor=west] at (5.80,\yc) {$2A$};
+\cmark{m31}{(\xa,\yc)}{2}{0}{0}{0}{0}
+\cmark{m32}{(\xb,\yc)}{0}{1}{0}{0}{0}
+\draw[carc] (m31) -- (m32) node[crl,midway,above=1pt] {$r_1$};
+\draw[carc,draw=cRed] (m32) -- ++(1.00,0) node[crl,pos=0.45,above=1pt] {$r_2$}
+  node[font=\cB,anchor=west,inner sep=1pt,xshift=2pt] {\cno\ \ $m_E=0<1=s^-_{E r_2}$};
+\node[font=\cB] at (\xq,\yc) {\cno};
+\node[font=\cB] at (\xf,\yc) {\cno};
+\draw[line width=0.5pt,cMuted!50] (13.40,-6.00) -- (13.40,-9.75);
+\end{tikzpicture}
+\endgroup

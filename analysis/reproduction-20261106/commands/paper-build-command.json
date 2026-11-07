@@ -1,0 +1,5 @@
+[
+  "make",
+  "all",
+  "PYTHON=/home/lolo/miniforge3/envs/synedu/bin/python"
+]

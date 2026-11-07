@@ -8,7 +8,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
+from result_style import use_sans
 from matplotlib.transforms import Affine2D
 from matplotlib.patches import (
     Circle,
@@ -27,18 +27,16 @@ GREEN = "#008564"
 ORANGE = "#D89915"
 MUTED = "#81939D"
 PALE = "#F1F6F8"
+# Color roles shared by all figures: ink and gray for structure and arrows,
+# blue for species, green only for a verified result, orange for the enzyme
+# (here) and for phosphorus (elsewhere).
+LIGHT_BLUE = "#9CC5E3"
 
 
 def render_visual_abstract(out):
-    font_manager.findfont("Arial", fallback_to_default=False)
+    use_sans()
     plt.rcParams.update(
         {
-            "font.family": "Arial",
-            "mathtext.fontset": "custom",
-            "mathtext.rm": "Arial",
-            "mathtext.it": "Arial:italic",
-            "mathtext.bf": "Arial:bold",
-            "mathtext.sf": "Arial",
             "pdf.fonttype": 42,
             "svg.fonttype": "none",
         }
@@ -50,7 +48,7 @@ def render_visual_abstract(out):
     central_offset_y = connector_y - 5.65
     fig, ax = plt.subplots(figsize=(7.2, 4.65))
     fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
-    ax.set(xlim=(0, 16.5), ylim=(central_offset_y, 9.25), aspect="equal")
+    ax.set(xlim=(0, 16.5), ylim=(central_offset_y + 0.95, 9.25), aspect="equal")
     ax.axis("off")
 
     def label(x, y, value, size=10, color=INK, weight="normal", ha="center"):
@@ -93,7 +91,7 @@ def render_visual_abstract(out):
                 (x - width / 2, y - height / 2),
                 width,
                 height,
-                facecolor=ORANGE,
+                facecolor=INK,
                 edgecolor="none",
                 zorder=5,
             )
@@ -111,11 +109,13 @@ def render_visual_abstract(out):
         line((x - 0.09, y), (x - 0.015, y - 0.085), color, 1.7)
         line((x - 0.015, y - 0.085), (x + 0.14, y + 0.13), color, 1.7)
 
-    # Three illustrated acquisition routes, with only the source names in text.
-    label(1.7, 8.65, "Build", 12, BLUE, "bold")
-    label(8.0, 8.75, "SynKit", 21, INK, "bold")
-    label(8.0, 8.11, "CRN submodule", 9, MUTED)
-    label(14.15, 8.65, "Analyse", 12, GREEN, "bold")
+    # Three columns read left to right under plain bold headers.
+    for x0, x1, head in (
+        (0.25, 3.05, "Build"),
+        (4.55, 11.05, "Represent"),
+        (12.3, 16.35, "Analyze"),
+    ):
+        label((x0 + x1) / 2, 8.75, head, 11, INK, "bold")
 
     # Curated pathway database: a cylinder containing a branching pathway.
     x, y = 1.75, 6.95
@@ -177,7 +177,7 @@ def render_visual_abstract(out):
     )
     ax.add_patch(
         Circle(
-            (2.4, 1.83), 0.1, facecolor="#FFF0CD", edgecolor=ORANGE, lw=1.2, zorder=6
+            (2.4, 1.83), 0.1, facecolor=BLUE, edgecolor=BLUE, lw=1.2, zorder=6
         )
     )
     label(x, 1.31, "Rules", 10, INK, "bold")
@@ -192,16 +192,6 @@ def render_visual_abstract(out):
     # Enzyme binding and product release: E+S <-> ES -> E+P.
     # Three transition nodes preserve the actual reactant/product incidence.
     existing_artists = set(ax.get_children())
-    ax.add_patch(
-        FancyBboxPatch(
-            (4.85, 3.95),
-            6.15,
-            3.78,
-            boxstyle="round,pad=.08,rounding_size=.24",
-            facecolor=PALE,
-            edgecolor="none",
-        )
-    )
 
     def enzyme(x, y, bound=False, r=0.39):
         ax.add_patch(
@@ -251,13 +241,13 @@ def render_visual_abstract(out):
         arrow(
             a,
             b,
-            ORANGE if b == positions["E"] or a == positions["E"] else BLUE,
+            MUTED,
             1.3,
             shrink=9,
             # Keep the incoming arrowhead outside the complex's circular edge.
             shrink_end=14 if b == positions["ES"] else None,
         )
-    arrow(unbind, positions["E"], ORANGE, 1.1, rad=-0.75, shrink=9)
+    arrow(unbind, positions["E"], MUTED, 1.1, rad=-0.75, shrink=9)
     enzyme(*positions["E"])
     enzyme(*positions["ES"], bound=True)
     ax.add_patch(
@@ -273,7 +263,7 @@ def render_visual_abstract(out):
     )
     ax.add_patch(
         RegularPolygon(
-            positions["P"], 5, radius=0.23, facecolor=GREEN, edgecolor="white", zorder=6
+            positions["P"], 5, radius=0.23, facecolor=BLUE, edgecolor="white", zorder=6
         )
     )
     for pos in (bind, unbind, release):
@@ -298,32 +288,26 @@ def render_visual_abstract(out):
                     0.18,
                     0.18,
                     facecolor=(
-                        BLUE if net[i, j] < 0 else GREEN if net[i, j] > 0 else "#DFE7EB"
+                        BLUE if net[i, j] < 0 else LIGHT_BLUE if net[i, j] > 0 else "#DFE7EB"
                     ),
                     edgecolor="none",
                 )
             )
     label(5.79, 1.31, "Stoichiometry", 9)
-    # The shaded branch indicates a hyperedge joining two required substrates.
-    ax.add_patch(
-        Polygon(
-            [
-                (7.4, 2.74),
-                (7.55, 2.95),
-                (8.58, 2.39),
-                (7.55, 1.89),
-                (7.4, 2.07),
-                (8.14, 2.4),
-            ],
-            closed=True,
-            facecolor="#DCEFE9",
-            edgecolor="none",
-        )
-    )
-    for a in [(7.48, 2.79), (7.48, 2.0)]:
-        line(a, (8.36, 2.4), GREEN, 1.4)
-    for a in [(7.48, 2.79), (7.48, 2.0), (8.36, 2.4)]:
-        species(*a, color=GREEN, r=0.135)
+    # One directed hyperedge: the tail set {E, S} is consumed jointly and the
+    # head ES is produced, so the two tails meet before the single arrowhead.
+    tails, junction, head = [(7.38, 2.82), (7.38, 1.98)], (7.98, 2.4), (8.62, 2.4)
+    ax.add_patch(Ellipse((7.38, 2.4), 0.62, 1.36, facecolor="none",
+                         edgecolor=MUTED, lw=0.8, ls=(0, (2, 1.5))))
+    for a, rad in zip(tails, (0.3, -0.3)):
+        ax.add_patch(FancyArrowPatch(a, junction, arrowstyle="-", lw=1.4,
+                                     color=MUTED, shrinkA=4, shrinkB=0,
+                                     connectionstyle=f"arc3,rad={rad}"))
+    ax.add_patch(Circle(junction, 0.045, facecolor=MUTED, edgecolor="none", zorder=6))
+    arrow(junction, head, MUTED, 1.4, shrink_end=5)
+    species(*tails[0], color=ORANGE, r=0.13)
+    species(*tails[1], color=BLUE, r=0.13)
+    species(*head, color=BLUE, r=0.13)
     label(7.94, 1.31, "Hypergraph", 9)
     species(9.46, 2.4, token=True, r=0.18)
     reaction(10.04, 2.4, 0.12, 0.47)
@@ -343,32 +327,29 @@ def render_visual_abstract(out):
     line((11.14, connector_y), (11.62, connector_y), MUTED, 1)
     line((11.62, min(connector_rows)), (11.62, max(connector_rows)), MUTED, 1)
     for yy in connector_rows:
-        arrow((11.62, yy), (12.27, yy), GREEN, 1.3)
+        arrow((11.62, yy), (12.27, yy), MUTED, 1.3)
 
     # A conserved enzyme pool redistributes between free and bound forms.
     enzyme(13.02, 7.02, r=0.31)
-    label(13.72, 7.02, "+", 14, GREEN)
+    label(13.72, 7.02, "+", 14, INK)
     enzyme(14.51, 7.02, bound=True, r=0.31)
-    label(14.0, 6.34, r"$E+ES=E_{\mathrm{total}}$", 10, GREEN)
+    label(14.0, 6.34, r"$E+ES=E_{\mathrm{total}}$", 10, INK)
     label(14.0, 5.96, "Conserved pools", 10, INK, "bold")
 
-    # CRNT: two complex-graph linkage classes and an exact deficiency expression.
-    for xx in (13.28, 14.72):
-        ax.add_patch(
-            Ellipse((xx, 4.68), 1.13, 0.98, facecolor="#E6F2ED", edgecolor="none")
-        )
-        for aa, bb, rad in [
-            ((xx - 0.29, 4.68), (xx + 0.29, 4.68), 0.55),
-            ((xx + 0.29, 4.68), (xx - 0.29, 4.68), 0.55),
-        ]:
-            arrow(aa, bb, GREEN, 1, rad=rad, shrink=4)
-        for dx in (-0.29, 0.29):
-            species(xx + dx, 4.68, color=GREEN, r=0.12)
-    label(14.0, 3.99, r"$\delta=n-\ell-s$", 11, GREEN)
+    # CRNT: the complex graph of this example, E+S <-> ES -> E+P, one linkage
+    # class, rank two, so the deficiency evaluates to zero.
+    for xx, name in ((12.82, "E+S"), (14.0, "ES"), (15.18, "E+P")):
+        label(xx, 4.68, name, 8.5, INK)
+    arrow((13.2, 4.76), (13.72, 4.76), MUTED, 1.1)
+    arrow((13.72, 4.60), (13.2, 4.60), MUTED, 1.1)
+    arrow((14.28, 4.68), (14.8, 4.68), MUTED, 1.1)
+    label(14.0, 3.99, r"$\delta=3-1-2=0$", 10.5, INK)
     label(14.0, 3.58, "CRNT tests", 10, INK, "bold")
 
-    # Executability: a token moves through enabled transitions, with replay checks.
-    for i, xx in enumerate((12.88, 14.0, 15.12)):
+    # A firing sequence from one E and one S: bind, then release.  Tokens keep
+    # the species colours of the central scheme, and one check marks replay.
+    markings = [(ORANGE, BLUE), ("ES",), (ORANGE, BLUE)]
+    for i, (xx, tokens) in enumerate(zip((12.82, 14.0, 15.18), markings)):
         ax.add_patch(
             FancyBboxPatch(
                 (xx - 0.35, 1.94),
@@ -376,30 +357,24 @@ def render_visual_abstract(out):
                 0.53,
                 boxstyle="round,pad=.025,rounding_size=.12",
                 facecolor="white",
-                edgecolor=GREEN,
+                edgecolor=MUTED,
                 lw=1.1,
             )
         )
-        for j in range(2 if i == 0 else 1):
-            ax.add_patch(
-                Circle(
-                    (xx + (j - 0.5) * 0.19 if i == 0 else xx, 2.21),
-                    0.07,
-                    facecolor=BLUE,
-                    edgecolor="none",
-                )
-            )
-        tick(xx, 2.78)
+        if tokens == ("ES",):
+            ax.add_patch(Circle((xx, 2.205), 0.085, facecolor=ORANGE,
+                                edgecolor="none", zorder=6))
+            ax.add_patch(Circle((xx, 2.205), 0.04, facecolor=BLUE,
+                                edgecolor="none", zorder=7))
+        else:
+            for dx, color in zip((-0.1, 0.1), tokens):
+                ax.add_patch(Circle((xx + dx, 2.205), 0.07, facecolor=color,
+                                    edgecolor="none", zorder=6))
         if i < 2:
-            arrow((xx + 0.42, 2.21), (xx + 0.70, 2.21), GREEN, 1.1)
+            arrow((xx + 0.40, 2.21), (xx + 0.78, 2.21), MUTED, 1.1)
+    tick(15.85, 2.21)
     label(14.0, 1.31, "Reaction sequences", 10, INK, "bold")
 
-    # A compact key defines the central graph symbols.
-    key_y = 0.46 + central_offset_y
-    species(6.17, key_y, r=0.1)
-    label(6.42, key_y, "Species", 8, ha="left")
-    reaction(8.60, key_y, 0.12, 0.2)
-    label(8.85, key_y, "Reaction", 8, ha="left")
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     fig.savefig(

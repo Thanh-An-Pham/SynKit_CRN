@@ -1,0 +1,187 @@
+{
+  "all_ten_agree": true,
+  "molfoundry_version": "0.1.11",
+  "positive_certificates_replayed": 3,
+  "rows": [
+    {
+      "certificate": null,
+      "independent_replay_ok": null,
+      "initial_marking": {
+        "C=O": 1,
+        "O=CCO": 1
+      },
+      "molfoundry_realizable": false,
+      "pool": "M1",
+      "requested_flux": {
+        "r_1": 1,
+        "r_3": 1
+      },
+      "synkit_realizable": false,
+      "target": "T4"
+    },
+    {
+      "certificate": null,
+      "independent_replay_ok": null,
+      "initial_marking": {
+        "C=O": 1,
+        "O=CCO": 1
+      },
+      "molfoundry_realizable": false,
+      "pool": "M1",
+      "requested_flux": {
+        "r_1": 2,
+        "r_3": 1,
+        "r_7": 1
+      },
+      "synkit_realizable": false,
+      "target": "T6"
+    },
+    {
+      "certificate": null,
+      "independent_replay_ok": null,
+      "initial_marking": {
+        "C=O": 2,
+        "O=CCO": 1
+      },
+      "molfoundry_realizable": false,
+      "pool": "M2",
+      "requested_flux": {
+        "r_1": 1,
+        "r_3": 1
+      },
+      "synkit_realizable": false,
+      "target": "T4"
+    },
+    {
+      "certificate": null,
+      "independent_replay_ok": null,
+      "initial_marking": {
+        "C=O": 2,
+        "O=CCO": 1
+      },
+      "molfoundry_realizable": false,
+      "pool": "M2",
+      "requested_flux": {
+        "r_1": 2,
+        "r_3": 1,
+        "r_7": 1
+      },
+      "synkit_realizable": false,
+      "target": "T6"
+    },
+    {
+      "certificate": null,
+      "independent_replay_ok": null,
+      "initial_marking": {
+        "C=O": 4,
+        "O=CCO": 1
+      },
+      "molfoundry_realizable": false,
+      "pool": "M3",
+      "requested_flux": {
+        "r_1": 1,
+        "r_3": 1
+      },
+      "synkit_realizable": false,
+      "target": "T4"
+    },
+    {
+      "certificate": null,
+      "independent_replay_ok": null,
+      "initial_marking": {
+        "C=O": 4,
+        "O=CCO": 1
+      },
+      "molfoundry_realizable": false,
+      "pool": "M3",
+      "requested_flux": {
+        "r_1": 2,
+        "r_3": 1,
+        "r_7": 1
+      },
+      "synkit_realizable": false,
+      "target": "T6"
+    },
+    {
+      "certificate": [
+        "r_1",
+        "r_3"
+      ],
+      "independent_replay_ok": true,
+      "initial_marking": {
+        "C=O": 2,
+        "O=CCO": 2
+      },
+      "molfoundry_realizable": true,
+      "pool": "M4",
+      "requested_flux": {
+        "r_1": 1,
+        "r_3": 1
+      },
+      "synkit_realizable": true,
+      "target": "T4"
+    },
+    {
+      "certificate": null,
+      "independent_replay_ok": null,
+      "initial_marking": {
+        "C=O": 2,
+        "O=CCO": 2
+      },
+      "molfoundry_realizable": false,
+      "pool": "M4",
+      "requested_flux": {
+        "r_1": 2,
+        "r_3": 1,
+        "r_7": 1
+      },
+      "synkit_realizable": false,
+      "target": "T6"
+    },
+    {
+      "certificate": [
+        "r_1",
+        "r_3"
+      ],
+      "independent_replay_ok": true,
+      "initial_marking": {
+        "C=O": 0,
+        "O=CCO": 3
+      },
+      "molfoundry_realizable": true,
+      "pool": "C2-only",
+      "requested_flux": {
+        "r_1": 1,
+        "r_3": 1
+      },
+      "synkit_realizable": true,
+      "target": "T4"
+    },
+    {
+      "certificate": [
+        "r_1",
+        "r_3",
+        "r_1",
+        "r_7"
+      ],
+      "independent_replay_ok": true,
+      "initial_marking": {
+        "C=O": 0,
+        "O=CCO": 3
+      },
+      "molfoundry_realizable": true,
+      "pool": "C2-only",
+      "requested_flux": {
+        "r_1": 2,
+        "r_3": 1,
+        "r_7": 1
+      },
+      "synkit_realizable": true,
+      "target": "T6"
+    }
+  ],
+  "schema": "synkit.formose-route-comparison/1",
+  "scope": "Fixed reaction multisets from finite initial markings; does not test unrestricted target reachability. FlowSolution is constructed directly, including infeasible candidates, without solving an aggregate hyperflow model.",
+  "source_sha256": "e148fbdcdc1351991db4009e607626df587215cde052684d4c316115e3a19317",
+  "synkit_evidence_sha256": "91c2949b500be3485f30b5ced7334281d67794308578dbe34ac023e18d5c5c0b"
+}

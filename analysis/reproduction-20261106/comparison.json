@@ -1,0 +1,91 @@
+{
+  "excluded_keys": [
+    "claim_boundary",
+    "closure_iqr",
+    "closure_median",
+    "environment",
+    "exhaustive_iqr",
+    "exhaustive_median",
+    "external_execution",
+    "independent_search_source",
+    "median",
+    "median_speedup",
+    "native_backend",
+    "q1",
+    "q3",
+    "ratio_of_medians",
+    "samples",
+    "script_sha256",
+    "source",
+    "source_sha256",
+    "speedup",
+    "verification_source"
+  ],
+  "excluded_patterns": [
+    "*seconds*"
+  ],
+  "note": "Environment, provenance and runtime values are excluded from study comparisons. Structural sets and the full glycolysis trajectory are also compared as exact payloads after removing environment and verification-script text.",
+  "reports": [
+    {
+      "differences": [],
+      "paper_report": "crn-biomodels.json",
+      "reproduced_report": "crn-biomodels.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-external-crnt4sbml.json",
+      "reproduced_report": "crn-external-crnt4sbml.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-formose.json",
+      "reproduced_report": "crn-formose.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-hydrogen.json",
+      "reproduced_report": "crn-hydrogen.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-kegg.json",
+      "reproduced_report": "crn-kegg.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-review-experiments.json",
+      "reproduced_report": "crn-representation.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-scaling.json",
+      "reproduced_report": "crn-scaling.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-si-donor-control.json",
+      "reproduced_report": "crn-glycolysis-donors.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-supplement-audit.json",
+      "reproduced_report": "crn-supplementary.json"
+    },
+    {
+      "differences": [],
+      "paper_report": "crn-validation.json",
+      "reproduced_report": "crn-validation.json"
+    },
+    {
+      "paper_report": "structural-verification.json",
+      "reproduced_report": "structural-verification.json",
+      "scientific_payload_identical": true
+    },
+    {
+      "paper_report": "glycolysis_analysis.json",
+      "reproduced_report": "glycolysis_analysis.json",
+      "scientific_payload_identical": true
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,7 @@
+{
+  "analysis_source_override": {
+    "PYTHONPATH": "/home/lolo/Documents/TACsy/SynEco/SynKit",
+    "actual_synkit_version": "1.6.5",
+    "note": "The checkout is imported ahead of the unrelated SynKit distribution installed in the analysis environment."
+  }
+}

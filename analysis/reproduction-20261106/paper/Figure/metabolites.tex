@@ -1,0 +1,103 @@
+% ---------------------------------------------------------------------------
+% metabolites.tex --- key metabolites of the extended glycolysis network.
+%
+% Source fragment: loaded by SI/si.tex (and exported standalone by
+% Figure/export_tikz.py), replacing the four auto-generated chemfig dumps in
+% Figure/moltex/, which drew every hydrogen at four different scales.
+%
+% Every structure is the constitution and configuration of the SMILES listed
+% in Table S2 (tokens C, S, H, J).  Sugars use Haworth projections: bold
+% front bonds, substituents up or down.  Phosphoryl groups are drawn in the
+% shared highlight colour, matching the phosphate convention of the
+% donor-selectivity figure.  The anomeric centre of fructose 1,6-bisphosphate
+% is left unspecified because the listed SMILES does not specify it.
+% ---------------------------------------------------------------------------
+% Figure styles are supplied by the manuscript preamble.
+
+\begingroup
+% --- molecule drawing conventions -----------------------------------------
+\setchemfig{atom sep=17pt,bond style={line width=0.5pt},bond offset=1.1pt,
+            cram width=1.7pt}
+\renewcommand*\printatom[1]{\ensuremath{\mathsf{#1}}}
+% phosphoryl atoms carry the highlight colour; \pk keeps that in one place
+\newcommand{\pk}[1]{\textcolor{scMark}{#1}}
+\newcommand{\mfont}{\fontsize{6.5}{7.5}\selectfont\color{scInk}}
+% phosphoester links, running right (R) or left (L) from the ester oxygen
+\definesubmol{pbR}{-[:-30,0.85,,,draw=scMark]\pk{P}(=[:60,0.8,,,draw=scMark]\pk{O})%
+  (-[:-120,0.8,,,draw=scMark]\pk{OH})-[:30,0.85,,,draw=scMark]\pk{O}}
+\definesubmol{ptR}{-[:-30,0.85,,,draw=scMark]\pk{P}(=[:60,0.85,,,draw=scMark]\pk{O})%
+  (-[:-120,0.8,,,draw=scMark]\pk{OH})-[:-15,0.85,,,draw=scMark]\pk{OH}}
+\definesubmol{ptL}{-[:210,0.85,,,draw=scMark]\pk{P}(=[:120,0.85,,,draw=scMark]\pk{O})%
+  (-[:-60,0.8,,,draw=scMark]\pk{OH})-[:195,0.85,,,draw=scMark]\pk{OH}}
+
+\begin{tikzpicture}[syn]
+% The sn-jnl text block of this manuscript is 466.63 pt = 16.40 cm wide (see
+% Figure/arch.tex), so the canvas is that width and the figure is included
+% unscaled: one point of type is the same size as in every other figure.
+\def\W{16.40}
+\path[use as bounding box] (0,0) rectangle (\W,-9.05);
+
+\def\pw{9.20}          % width of the left (wide) panels
+\def\qw{7.00}          % width of the right (narrow) panels
+\def\gx{9.40}          % left edge of the right-hand column
+\def\ra{-5.15}         % top edge of the second row
+
+% =========================================================================
+% A  ATP
+% =========================================================================
+\draw[panel] (0,-0.02) rectangle (\pw,-4.95);
+\scHead{(0.22,-0.06)}{a}{ATP {\mdseries (C)}}{$\mathrm{C_{10}H_{16}N_5O_{13}P_3}$ --- phosphoryl donor of $r10$ and $r3$}
+\node[anchor=center] at (4.60,-2.75) {\mfont\chemfig{
+*6(-*5(-N=-N(-[:-70,1.3]
+   ?[r]
+   -[:-59.7,0.834,,,line width=0.95pt](-[:-120,0.7]HO)
+   -[:0,0.66,,,line width=0.95pt](-[:-60,0.7]OH)
+   -[:59.7,0.834,,,line width=0.95pt](-[:80,0.9]-[:10,0.9]\pk{O}!{pbR}!{pbR}!{ptR})
+   -[:140.4,0.973]O?[r]
+  )-)=(-[:52,0.95]NH_2)-N=-N=)
+}};
+\node[note,anchor=south west] at (0.22,-4.83) {two phosphoanhydride bonds; $r10$ leaves ADP};
+
+% =========================================================================
+% B  alpha-D-glucose
+% =========================================================================
+\draw[panel] (\gx,-0.02) rectangle (\gx+\qw,-4.95);
+\scHead{(\gx+0.22,-0.06)}{b}{$\alpha$-D-Glucose {\mdseries (S)}}{$\mathrm{C_6H_{12}O_6}$ --- phosphorylated by $r10$}
+\node[anchor=center] at (\gx+3.50,-2.75) {\mfont\chemfig{
+?[a](-[:90,0.9]-[:30,0.9]OH)
+-[:222,0.85](-[:-90,0.72]OH)
+-[:-40,0.8,,,line width=0.95pt](-[:58,0.68]OH)
+-[:0,1.9,,,line width=0.95pt](-[:-90,0.72]OH)
+-[:40,0.8,,,line width=0.95pt](-[:-90,0.72]OH)
+-[:138,0.85]O?[a]
+}};
+\node[note,anchor=south west] at (\gx+0.22,-4.83) {anomeric \ce{OH} down; no phosphate before $r10$};
+
+% =========================================================================
+% C  fructose 1,6-bisphosphate
+% =========================================================================
+\draw[panel] (0,\ra) rectangle (\pw,\ra-3.85);
+\scHead{(0.22,\ra+0.02)}{c}{Fructose 1,6-bisphosphate {\mdseries (H)}}{$\mathrm{C_6H_{14}O_{12}P_2}$ --- product of $r3$ and $r12$}
+\node[anchor=center] at (4.60,\ra-2.05) {\mfont\chemfig{
+?[f](-[:100,0.9]-[:170,0.9]\pk{O}!{ptL})
+-[:-59.7,0.834,,,line width=0.95pt](-[:-120,0.7]HO)
+-[:0,0.66,,,line width=0.95pt](-[:108,0.62]OH)
+-[:59.7,0.834,,,line width=0.95pt](-[:-25,0.78]OH)(-[:78,0.9]-[:12,0.9]\pk{O}!{ptR})
+-[:140.4,0.973]O?[f]
+}};
+\node[note,anchor=south west] at (0.22,\ra-3.73) {cleaved by aldolase $r7$; C2 configuration not specified};
+
+% =========================================================================
+% D  D-glyceraldehyde 3-phosphate
+% =========================================================================
+\draw[panel] (\gx,\ra) rectangle (\gx+\qw,\ra-3.85);
+\scHead{(\gx+0.22,\ra+0.02)}{d}{D-Glyceraldehyde 3-phosphate {\mdseries (J)}}{$\mathrm{C_3H_7O_6P}$ --- target of both routes}
+\node[anchor=center] at (\gx+3.50,\ra-2.05) {\mfont\chemfig{
+\pk{HO}-[:30,0.85,,,draw=scMark]\pk{P}(=[:90,0.85,,,draw=scMark]\pk{O})%
+(-[:-90,0.8,,,draw=scMark]\pk{OH})-[:-30,0.85,,,draw=scMark]\pk{O}%
+-[:-30,0.85]-[:30,0.85](<[:90,0.75]OH)-[:-30,0.85](=[:-60,0.8]O)-[:30,0.7]H
+}};
+\node[note,anchor=south west] at (\gx+0.22,\ra-3.73) {(\textit{R}) centre; released with DHAP by $r7$};
+
+\end{tikzpicture}
+\endgroup

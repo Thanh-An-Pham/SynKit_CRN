@@ -1,0 +1,140 @@
+--- expand.cpp
++++ expand.profile.cpp
+@@ -259,6 +259,19 @@
+   return json::value_to<T>(it->value());
+ }
+ 
++struct ProfileEntry { double seconds = 0; std::int64_t calls = 0; };
++std::map<std::string, ProfileEntry> profile_entries;
++struct ProfileScope {
++  const char *name;
++  Clock::time_point start = Clock::now();
++  explicit ProfileScope(const char *name) : name(name) {}
++  ~ProfileScope() {
++    auto &entry = profile_entries[name];
++    entry.seconds += std::chrono::duration<double>(Clock::now() - start).count();
++    ++entry.calls;
++  }
++};
++
+ class Expander {
+  public:
+   Expander(Options options, std::vector<Rule> rules)
+@@ -276,6 +289,7 @@
+   // Equivalent of synkit.CRN.Construct.smiles.standardize_smiles_rdkit with
+   // keep_aam=False: parse unsanitized, sanitize, strip maps, remove all Hs.
+   std::optional<std::string> standardize(const std::string &text) {
++    ProfileScope scope("standardize");
+     auto cached = standard_.find(text);
+     if (cached != standard_.end()) return cached->second;
+     std::optional<std::string> out;
+@@ -302,17 +316,19 @@
+   int species_id(const std::string &key) {
+     auto it = index_.find(key);
+     if (it != index_.end()) return it->second;
++    ProfileScope scope("new_species");
+     Species record;
+     record.key = key;
+-    auto mol = RDKit::v2::SmilesParse::MolFromSmiles(key);
++    auto mol = [&]() { ProfileScope s("new_species_parse"); return RDKit::v2::SmilesParse::MolFromSmiles(key); }();
+     if (!mol) throw std::runtime_error("Invalid canonical species: " + key);
+     for (auto atom : mol->atoms())
+       atom->setProp<int>(kHydrogenProp, static_cast<int>(atom->getTotalNumHs(false)));
+     auto explicit_mol = std::make_unique<RDKit::RWMol>(*mol);
+-    RDKit::MolOps::addHs(*explicit_mol);
++    { ProfileScope s("new_species_add_hs"); RDKit::MolOps::addHs(*explicit_mol); }
+     record.heavy = RDKit::ROMOL_SPTR(mol.release());
+     record.with_hs = RDKit::ROMOL_SPTR(explicit_mol.release());
+     record.slots.resize(rules_.size());
++    ProfileScope binding_scope("new_species_bindings");
+     for (std::size_t r = 0; r < rules_.size(); ++r) {
+       auto &slots = record.slots[r];
+       slots.assign(rules_[r].templates, 0);
+@@ -437,6 +453,14 @@
+       rules.emplace_back(std::move(item));
+     }
+     out["rules"] = std::move(rules);
++    json::object profile;
++    for (const auto &[name, entry] : profile_entries) {
++      json::object item;
++      item["seconds"] = entry.seconds;
++      item["calls"] = entry.calls;
++      profile[name] = std::move(item);
++    }
++    out["profile"] = std::move(profile);
+     return out;
+   }
+ 
+@@ -521,6 +545,7 @@
+ 
+   std::vector<Task> make_tasks(const std::set<std::string> &pool,
+                                const std::set<std::string> &frontier, StepStats &stats) {
++    ProfileScope scope("make_tasks");
+     std::vector<int> ranked;
+     ranked.reserve(pool.size());
+     for (const auto &key : pool) ranked.push_back(index_.at(key));
+@@ -576,6 +601,7 @@
+   // Returns false when the Lewis-state hydrogen update is inadmissible.
+   bool canonical_outcome(const RDKit::MOL_SPTR_VECT &outcome, const Rule &rule,
+                          const RDKit::MOL_SPTR_VECT &reactants, std::string &joined) const {
++    ProfileScope scope("canonical_outcome");
+     std::vector<std::string> parts;
+     for (const auto &product : outcome) {
+       RDKit::RWMol molecule(*product);
+@@ -603,12 +629,12 @@
+           atom->setNoImplicit(true);
+         }
+       }
+-      RDKit::MolOps::sanitizeMol(molecule);
++      { ProfileScope s("outcome_sanitize"); RDKit::MolOps::sanitizeMol(molecule); }
+       for (auto idx : changed)
+         if (!lewis_admissible(*molecule.getAtomWithIdx(idx))) return false;
+-      if (!o_.explicit_h) RDKit::MolOps::removeHs(molecule, RDKit::MolOps::RemoveHsParameters(), true);
++      if (!o_.explicit_h) { ProfileScope s("outcome_remove_hs"); RDKit::MolOps::removeHs(molecule, RDKit::MolOps::RemoveHsParameters(), true); }
+       for (auto atom : molecule.atoms()) atom->setAtomMapNum(0);
+-      parts.push_back(RDKit::MolToSmiles(molecule));
++      { ProfileScope s("outcome_smiles"); parts.push_back(RDKit::MolToSmiles(molecule)); }
+     }
+     std::sort(parts.begin(), parts.end());
+     joined.clear();
+@@ -626,6 +652,7 @@
+   };
+ 
+   TaskResult apply(const Task &task) const {
++    ProfileScope scope("apply");
+     TaskResult result;
+     const Rule &rule = rules_[task.rule];
+     const std::size_t n = task.species.size();
+@@ -643,7 +670,7 @@
+       if (!binds) continue;
+       RDKit::MOL_SPTR_VECT reactants;
+       for (std::size_t slot = 0; slot < n; ++slot) reactants.push_back(molecules[order[slot]]);
+-      auto outcomes = rule.active().runReactants(reactants, o_.max_products);
++      auto outcomes = [&]() { ProfileScope s("run_reactants"); return rule.active().runReactants(reactants, o_.max_products); }();
+       ++result.applications;
+       if (outcomes.size() >= o_.max_products) {
+         result.error = "product_limit";
+@@ -668,6 +695,7 @@
+   }
+ 
+   std::vector<TaskResult> run_tasks(const std::vector<Task> &tasks, StepStats &stats) {
++    ProfileScope scope("run_tasks");
+     std::vector<TaskResult> results(tasks.size());
+     const int workers = std::max(1, std::min<int>(o_.threads, static_cast<int>(tasks.size())));
+     std::atomic<std::size_t> next{0};
+@@ -710,6 +738,7 @@
+   std::set<std::string> integrate(const std::vector<Task> &tasks,
+                                   const std::vector<TaskResult> &results,
+                                   std::set<std::string> &pool, int step, StepStats &stats) {
++    ProfileScope scope("integrate");
+     std::set<std::string> next;
+     for (std::size_t t = 0; t < tasks.size(); ++t) {
+       check();
+@@ -826,6 +855,7 @@
+ 
+ json::object handle(const std::string &text) {
+   try {
++    profile_entries.clear();
+     const json::object request = json::parse(text).as_object();
+     if (get_or<int>(request, "protocol", kProtocol) != kProtocol)
+       throw std::invalid_argument("unsupported protocol");

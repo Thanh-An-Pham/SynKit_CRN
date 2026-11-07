@@ -7,8 +7,37 @@
   "claim_boundary": "These are structural, operation-specific verdicts rather than predictions at a fitted parametrization. Deficiency-theorem conclusions apply to mass-action systems under their reported hypotheses. The Angeli-De Leenheer-Sontag persistence test is sufficient, not necessary, so a failing condition does not prove that a species can be driven to extinction.",
   "environment": {
     "cpu_count": 22,
-    "git_commit": "22b007ed0d93755fcb95291784b39f96ced68e14",
-    "git_dirty": false,
+    "crn_backend": {
+      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
+      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "native_operations": {
+        "crnt": 12,
+        "matrix": 12,
+        "semiflows": 46,
+        "structural_sets": 12
+      },
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
     "machine": "x86_64",
     "networkx": "3.5",
     "numpy": "2.3.3",
@@ -17,7 +46,7 @@
     "python": "3.11.0",
     "rdkit": "2025.09.3",
     "scipy": "1.16.0",
-    "synkit": "1.6.2"
+    "synkit": "1.6.5"
   },
   "n_networks": 12,
   "networks": [
@@ -875,6 +904,6 @@
     }
   ],
   "schema": "synkit.crn-validation/1",
-  "seconds": 0.2202076830144506,
+  "seconds": 0.07420543799526058,
   "status": "PASS"
 }

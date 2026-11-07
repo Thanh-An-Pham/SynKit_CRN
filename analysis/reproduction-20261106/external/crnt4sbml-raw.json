@@ -1,0 +1,175 @@
+{
+  "environment": {
+    "crnt4sbml": "0.0.15",
+    "libsbml": "5.18.0",
+    "networkx": "2.3",
+    "numpy": "1.16.4",
+    "python": "3.7.12"
+  },
+  "networks": [
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0
+      ],
+      "n_complexes": 2,
+      "n_linkage_classes": 1,
+      "n_reactions": 2,
+      "n_species": 2,
+      "name": "reversible_isomerization",
+      "rank": 1,
+      "weakly_reversible": true
+    },
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0
+      ],
+      "n_complexes": 2,
+      "n_linkage_classes": 1,
+      "n_reactions": 1,
+      "n_species": 2,
+      "name": "irreversible_isomerization",
+      "rank": 1,
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0
+      ],
+      "n_complexes": 3,
+      "n_linkage_classes": 1,
+      "n_reactions": 3,
+      "n_species": 3,
+      "name": "isomerization_cycle",
+      "rank": 2,
+      "weakly_reversible": true
+    },
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0,
+        0,
+        0
+      ],
+      "n_complexes": 6,
+      "n_linkage_classes": 3,
+      "n_reactions": 6,
+      "n_species": 6,
+      "name": "disjoint_reversible_blocks",
+      "rank": 3,
+      "weakly_reversible": true
+    },
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0,
+        0,
+        0
+      ],
+      "n_complexes": 6,
+      "n_linkage_classes": 3,
+      "n_reactions": 6,
+      "n_species": 6,
+      "name": "disjoint_blocks_with_stoichiometry",
+      "rank": 3,
+      "weakly_reversible": true
+    },
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0
+      ],
+      "n_complexes": 3,
+      "n_linkage_classes": 1,
+      "n_reactions": 3,
+      "n_species": 4,
+      "name": "michaelis_menten",
+      "rank": 2,
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0
+      ],
+      "n_complexes": 3,
+      "n_linkage_classes": 1,
+      "n_reactions": 4,
+      "n_species": 4,
+      "name": "reversible_michaelis_menten",
+      "rank": 2,
+      "weakly_reversible": true
+    },
+    {
+      "deficiency": 1,
+      "linkage_class_deficiencies": [
+        0,
+        0
+      ],
+      "n_complexes": 5,
+      "n_linkage_classes": 2,
+      "n_reactions": 6,
+      "n_species": 3,
+      "name": "edelstein",
+      "rank": 2,
+      "weakly_reversible": true
+    },
+    {
+      "deficiency": 1,
+      "linkage_class_deficiencies": [
+        0,
+        0
+      ],
+      "n_complexes": 6,
+      "n_linkage_classes": 2,
+      "n_reactions": 6,
+      "n_species": 6,
+      "name": "futile_cycle_1_site",
+      "rank": 3,
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 2,
+      "linkage_class_deficiencies": [
+        0,
+        0
+      ],
+      "n_complexes": 10,
+      "n_linkage_classes": 2,
+      "n_reactions": 12,
+      "n_species": 9,
+      "name": "futile_cycle_2_site",
+      "rank": 6,
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 1,
+      "linkage_class_deficiencies": [
+        0,
+        0
+      ],
+      "n_complexes": 4,
+      "n_linkage_classes": 2,
+      "n_reactions": 2,
+      "n_species": 2,
+      "name": "shinar_feinberg_acr",
+      "rank": 1,
+      "weakly_reversible": false
+    },
+    {
+      "deficiency": 0,
+      "linkage_class_deficiencies": [
+        0
+      ],
+      "n_complexes": 3,
+      "n_linkage_classes": 1,
+      "n_reactions": 3,
+      "n_species": 2,
+      "name": "open_inflow_outflow",
+      "rank": 2,
+      "weakly_reversible": true
+    }
+  ]
+}

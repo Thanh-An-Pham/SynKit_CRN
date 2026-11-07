@@ -1,0 +1,111 @@
+{
+  "checks": {
+    "all_study_checks_passed": true,
+    "biomodels_reaction_bearing": 10,
+    "manuscript_verifier": "PASS",
+    "notebook_code_cells_executed": 6,
+    "paper_and_si_rebuilt": true,
+    "pytest_failures": 0,
+    "pytest_skips": 0,
+    "pytest_subtests_passed": 482,
+    "pytest_tests_passed": 964,
+    "scaling_configurations_complete": 60,
+    "scientific_evidence_payloads_matching": 12,
+    "structural_crosscheck_networks": 31,
+    "studies": 10,
+    "unresolved_pdf_reference_markers": 0
+  },
+  "completed_at": "2026-11-06T11:48:44.038949+00:00",
+  "crn_source_files_checked": 116,
+  "crn_sources_unchanged_through_run": true,
+  "external_comparator": {
+    "all_12_inputs_match_paper_sha256": true,
+    "environment": {
+      "crnt4sbml": "0.0.15",
+      "libsbml": "5.18.0",
+      "networkx": "2.3",
+      "numpy": "1.16.4",
+      "python": "3.7.12"
+    },
+    "mode": "fresh isolated interpreter run, additionally compared to archived paper outputs",
+    "networks": 12,
+    "report": "external/comparison.json",
+    "shared_quantities_per_network": 8
+  },
+  "git_cache_cleanup": {
+    "ignore_file": ".gitignore",
+    "tracked_cache_untracked_but_kept_on_disk": [
+      ".DS_Store"
+    ]
+  },
+  "latex_build_warnings": [
+    {
+      "file": "paper/main.log",
+      "font_substitution_warning": true,
+      "overfull_boxes": 0,
+      "remote_page_warnings": 6,
+      "undefined_references": false
+    },
+    {
+      "file": "paper/SI/si.log",
+      "font_substitution_warning": true,
+      "overfull_boxes": 1,
+      "remote_page_warnings": 0,
+      "undefined_references": false
+    }
+  ],
+  "native_build": {
+    "analysis": {
+      "build_sha256": "2769128e2e4e759b65f53da4ca7a8052272468f6372a6b873c2a0c3c03c8600f",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/synkit-crn-safe-reproduction-20261106/native/libsynkit_crn_2769128e2e4e759b.so",
+      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
+      "native_operations": {},
+      "production_backend": "cpp"
+    },
+    "expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/synkit-crn-safe-reproduction-20261106/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "de3c2c8b3ce0354a306232d0ee413a49ed25e3cb71f997e0723e7752b660182c",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "fresh_directory": true
+  },
+  "paper_primary_comparison_policy": "The manuscript evidence retains its recorded-comparator format for compatibility with verify_revision.py. The additional external/ directory contains the fresh interpreter run, raw results, portable SBML inputs and comparison.",
+  "pdfs": {
+    "main": "paper/main.pdf",
+    "supplement": "paper/SI/si.pdf"
+  },
+  "schema": "synkit.full-paper-reproduction/1",
+  "scope_limits": [
+    "This reproduces the computational evidence from the recorded inputs; it is not independent experimental validation of biochemical annotations.",
+    "Existing LaTeX font substitutions, a small SI overfull box and cross-document page-link warnings remain in the snapshot; there are no undefined references."
+  ],
+  "snapshot_adjustments": [
+    "Regeneration script reads the comparator archive from the manuscript bundle instead of an ignored SynKit results directory.",
+    "Snapshot provenance date set to 6 November 2026.",
+    "Generated numerical blocks and figures updated from fresh timings."
+  ],
+  "started_at": "2026-11-06T11:37:07.742340+00:00",
+  "status": "PASS",
+  "synkit_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+  "synkit_version": "1.6.5",
+  "timings": "Timings were measured again and are allowed to differ. Structural quantities, exact witnesses, certificates and scientific outcomes match the saved evidence.",
+  "working_manuscript_files_changed_since_snapshot": [
+    "SI/si.pdf",
+    "SI/si.tex",
+    "main.pdf",
+    "main.tex"
+  ],
+  "working_manuscript_note": "The reproduction ran in a separate snapshot and did not overwrite working manuscript or experiment sources. Later working-file edits are separate from the captured snapshot."
+}

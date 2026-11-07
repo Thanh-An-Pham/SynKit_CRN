@@ -16,17 +16,14 @@
 % Width: laid out on the 16.40 cm text block of this manuscript (see
 % Figure/arch.tex) and included unscaled.
 % ---------------------------------------------------------------------------
-\IfFileExists{synstyle.tex}{\input{synstyle}}{%
-  \IfFileExists{Figure/synstyle.tex}{\input{Figure/synstyle}}{%
-    \input{../Figure/synstyle}}}
+% Figure styles are supplied by the manuscript preamble.
 
 \tikzset{
-  complex/.style={rounded corners=2pt,fill=white,draw=scRxE!70,line width=0.5pt,
+  complex/.style={fill=white,draw=black,line width=0.4pt,
     inner xsep=3.4pt,inner ysep=2.4pt,font=\scBody,text=scInk},
   cxedge/.style={-{Stealth[round,length=1.7mm,width=1.4mm]},line width=0.5pt,
     draw=scRxE,shorten >=1pt,shorten <=1pt},
-  lcbox/.style={rounded corners=4pt,fill=scAccentF,draw=scAccent!45,
-    line width=0.45pt},
+  lcbox/.style={fill=none,draw=black,densely dashed,line width=0.4pt},
   vrow/.style={anchor=base west,font=\scBody,text=scInkM},
 }
 
@@ -134,8 +131,8 @@
 
 \node[anchor=base west,font=\scBody,text=scInk] at (\bx+0.30,\my-3*\cs-0.92)
   {$s=\operatorname{rank}\mathbf S=2$};
-\node[chip,anchor=north east,text=scMark] at (\bx+\bw-0.22,\my-3*\cs-0.72)
-  {\textbf{conserved pool} $\mathrm B+\mathrm C$, exact};
+\node[anchor=base west,font=\scBody,text=scInk] at (\bx+0.30,\my-3*\cs-1.30)
+  {conserved pool $\mathrm B+\mathrm C$, exact};
 
 \draw[flow] (\bx+\bw+0.04,-2.30) -- (\cx-0.04,-2.30);
 
@@ -147,8 +144,6 @@
 \end{scope}
 \scHead[scAlert]{(\cx+0.22,-0.16)}{c}{theorem applicability}{}
 
-\path[rounded corners=2.5pt,fill=scPaper,draw=scRule,line width=0.4pt]
-  (\cx+0.22,-0.80) rectangle (\cx+\cw-0.22,-1.52);
 \node[font=\scNum,anchor=west] at (\cx+0.40,-1.16) {$\delta=1$};
 \draw[draw=scRule,line width=0.4pt] (\cx+1.48,-0.94) -- (\cx+1.48,-1.38);
 \node[anchor=west,font=\scSmall,text=scInkM] at (\cx+1.62,-1.16)
@@ -171,7 +166,7 @@
 \node[vrow] at (\cx+0.62,-3.57) {$\textstyle\sum_i\delta_i=0\neq\delta$};
 
 \node[note,anchor=north west,text width=4.26cm,minimum height=0.46cm,
-      align=center,fill=scAlertF!45,draw=scAlert!30] at (\cx+0.22,-3.86)
-  {\textbf{\textcolor{scAlert}{multistationarity undecided}}};
+      align=center] at (\cx+0.22,-3.86)
+  {\itshape multistationarity undecided};
 
 \end{tikzpicture}

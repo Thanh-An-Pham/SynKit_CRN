@@ -1,0 +1,209 @@
+{
+  "depth": 2,
+  "n_reactions": 4,
+  "n_species": 5,
+  "native_manifest": {
+    "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+    "cmake_cache": {
+      "CMAKE_BUILD_TYPE:STRING": "Release",
+      "CMAKE_CXX_COMPILER-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_COMPILER:FILEPATH": "/usr/lib64/ccache/c++",
+      "CMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_COMPILER_AR:FILEPATH": "/usr/bin/gcc-ar",
+      "CMAKE_CXX_COMPILER_RANLIB-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_COMPILER_RANLIB:FILEPATH": "/usr/bin/gcc-ranlib",
+      "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_FLAGS:STRING": "",
+      "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+      "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG"
+    },
+    "configuration": {
+      "builder_sha256": "f79be689509e5239b3762068ce3388427ac2443d4d5f91e324286f398ba7cd23",
+      "compiler": null,
+      "environment": {
+        "CXX": null,
+        "CXXFLAGS": null,
+        "LDFLAGS": null
+      },
+      "machine": "x86_64",
+      "platform": "linux",
+      "protocol": 1,
+      "rdkit_dir": "/home/lolo/.cache/synkit/rdkit-cpp-2026.03.1",
+      "sdk_inputs_sha256": "b8aefdd4ac406ef89cd5b32cd6041914d43e9991314a57c9e645724f05b5bd4b",
+      "sources": {
+        "CMakeLists.txt": "92f11b2b8fb56b1a60f32f293088d6e033feb13ce7c1b5df2b2a65b3c3d037fe",
+        "expand.cpp": "ea5c0a4232c89a1df403743bba25da787f31965d8939e9c81f6e2967cd83947d"
+      }
+    },
+    "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
+    "rdkit_version": "2026.03.1"
+  },
+  "native_steps": {
+    "binding_tests": 20,
+    "engine": "synkit_crn_expand",
+    "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
+    "hydrogen_model": "lewis",
+    "rdkit_version": "2026.03.1",
+    "rules": [
+      {
+        "hydrogen_deltas": {
+          "1": -1,
+          "3": 1
+        },
+        "hydrogen_model": "lewis",
+        "note": ""
+      },
+      {
+        "hydrogen_deltas": {
+          "3": -1,
+          "5": 1
+        },
+        "hydrogen_model": "lewis",
+        "note": ""
+      },
+      {
+        "hydrogen_deltas": {
+          "1": 1,
+          "3": -1
+        },
+        "hydrogen_model": "lewis",
+        "note": ""
+      },
+      {
+        "hydrogen_deltas": {
+          "3": 1,
+          "5": -1
+        },
+        "hydrogen_model": "lewis",
+        "note": ""
+      }
+    ],
+    "steps": [
+      {
+        "applications": 1,
+        "bindings": 1,
+        "candidate_mixtures": 1,
+        "capped_rules": [],
+        "events": 1,
+        "frontier": 2,
+        "lewis_rejected": 0,
+        "outcomes": 1,
+        "pool": 2,
+        "seen_mixtures": 0,
+        "step": 1,
+        "task_budget_exhausted": false,
+        "tasks": 1
+      },
+      {
+        "applications": 3,
+        "bindings": 5,
+        "candidate_mixtures": 3,
+        "capped_rules": [],
+        "events": 3,
+        "frontier": 1,
+        "lewis_rejected": 0,
+        "outcomes": 6,
+        "pool": 3,
+        "seen_mixtures": 0,
+        "step": 2,
+        "task_budget_exhausted": false,
+        "tasks": 3
+      }
+    ],
+    "steps_run": 2,
+    "stop_reason": "repeats"
+  },
+  "repeats": 5,
+  "samples": [
+    0.0008993039955385029,
+    0.0009258390055038035,
+    0.0008544219890609384,
+    0.0008686200017109513,
+    0.000861867010826245
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c",
+    "species": [
+      "C=O",
+      "O=CC(O)C(O)CO",
+      "O=CC(O)CO",
+      "O=CCO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete",
+  "tool": "synkit",
+  "version": "1.6.5"
+}

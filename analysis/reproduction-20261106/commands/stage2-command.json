@@ -1,0 +1,11 @@
+[
+  "/home/lolo/miniforge3/envs/synedu/bin/python",
+  "/tmp/synkit-crn-safe-reproduction-20261106/paper/analysis/scripts/regenerate_evidence.py",
+  "--work-dir",
+  "/tmp/synkit-crn-safe-reproduction-20261106",
+  "--skip-studies",
+  "--native-build-dir",
+  "/tmp/synkit-crn-safe-reproduction-20261106/native",
+  "--rdkit-dir",
+  "/home/lolo/.cache/synkit/rdkit-cpp-2026.03.1"
+]

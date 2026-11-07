@@ -1,0 +1,19 @@
+{
+  "synkit_root": "/home/lolo/Documents/TACsy/SynEco/SynKit",
+  "synkit_git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+  "synkit_git_dirty": true,
+  "interpreters": {
+    "synkit": {
+      "path": "/home/lolo/Documents/TACsy/SynEco/SynTest/.venv/bin/python",
+      "version": "Python 3.12.12"
+    },
+    "mod": {
+      "path": "/tmp/formose-mod-env/bin/python",
+      "version": "Python 3.12.16"
+    },
+    "molfoundry": {
+      "path": "/tmp/formose-comparison-env/bin/python",
+      "version": "Python 3.12.12"
+    }
+  }
+}

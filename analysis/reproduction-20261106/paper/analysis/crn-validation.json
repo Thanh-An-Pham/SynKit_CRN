@@ -1,0 +1,909 @@
+{
+  "checks": {
+    "all_networks_agree_with_independent_recomputation": true,
+    "all_networks_reproduce_expected_verdicts": true,
+    "deficiency_identity_holds_everywhere": true
+  },
+  "claim_boundary": "These are structural, operation-specific verdicts rather than predictions at a fitted parametrization. Deficiency-theorem conclusions apply to mass-action systems under their reported hypotheses. The Angeli-De Leenheer-Sontag persistence test is sufficient, not necessary, so a failing condition does not prove that a species can be driven to extinction.",
+  "environment": {
+    "cpu_count": 22,
+    "crn_backend": {
+      "build_sha256": "2769128e2e4e759b65f53da4ca7a8052272468f6372a6b873c2a0c3c03c8600f",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/synkit-crn-safe-reproduction-20261106/native/libsynkit_crn_2769128e2e4e759b.so",
+      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
+      "native_operations": {
+        "crnt": 12,
+        "matrix": 12,
+        "semiflows": 46,
+        "structural_sets": 12
+      },
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/synkit-crn-safe-reproduction-20261106/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "de3c2c8b3ce0354a306232d0ee413a49ed25e3cb71f997e0723e7752b660182c",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
+    "machine": "x86_64",
+    "networkx": "3.6.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.3",
+    "synkit": "1.6.5"
+  },
+  "n_networks": 12,
+  "networks": [
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 2,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 1,
+        "n_reactions": 2,
+        "n_species": 2,
+        "persistent": true,
+        "rank": 1,
+        "weakly_reversible": true
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 1,
+          "nontrivial": true,
+          "nullity": 1,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 1,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "A <-> B. The smallest weakly reversible network; deficiency zero, so the Deficiency Zero Theorem gives a unique stable equilibrium.",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 2,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 1,
+        "persistent": true,
+        "rank": 1,
+        "weakly_reversible": true
+      },
+      "mismatches": {},
+      "name": "reversible_isomerization",
+      "passed": true,
+      "reactions": [
+        "A>>B",
+        "B>>A"
+      ],
+      "source": "Feinberg, Foundations of Chemical Reaction Network Theory (2019), Ch. 3",
+      "tags": [
+        "textbook",
+        "deficiency-zero"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 2,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 1,
+        "n_reactions": 1,
+        "n_species": 2,
+        "persistent": false,
+        "rank": 1,
+        "weakly_reversible": false
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 1,
+          "nontrivial": true,
+          "nullity": 1,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": false,
+        "rank_by_svd": 1,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 0,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "A -> B. Deficiency zero but not weakly reversible, so no positive steady state exists for any rate constants. Not persistent: A is driven to zero.",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 2,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 1,
+        "persistent": false,
+        "rank": 1,
+        "weakly_reversible": false
+      },
+      "mismatches": {},
+      "name": "irreversible_isomerization",
+      "passed": true,
+      "reactions": [
+        "A>>B"
+      ],
+      "source": "Feinberg, Foundations of Chemical Reaction Network Theory (2019), Ch. 3",
+      "tags": [
+        "textbook",
+        "deficiency-zero"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 1,
+        "n_reactions": 3,
+        "n_species": 3,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 1,
+          "nontrivial": true,
+          "nullity": 1,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 2,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "A -> B -> C -> A. Weakly reversible without any single reaction being reversible; separates weak reversibility from reversibility.",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 1,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "mismatches": {},
+      "name": "isomerization_cycle",
+      "passed": true,
+      "reactions": [
+        "A>>B",
+        "B>>C",
+        "C>>A"
+      ],
+      "source": "Feinberg, Foundations of Chemical Reaction Network Theory (2019), Ch. 3",
+      "tags": [
+        "textbook",
+        "weak-reversibility"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 6,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 3,
+        "n_reactions": 6,
+        "n_species": 6,
+        "persistent": true,
+        "rank": 3,
+        "weakly_reversible": true
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 3,
+          "nontrivial": true,
+          "nullity": 3,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 3,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 3,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 3,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "Three independent reversible pairs. Regression for linkage-class counting and for minimal-semiflow supports, which must come out as three disjoint pairs rather than their union.",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 6,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 3,
+        "persistent": true,
+        "rank": 3,
+        "weakly_reversible": true
+      },
+      "mismatches": {},
+      "name": "disjoint_reversible_blocks",
+      "passed": true,
+      "reactions": [
+        "A>>B",
+        "B>>A",
+        "C>>D",
+        "D>>C",
+        "E>>F",
+        "F>>E"
+      ],
+      "source": "constructed (regression for finding F1)",
+      "tags": [
+        "regression",
+        "disconnected"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 6,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 3,
+        "n_reactions": 6,
+        "n_species": 6,
+        "persistent": true,
+        "rank": 3,
+        "weakly_reversible": true
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 3,
+          "nontrivial": true,
+          "nullity": 3,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 3,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 3,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 3,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "Disjoint reversible blocks where one uses non-unit stoichiometry (E <-> 2F). The conservation law on that block is 2E + F, which a float kernel basis reports incorrectly.",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 6,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 3,
+        "persistent": true,
+        "rank": 3,
+        "weakly_reversible": true
+      },
+      "mismatches": {},
+      "name": "disjoint_blocks_with_stoichiometry",
+      "passed": true,
+      "reactions": [
+        "A>>B",
+        "B>>A",
+        "C>>D",
+        "D>>C",
+        "E>>2F",
+        "2F>>E"
+      ],
+      "source": "constructed (regression for finding F1)",
+      "tags": [
+        "regression",
+        "stoichiometry"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 2,
+        "n_linkage_classes": 1,
+        "n_reactions": 3,
+        "n_species": 4,
+        "persistent": false,
+        "rank": 2,
+        "weakly_reversible": false
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 2,
+          "nontrivial": true,
+          "nullity": 2,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 2,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": false,
+        "rank_by_svd": 2,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "E + S <-> ES -> E + P. The canonical enzyme mechanism. Deficiency zero and not weakly reversible, so no positive steady state exists; two conservation laws (total enzyme and total substrate moiety).",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 2,
+        "n_linkage_classes": 1,
+        "persistent": false,
+        "rank": 2,
+        "weakly_reversible": false
+      },
+      "mismatches": {},
+      "name": "michaelis_menten",
+      "passed": true,
+      "reactions": [
+        "E+S>>ES",
+        "ES>>E+S",
+        "ES>>E+P"
+      ],
+      "source": "Michaelis & Menten (1913); Feinberg (2019), Ch. 3",
+      "tags": [
+        "biology",
+        "enzyme",
+        "deficiency-zero"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 2,
+        "n_linkage_classes": 1,
+        "n_reactions": 4,
+        "n_species": 4,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 2,
+          "nontrivial": true,
+          "nullity": 2,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 2,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 2,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 2,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "E + S <-> ES <-> E + P. Making product release reversible makes the mechanism weakly reversible at unchanged deficiency, flipping the Deficiency Zero verdict to a unique stable equilibrium.",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 2,
+        "n_linkage_classes": 1,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "mismatches": {},
+      "name": "reversible_michaelis_menten",
+      "passed": true,
+      "reactions": [
+        "E+S>>ES",
+        "ES>>E+S",
+        "ES>>E+P",
+        "E+P>>ES"
+      ],
+      "source": "Feinberg (2019), Ch. 3",
+      "tags": [
+        "biology",
+        "enzyme",
+        "deficiency-zero"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 1,
+        "n_complexes": 5,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 2,
+        "n_reactions": 6,
+        "n_species": 3,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 1,
+          "nontrivial": true,
+          "nullity": 1,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 1,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 2,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 5,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "A <-> 2A, A + B <-> C <-> B. The standard bistable motif and the smallest familiar network of deficiency one: reversible, hence weakly reversible, yet outside the Deficiency Zero Theorem.",
+      "expected": {
+        "deficiency": 1,
+        "n_complexes": 5,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 2,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "mismatches": {},
+      "name": "edelstein",
+      "passed": true,
+      "reactions": [
+        "A>>2A",
+        "2A>>A",
+        "A+B>>C",
+        "C>>A+B",
+        "C>>B",
+        "B>>C"
+      ],
+      "source": "Edelstein, J. Theor. Biol. 29:57 (1970)",
+      "tags": [
+        "textbook",
+        "deficiency-one",
+        "bistable"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 1,
+        "n_complexes": 6,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 2,
+        "n_reactions": 6,
+        "n_species": 6,
+        "persistent": true,
+        "rank": 3,
+        "weakly_reversible": false
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 3,
+          "nontrivial": true,
+          "nullity": 3,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 1,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 3,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 3,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 3,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "One-site phosphorylation-dephosphorylation cycle with distinct kinase and phosphatase. The core motif of signal transduction; three conservation laws (kinase, phosphatase, substrate pools).",
+      "expected": {
+        "deficiency": 1,
+        "n_complexes": 6,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 2,
+        "persistent": true,
+        "rank": 3,
+        "weakly_reversible": false
+      },
+      "mismatches": {},
+      "name": "futile_cycle_1_site",
+      "passed": true,
+      "reactions": [
+        "S0+E>>S0E",
+        "S0E>>S0+E",
+        "S0E>>S1+E",
+        "S1+F>>S1F",
+        "S1F>>S1+F",
+        "S1F>>S0+F"
+      ],
+      "source": "Wang & Sontag, J. Math. Biol. 57:29 (2008)",
+      "tags": [
+        "biology",
+        "signalling",
+        "deficiency-one"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 2,
+        "n_complexes": 10,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 2,
+        "n_reactions": 12,
+        "n_species": 9,
+        "persistent": true,
+        "rank": 6,
+        "weakly_reversible": false
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 3,
+          "nontrivial": true,
+          "nullity": 3,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 2,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 3,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 6,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 6,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "Distributive two-site phosphorylation, the standard multistationarity example in signal transduction. Larger than the one-site cycle and a useful size check on complex extraction.",
+      "expected": {
+        "deficiency": 2,
+        "n_complexes": 10,
+        "n_conservation_laws": 3,
+        "n_linkage_classes": 2,
+        "persistent": true,
+        "rank": 6,
+        "weakly_reversible": false
+      },
+      "mismatches": {},
+      "name": "futile_cycle_2_site",
+      "passed": true,
+      "reactions": [
+        "S0+E>>S0E",
+        "S0E>>S0+E",
+        "S0E>>S1+E",
+        "S1+E>>S1E",
+        "S1E>>S1+E",
+        "S1E>>S2+E",
+        "S2+F>>S2F",
+        "S2F>>S2+F",
+        "S2F>>S1+F",
+        "S1+F>>S1F2",
+        "S1F2>>S1+F",
+        "S1F2>>S0+F"
+      ],
+      "source": "Wang & Sontag, J. Math. Biol. 57:29 (2008)",
+      "tags": [
+        "biology",
+        "signalling",
+        "multistationarity"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 1,
+        "n_complexes": 4,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 2,
+        "n_reactions": 2,
+        "n_species": 2,
+        "persistent": false,
+        "rank": 1,
+        "weakly_reversible": false
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 1,
+          "nontrivial": true,
+          "nullity": 1,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 1,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": false,
+        "rank_by_svd": 1,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "A + B -> 2B, B -> A. The minimal absolute-concentration-robustness motif: two complexes in the same linkage class differ in exactly one species, which is what makes B's steady-state concentration independent of total mass.",
+      "expected": {
+        "deficiency": 1,
+        "n_complexes": 4,
+        "n_conservation_laws": 1,
+        "n_linkage_classes": 2,
+        "persistent": false,
+        "rank": 1,
+        "weakly_reversible": false
+      },
+      "mismatches": {},
+      "name": "shinar_feinberg_acr",
+      "passed": true,
+      "reactions": [
+        "A+B>>2B",
+        "B>>A"
+      ],
+      "source": "Shinar & Feinberg, Science 327:1389 (2010)",
+      "tags": [
+        "biology",
+        "robustness",
+        "deficiency-one"
+      ]
+    },
+    {
+      "computed": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 0,
+        "n_linkage_classes": 1,
+        "n_reactions": 3,
+        "n_species": 2,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "crosscheck_failures": [],
+      "crosschecks": {
+        "conservation_laws": {
+          "count_matches_expected": true,
+          "count_matches_nullity": true,
+          "in_left_kernel": true,
+          "integral": true,
+          "n_reported": 0,
+          "nontrivial": true,
+          "nullity": 0,
+          "ok": true
+        },
+        "deficiency_by_rank_identity": 0,
+        "deficiency_identity": true,
+        "p_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 0,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        },
+        "persistence_by_brute_force": true,
+        "rank_by_svd": 2,
+        "t_semiflows": {
+          "in_kernel": true,
+          "integral": true,
+          "n_semiflows": 1,
+          "nonnegative": true,
+          "ok": true,
+          "supports_minimal": true
+        }
+      },
+      "description": "An open reactor: 0 -> A -> B -> 0. Exercises the zero complex, which must be treated as a complex like any other. Counting it is what makes the complex graph a cycle 0 -> A -> B -> 0, so the network is weakly reversible; dropping it would give the wrong verdict. There is no conservation law, and no siphon at all, so persistence holds vacuously.",
+      "expected": {
+        "deficiency": 0,
+        "n_complexes": 3,
+        "n_conservation_laws": 0,
+        "n_linkage_classes": 1,
+        "persistent": true,
+        "rank": 2,
+        "weakly_reversible": true
+      },
+      "mismatches": {},
+      "name": "open_inflow_outflow",
+      "passed": true,
+      "reactions": [
+        ">>A",
+        "A>>B",
+        "B>>"
+      ],
+      "source": "constructed (zero-complex handling)",
+      "tags": [
+        "regression",
+        "open-system"
+      ]
+    }
+  ],
+  "schema": "synkit.crn-validation/1",
+  "seconds": 0.07490569501533173,
+  "status": "PASS"
+}

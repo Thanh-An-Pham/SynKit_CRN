@@ -3,11 +3,37 @@
     "all_shared_structural_quantities_agree": true,
     "same_network_set": true
   },
-  "claim_boundary": "This is an interoperability and agreement check for quantities both tools expose. It is not an independent validation of SynKit-only siphon, trap, canonicalization, pathway, or rule-expansion operations.",
+  "claim_boundary": "SynKit 1.6.5 outputs are recomputed and compared with recorded CRNT4SBML outputs for byte-identical exported SBML inputs. The legacy CRNT4SBML interpreter was not rerun. This checks shared structural quantities, not the SynKit-only analyses or relative speed.",
   "environment": {
     "cpu_count": 22,
-    "git_commit": "22b007ed0d93755fcb95291784b39f96ced68e14",
-    "git_dirty": false,
+    "crn_backend": {
+      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
+      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "native_operations": {
+        "crnt": 12
+      },
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
     "machine": "x86_64",
     "networkx": "3.5",
     "numpy": "2.3.3",
@@ -16,7 +42,7 @@
     "python": "3.11.0",
     "rdkit": "2025.09.3",
     "scipy": "1.16.0",
-    "synkit": "1.6.2"
+    "synkit": "1.6.5"
   },
   "external_environment": {
     "crnt4sbml": "0.0.15",
@@ -24,6 +50,47 @@
     "networkx": "2.3",
     "numpy": "1.16.4",
     "python": "3.7.12"
+  },
+  "external_execution": {
+    "all_exported_input_hashes_match": true,
+    "interpreter_rerun": false,
+    "mode": "recorded_outputs_on_identical_sbml_inputs",
+    "reference_environment": {
+      "cpu_count": 22,
+      "crn_backend": {
+        "build_sha256": "9845e81c0f4fef0d2c589ca0176500511f8a9ec68c898d37b88ab7092655b0ce",
+        "capabilities": [
+          "closure",
+          "structural_sets",
+          "structural_unlimited",
+          "exhaustive_siphons",
+          "exact_semiflows",
+          "exact_algebra",
+          "crnt",
+          "pathway",
+          "symmetry"
+        ],
+        "library_path": "/tmp/synkit-crn-native/libsynkit_crn_9845e81c0f4fef0d.so",
+        "library_sha256": "cf7e45ac10609dea4d25813f32951853a55ec29f2674e009a78f550f36954d19",
+        "native_operations": {
+          "crnt": 12
+        },
+        "production_backend": "cpp"
+      },
+      "git_commit": "c31b47a1abd9adb1774849aded2cc7f86e29da55",
+      "git_dirty": true,
+      "machine": "x86_64",
+      "networkx": "3.6.1",
+      "numpy": "2.4.4",
+      "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+      "processor": null,
+      "python": "3.12.12",
+      "rdkit": "2026.03.1",
+      "scipy": "1.17.0",
+      "synkit": "1.6.3"
+    },
+    "reference_path": "reference-1.6.3/crn-external-crnt4sbml.json",
+    "reference_sha256": "441176aa3ea706cb754c36c97a80a2be6bfc4eb9188fa1af501371d6506c201b"
   },
   "external_tool": {
     "name": "CRNT4SBML",
@@ -411,6 +478,6 @@
     }
   ],
   "schema": "synkit.crn-external-crnt4sbml/1",
-  "seconds": 7.004875862010522,
+  "seconds": 0.0283077210187912,
   "status": "PASS"
 }

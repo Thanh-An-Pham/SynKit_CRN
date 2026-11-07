@@ -8,23 +8,19 @@ import json
 import sys
 from pathlib import Path
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
-if str(REPOSITORY_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPOSITORY_ROOT))
-
-from synkit.CRN.Benchmark import (  # noqa: E402
-    GLYCOLYSIS_FLUX,
-    analyze_kegg_module,
-    build_kegg_crn,
-)
-from synkit.CRN.Benchmark.kegg import _species_labels  # noqa: E402
-from synkit.CRN.Pathway.realizability import PathwayRealizability  # noqa: E402
-from synkit.CRN.Props.stoich import conserved_moieties  # noqa: E402
-
-
 def build_analysis() -> dict[str, object]:
     """Run the structural analysis and replay the returned certificate."""
-    crn = build_kegg_crn("M00001")
+    from Experiment.CRN.benchmarks import (
+        GLYCOLYSIS_FLUX,
+        analyze_kegg_module,
+        build_kegg_crn,
+    )
+    from Experiment.CRN.benchmarks.kegg import _species_labels
+    from Experiment.CRN.tools.common import environment
+    from synkit.CRN.Pathway.realizability import PathwayRealizability
+    from synkit.CRN.Props.stoich import conserved_moieties
+
+    crn = build_kegg_crn("M00001", drop_currency=True)
     summary = analyze_kegg_module("M00001")
 
     checker = PathwayRealizability().load_syncrn_and_flow(
@@ -94,6 +90,7 @@ def build_analysis() -> dict[str, object]:
         raise RuntimeError("certificate produced a negative species marking")
 
     return {
+        "environment": environment(),
         "module": {
             "species": summary.n_species,
             "reactions": summary.n_reactions,
@@ -171,14 +168,17 @@ def render_tex(data: dict[str, object]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", type=Path, required=True)
-    parser.add_argument("--tex", type=Path, required=True)
+    parser.add_argument("--tex", type=Path)
     args = parser.parse_args()
 
     data = build_analysis()
     args.json.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
-    args.tex.write_text(render_tex(data), encoding="utf-8")
+    if args.tex is not None:
+        args.tex.write_text(render_tex(data), encoding="utf-8")
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    from Experiment.CRN.tools.common import native_experiment
+
+    raise SystemExit(native_experiment(main)())

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/lolo/Documents/TACsy/paper/SynKit_CRN/analysis/scripts/formose_synkit_variants.py", line 77, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/home/lolo/Documents/TACsy/paper/SynKit_CRN/analysis/scripts/formose_synkit_variants.py", line 49, in main
+    graph=builder.build(inputs['seeds'])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/Documents/TACsy/SynEco/SynKit/synkit/CRN/Construct/builder.py", line 310, in build
+    tasks = self._make_tasks_for_step(pool_keys, frontier_keys)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lolo/Documents/TACsy/SynEco/SynKit/synkit/CRN/Construct/builder.py", line 467, in _make_tasks_for_step
+    tasks.append(task)
+MemoryError

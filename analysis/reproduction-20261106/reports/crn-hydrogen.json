@@ -1,0 +1,678 @@
+{
+  "balance_cases": [
+    {
+      "explicit": {
+        "n_balanced": 0,
+        "n_reactions": 1,
+        "reactions": [
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "CC",
+              "O"
+            ],
+            "reactants": [
+              "CC",
+              "[OH]"
+            ],
+            "rule_index": 0
+          }
+        ],
+        "rule_models": [
+          "explicit"
+        ]
+      },
+      "label": "H-atom transfer",
+      "lewis": {
+        "n_balanced": 1,
+        "n_reactions": 1,
+        "reactions": [
+          {
+            "imbalance": {},
+            "products": [
+              "O",
+              "[CH2]C"
+            ],
+            "reactants": [
+              "CC",
+              "[OH]"
+            ],
+            "rule_index": 0
+          }
+        ],
+        "rule_models": [
+          "lewis"
+        ]
+      },
+      "name": "hydrogen_atom_transfer",
+      "repeats": 1,
+      "rules": [
+        "[C:1][H:2].[O:3]>>[C:1].[O:3][H:2]"
+      ],
+      "seeds": [
+        "CC",
+        "[OH]"
+      ]
+    },
+    {
+      "explicit": {
+        "n_balanced": 0,
+        "n_reactions": 0,
+        "reactions": [],
+        "rule_models": [
+          "explicit",
+          "explicit"
+        ]
+      },
+      "label": "Proton transfer",
+      "lewis": {
+        "n_balanced": 4,
+        "n_reactions": 4,
+        "reactions": [
+          {
+            "imbalance": {},
+            "products": [
+              "CC(=O)O",
+              "CN"
+            ],
+            "reactants": [
+              "CC(=O)[O-]",
+              "C[NH3+]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "CC(=O)O",
+              "N"
+            ],
+            "reactants": [
+              "CC(=O)[O-]",
+              "[NH4+]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "CC(=O)[O-]",
+              "C[NH3+]"
+            ],
+            "reactants": [
+              "CC(=O)O",
+              "CN"
+            ],
+            "rule_index": 1
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "CC(=O)[O-]",
+              "[NH4+]"
+            ],
+            "reactants": [
+              "CC(=O)O",
+              "N"
+            ],
+            "rule_index": 1
+          }
+        ],
+        "rule_models": [
+          "lewis",
+          "lewis"
+        ]
+      },
+      "name": "proton_transfer",
+      "repeats": 2,
+      "rules": [
+        "[N+:1][H:2].[O-:3]>>[N:1].[O:3][H:2]",
+        "[N:1].[O:3][H:2]>>[N+:1][H:2].[O-:3]"
+      ],
+      "seeds": [
+        "C[NH3+]",
+        "CC(=O)[O-]",
+        "[NH4+]"
+      ]
+    },
+    {
+      "explicit": {
+        "n_balanced": 0,
+        "n_reactions": 12,
+        "reactions": [
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "O=CC[CH2][Pd]"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH]([Pd])C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd][CH2]CC=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "C[CH]([Pd])C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd][CH](C)C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "C[CH]([Pd])C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "O=CC[CH2][Pd][CH2]CC=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=CC[CH2][Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd][CH2]CC=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=CC[CH2][Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd]([CH2]CC=O)[CH2]CC=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "C[CH](C=O)[Pd][CH2]CC=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd]([CH2]CC=O)[CH](C)C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "C[CH](C=O)[Pd][CH2]CC=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd]([CH2]CC=O)[CH](C)C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "C[CH](C=O)[Pd][CH](C)C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd]([CH](C)C=O)[CH](C)C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "C[CH](C=O)[Pd][CH](C)C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "O=CC[CH2][Pd]([CH2]CC=O)[CH2]CC=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=CC[CH2][Pd][CH2]CC=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {
+              "H": 1
+            },
+            "products": [
+              "C[CH](C=O)[Pd]([CH2]CC=O)[CH2]CC=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=CC[CH2][Pd][CH2]CC=O"
+            ],
+            "rule_index": 0
+          }
+        ],
+        "rule_models": [
+          "explicit",
+          "explicit"
+        ]
+      },
+      "label": "Incomplete insertion rule",
+      "lewis": {
+        "n_balanced": 18,
+        "n_reactions": 18,
+        "reactions": [
+          {
+            "imbalance": {},
+            "products": [
+              "O=C[CH][CH2][Pd]"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH]([Pd])C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "O=C[CH][CH2][Pd][CH2][CH]C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=C[CH][CH2][Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd][CH2][CH]C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=C[CH][CH2][Pd]"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd][CH2][CH]C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[CH2][CH]([Pd])C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd][CH]([CH2])C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[CH2][CH]([Pd])C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "C=CC=O",
+              "[Pd]"
+            ],
+            "reactants": [
+              "O=C[CH][CH2][Pd]"
+            ],
+            "rule_index": 1
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "C=CC=O",
+              "[Pd]"
+            ],
+            "reactants": [
+              "[CH2][CH]([Pd])C=O"
+            ],
+            "rule_index": 1
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "O=C[CH][CH2][Pd]([CH2][CH]C=O)[CH2][CH]C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=C[CH][CH2][Pd][CH2][CH]C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd]([CH2][CH]C=O)[CH2][CH]C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "O=C[CH][CH2][Pd][CH2][CH]C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd]([CH2][CH]C=O)[CH2][CH]C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[CH2][CH](C=O)[Pd][CH2][CH]C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd]([CH2][CH]C=O)[CH]([CH2])C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[CH2][CH](C=O)[Pd][CH2][CH]C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd]([CH2][CH]C=O)[CH]([CH2])C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[CH2][CH](C=O)[Pd][CH]([CH2])C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "[CH2][CH](C=O)[Pd]([CH]([CH2])C=O)[CH]([CH2])C=O"
+            ],
+            "reactants": [
+              "C=CC=O",
+              "[CH2][CH](C=O)[Pd][CH]([CH2])C=O"
+            ],
+            "rule_index": 0
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "C=CC=O",
+              "O=C[CH][CH2][Pd]"
+            ],
+            "reactants": [
+              "O=C[CH][CH2][Pd][CH2][CH]C=O"
+            ],
+            "rule_index": 1
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "C=CC=O",
+              "O=C[CH][CH2][Pd]"
+            ],
+            "reactants": [
+              "[CH2][CH](C=O)[Pd][CH2][CH]C=O"
+            ],
+            "rule_index": 1
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "C=CC=O",
+              "[CH2][CH]([Pd])C=O"
+            ],
+            "reactants": [
+              "[CH2][CH](C=O)[Pd][CH2][CH]C=O"
+            ],
+            "rule_index": 1
+          },
+          {
+            "imbalance": {},
+            "products": [
+              "C=CC=O",
+              "[CH2][CH]([Pd])C=O"
+            ],
+            "reactants": [
+              "[CH2][CH](C=O)[Pd][CH]([CH2])C=O"
+            ],
+            "rule_index": 1
+          }
+        ],
+        "rule_models": [
+          "lewis",
+          "lewis"
+        ]
+      },
+      "name": "incomplete_insertion",
+      "repeats": 3,
+      "rules": [
+        "[C:1]=[C:2].[Pd:3]>>[C:1]([Pd:3])[C:2]",
+        "[C:1]([Pd:3])[C:2]>>[C:1]=[C:2].[Pd:3]"
+      ],
+      "seeds": [
+        "C=CC=O",
+        "[Pd]"
+      ]
+    }
+  ],
+  "checks": {
+    "formose_identical_at_every_depth": true,
+    "formose_rules_compiled_to_lewis": true,
+    "lewis_faster_at_deepest_formose": true,
+    "lewis_reactions_all_balanced": true
+  },
+  "claim_boundary": "Balance checks concern atom and charge conservation of the generated reactions. They do not assess whether a rule or its products are chemically plausible; the incomplete insertion rule is deliberately underspecified.",
+  "environment": {
+    "cpu_count": 22,
+    "crn_backend": {
+      "build_sha256": "2769128e2e4e759b65f53da4ca7a8052272468f6372a6b873c2a0c3c03c8600f",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/synkit-crn-safe-reproduction-20261106/native/libsynkit_crn_2769128e2e4e759b.so",
+      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
+      "native_operations": {
+        "native_rule_expansion": 14
+      },
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/synkit-crn-safe-reproduction-20261106/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "de3c2c8b3ce0354a306232d0ee413a49ed25e3cb71f997e0723e7752b660182c",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
+    "machine": "x86_64",
+    "networkx": "3.6.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.11.0",
+    "rdkit": "2025.09.3",
+    "scipy": "1.16.3",
+    "synkit": "1.6.5"
+  },
+  "formose": [
+    {
+      "depth": 4,
+      "explicit": {
+        "lewis_rejected": 0,
+        "match_outcomes": 52,
+        "n_reactions": 44,
+        "n_species": 37,
+        "rule_applications": 30,
+        "rule_models": [
+          "explicit",
+          "explicit",
+          "explicit",
+          "explicit"
+        ],
+        "seconds": 0.017461690003983676
+      },
+      "identical": true,
+      "lewis": {
+        "lewis_rejected": 0,
+        "match_outcomes": 51,
+        "n_reactions": 44,
+        "n_species": 37,
+        "rule_applications": 30,
+        "rule_models": [
+          "lewis",
+          "lewis",
+          "lewis",
+          "lewis"
+        ],
+        "seconds": 0.00885287401615642
+      },
+      "speedup": 1.9724317743725077
+    },
+    {
+      "depth": 5,
+      "explicit": {
+        "lewis_rejected": 0,
+        "match_outcomes": 418,
+        "n_reactions": 371,
+        "n_species": 302,
+        "rule_applications": 214,
+        "rule_models": [
+          "explicit",
+          "explicit",
+          "explicit",
+          "explicit"
+        ],
+        "seconds": 0.176355000003241
+      },
+      "identical": true,
+      "lewis": {
+        "lewis_rejected": 0,
+        "match_outcomes": 409,
+        "n_reactions": 371,
+        "n_species": 302,
+        "rule_applications": 214,
+        "rule_models": [
+          "lewis",
+          "lewis",
+          "lewis",
+          "lewis"
+        ],
+        "seconds": 0.10909913000068627
+      },
+      "speedup": 1.6164656858595634
+    },
+    {
+      "depth": 6,
+      "explicit": {
+        "lewis_rejected": 0,
+        "match_outcomes": 12134,
+        "n_reactions": 11239,
+        "n_species": 10572,
+        "rule_applications": 6098,
+        "rule_models": [
+          "explicit",
+          "explicit",
+          "explicit",
+          "explicit"
+        ],
+        "seconds": 9.031554331973894
+      },
+      "identical": true,
+      "lewis": {
+        "lewis_rejected": 0,
+        "match_outcomes": 12099,
+        "n_reactions": 11239,
+        "n_species": 10572,
+        "rule_applications": 6098,
+        "rule_models": [
+          "lewis",
+          "lewis",
+          "lewis",
+          "lewis"
+        ],
+        "seconds": 5.874578799994197
+      },
+      "speedup": 1.5373960652264662
+    }
+  ],
+  "schema": "synkit.crn-hydrogen/1",
+  "status": "PASS"
+}

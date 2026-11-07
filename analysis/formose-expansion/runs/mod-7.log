@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/lolo/Documents/TACsy/paper/SynKit_CRN/analysis/scripts/formose_expansion_worker.py", line 146, in <module>
+    run(p.parse_args())
+  File "/home/lolo/Documents/TACsy/paper/SynKit_CRN/analysis/scripts/formose_expansion_worker.py", line 101, in run
+    builder.execute(strat, verbosity=0)
+  File "/tmp/formose-mod-env/lib/mod/__init__.py", line 438, in execute
+    return self._builder.execute(strategy, verbosity=verbosity, ignoreRuleLabelTypes=ignoreRuleLabelTypes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/formose-mod-env/lib/mod/__init__.py", line 383, in _DGBuilder_execute
+    return _DGBuilder_execute_orig(self, dgStrat(strategy), verbosity, ignoreRuleLabelTypes)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+MemoryError

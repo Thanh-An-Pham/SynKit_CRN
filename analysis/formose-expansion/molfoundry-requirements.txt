@@ -1,0 +1,14 @@
+certifi==2026.10.23
+charset-normalizer==3.5.2
+idna==3.20
+molfoundry==0.1.11
+mpmath==1.3.0
+networkx==3.7
+numpy==2.5.4
+pillow==13.0.0
+rdkit==2026.9.1
+requests==2.34.2
+scipy==1.18.1
+sympy==1.14.0
+urllib3==2.8.0
+z3-solver==5.3.3.0

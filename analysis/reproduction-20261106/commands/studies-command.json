@@ -1,0 +1,14 @@
+[
+  "/home/lolo/miniforge3/envs/synedu/bin/python",
+  "/home/lolo/Documents/TACsy/SynEco/SynKit/Experiment/CRN/run_all.py",
+  "--with-biomodels",
+  "--offline",
+  "--output-dir",
+  "/tmp/synkit-crn-safe-reproduction-20261106",
+  "--summary",
+  "/tmp/synkit-crn-safe-reproduction-20261106/summary.json",
+  "--native-build-dir",
+  "/tmp/synkit-crn-safe-reproduction-20261106/native",
+  "--rdkit-dir",
+  "/home/lolo/.cache/synkit/rdkit-cpp-2026.03.1"
+]

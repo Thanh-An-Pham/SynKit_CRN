@@ -191,6 +191,7 @@
     "n_species": 37
   },
   "checks": {
+    "all_structural_analyses_complete": true,
     "conservation_law_is_carbon_count": true,
     "deficiency_identity_holds": true,
     "iteration_4_size_is_stable": true,
@@ -201,8 +202,38 @@
   "claim_boundary": "The expansion enumerates rule applications; it does not model kinetics, selectivity, thermodynamic favourability or yield. Recovering carbon conservation is a statement about the generated stoichiometry, not evidence about prebiotic plausibility.",
   "environment": {
     "cpu_count": 22,
-    "git_commit": "22b007ed0d93755fcb95291784b39f96ced68e14",
-    "git_dirty": false,
+    "crn_backend": {
+      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
+      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "native_operations": {
+        "crnt": 1,
+        "matrix": 1,
+        "native_rule_expansion": 4,
+        "semiflows": 3,
+        "structural_sets": 3
+      },
+      "production_backend": "cpp"
+    },
+    "crn_expander": {
+      "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
+      "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
+      "rdkit_cpp_version": "2026.03.1"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
     "machine": "x86_64",
     "networkx": "3.5",
     "numpy": "2.3.3",
@@ -211,32 +242,198 @@
     "python": "3.11.0",
     "rdkit": "2025.09.3",
     "scipy": "1.16.0",
-    "synkit": "1.6.2"
+    "synkit": "1.6.5"
   },
   "growth": [
     {
+      "hydrogen_model": "lewis",
       "iteration": 1,
       "n_reactions": 1,
       "n_species": 3,
-      "seconds": 0.04962455699569546
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 1,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "lewis_rejected": 0,
+          "outcomes": 1,
+          "pool": 2,
+          "seen_mixtures": 0,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        }
+      ],
+      "rule_backend": "native",
+      "seconds": 0.029007648001424968
     },
     {
+      "hydrogen_model": "lewis",
       "iteration": 2,
       "n_reactions": 4,
       "n_species": 5,
-      "seconds": 0.07856947398977354
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 1,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "lewis_rejected": 0,
+          "outcomes": 1,
+          "pool": 2,
+          "seen_mixtures": 0,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        },
+        {
+          "applications": 3,
+          "bindings": 5,
+          "candidate_mixtures": 3,
+          "capped_rules": [],
+          "events": 3,
+          "frontier": 1,
+          "lewis_rejected": 0,
+          "outcomes": 6,
+          "pool": 3,
+          "seen_mixtures": 0,
+          "step": 2,
+          "task_budget_exhausted": false,
+          "tasks": 3
+        }
+      ],
+      "rule_backend": "native",
+      "seconds": 0.002711687993723899
     },
     {
+      "hydrogen_model": "lewis",
       "iteration": 3,
       "n_reactions": 10,
       "n_species": 9,
-      "seconds": 0.12213923002127558
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 1,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "lewis_rejected": 0,
+          "outcomes": 1,
+          "pool": 2,
+          "seen_mixtures": 0,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        },
+        {
+          "applications": 3,
+          "bindings": 5,
+          "candidate_mixtures": 3,
+          "capped_rules": [],
+          "events": 3,
+          "frontier": 1,
+          "lewis_rejected": 0,
+          "outcomes": 6,
+          "pool": 3,
+          "seen_mixtures": 0,
+          "step": 2,
+          "task_budget_exhausted": false,
+          "tasks": 3
+        },
+        {
+          "applications": 6,
+          "bindings": 11,
+          "candidate_mixtures": 6,
+          "capped_rules": [],
+          "events": 6,
+          "frontier": 2,
+          "lewis_rejected": 0,
+          "outcomes": 8,
+          "pool": 5,
+          "seen_mixtures": 0,
+          "step": 3,
+          "task_budget_exhausted": false,
+          "tasks": 6
+        }
+      ],
+      "rule_backend": "native",
+      "seconds": 0.003992890007793903
     },
     {
+      "hydrogen_model": "lewis",
       "iteration": 4,
       "n_reactions": 44,
       "n_species": 37,
-      "seconds": 0.2804255800147075
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 1,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "lewis_rejected": 0,
+          "outcomes": 1,
+          "pool": 2,
+          "seen_mixtures": 0,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        },
+        {
+          "applications": 3,
+          "bindings": 5,
+          "candidate_mixtures": 3,
+          "capped_rules": [],
+          "events": 3,
+          "frontier": 1,
+          "lewis_rejected": 0,
+          "outcomes": 6,
+          "pool": 3,
+          "seen_mixtures": 0,
+          "step": 2,
+          "task_budget_exhausted": false,
+          "tasks": 3
+        },
+        {
+          "applications": 6,
+          "bindings": 11,
+          "candidate_mixtures": 6,
+          "capped_rules": [],
+          "events": 6,
+          "frontier": 2,
+          "lewis_rejected": 0,
+          "outcomes": 8,
+          "pool": 5,
+          "seen_mixtures": 0,
+          "step": 3,
+          "task_budget_exhausted": false,
+          "tasks": 6
+        },
+        {
+          "applications": 20,
+          "bindings": 33,
+          "candidate_mixtures": 20,
+          "capped_rules": [],
+          "events": 34,
+          "frontier": 4,
+          "lewis_rejected": 0,
+          "outcomes": 36,
+          "pool": 9,
+          "seen_mixtures": 0,
+          "step": 4,
+          "task_budget_exhausted": false,
+          "tasks": 20
+        }
+      ],
+      "rule_backend": "native",
+      "seconds": 0.010358861007262021
     }
   ],
   "inputs": {
@@ -281,18 +478,18 @@
     "n_minimal_p_semiflows": 1,
     "n_minimal_siphons": 2,
     "n_minimal_t_semiflows": 7,
-    "n_minimal_traps": 15,
+    "n_minimal_traps": 28,
     "n_reactions": 44,
     "n_species": 37,
     "n_terminal_strong_linkage_classes": 29,
-    "persistence_seconds": 2.8179108400072437,
+    "persistence_seconds": 0.007447151991073042,
     "persistent": false,
     "rank": 36,
     "reversible": false,
     "right_nullity": 8,
-    "siphon_seconds": 1.6674715720000677,
-    "t_semiflow_seconds": 0.16080096599762328,
-    "trap_seconds": 1.326831526006572,
+    "siphon_seconds": 0.001517067983513698,
+    "t_semiflow_seconds": 0.005973567982437089,
+    "trap_seconds": 0.0014064289862290025,
     "weakly_reversible": false
   }
 }

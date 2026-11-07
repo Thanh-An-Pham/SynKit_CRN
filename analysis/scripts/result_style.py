@@ -5,37 +5,69 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 from matplotlib.patches import FancyArrowPatch, Circle
 from matplotlib.path import Path as MarkerPath
 from matplotlib.transforms import offset_copy
 
-INK = "#193342"
-BLUE = "#0072B2"
-GREEN = "#008564"
-ORANGE = "#B57A00"
-RED = "#C34724"
-GRAY = "#667680"
-HAIR = "#DCE5E9"
-PALE = "#F0F5F7"
+# Result figures are black and white, after the plain style of the keriso
+# paper: one ink, two grays, series told apart by marker shape and dashing.
+# Only the visual abstract (visual_abstract.py) keeps its own colours.
+INK = "black"
+BLUE = "black"      # method / measured series
+GREEN = "black"     # verified result (shape, not colour, carries it)
+ORANGE = "#4D4D4D"  # phosphorus and highlighted participants
+RED = "black"
+GRAY = "#7F7F7F"    # baseline, structure, failed cases
+HAIR = "#BFBFBF"
+PALE = "#E6E6E6"
+SERIF = "CMU Serif"
 
 
 def configure():
+    """Serif text as in the manuscript, boxed axes, inward ticks on all sides."""
     plt.rcParams.update(
         {
-            "font.family": "DejaVu Sans",
+            "font.family": SERIF,
+            "mathtext.fontset": "cm",
             "font.size": 9,
             "axes.labelsize": 9,
-            "xtick.labelsize": 8,
-            "ytick.labelsize": 8,
-            "pdf.fonttype": 42,
+            "xtick.labelsize": 8.5,
+            "ytick.labelsize": 8.5,
+            "legend.fontsize": 8.5,
+            # CMU Serif is a CFF font: Type 3 embeds it cleanly, Type 42 does not.
+            "pdf.fonttype": 3,
             "svg.fonttype": "none",
-            "text.color": INK,
-            "axes.labelcolor": INK,
-            "xtick.color": GRAY,
-            "ytick.color": GRAY,
-            "axes.spines.top": False,
-            "axes.spines.right": False,
-            "axes.edgecolor": HAIR,
+            "text.color": "black",
+            "axes.labelcolor": "black",
+            "axes.edgecolor": "black",
+            "axes.linewidth": 0.5,
+            "axes.spines.top": True,
+            "axes.spines.right": True,
+            "axes.grid": False,
+            "axes.unicode_minus": True,
+            "xtick.color": "black",
+            "ytick.color": "black",
+            "xtick.direction": "in",
+            "ytick.direction": "in",
+            "xtick.top": True,
+            "ytick.right": True,
+            "xtick.major.size": 3,
+            "ytick.major.size": 3,
+            "xtick.minor.size": 1.5,
+            "ytick.minor.size": 1.5,
+            "xtick.major.width": 0.5,
+            "ytick.major.width": 0.5,
+            "xtick.minor.width": 0.4,
+            "ytick.minor.width": 0.4,
+            "lines.linewidth": 0.8,
+            "lines.markersize": 4,
+            "legend.frameon": True,
+            "legend.edgecolor": "black",
+            "legend.fancybox": False,
+            "legend.framealpha": 1,
+            "patch.linewidth": 0.5,
+            "hatch.linewidth": 0.5,
             "savefig.bbox": None,
         }
     )
@@ -44,7 +76,7 @@ def configure():
 def heading(ax, letter, title, y=1.06):
     """Panel header: an ink badge carrying the letter, then the title.
 
-    The badge is the shared panel marker of the manuscript (Figure/synstyle.tex):
+    The badge is the shared panel marker of the manuscript (paper_layout.tex):
     panel identity is encoded by the letter, not by colour alone, so the header
     survives greyscale printing.  Both pieces are offset from the axes origin in
     points, so the badge clears the figure edge whatever the axes width is.
@@ -78,34 +110,70 @@ def heading(ax, letter, title, y=1.06):
     )
 
 
-def plain_heading(ax, letter, title, y=1.06):
-    """Plain bold lowercase panel letter followed by its title."""
+def sans_family():
+    """Arial where installed, otherwise its metric-compatible Liberation Sans."""
+    for name in ("Arial", "Liberation Sans"):
+        try:
+            font_manager.findfont(name, fallback_to_default=False)
+            return name
+        except ValueError:
+            pass
+    raise ValueError("Install Arial or Liberation Sans")
+
+
+def use_sans():
+    """Arial labels for the visual abstract, the one colour figure."""
+    name = sans_family()
+    plt.rcParams.update({
+        "font.family": name,
+        "mathtext.fontset": "custom",
+        "mathtext.rm": name,
+        "mathtext.it": f"{name}:italic",
+        "mathtext.bf": f"{name}:bold",
+        "mathtext.sf": name,
+    })
+
+
+def plain_heading(ax, letter, *args, y=1.06, x=0, **kwargs):
+    """Plain parenthesized panel letter, "(a)". The caption names the panel."""
+    if args and isinstance(args[0], (int, float)):
+        y = args[0]
+    if "y" in kwargs:
+        y = kwargs["y"]
+    if "x" in kwargs:
+        x = kwargs["x"]
     ax.text(
-        0, y, letter.lower(), transform=ax.transAxes,
-        ha="left", va="bottom", fontsize=11, weight="bold",
+        x, y, f"({letter.lower()})", transform=ax.transAxes,
+        ha="left", va="bottom", fontsize=9.5,
         color="black", clip_on=False,
     )
-    title_at = offset_copy(ax.transAxes, fig=ax.figure, x=14, units="points")
+
+
+def inset_label(ax, letter, x=0.03, y=0.96):
+    """Panel letter inside the upper-left corner of a boxed plot."""
     ax.text(
-        0, y, title, transform=title_at,
-        ha="left", va="bottom", fontsize=10, weight="bold",
-        color="black", clip_on=False,
+        x, y, f"({letter.lower()})", transform=ax.transAxes,
+        ha="left", va="top", fontsize=9.5, color="black",
     )
 
 
 def clean(ax, grid="y"):
-    ax.grid(axis=grid, color=HAIR, lw=0.6, zorder=0)
-    ax.set_axisbelow(True)
-    ax.spines[["top", "right"]].set_visible(False)
+    """Boxed axes without grid lines."""
+    ax.grid(False)
+    ax.spines[:].set_visible(True)
 
 
 def arrow(ax, a, b, color=GRAY, lw=1.1, rad=0, shrink=0):
+    # Schematic arrows print as thin black lines; other colours are kept.
+    if color == GRAY:
+        color = "black"
+    lw = min(lw, 0.75)
     ax.add_patch(
         FancyArrowPatch(
             a,
             b,
             arrowstyle="-|>",
-            mutation_scale=10,
+            mutation_scale=8,
             linewidth=lw,
             color=color,
             connectionstyle=f"arc3,rad={rad}",
@@ -116,7 +184,9 @@ def arrow(ax, a, b, color=GRAY, lw=1.1, rad=0, shrink=0):
 
 
 def verdict(ax, x, y, ok, size=11, vector=False):
-    # Shape and text encode status as well as colour.
+    # Shape encodes status. The serif face lacks a check glyph, so the marks
+    # are always drawn as paths.
+    vector = True
     if vector:
         # Arial lacks a checkmark glyph, so draw the symbol directly.
         if ok:
@@ -125,7 +195,7 @@ def verdict(ax, x, y, ok, size=11, vector=False):
                        facecolor="none", edgecolor=GREEN, linewidths=1.3)
         else:
             ax.scatter(x, y, marker="x", s=size**2 * 0.45,
-                       color=RED, linewidths=1.3)
+                       color=GRAY, linewidths=1.3)
         return
     ax.text(
         x,
@@ -133,7 +203,7 @@ def verdict(ax, x, y, ok, size=11, vector=False):
         "✓" if ok else "×",
         ha="center",
         va="center",
-        color=GREEN if ok else RED,
+        color=GREEN if ok else GRAY,
         fontsize=size,
         weight="bold",
     )

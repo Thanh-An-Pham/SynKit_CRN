@@ -1,0 +1,3 @@
+/home/lolo/miniforge3/envs/synedu/lib/python3.11/site-packages/rxnmapper/batched_mapper.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+PASS: fresh isolated CRNT4SBML run agrees on 12 networks and 8 shared quantities

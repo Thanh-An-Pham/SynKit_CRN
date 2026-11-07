@@ -1,0 +1,1 @@
+Hit MOZ_CRASH([unhandlable oom] Nursery::maybeMoveRawBufferOnPromotion) at /__w/PythonMonkey/PythonMonkey/firefox-source/js/src/vm/JSContext.cpp:1364
