@@ -48,7 +48,7 @@ def render_visual_abstract(out):
     central_offset_y = connector_y - 5.65
     fig, ax = plt.subplots(figsize=(7.2, 4.65))
     fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
-    ax.set(xlim=(0, 16.5), ylim=(central_offset_y + 0.95, 9.25), aspect="equal")
+    ax.set(xlim=(0, 16.5), ylim=(central_offset_y + 0.95, 8.55), aspect="equal")
     ax.axis("off")
 
     def label(x, y, value, size=10, color=INK, weight="normal", ha="center"):
@@ -115,7 +115,7 @@ def render_visual_abstract(out):
         (4.55, 11.05, "Represent"),
         (12.3, 16.35, "Analyze"),
     ):
-        label((x0 + x1) / 2, 8.75, head, 11, INK, "bold")
+        label((x0 + x1) / 2, 8.10, head, 11, INK, "bold")
 
     # Curated pathway database: a cylinder containing a branching pathway.
     x, y = 1.75, 6.95

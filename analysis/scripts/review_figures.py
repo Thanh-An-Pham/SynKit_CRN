@@ -19,7 +19,6 @@ def render_tables(e):
     """Return numerical macro and table text for embedding in the manuscripts."""
     review = load(e / "crn-review-experiments.json", "synkit.crn-representation/1")
     archived = load(e / "crn-scaling.json", "synkit.crn-scaling/1")
-    formose = load(e / "crn-formose.json", "synkit.crn-formose/1")
     supplement = load(e / "crn-supplement-audit.json", "synkit.crn-supplementary/1")
     tables = {}
     last = {
@@ -76,18 +75,7 @@ def render_tables(e):
         ("ReviewBioModelMoietySeconds", "moiety_seconds"),
     ):
         macros += "\\newcommand{\\%s}{%.3g}\n" % (name, largest[field])
-    macros += "\\newcommand{\\ReviewFormoseGenerationSeconds}{%.3g}\n" % next(
-        row["seconds"] for row in formose["growth"] if row["iteration"] == 4
-    )
     tables["crn-review-macros.tex"] = (macros)
-    rows = [
-        f"{r['iteration']} & {r['n_species']} & {r['n_reactions']} & {r['seconds']:.3f}"
-        for r in formose["growth"]
-    ]
-    tables["crn-formose-growth.tex"] = (
-        "% Generated from crn-formose.json.\n"
-        + "".join(row + " " + chr(92) * 2 + "\n" for row in rows)
-    )
     aliases = {
         "reversible_isomerization": "Reversible isomerization",
         "irreversible_isomerization": "Irreversible isomerization",

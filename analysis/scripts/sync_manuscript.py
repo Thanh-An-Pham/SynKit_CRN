@@ -131,7 +131,6 @@ def generated_blocks(paper=PAPER):
             "glycolysis-flux": glycolysis_flux_table(read("crn-kegg.json")),
             "glycolysis-participant-control": glycolysis_participant_table(read("crn-review-experiments.json")),
             "glycolysis-currency-control": glycolysis_currency_table(read("crn-review-experiments.json")),
-            "formose-growth": tables["crn-formose-growth.tex"],
             "formose-routes": formose_route_table(read("crn-supplement-audit.json")),
             "formose-inventories": formose_inventory_table(read("crn-supplement-audit.json")),
         },

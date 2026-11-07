@@ -140,7 +140,7 @@ def verify_document_content():
         "Computational cost across network families",
         "BioModels: structural SBML interoperability",
         "KEGG: module structure and glycolysis controls",
-        "Formose: carbon conservation and precursor requirements",
+        "Formose networks: expansion and precursor requirements",
     ]
     for obsolete in (
         "tab:glycolysis_full_reactions", "tab:glycolysis_species_map",

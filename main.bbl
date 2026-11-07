@@ -1,4 +1,4 @@
-\begin{thebibliography}{40}
+\begin{thebibliography}{42}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -48,7 +48,7 @@ Feinberg M (1987) Chemical reaction network structure and the stability of
 
 \bibitem[{Gunawardena(2003)}]{gunawardena2003crnt}
 Gunawardena J (2003) Chemical reaction network theory for in-silico biologists.
-  \url{https://vcp.upf.edu/papers/crnt.pdf}, preprint
+  \url{https://vcp.med.harvard.edu/papers/crnt.pdf}, preprint
 
 \bibitem[{Andersen et~al(2023)Andersen, Banke, Fagerberg, Flamm, Merkle, and
   Stadler}]{andersen2023realisability}
@@ -73,11 +73,6 @@ Ebrahim A, Lerman JA, Palsson BO, Hyduke DR (2013) {COBRApy}:
 \bibitem[{Orth et~al(2010)Orth, Thiele, and Palsson}]{orth2010fba}
 Orth JD, Thiele I, Palsson B{\O} (2010) What is flux balance analysis? Nature
   Biotechnology 28(3):245--248, \doi{10.1038/nbt.1614}
-
-\bibitem[{Schuster and Hilgetag(1994)}]{schuster1994efm}
-Schuster S, Hilgetag C (1994) On elementary flux modes in biochemical reaction
-  systems at steady state. Journal of Biological Systems 2(02):165--182,
-  \doi{10.1142/S0218339094000131}
 
 \bibitem[{Reyes et~al(2020)Reyes, Otero-Muras, Shuen, Tartakovsky, and
   Petyuk}]{reyes2020crnt4sbml}
@@ -140,6 +135,11 @@ Phan TL, Gonz{\'a}lez~Laffitte ME, Weinbauer K, Merkle D, Andersen JL,
   framework for rule-based reaction modeling and analysis. Journal of Chemical
   Information and Modeling 65(24):13,012--13,019,
   \doi{10.1021/acs.jcim.5c02123}
+
+\bibitem[{Hagberg et~al(2008)Hagberg, Swart, and Schult}]{hagberg2008networkx}
+Hagberg A, Swart PJ, Schult DA (2008) Exploring network structure, dynamics,
+  and function using {NetworkX}. In: Proceedings of the Python in Science
+  Conference, pp 11--15, \doi{10.25080/TCWV9851}
 
 \bibitem[{M{\"u}ller et~al(2022)M{\"u}ller, Flamm, and
   Stadler}]{muller2022chemical}
@@ -242,5 +242,18 @@ Malik-Sheriff RS, Glont M, Nguyen TVN, Tiwari K, Roberts MG, Xavier A, Vu MT,
 Phan TL, Weinbauer K (2026) {SynKit}, version 1.6.5.
   \url{https://github.com/TieuLongPhan/SynKit/releases/tag/v1.6.5}, released 30
   October 2026
+
+\bibitem[{Harris et~al(2020)Harris, Millman, van~der Walt, Gommers, Virtanen,
+  Cournapeau, Wieser, Taylor, Berg, Smith et~al}]{harris2020numpy}
+Harris CR, Millman KJ, van~der Walt SJ, Gommers R, Virtanen P, Cournapeau D,
+  Wieser E, Taylor J, Berg S, Smith NJ, et~al (2020) Array programming with
+  {NumPy}. Nature 585(7825):357--362, \doi{10.1038/s41586-020-2649-2}
+
+\bibitem[{Virtanen et~al(2020)Virtanen, Gommers, Oliphant, Haberland, Reddy,
+  Cournapeau, Burovski, Peterson, Weckesser, Bright et~al}]{virtanen2020scipy}
+Virtanen P, Gommers R, Oliphant TE, Haberland M, Reddy T, Cournapeau D,
+  Burovski E, Peterson P, Weckesser W, Bright J, et~al (2020) {SciPy} 1.0:
+  fundamental algorithms for scientific computing in {P}ython. Nature Methods
+  17(3):261--272, \doi{10.1038/s41592-019-0686-2}
 
 \end{thebibliography}

@@ -144,7 +144,7 @@
 
 \begin{document}
 
-\title[Supplementary Information]{Supplementary Information\hb On The Conservation Laws and Pathway Realizability\hb of Biochemical Reaction Networks}
+\title[Supplementary Information]{Supplementary Information\hb On the Conservation Laws and Pathway Realizability\hb of Biochemical Reaction Networks}
 
 \author[1]{\fnm{Thanh-An} \sur{Pham}}\email{thanh-an.pham@uni-leipzig.de}
 \author*[1,2]{\fnm{Tieu-Long} \sur{Phan}}\email{tieu@bioinf.uni-leipzig.de}
@@ -202,18 +202,18 @@ Table~\ref{tab:reference_audit} details the literature sources, targeted structu
 \toprule
 \textbf{Network model} & \textbf{Source} & \textbf{Targeted property} & \textbf{SVD res.} & \textbf{Rounded inv.} & \textbf{Exact res.} \\
 \midrule
-Reversible isomerization & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Minimal weakly reversible; Deficiency Zero Theorem (positive branch) & 1.1e-16 & 0 & 0 \\
+Reversible isomerization & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Minimal weakly reversible, Deficiency Zero Theorem (positive branch) & 1.1e-16 & 0 & 0 \\
 Irreversible isomerization & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Deficiency Zero Theorem (negative branch) & 0.0e+00 & 0 & 0 \\
 Isomerization cycle & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Weak reversibility without individual reversible steps & 2.2e-16 & 0 & 0 \\
-Three disjoint reversible pairs & Constructed test network & Disconnected linkage classes; minimal semiflow supports isolate disjoint pairs, not their union & 1.1e-16 & 0 & 0 \\
+Three disjoint reversible pairs & Constructed test network & Disconnected linkage classes, with minimal semiflow supports isolating disjoint pairs rather than their union & 1.1e-16 & 0 & 0 \\
 Disjoint pairs, non-unit stoichiometry & Constructed test network & As above with $E \rightleftharpoons 2F$: exact pool $2E+F$, which rounding can corrupt & 1.1e-16 & 0 & 0 \\
 Michaelis-Menten & Michaelis \& Menten, Feinberg~\cite{feinberg2019foundations} & Enzyme mechanism with two conserved pools, $\delta=0$, non-weakly reversible & 2.2e-16 & 1 & 0 \\
-Reversible Michaelis-Menten & Feinberg~\cite{feinberg2019foundations} & $\delta=0$; weak reversibility restored & 1.7e-16 & 1 & 0 \\
+Reversible Michaelis-Menten & Feinberg~\cite{feinberg2019foundations} & $\delta=0$, with weak reversibility restored & 1.7e-16 & 1 & 0 \\
 Edelstein bistable switch & Edelstein~\cite{edelstein1970biochemical} & Minimal reversible $\delta=1$ network with multiple steady states & 0.0e+00 & 0 & 0 \\
 Futile cycle (single-site) & Wang \& Sontag~\cite{wang2008multisite} & Distributive cycle with three independent pools & 3.3e-16 & 3 & 0 \\
 Futile cycle (two-site) & Wang \& Sontag~\cite{wang2008multisite} & Exact conservation in a multistationarity motif & 5.3e-16 & 0 & 0 \\
-Shinar-Feinberg ACR motif & Shinar \& Feinberg~\cite{shinar2010structural} & ACR motif; a minimal siphon contains no P-semiflow support & 1.1e-16 & 0 & 0 \\
-Open reactor ($0 \to A \to B \to 0$) & Constructed test network & Zero-complex handling; cycle closure changes weak reversibility & 0.0e+00 & 0 & 0 \\
+Shinar-Feinberg ACR motif & Shinar \& Feinberg~\cite{shinar2010structural} & ACR motif, where a minimal siphon contains no P-semiflow support & 1.1e-16 & 0 & 0 \\
+Open reactor ($0 \to A \to B \to 0$) & Constructed test network & Zero-complex handling, where cycle closure changes weak reversibility & 0.0e+00 & 0 & 0 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -245,7 +245,7 @@ A conservation law is a non-zero integer vector $y$ with $y^T \mathbf{S} = 0$. F
 \section{Computational cost across network families}
 \label{si:scaling}
 
-Fig.~\ref{fig:network_families} illustrates the three benchmark families. Fig.~\ref{fig:performance_diagnostics} reports the runtimes for the four structural analyses across these families; numbers beside the random-sparse siphon points give the number of minimal siphons.
+Fig.~\ref{fig:network_families} illustrates the three benchmark families. Fig.~\ref{fig:performance_diagnostics} reports the runtimes for the four structural analyses across these families, with numbers beside the random-sparse siphon points giving the number of minimal siphons.
 
 
 
@@ -259,7 +259,7 @@ Fig.~\ref{fig:network_families} illustrates the three benchmark families. Fig.~\
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{../Figure/performance_diagnostics.pdf}
-    \caption{Structural analysis runtimes across directed-chain, reversible-chain, and random-sparse networks. \textbf{(a)}~Minimal-siphon enumeration; numbers beside the random-sparse points give the number of minimal siphons. \textbf{(b)}~Exact CRNT analysis. \textbf{(c)}~Graph canonicalization. \textbf{(d)}~Exact conserved-pool enumeration. Points and connecting lines show completed single-run measurements. Line styles and markers distinguish the three families. All 60 measurements complete.}
+    \caption{Structural analysis runtimes across directed-chain, reversible-chain, and random-sparse networks. \textbf{(a)}~Minimal-siphon enumeration, where numbers beside random-sparse points give minimal siphon counts. \textbf{(b)}~Exact CRNT analysis. \textbf{(c)}~Graph canonicalization. \textbf{(d)}~Exact conserved-pool enumeration. Points and connecting lines show completed single-run measurements. Line styles and markers distinguish the three families. All 60 measurements complete.}
     \label{fig:performance_diagnostics}
 \end{figure}
 
@@ -270,7 +270,7 @@ The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \tex
 
 \begin{table}[htbp]
 \centering
-\caption{BioModels input inventory and structural results. $m$: species; $r$: directed reactions; $s$: exact rank; $\delta$: deficiency; P: minimal conserved pools; S: minimal siphons; RT: supported structural round trip; Covered: every minimal siphon contains a conserved-pool support. Coverage is the sufficient persistence condition used in the main text, including the vacuous case of no siphons; failure does not prove extinction. Dashes mark analyses inapplicable to the reaction-free control.}
+\caption{BioModels input inventory and structural results. $m$: species, $r$: directed reactions, $s$: exact rank, $\delta$: deficiency, P: minimal conserved pools, S: minimal siphons, RT: supported structural round trip, and Covered: every minimal siphon contains a conserved-pool support. Coverage is the sufficient persistence condition used in the main text, including the vacuous case of no siphons. Failure does not prove extinction. Dashes mark analyses inapplicable to the reaction-free control.}
 \label{tab:biomodels_models}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -304,7 +304,7 @@ Table~\ref{tab:kegg_modules} summarizes structural deficiency and conserved moie
 
 \begin{table}[htbp]
 \centering
-\caption{Structural results for four reduced KEGG modules. $m$: species; $r$: directed reactions; $n$: complexes; $\ell$: linkage classes; $s$: rank; $\delta=n-\ell-s$: deficiency; P: minimal conserved pools; S: minimal siphons.}
+\caption{Structural results for four reduced KEGG modules. $m$: species, $r$: directed reactions, $n$: complexes, $\ell$: linkage classes, $s$: rank, $\delta=n-\ell-s$: deficiency, P: minimal conserved pools, and S: minimal siphons.}
 \label{tab:kegg_modules}
 \small
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrrr@{}}
@@ -324,7 +324,7 @@ Module & $m$ & $r$ & $n$ & $\ell$ & $s$ & $\delta$ & P & S \\
 
 \subsection{Glucose-to-pyruvate pathway realization and invariants}
 
-Table~\ref{tab:glycolysis_flux} lists the reaction multiset converting one glucose to two pyruvates across a preparatory phase (reactions firing once) and payoff phase (firing twice). Aldolase (\texttt{R01068}) and triosephosphate isomerase (\texttt{R01015}) produce two glyceraldehyde 3-phosphate equivalents, directing payoff enzymes (\texttt{R01061}--\texttt{R00200}) to fire twice. State-space search yields a certified 15-step sequence (Fig.~5b) strictly preserving the weighted three-carbon backbone ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).
+Table~\ref{tab:glycolysis_flux} lists the reaction multiset converting one glucose to two pyruvates across a preparatory phase (reactions firing once) and payoff phase (firing twice). Aldolase (\texttt{R01068}) and triosephosphate isomerase (\texttt{R01015}) produce two glyceraldehyde 3-phosphate equivalents, directing payoff enzymes (\texttt{R01061}--\texttt{R00200}) to fire twice. State-space search yields a certified 15-step sequence (Fig.~5b) preserving the weighted three-carbon backbone ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).
 
 \begin{table}[htbp]
 \centering
@@ -348,11 +348,11 @@ Reaction & Count & Reaction & Count \\
 
 \subsection{Catalytic gating and cofactor boundary controls}
 
-Table~\ref{tab:glycolysis_participant} evaluates participant reduction on glucokinase (\texttt{R02189}), which couples glucose phosphorylation to polyphosphate hydrolysis. While net stoichiometric reduction preserves the stoichiometric matrix $\mathbf S$, it drops deficiency ($\delta: 1 \to 0$) and destroys catalytic gating by allowing spontaneous firing without polyphosphate. Retaining the shared participant enforces this donor requirement.
+Table~\ref{tab:glycolysis_participant} evaluates participant reduction on glucokinase (\texttt{R02189}), which couples glucose phosphorylation to polyphosphate hydrolysis. Net stoichiometric reduction preserves the stoichiometric matrix $\mathbf S$, but it drops deficiency ($\delta: 1 \to 0$) and destroys catalytic gating by allowing spontaneous firing without polyphosphate. Retaining the shared participant enforces this donor requirement.
 
 \begin{table}[htbp]
 \centering
-\caption{Shared-polyphosphate control for a single prescribed \texttt{R02189} firing. The glucose inventory is one in every row. $n$: complexes; $\ell$: linkage classes; $\delta$: deficiency.}
+\caption{Shared-polyphosphate control for a single prescribed \texttt{R02189} firing. The glucose inventory is one in every row. $n$: complexes, $\ell$: linkage classes, and $\delta$: deficiency.}
 \label{tab:glycolysis_participant}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrl@{}}
 \toprule
@@ -390,49 +390,22 @@ Retained & 24 & 15 & unrealizable & -- \\
 \end{tabular*}
 \end{table}
 
-\section{Formose: carbon conservation and precursor requirements}
+\section{Formose networks: expansion and precursor requirements}
 \label{sec:si_case_formose}
 
-Four rules for aldol addition, retro-aldol cleavage, and reversible keto-enol tautomerization iteratively expand formaldehyde and glycolaldehyde seeds. The fourth iteration contains 37 species and 44 reactions, with 54 complexes, 17 linkage classes, rank 36, and deficiency one.
+The formose reaction system serves as a benchmark for rule-based graph transformation, exact mass conservation, and discrete pathway realizability in open-ended reaction spaces. Graph transformation explores carbohydrate condensation from formaldehyde ($C_1$) and glycolaldehyde ($C_2$) seeds through recursive aldol coupling and enediol-mediated keto-enol tautomerization.
 
-\subsection{Network growth and carbon conservation}
+\subsection{Network growth and stoichiometric carbon conservation}
 
-Table~\ref{tab:formose_growth} reports the recorded species and reaction counts across iterations. The fourth iteration includes 31 species containing at least four carbons and reaches ten carbons.
+Table~\ref{tab:formose_dpo_comparison} reports network growth from the formaldehyde and glycolaldehyde seeds. After four iterations, the network contains 37 species and 44 reactions and reaches species with ten carbon atoms ($C_{10}$). Exact nullspace analysis of its stoichiometric matrix identifies a single positive conservation semiflow whose weights match the carbon atom count of every species, confirming carbon conservation across the generated reactions.
 
-\begin{table}[htbp]
-  \centering
-  \caption{Network size and cumulative generation time from the seeds through each expansion depth in the native SynReactor DPO study. These single-run timings include first-call overhead; Table~\ref{tab:formose_dpo_comparison} provides the repeated comparison after warm-up.}
-  \label{tab:formose_growth}
-  \scriptsize
-  \setlength{\tabcolsep}{3.5pt}
-  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rrrr@{}}
-  \toprule
-  Iteration & Species & Reactions & Cumulative time (s) \\
-  \midrule
-% BEGIN GENERATED: formose-growth
-% Generated from crn-formose.json.
-1 & 3 & 1 & 0.048 \\
-2 & 5 & 4 & 0.014 \\
-3 & 9 & 10 & 0.015 \\
-4 & 37 & 44 & 0.018 \\
-% END GENERATED: formose-growth
-\bottomrule
-  \end{tabular*}
-\end{table}
+\subsection{Comparative rule expansion benchmarking}
 
-The stoichiometric matrix $\mathbf S\in\mathbb Z^{37\times44}$ has a one-dimensional left nullspace whose positive primitive conservation vector agrees exactly with the molecular carbon count for every species, confirming that the generated reaction rules strictly conserve carbon.
-
-\subsection{Native SynReactor DPO generation and comparison}
-
-The default native formose study uses \texttt{CRNExpand(rule\_backend="synreactor-native")}. Rules are compiled once per expansion through \texttt{SynRule}'s tuple representation and the native DPO ABI compiler. The C++ controller performs candidate construction, frontier updates, calls to \synkit's DPO matching and rewriting kernel, product-component projection, and reaction integration. It retains native product graphs and prepares their component compatibility only when they become reactants. Native product graphs undergo molecular validation and canonical SMILES identification. Regression tests require the complete 37-species, 44-reaction formose result while disabling alternative reaction engines and the Python task runner.
-
-Both seeds are initially active. Every expansion round requires a frontier reactant, and self-mixtures are excluded. The component policy is explicitly \texttt{union}, preserving \texttt{SynReactor}'s full matching over the selected molecular union, including intramolecular matches with unused spectators. The optional \texttt{distinct} policy requires separate selected molecules for disconnected rule components. They agree for this formose grammar. The generic mapped carbon patterns omit radical guards in the legacy representation; the typed comparison therefore explicitly selects \texttt{dpo\_radical\_policy="ignore"}, retaining zero radical deltas. Strict radical guards remain the default for other inputs and are tested separately. The native controller currently requires concrete, persistent, non-aromatic heavy-atom graphs with standard sigma/pi bond partitions. Unsupported isotope, aromatic, symbolic-port, or other unrepresented states fail explicitly.
-
-Table~\ref{tab:formose_dpo_comparison} compares the full API runtime of native \texttt{SynReactor} DPO, \texttt{M{\O}D}, and \texttt{MolFoundry}. Every tool and completed depth has 20 timed expansions after three untimed warm-ups, on the same logical CPU and from fresh seeds. Timings include rule and seed compilation, expansion, molecular identity, and construction of each tool's network representation, including Python CRN construction for \synkit. Imports, library startup, and independent identity audits are excluded. Rules use each tool's input format; the fixed mapped-rule-to-GML translation for the external tools is performed before timing. Completed species sets and directed stoichiometric reaction multisets agree exactly with the independent tools. Complete source fingerprints, kernel/controller build hashes, all 20 samples, and output snapshots accompany the reports. Each tool and depth uses a separate process pinned to the same logical CPU of an Intel Core Ultra~7 155H. Only one expansion runs at a time. Tool configurations are interleaved, and their execution order is recorded in the evidence. Imported engines remain loaded; the native controller process is retained across calls. Every expansion starts from freshly parsed rules and seeds. No molecular-size cutoff is imposed; task and mixture caps are raised to $2^{60}$, and completed native runs are checked for truncation. Exported molecules are compared through canonical non-stereochemical SMILES with explicit hydrogen vertices removed. Directed reactant and product multisets retain their stoichiometric multiplicities; identity checks ignore atom maps, rule labels, and alternative atom-level derivations. Every exported reaction is independently checked for carbon balance. Fig.~\ref{main:fig:formose_dpo_runtime}b shows individual measurements, medians, and interquartile ranges.
+Table~\ref{tab:formose_dpo_comparison} compares the full API runtime of \texttt{SynReactor} DPO against \texttt{M{\O}D} and \texttt{MolFoundry} across six expansion depths from fresh formaldehyde and glycolaldehyde seeds. Timings are evaluated across 20 timed repetitions after three warm-ups on an isolated logical CPU. Each tool uses its native rule format, and generated molecules are canonicalized without explicit hydrogens to evaluate exact network equivalence. Across all completed depths, all three tools generate identical species sets and directed stoichiometric reactions, validating algorithmic equivalence. At depth seven, all three tools exceeded system resource limits (memory or search bounds).
 
 \begin{table}[htbp]
 \centering
-\caption{Full API runtime comparison. Times are median cumulative seconds from seeds over 20 timed runs after three warm-ups. Native \texttt{SynReactor} uses its C++ controller and DPO kernel with implicit hydrogen counts; \texttt{M{\O}D} and \texttt{MolFoundry} use explicit hydrogen vertices. Rule preparation and network construction are included for every tool. Counts describe identical completed species and stoichiometric reaction sets. Each expansion has a 180~s time limit and an 8~GiB per-process address-space limit. All 20 measurements and their quartiles are saved.}
+\caption{Full API runtime comparison. Times are median cumulative seconds from seeds over 20 timed runs after three warm-ups. Native \texttt{SynReactor} uses its C++ controller and DPO kernel with implicit hydrogen counts, whereas \texttt{M{\O}D} and \texttt{MolFoundry} use explicit hydrogen vertices. Rule preparation and network construction are included for every tool. Counts describe identical completed species and stoichiometric reaction sets. Each expansion has a 180~s time limit and an 8~GiB per-process address-space limit.}
 \label{tab:formose_dpo_comparison}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -452,15 +425,13 @@ Depth & Species & Reactions & \texttt{SynReactor} C++ DPO & \texttt{M{\O}D} & \t
 \end{tabular*}
 \end{table}
 
-Depth seven is excluded from the completed-runtime table and figure. In a separate attempt, native DPO reached its explicit binding-search limit of $5\times10^7$, while the preceding matched-input experiments recorded a memory-limit failure for \texttt{M{\O}D} and an out-of-memory runtime crash for \texttt{MolFoundry}. These incomplete attempts establish neither a maximum chemical expansion depth nor target unreachability.
-
 \subsection{Route definitions and finite precursor inventories}
 
 The targets are an aldotetrose ($T_4$, \texttt{O=CC(O)C(O)CO}) and an aldohexose ($T_6$, \texttt{O=CC(O)C(O)C(O)C(O)CO}). Under qualitative set reachability, both are reachable from the two seed species. Table~\ref{tab:formose_routes} distinguishes qualitative depth from the reaction multiplicities required for discrete firing, and Fig.~\ref{fig:formose_reaction_motifs} shows the reaction motifs.
 
 \begin{table}[htbp]
 \centering
-\caption{Qualitative depths and prescribed discrete reaction multisets for the selected formose targets. Set reachability reuses a species once generated; discrete firing requires a separate token for each consumed molecule.}
+\caption{Qualitative depths and prescribed discrete reaction multisets for the selected formose targets. Set reachability reuses a species once generated, whereas discrete firing requires a separate token for each consumed molecule.}
 \label{tab:formose_routes}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrl@{}}
 \toprule
@@ -478,15 +449,17 @@ $T_{6}$ & 3 & 4 & $2r_{1}+r_{3}+r_{7}$ \\
 \begin{figure}[!htbp]
 \centering
 \input{../Figure/formose_chemistry.tex}   % TikZ/chemfig source, typeset inline at \textwidth
-\caption{Stoichiometry and precursor requirements of the selected formose routes. \textbf{(a)}~Tautomerization ($r_1$) of glycolaldehyde to enediol. \textbf{(b)}~Aldol coupling ($r_3$) to the aldotetrose ($T_4$). \textbf{(c)}~Second aldol coupling ($r_7$) to the aldohexose ($T_6$). Firing counts are per route. Structures are constitutional; no stereochemistry or atom mapping is assigned.}
+\caption{Precursor requirements of the selected formose routes. Bars are reactions, as in the Petri nets of the main text, and each glycolaldehyde is drawn as a separate molecule because discrete firing consumes one token per molecule. Keto--enol tautomerization ($r_1$) supplies the enediol consumed by each aldol addition ($r_3$, $r_7$). The shaded block is the $T_4$ route ($r_1+r_3$: two firings, two glycolaldehyde), and the whole scheme is the $T_6$ route ($2r_1+r_3+r_7$: four firings, three glycolaldehyde). Structures are constitutional, with no stereochemistry or atom mapping assigned.}
 \label{fig:formose_reaction_motifs}
 \end{figure}
 
-Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor inventories. Formaldehyde is $C_1$ and glycolaldehyde is $C_2$. Every positive sequence is confirmed by an executable firing sequence, while negative decisions are established by exhaustive search over the prescribed multiset. For an independent check, the same reaction multisets and initial markings are supplied directly to \texttt{MolFoundry}'s \texttt{FlowSolution}, without optimizing a new hyperflow. Its \texttt{is\_realizable()} method and SMT certificate enumeration agree with all ten \synkit decisions. All three positive certificates are independently replayed, checking enabling before every firing, the requested reaction multiplicities, and target production. This comparison concerns the prescribed routes, rather than unrestricted target reachability.
+\clearpage
+
+Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor inventories. Formaldehyde is $C_1$ and glycolaldehyde is $C_2$. Every positive sequence is confirmed by a replayable firing sequence, while negative decisions are established by exhaustive search over the prescribed multiset. For an independent check, the same reaction multisets and initial markings are supplied to \texttt{MolFoundry}'s \texttt{FlowSolution}, without optimizing a new hyperflow. Its \texttt{is\_realizable()} method and SMT certificate enumeration agree with all ten \synkit decisions. All three positive certificates are independently replayed, checking enabling before every firing, the requested reaction multiplicities, and target production. This comparison concerns the prescribed routes, rather than unrestricted target reachability.
 
 \begin{table}[htbp]
 \centering
-\caption{Realizability of the prescribed tetrose and hexose routes across five precursor inventories. Counts denote molecules; total carbon counts carbon tokens. Yes indicates a verified certificate and No an exhaustive negative decision for the selected multiset.}
+\caption{Realizability of the prescribed tetrose and hexose routes across five precursor inventories. Counts denote molecules and total carbon counts carbon tokens. Yes indicates a verified certificate and No an exhaustive negative decision for the selected multiset.}
 \label{tab:formose_exact_benchmark}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
 \toprule
@@ -504,7 +477,7 @@ $M_5$ & 0 & 3 & 6 & yes & yes \\
 \end{tabular*}
 \end{table}
 
-The tetrose route converts glycolaldehyde to enediol ($r_1$), then couples that enediol with a second glycolaldehyde ($r_3$). It requires two glycolaldehyde molecules and leaves formaldehyde untouched; pools $M_4$ and $M_5$ support it, whereas $M_3$ (which contains only one glycolaldehyde) cannot. The hexose route requires two enediol tokens, consuming three glycolaldehyde molecules in total ($2r_1 + r_3 + r_7$), which only pool $M_5$ satisfies. The three six-carbon inventories ($M_3$, $M_4$, and $M_5$) thus produce different realizability outcomes despite having equal total carbon budgets.
+The tetrose route converts glycolaldehyde to enediol ($r_1$) and couples that intermediate with a second glycolaldehyde ($r_3$). This motif requires two glycolaldehyde precursors and consumes no formaldehyde, so inventories $M_4$ and $M_5$ support it while $M_3$ (containing only one glycolaldehyde) cannot. The hexose route requires two successive aldol couplings consuming two enediol equivalents, demanding three glycolaldehyde precursors in total ($2r_1 + r_3 + r_7$), which only pool $M_5$ satisfies. Consequently, the three six-carbon inventories ($M_3$, $M_4$, and $M_5$) produce divergent realizability outcomes despite possessing identical total carbon budgets.
 
 \bibliography{../refs}
 
