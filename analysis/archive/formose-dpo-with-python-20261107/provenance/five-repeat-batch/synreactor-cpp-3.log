@@ -1,0 +1,12 @@
+{"phase": "generation_complete", "backend": "synreactor-cpp", "depth": 3, "repeat": 0, "seconds": 0.051073965994874015}
+{"phase": "network_verified", "species": 9, "reactions": 10}
+{"phase": "generation_complete", "backend": "synreactor-cpp", "depth": 3, "repeat": 1, "seconds": 0.045678158989176154}
+{"phase": "network_verified", "species": 9, "reactions": 10}
+{"phase": "generation_complete", "backend": "synreactor-cpp", "depth": 3, "repeat": 2, "seconds": 0.04490431200247258}
+{"phase": "network_verified", "species": 9, "reactions": 10}
+{"phase": "generation_complete", "backend": "synreactor-cpp", "depth": 3, "repeat": 3, "seconds": 0.04461311301565729}
+{"phase": "network_verified", "species": 9, "reactions": 10}
+{"phase": "generation_complete", "backend": "synreactor-cpp", "depth": 3, "repeat": 4, "seconds": 0.06168379800510593}
+{"phase": "network_verified", "species": 9, "reactions": 10}
+{"phase": "generation_complete", "backend": "synreactor-cpp", "depth": 3, "repeat": 5, "seconds": 0.04489953801385127}
+{"phase": "network_verified", "species": 9, "reactions": 10}

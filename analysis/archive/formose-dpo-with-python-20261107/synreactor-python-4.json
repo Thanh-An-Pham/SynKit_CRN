@@ -1,0 +1,969 @@
+{
+  "audits": [
+    {
+      "index": 0,
+      "phase": "warmup",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 1,
+      "phase": "warmup",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 2,
+      "phase": "warmup",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 0,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 1,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 2,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 3,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 4,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 5,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 6,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 7,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 8,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 9,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 10,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 11,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 12,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 13,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 14,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 15,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 16,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 17,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 18,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    },
+    {
+      "index": 19,
+      "phase": "measured",
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+    }
+  ],
+  "backend": "synreactor-python",
+  "controller": "python",
+  "depth": 4,
+  "dpo_report": {
+    "component_policy": "union",
+    "component_rejected_applications": 0,
+    "controller": "python",
+    "engine": "synkit_dpo_python",
+    "hydrogen_model": "implicit",
+    "kernel": "python",
+    "native_applications": null,
+    "native_candidates": null,
+    "native_elapsed_ns": null,
+    "partial": false,
+    "radical_policy": "ignore",
+    "reactor_library": null,
+    "rule_calls": 63,
+    "rules_compiled": 4,
+    "template_format": "tuple"
+  },
+  "hydrogen_representation": "implicit counts",
+  "kernel": "python",
+  "n_reactions": 44,
+  "n_species": 37,
+  "radical_policy": "ignore",
+  "samples": [
+    0.15134480901178904,
+    0.1516204710060265,
+    0.15174840998952277,
+    0.1516408909810707,
+    0.15415638699778356,
+    0.15281019799294882,
+    0.15016116699553095,
+    0.14795730798505247,
+    0.15042799001093954,
+    0.15722228301456198,
+    0.1598526730085723,
+    0.15510366798844188,
+    0.15513898700010031,
+    0.170647104998352,
+    0.14718823501607403,
+    0.14786918598110788,
+    0.15043224400142208,
+    0.1486007790081203,
+    0.15029674299876206,
+    0.1551391110115219
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(C(O)CO)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(CO)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(CO)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(C(O)CO)C(O)C(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(C(O)CO)C(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)C(O)C(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(CO)C(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(C(O)CO)C(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(C(O)CO)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)C(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(CO)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(C(O)CO)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(C(O)CO)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)C(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(CO)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(C(O)CO)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(C(O)CO)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(CO)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(C(O)CO)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(C(O)CO)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)(CO)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=C(CO)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7",
+    "species": [
+      "C=O",
+      "O=C(C(O)CO)C(O)C(O)C(O)C(O)C(O)C(O)CO",
+      "O=C(C(O)CO)C(O)C(O)C(O)C(O)C(O)CO",
+      "O=C(C(O)CO)C(O)C(O)C(O)C(O)CO",
+      "O=C(C(O)CO)C(O)C(O)C(O)CO",
+      "O=C(C(O)CO)C(O)C(O)CO",
+      "O=C(C(O)CO)C(O)CO",
+      "O=C(CO)C(O)C(O)C(O)C(O)C(O)C(O)CO",
+      "O=C(CO)C(O)C(O)C(O)C(O)C(O)CO",
+      "O=C(CO)C(O)C(O)C(O)C(O)CO",
+      "O=C(CO)C(O)C(O)C(O)CO",
+      "O=C(CO)C(O)C(O)CO",
+      "O=C(CO)C(O)CO",
+      "O=C(CO)CO",
+      "O=CC(O)(C(O)CO)C(O)C(O)C(O)C(O)C(O)CO",
+      "O=CC(O)(C(O)CO)C(O)C(O)C(O)C(O)CO",
+      "O=CC(O)(C(O)CO)C(O)C(O)C(O)CO",
+      "O=CC(O)(C(O)CO)C(O)C(O)CO",
+      "O=CC(O)(C(O)CO)C(O)CO",
+      "O=CC(O)(CO)C(O)C(O)C(O)C(O)C(O)CO",
+      "O=CC(O)(CO)C(O)C(O)C(O)C(O)CO",
+      "O=CC(O)(CO)C(O)C(O)C(O)CO",
+      "O=CC(O)(CO)C(O)C(O)CO",
+      "O=CC(O)(CO)C(O)CO",
+      "O=CC(O)(CO)CO",
+      "O=CC(O)C(O)C(O)C(O)C(O)C(O)CO",
+      "O=CC(O)C(O)C(O)C(O)C(O)CO",
+      "O=CC(O)C(O)C(O)C(O)CO",
+      "O=CC(O)C(O)C(O)CO",
+      "O=CC(O)C(O)CO",
+      "O=CC(O)CO",
+      "O=CCO",
+      "OC=C(O)C(O)C(O)C(O)CO",
+      "OC=C(O)C(O)C(O)CO",
+      "OC=C(O)C(O)CO",
+      "OC=C(O)CO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete",
+  "version": "1.6.5",
+  "warmup_samples": [
+    0.32647328899474815,
+    0.19912987400311977,
+    0.157326763990568
+  ]
+}

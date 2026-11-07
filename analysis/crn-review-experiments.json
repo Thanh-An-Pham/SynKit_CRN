@@ -12,7 +12,7 @@
   "environment": {
     "cpu_count": 22,
     "crn_backend": {
-      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "build_sha256": "2769128e2e4e759b65f53da4ca7a8052272468f6372a6b873c2a0c3c03c8600f",
       "capabilities": [
         "closure",
         "structural_sets",
@@ -24,8 +24,8 @@
         "pathway",
         "symmetry"
       ],
-      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
-      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_2769128e2e4e759b.so",
+      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
       "native_operations": {
         "crnt": 4,
         "exhaustive_siphons": 20,
@@ -34,151 +34,166 @@
       },
       "production_backend": "cpp"
     },
+    "crn_dpo_expander": {
+      "build_sha256": "3d74c7db9165779567b35c88d922daaaab28bdd9da22ba07286d0b52f218ee52",
+      "controller": "cpp",
+      "engine": "synkit_dpo_cpp",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/dpo-expander/synkit_dpo_crn_3d74c7db91657795",
+      "executable_sha256": "4657792d8c55d87cfaf5b6be181c6d6980880eccfaef4005fbc7fbba343d1f77",
+      "kernel": "synkit_dpo_cpp",
+      "kernel_abi": 1,
+      "kernel_library": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/dpo-expander/kernel/libsynkit_partial_c25e34c2c2aaf46cdad2.so",
+      "kernel_library_sha256": "9aa07f7f395783d2075bae80d1d9183bde4388c583ec3a0b68821deec184abd1",
+      "rdkit_cpp_version": "2026.03.1",
+      "reaction_engine": "SynReactor DPO"
+    },
     "crn_expander": {
       "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "engine": "synkit_crn_expand",
       "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
       "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
-      "rdkit_cpp_version": "2026.03.1"
+      "rdkit_cpp_version": "2026.03.1",
+      "reaction_engine": "RDKit reaction SMARTS"
     },
     "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
     "git_dirty": true,
     "machine": "x86_64",
-    "networkx": "3.5",
-    "numpy": "2.3.3",
+    "networkx": "3.6.1",
+    "numpy": "2.4.4",
     "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
     "processor": null,
-    "python": "3.11.0",
-    "rdkit": "2025.09.3",
-    "scipy": "1.16.0",
+    "python": "3.12.12",
+    "rdkit": "2026.03.1",
+    "scipy": "1.18.1",
     "synkit": "1.6.5"
   },
   "paired_siphon_timings": [
     {
       "algorithm": "closure",
-      "median_seconds": 0.0008242360199801624,
+      "median_seconds": 0.00047275700489990413,
       "n_reactions": 20,
       "n_species": 11,
       "outputs_agree": true,
-      "q1_seconds": 0.0008042550180107355,
-      "q3_seconds": 0.0008574489911552519,
+      "q1_seconds": 0.0004699629789683968,
+      "q3_seconds": 0.00048140299622900784,
       "samples_seconds": [
-        0.0008242360199801624,
-        0.0008835330081637949,
-        0.0008574489911552519,
-        0.0008042550180107355,
-        0.0007671080238651484
+        0.00048140299622900784,
+        0.0004699629789683968,
+        0.0004697090189438313,
+        0.0004835379950236529,
+        0.00047275700489990413
       ]
     },
     {
       "algorithm": "exhaustive",
-      "median_seconds": 0.0008215199923142791,
+      "median_seconds": 0.0004740399890579283,
       "n_reactions": 20,
       "n_species": 11,
       "outputs_agree": true,
-      "q1_seconds": 0.0008184379839804024,
-      "q3_seconds": 0.0009313180053140968,
+      "q1_seconds": 0.0004698529955931008,
+      "q3_seconds": 0.0004766540077980608,
       "samples_seconds": [
-        0.0009891210065688938,
-        0.0009313180053140968,
-        0.0008184379839804024,
-        0.0008215199923142791,
-        0.0007578550139442086
+        0.0004740399890579283,
+        0.00046919198939576745,
+        0.0004766540077980608,
+        0.0004780269809998572,
+        0.0004698529955931008
       ]
     },
     {
       "algorithm": "closure",
-      "median_seconds": 0.0006244179967325181,
+      "median_seconds": 0.0005213379918131977,
       "n_reactions": 28,
       "n_species": 15,
       "outputs_agree": true,
-      "q1_seconds": 0.0005708539974875748,
-      "q3_seconds": 0.0007013629947323352,
+      "q1_seconds": 0.0005208009970374405,
+      "q3_seconds": 0.0005234749987721443,
       "samples_seconds": [
-        0.0008866639982443303,
-        0.0007013629947323352,
-        0.0005511220078915358,
-        0.0005708539974875748,
-        0.0006244179967325181
+        0.0005208009970374405,
+        0.0005234749987721443,
+        0.0005116359970998019,
+        0.0005213379918131977,
+        0.0005279380129650235
       ]
     },
     {
       "algorithm": "exhaustive",
-      "median_seconds": 0.0010625739814713597,
+      "median_seconds": 0.0009410229977220297,
       "n_reactions": 28,
       "n_species": 15,
       "outputs_agree": true,
-      "q1_seconds": 0.000974750000750646,
-      "q3_seconds": 0.001638057001400739,
+      "q1_seconds": 0.0009388620092067868,
+      "q3_seconds": 0.0009429090132471174,
       "samples_seconds": [
-        0.001638057001400739,
-        0.00166945400997065,
-        0.0009386639867443591,
-        0.000974750000750646,
-        0.0010625739814713597
+        0.0009388620092067868,
+        0.0009481739834882319,
+        0.0009429090132471174,
+        0.0009410229977220297,
+        0.0009358870156574994
       ]
     },
     {
       "algorithm": "closure",
-      "median_seconds": 0.00071024100179784,
+      "median_seconds": 0.0005732749996241182,
       "n_reactions": 36,
       "n_species": 19,
       "outputs_agree": true,
-      "q1_seconds": 0.000674484996125102,
-      "q3_seconds": 0.0007447160023730248,
+      "q1_seconds": 0.0005617279966827482,
+      "q3_seconds": 0.0005898269882891327,
       "samples_seconds": [
-        0.0006314319907687604,
-        0.0008465670107398182,
-        0.000674484996125102,
-        0.0007447160023730248,
-        0.00071024100179784
+        0.0005575129762291908,
+        0.0006096089782658964,
+        0.0005617279966827482,
+        0.0005898269882891327,
+        0.0005732749996241182
       ]
     },
     {
       "algorithm": "exhaustive",
-      "median_seconds": 0.009525355999357998,
+      "median_seconds": 0.007722295995336026,
       "n_reactions": 36,
       "n_species": 19,
       "outputs_agree": true,
-      "q1_seconds": 0.009378062997711822,
-      "q3_seconds": 0.009637689014198259,
+      "q1_seconds": 0.007667044992558658,
+      "q3_seconds": 0.00773378400481306,
       "samples_seconds": [
-        0.009228309005266055,
-        0.009378062997711822,
-        0.009637689014198259,
-        0.009525355999357998,
-        0.009891921014059335
+        0.007667044992558658,
+        0.0076121460006106645,
+        0.007722295995336026,
+        0.00773378400481306,
+        0.007991507998667657
       ]
     },
     {
       "algorithm": "closure",
-      "median_seconds": 0.0007861710037104785,
+      "median_seconds": 0.0006275929918047041,
       "n_reactions": 40,
       "n_species": 21,
       "outputs_agree": true,
-      "q1_seconds": 0.0007707949844188988,
-      "q3_seconds": 0.0008124050218611956,
+      "q1_seconds": 0.0006077730213291943,
+      "q3_seconds": 0.0006974480056669563,
       "samples_seconds": [
-        0.0007707949844188988,
-        0.0007861710037104785,
-        0.0006787340098526329,
-        0.000977065006736666,
-        0.0008124050218611956
+        0.0006275929918047041,
+        0.0007024070073384792,
+        0.0005957669927738607,
+        0.0006974480056669563,
+        0.0006077730213291943
       ]
     },
     {
       "algorithm": "exhaustive",
-      "median_seconds": 0.035610062011983246,
+      "median_seconds": 0.02925037100794725,
       "n_reactions": 40,
       "n_species": 21,
       "outputs_agree": true,
-      "q1_seconds": 0.03542277798987925,
-      "q3_seconds": 0.036306164984125644,
+      "q1_seconds": 0.029203791986219585,
+      "q3_seconds": 0.029284852993441746,
       "samples_seconds": [
-        0.036306164984125644,
-        0.035026808007387444,
-        0.04724196300958283,
-        0.035610062011983246,
-        0.03542277798987925
+        0.029284852993441746,
+        0.029293898987816647,
+        0.029203791986219585,
+        0.02897631999803707,
+        0.02925037100794725
       ]
     }
   ],
@@ -413,7 +428,7 @@
     "Experiment/CRN/studies/__init__.py": "2c9da180a4ec6fa2598cdf1da65a59b09dfd0aace1e147a75215eaeea01c0b98",
     "Experiment/CRN/studies/biomodels.py": "ed8f6341b9345b215018ef3097b2a7b756ea31e5f7b37b66183ea3760664cab2",
     "Experiment/CRN/studies/external_crnt4sbml.py": "6ea8f4f517175d6a813162eb3e2bdf828611f21c2318127abecaed0db889e418",
-    "Experiment/CRN/studies/formose_case_study.py": "68abaf80ee7cb7ecb7d0b75bf0aaf90b2d318151a0186518a5d5b1656ac88bea",
+    "Experiment/CRN/studies/formose_case_study.py": "720fb52dea5db92e4990e12eebbf8fd67355f2f2a53c4c4e5e93eafb22febe46",
     "Experiment/CRN/studies/glycolysis_donors.py": "36486180a98c27f341fb0aaf7d4e3ba86d0e866da4a104e5a22ee3905273c112",
     "Experiment/CRN/studies/hydrogen_accounting.py": "52f1e1bb27f9660463e520a11547afe94c6c07a360ad3d39c9036bd1f3c85d31",
     "Experiment/CRN/studies/kegg_case_study.py": "508486631309dbbe1db8d53272d172170fcaef44ef50c8a903a7dc61cee9cec9",
@@ -423,7 +438,7 @@
     "Experiment/CRN/studies/validation.py": "0297c46644b1e5aa42890316e83d56e7e9596f9c865c50b3b42625c8ad2a852a",
     "Experiment/CRN/tools/__init__.py": "17a6e6c00ec7f8bb466be48374b1438da9800095aacd8f86d63fc30660a6980f",
     "Experiment/CRN/tools/check_reports.py": "f72372404feacd394a249baacfd3d966a88dd5aa32a514bb80e9037f3fc3aed9",
-    "Experiment/CRN/tools/common.py": "d55d2b57ad617795051bdb95d4f0551ad877c55e94ed28c0c2d293e469eae7fc",
+    "Experiment/CRN/tools/common.py": "42e62f037e92a030d738858a4c068e191a87ee1e6fb6ef514df51011ab0ae6dc",
     "Experiment/CRN/tools/crnt4sbml_worker.py": "dbc99e64c4f5c20fbd67e2d351f41e8593374ec7a940a3ca72ab8f1d0b2049a6",
     "Experiment/CRN/tools/refresh_kegg_cache.py": "10b43f82c0946423d32f071c3df63fa2f13f3a9c700bc15eeeb1f6eeb6241fc2",
     "synkit/CRN/Benchmark/__init__.py": "f2500864c356c367acb6db91bf633c751d57ae8339ffe756ce69715b45c4ac88",
@@ -432,15 +447,18 @@
     "synkit/CRN/Benchmark/networks.py": "a1341cfb6bbb41c4d6141a121c74ec74bcf95f5e01ce168b7c06b7d314f454da",
     "synkit/CRN/Benchmark/scaling.py": "ebb427d20c51993428506cf55d17ed0ac0e4192a99aaa102b418ca31bb5553fb",
     "synkit/CRN/Benchmark/validate.py": "74184f73411575d056407ba6163d6a5ccd6b9dd830cc0d06c9fb81d25971b7a7",
-    "synkit/CRN/Construct/__init__.py": "dcc2102dc3b39d98089fc3cc3865cf09229f2e7851344b67b37262733d2d62de",
+    "synkit/CRN/Construct/__init__.py": "4af327c0b042ed654f80e6354d9886b6fc64a699019a916955a77e5dc0435309",
     "synkit/CRN/Construct/abstract.py": "6811698d53ccc98ab1f5347e354b3c3cd75c72a983ba5934e7b06282f4e1b90c",
     "synkit/CRN/Construct/arity.py": "edf28cde6873dbe0001809ed2fce5d621f1b2947baaecf51dcea460591801317",
-    "synkit/CRN/Construct/builder.py": "5b32b0624d1c4b07491d4da6d980243468d7aca0c810542217fae69a882537c8",
+    "synkit/CRN/Construct/builder.py": "d5ff2ef26d48bc599713f2684bd2252a1a2dcc67e1acb29ad8a897c170c111bd",
     "synkit/CRN/Construct/cpp/expand.cpp": "ea5c0a4232c89a1df403743bba25da787f31965d8939e9c81f6e2967cd83947d",
     "synkit/CRN/Construct/derivation.py": "1d3061715d909f91f95aa96622133cba9bd0a85e312ca790623a8ae54732d130",
+    "synkit/CRN/Construct/dpo_cpp/expand.cpp": "47d9cef48865d627b0918e17d8aa0eb67d0e5c10af2629a4641440ff5cc266c0",
+    "synkit/CRN/Construct/dpo_worker.py": "a59fa2225c2a6cf67964fed816a65597896d7c13e1f628aa28b1b2d5cfa845ba",
     "synkit/CRN/Construct/flattener.py": "3382eb24cac4adcdf8a8e564ab0985a4b5f6f275e4cc58fa158829499004a390",
     "synkit/CRN/Construct/keys.py": "12818a058801ec2d6d71212e9f1a8845e544fb5a75f7f8cda39e80248972b218",
     "synkit/CRN/Construct/mixtures.py": "e6a296858a0715e5a676c4eb713c9065a5c91ee5224e49e2f22b59042e67fb07",
+    "synkit/CRN/Construct/native_dpo.py": "adc36591e34613a7c42ef2f51fb97ec6cf77aeef2ca5b32240f4a6d5613fa1f0",
     "synkit/CRN/Construct/native_expand.py": "f79be689509e5239b3762068ce3388427ac2443d4d5f91e324286f398ba7cd23",
     "synkit/CRN/Construct/rdkit_worker.py": "f3a24e268be53fd9ccedef5324aad9d28f1569a7a5aa81d8999446e2465e7bde",
     "synkit/CRN/Construct/smiles.py": "966a38f2d12ed65cc372b992857b449185dd8f69c6621402f5e380b369568334",

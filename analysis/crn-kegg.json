@@ -13,7 +13,7 @@
   "environment": {
     "cpu_count": 22,
     "crn_backend": {
-      "build_sha256": "066f16aef7ab7de5d50ceea78f306266264675fd4792bb2928a30825efaea762",
+      "build_sha256": "2769128e2e4e759b65f53da4ca7a8052272468f6372a6b873c2a0c3c03c8600f",
       "capabilities": [
         "closure",
         "structural_sets",
@@ -25,8 +25,8 @@
         "pathway",
         "symmetry"
       ],
-      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_066f16aef7ab7de5.so",
-      "library_sha256": "ca165f5f4c9f250c7d146a95a2ee72e0e287bf63e00f2b83e38861b10b1bc1c0",
+      "library_path": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/libsynkit_crn_2769128e2e4e759b.so",
+      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
       "native_operations": {
         "crnt": 4,
         "pathway": 1,
@@ -35,22 +35,37 @@
       },
       "production_backend": "cpp"
     },
+    "crn_dpo_expander": {
+      "build_sha256": "3d74c7db9165779567b35c88d922daaaab28bdd9da22ba07286d0b52f218ee52",
+      "controller": "cpp",
+      "engine": "synkit_dpo_cpp",
+      "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/dpo-expander/synkit_dpo_crn_3d74c7db91657795",
+      "executable_sha256": "4657792d8c55d87cfaf5b6be181c6d6980880eccfaef4005fbc7fbba343d1f77",
+      "kernel": "synkit_dpo_cpp",
+      "kernel_abi": 1,
+      "kernel_library": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/dpo-expander/kernel/libsynkit_partial_c25e34c2c2aaf46cdad2.so",
+      "kernel_library_sha256": "9aa07f7f395783d2075bae80d1d9183bde4388c583ec3a0b68821deec184abd1",
+      "rdkit_cpp_version": "2026.03.1",
+      "reaction_engine": "SynReactor DPO"
+    },
     "crn_expander": {
       "build_sha256": "e6a58932050d6c35ac0e79a5e9b49e06282eff91b0159f4e964520a67d9e1ece",
+      "engine": "synkit_crn_expand",
       "executable": "/tmp/claude-1000/-home-lolo-Documents-TACsy-SynEco-SynKit/2394d257-0b81-4a0d-a31f-118e84362407/scratchpad/evidence/native/expander/synkit_crn_expand_e6a58932050d6c35",
       "executable_sha256": "04820b0f8882129dab1988b6929578d9e4c25ea0b76d456be4e413118658dd11",
-      "rdkit_cpp_version": "2026.03.1"
+      "rdkit_cpp_version": "2026.03.1",
+      "reaction_engine": "RDKit reaction SMARTS"
     },
     "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
     "git_dirty": true,
     "machine": "x86_64",
-    "networkx": "3.5",
-    "numpy": "2.3.3",
+    "networkx": "3.6.1",
+    "numpy": "2.4.4",
     "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
     "processor": null,
-    "python": "3.11.0",
-    "rdkit": "2025.09.3",
-    "scipy": "1.16.0",
+    "python": "3.12.12",
+    "rdkit": "2026.03.1",
+    "scipy": "1.18.1",
     "synkit": "1.6.5"
   },
   "glycolysis_flux": {
@@ -90,7 +105,7 @@
     },
     "max_depth_reached": 15,
     "realizable": true,
-    "seconds": 0.0020684890041593462,
+    "seconds": 0.0011738470057025552,
     "status": "realizable",
     "termination_reason": "certificate"
   },
@@ -127,7 +142,7 @@
       "n_species": 14,
       "persistent": false,
       "rank": 11,
-      "seconds": 0.006305545975919813,
+      "seconds": 0.0034607720153871924,
       "siphon_termination_reason": "complete",
       "siphons": [
         [
@@ -201,7 +216,7 @@
       "n_species": 13,
       "persistent": false,
       "rank": 6,
-      "seconds": 0.0047205940063577145,
+      "seconds": 0.0026788589893840253,
       "siphon_termination_reason": "complete",
       "siphons": [
         [
@@ -318,7 +333,7 @@
       "n_species": 22,
       "persistent": false,
       "rank": 12,
-      "seconds": 0.005561297992244363,
+      "seconds": 0.003632714011473581,
       "siphon_termination_reason": "complete",
       "siphons": [
         [
@@ -428,7 +443,7 @@
       "n_species": 12,
       "persistent": false,
       "rank": 10,
-      "seconds": 0.004236307984683663,
+      "seconds": 0.0026929849991574883,
       "siphon_termination_reason": "complete",
       "siphons": [
         [

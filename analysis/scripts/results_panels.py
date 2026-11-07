@@ -39,11 +39,11 @@ def representation(out, report):
         and rep["reaction_order_unchanged"]
     )
     arms = {(r["arm"], r["catalyst_tokens"]): r for r in rep["catalyst_arms"]}
-    fig = plt.figure(figsize=(7.2, 4.6))
-    a = fig.add_axes([0.045, 0.56, 0.91, 0.38])
-    a.set(xlim=(0, 10), ylim=(0, 3))
+    fig = plt.figure(figsize=(7.2, 3.4))
+    a = fig.add_axes([0.045, 0.58, 0.91, 0.38])
+    a.set(xlim=(0, 10), ylim=(1.05, 2.85))
     a.axis("off")
-    plain_heading(a, "a")
+    plain_heading(a, "a", y=0.98)
     # Display the actual reaction equations; orange participant is retained twice.
     for xx, key, title in ((0, "intact", "Retained"), (5.4, "cancelled", "Cancelled")):
         a.text(xx + 2.18, 2.6, title, ha="center", fontsize=10, style="italic")
@@ -60,7 +60,7 @@ def representation(out, report):
     # (b) R02189 as a Petri net under each condition.  Places are circles with
     # their tokens, the transition is the orange bar; the retained arm keeps
     # PolyP on both sides, so it needs a PolyP token to fire.
-    b = fig.add_axes([0.045, 0.06, 0.42, 0.34])
+    b = fig.add_axes([0.045, 0.08, 0.42, 0.44])
     b.set(xlim=(0, 4.2), ylim=(0, 2.5))
     b.axis("off")
     plain_heading(b, "b", y=1.0)
@@ -106,42 +106,78 @@ def representation(out, report):
             ok = arms[(key, tokens)]["outcome"]["status"] == "realizable"
             verdict(b, cx + 0.8, cy, ok, 11, vector=True)
 
-    # (c) The prescribed glycolytic flux from one glucose, one dot per firing.
-    # With currency metabolites kept but not supplied, hexokinase, the only
-    # reaction that consumes glucose, lacks ATP, so nothing fires.
-    c = fig.add_axes([0.62, 0.15, 0.36, 0.25])
-    c.set(xlim=(-0.8, 17.5), ylim=(-0.6, 1.7))
-    plain_heading(c, "c", y=1.0, x=-0.42)
-    for y, row in zip((1.0, 0.0), rep["currency_arms"]):
-        ok = row["outcome"]["status"] == "realizable"
-        n = len(row["outcome"]["certificate"] or [])
-        c.text(
-            -0.04,
-            y,
-            "cofactors\nremoved" if row["drop_currency"] else "cofactors\nkept",
-            transform=c.get_yaxis_transform(),
-            ha="right",
-            va="center",
-            fontsize=8,
-            linespacing=1.0,
-        )
-        if ok:
-            c.plot(
-                range(n + 1),
-                [y] * (n + 1),
-                color=GREEN,
-                lw=1,
-                marker="o",
-                ms=3.2,
-                zorder=3,
-            )
+    # (c) Why the prescribed glycolytic flux fails with cofactors kept: the
+    # only glucose-consuming step, hexokinase (R01786, ATP + Glc -> ADP + G6P),
+    # needs an ATP token that the glucose-only inventory does not supply.
+    # The Petri nets reuse the visual language of panel b; the table on the
+    # right reports the search recorded for each arm.
+    c = fig.add_axes([0.53, 0.08, 0.45, 0.44])
+    c.set(xlim=(0, 6.0), ylim=(0, 2.5))
+    c.axis("off")
+    plain_heading(c, "c", y=1.0)
+    c.text(1.95, 2.3, "HK at step 0", ha="center", fontsize=8.5)
+    c.text(4.75, 2.3, "search from one Glc", ha="center", fontsize=8.5)
+    c.plot([3.45, 6.0], [2.17, 2.17], color=INK, lw=0.5)
+    for cy, row in zip((1.6, 0.55), rep["currency_arms"]):
+        kept = not row["drop_currency"]
+        outcome = row["outcome"]
+        ok = outcome["status"] == "realizable"
+        assert outcome["initial_marking"] == {"alpha-D-Glucose": 1}
+        assert outcome["requested_flux"]["R01786"] == 1
+        assert ok != kept  # kept: unrealizable; removed: certified
+        c.text(0.0, cy, "cofactors\nkept" if kept else "cofactors\nremoved",
+               va="center", fontsize=8.5, linespacing=1.0)
+        tr = (1.95, cy)
+        ins = [((1.45, cy + 0.27), 1, "Glc"), ((1.45, cy - 0.27), 0, "ATP")]
+        outs = [((2.45, cy + 0.27), "G6P"), ((2.45, cy - 0.27), "ADP")]
+        if not kept:
+            ins, outs = [((1.45, cy), 1, "Glc")], [((2.45, cy), "G6P")]
+        for xy, tokens, name in ins:
+            place(c, *xy, tokens)
+            arrow(c, xy, tr, GRAY, 0.8, shrink=5)
+            c.text(xy[0] - 0.17, xy[1], name, ha="right", va="center",
+                   fontsize=7)
+        for xy, name in outs:
+            place(c, *xy)
+            arrow(c, tr, xy, GRAY, 0.8, shrink=5)
+            c.text(xy[0] + 0.17, xy[1], name, ha="left", va="center",
+                   fontsize=7)
+        c.plot(*tr, marker="|", ms=15, mew=3, color=INK, zorder=3)
+
+        # State space actually reached: one node per marking on the path.
+        x0, x1 = 3.62, 5.62
+        start = dict(ms=6.5, mfc="white", mec=INK, mew=0.9, zorder=4)
+        if not ok:
+            # Caption: "exhaustive search ends after one state".
+            assert outcome["exhaustive"] and outcome["max_depth_reached"] == 0
+            assert outcome["explored_states"] == 1
+            c.plot(x0, cy, "o", **start)
+            c.text(x0, cy + 0.13, "Glc", ha="center", va="bottom", fontsize=7)
+            # Blocked first firing: an arrow stub ending in a bar.
+            c.plot([x0 + 0.1, x0 + 0.62], [cy, cy], color=GRAY, lw=0.8)
+            c.plot([x0 + 0.62] * 2, [cy - 0.1, cy + 0.1], color=INK, lw=1.2)
+            c.text(x0 + 0.44, cy + 0.04, "HK", ha="center", va="bottom",
+                   fontsize=7)
+            verdict(c, x0 + 0.95, cy, False, 9, vector=True)
         else:
-            c.plot([0], [y], color=GRAY, marker="o", ms=3.2)
-            verdict(c, 1.0, y, False, 9, vector=True)
-    c.set_yticks([])
-    c.set_xticks([0, 5, 10, 15])
-    c.set_xlabel("Firing step")
-    c.tick_params(axis="y", which="both", left=False, right=False)
+            assert outcome["independent_replay_ok"]
+            depth = len(outcome["certificate"])
+            assert depth == outcome["max_depth_reached"]
+            assert outcome["explored_states"] == 30  # quoted in the caption
+            xs = np.linspace(x0, x1, depth + 1)
+            c.plot(xs, [cy] * len(xs), color=INK, lw=0.8, zorder=2)
+            c.plot(xs[1:-1], [cy] * (depth - 1), "o", ms=2.4, color=INK,
+                   mew=0, zorder=3)
+            c.plot(xs[0], cy, "o", **start)
+            # Final marking: two pyruvate tokens (ringed dot, as in Fig. 5b).
+            c.plot(xs[-1], cy, "o", ms=6.5, mfc="white", mec=INK, mew=0.9,
+                   zorder=4)
+            c.plot(xs[-1], cy, "o", ms=3.0, color=INK, mew=0, zorder=5)
+            c.text(xs[-1], cy + 0.13, "2 Pyr", ha="center", va="bottom",
+                   fontsize=7)
+            c.text(xs[0], cy + 0.13, "Glc", ha="center", va="bottom",
+                   fontsize=7)
+            verdict(c, x1 + 0.28, cy, True, 9, vector=True)
     save(fig, out, "representation_sensitivity")
 
 
@@ -322,40 +358,10 @@ def scaling(out, review, archived):
 
 def formose_figure(out, evidence, supplement):
     configure_arial()
-    fig = plt.figure(figsize=(7.2, 4.0))
-    route = fig.add_axes([0.06, 0.61, 0.90, 0.35])
+    fig = plt.figure(figsize=(7.2, 3.65))
+    route = fig.add_axes([0.06, 0.62, 0.90, 0.34])
     formose_route(route, supplement)
-    a = fig.add_axes([0.075, 0.11, 0.235, 0.44])
-    b = fig.add_axes([0.415, 0.11, 0.235, 0.44])
-    growth = evidence["growth"]
-    for key, label, color, marker, face, dash in [
-        ("n_species", "Species", "black", "o", "black", "-"),
-        ("n_reactions", "Reactions", "black", "s", "white", "--"),
-    ]:
-        x = [r["iteration"] for r in growth]
-        y = [r[key] for r in growth]
-        a.plot(x, y, color=color, marker=marker, mfc=face, mec="black", ms=4,
-               lw=0.8, ls=dash, label=label)
-        a.annotate(
-            str(y[-1]),
-            (x[-1], y[-1]),
-            xytext=(-7, 2) if key == "n_reactions" else (7, -3),
-            textcoords="offset points",
-            ha="right" if key == "n_reactions" else "left",
-            color=color,
-            fontsize=8,
-        )
-    a.set(
-        xlabel="Expansion iteration",
-        ylabel="Count",
-        xticks=[1, 2, 3, 4],
-        xlim=(0.8, 4.25),
-        ylim=(0, 51),
-    )
-    a.legend(loc="upper left", handlelength=2.2,
-             borderpad=0.4, fontsize=8)
-    a.minorticks_off()
-    plain_heading(a, "b", y=1.02)
+    b = fig.add_axes([0.12, 0.14, 0.34, 0.42])
     entries = evidence["carbon_conservation"]["entries"]
     # A separate small point for each species avoids hiding multiplicities.
     # Horizontal offsets separate coincident observations; vertical values are exact.
@@ -388,11 +394,11 @@ def formose_figure(out, evidence, supplement):
         fontsize=8,
     )
     b.minorticks_off()
-    plain_heading(b, "c", y=1.02)
+    plain_heading(b, "b", y=1.02)
 
-    # (d) Initial inventories in precursor space.  Dashed lines join inventories
+    # (c) Initial inventories in precursor space.  Dashed lines join inventories
     # of equal carbon; each inventory carries a T4 (left) and T6 (right) mark.
-    c = fig.add_axes([0.755, 0.11, 0.225, 0.44])
+    c = fig.add_axes([0.64, 0.14, 0.32, 0.42])
     for carbon in (3, 4, 6):
         xs = np.array([0, carbon])
         c.plot(xs, (carbon - xs) / 2, ls="--", lw=0.5, color="black", zorder=1)
@@ -436,5 +442,5 @@ def formose_figure(out, evidence, supplement):
     for dx, name, ha in ((-0.1, "T$_4$", "right"), (0.1, "T$_6$", "left")):
         c.text(dx, 3.24, name, ha=ha, va="bottom", fontsize=7.5)
     c.minorticks_off()
-    plain_heading(c, "d", y=1.02)
+    plain_heading(c, "c", y=1.02)
     save(fig, out, "formose")

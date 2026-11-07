@@ -3,6 +3,8 @@
     0
   ],
   "depth": 6,
+  "engine": "RDKit C++ reaction SMARTS via CRNExpand native adapter",
+  "is_synreactor_dpo": false,
   "median_request_seconds": 4.153782481997041,
   "n_reactions": 11239,
   "n_species": 10572,

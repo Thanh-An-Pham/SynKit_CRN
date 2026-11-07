@@ -135,8 +135,8 @@ def verify_document_content():
     si_text = (PAPER / "SI/si.tex").read_text()
     sections = re.findall(r"\\section\{([^}]+)\}", si_text)
     assert sections == [
-        "Software architecture and analysis interfaces",
-        "Reference-network validation and numerical audit",
+        "Python interface example",
+        "Reference-network validation and numerical comparison",
         "Computational cost across network families",
         "BioModels: structural SBML interoperability",
         "KEGG: module structure and glycolysis controls",
@@ -148,8 +148,7 @@ def verify_document_content():
         "fig:structural_landscape", "Automorphisms", "Jacobian",
     ):
         assert obsolete not in si_text, obsolete
-    assert r"\input{../Figure/arch.tex}" in si_text
-    assert r"\label{fig:synkit_architecture}" in si_text
+    assert r"\input{../Figure/arch.tex}" not in si_text
     for source, target, prefix in (
         (main_text, si_text, "supp:"), (si_text, main_text, "main:")
     ):
@@ -377,9 +376,14 @@ def main():
 
     formose = json.loads((PAPER / "analysis/crn-formose.json").read_text())
     assert all(
-        row["rule_backend"] == "native" and row["hydrogen_model"] == "lewis"
+        row["rule_backend"] == "synreactor-native"
+        and row["engine"] == "synkit_dpo_cpp"
+        and row["controller"] == "cpp"
+        and row["implicit_h"] is True
         for row in formose["growth"]
-    ), "Formose growth must use native expansion with hydrogen counts"
+    ), "Formose growth must execute the genuine full C++ SynReactor DPO path"
+    dpo_build = formose["environment"]["crn_dpo_expander"]
+    assert dpo_build and dpo_build["build_sha256"] and dpo_build["kernel_library_sha256"]
     hydrogen = json.loads((PAPER / "analysis/crn-hydrogen.json").read_text())
     assert hydrogen["schema"] == "synkit.crn-hydrogen/1"
     assert [row["depth"] for row in hydrogen["formose"]] == [4, 5, 6]
@@ -446,11 +450,30 @@ def main():
         == supplement["script_sha256"]
     )
     verify_document_content()
+    def figure_source(path, seen=None):
+        seen = set() if seen is None else seen
+        if path in seen or not path.is_file():
+            return False
+        seen.add(path)
+        source = path.read_text()
+        if r"\begin{tikzpicture}" in source:
+            return True
+        if not re.search(r"\\documentclass(?:\[[^\]]*\])?\{standalone\}", source):
+            return False
+        for name in re.findall(r"\\input\{([^}]+)\}", source):
+            child = path.parent / name
+            if not child.suffix:
+                child = child.with_suffix(".tex")
+            if child.resolve().parent == (PAPER / "Figure").resolve() and figure_source(child, seen):
+                return True
+        return False
     for path in (PAPER / "Figure").iterdir():
-        if path.name == "synstyle.tex":
+        if (path.name == "synstyle.tex"
+                or path.suffix in {".aux", ".log", ".out", ".fls", ".fdb_latexmk"}
+                or path.name.endswith(".synctex.gz")):
             continue
         assert path.suffix == ".pdf" or (
-            path.suffix == ".tex" and r"\begin{tikzpicture}" in path.read_text()
+            path.suffix == ".tex" and figure_source(path)
         ), f"Non-figure file in Figure/: {path.name}"
     glycolysis_figure = json.loads(
         (PAPER / "analysis/glycolysis_analysis.json").read_text()

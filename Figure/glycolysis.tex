@@ -52,10 +52,10 @@
 \newcommand{\gcov}{\textcolor{scAccent}{$\checkmark$}}
 \newcommand{\gunc}{\textcolor{scInkM}{$\times$}}
 
-\def\ry{-4.15}          % top edge of the bottom row
+\def\ry{-4.25}          % top edge of the bottom row
 
 \begin{tikzpicture}[syn,x=1.258384cm]
-\scCanvas{10.2}
+\scCanvas{10.9}
 
 % =========================================================================
 % (a) module topology
@@ -70,8 +70,8 @@
 \node[gmet] (g6p)  at (1.92,-1.48) {\gchain{6}{1}\\G6P};
 \node[gmet] (f6p)  at (3.29,-1.48) {\gchain{6}{1}\\F6P};
 \node[gmet] (fbp)  at (4.56,-1.48) {\gchain{6}{2}\\FBP};
-\node[gmet] (dhap) at (5.72,-1.05) {\gchain{3}{1}\\DHAP};
-\node[gmet] (gap)  at (5.72,-2.08) {\gchain{3}{1}\\GAP};
+\node[gmet] (dhap) at (5.72,-0.98) {\gchain{3}{1}\\DHAP};
+\node[gmet] (gap)  at (5.72,-1.98) {\gchain{3}{1}\\GAP};
 
 % Labels ride above their edges: at 6 pt they do not fit between the nodes.
 \draw[gpath] (glc) -- (g6p) node[glabel,midway,yshift=3.4mm] {HK $\times3$};
@@ -81,27 +81,31 @@
 \node[glabel] at (5.03,-0.91) {ALD};
 \draw[gpath] (fbp) -- (gap);
 \draw[gpath] (dhap) to[out=-12,in=12,looseness=1.8] (gap);
-\node[glabel] at (6.18,-1.64) {TPI};
+\node[glabel] at (6.18,-1.56) {TPI};
 
-\node[gmet] (bpg) at (5.20,-3.15) {\gchain{3}{2}\\BPG};
-\node[gmet] (pg3) at (4.30,-3.15) {\gchain{3}{1}\\3PG};
-\node[gmet] (pg2) at (3.40,-3.15) {\gchain{3}{1}\\2PG};
-\node[gmet] (pep) at (2.50,-3.15) {\gchain{3}{1}\\PEP};
-\node[gmet] (pyr) at (1.55,-3.15) {\gchain{3}{0}\\Pyr};
+% Lower chain runs back right to left under the triose pair, so GAPDH is a
+% short vertical step and the ferredoxin bypass can arc over PGK.
+\node[gmet] (bpg) at (5.72,-3.30) {\gchain{3}{2}\\BPG};
+\node[gmet] (pg3) at (4.62,-3.30) {\gchain{3}{1}\\3PG};
+\node[gmet] (pg2) at (3.62,-3.30) {\gchain{3}{1}\\2PG};
+\node[gmet] (pep) at (2.62,-3.30) {\gchain{3}{1}\\PEP};
+\node[gmet] (pyr) at (1.62,-3.30) {\gchain{3}{0}\\Pyr};
 
-\draw[gpath] (gap) -- (bpg);
-\node[glabel,anchor=west] at (5.62,-2.86) {GAPDH $\times2$};
-\draw[gpath] (bpg) -- (pg3) node[glabel,midway,yshift=3.2mm] {PGK};
+\draw[gpath] (gap) -- (bpg) node[glabel,midway,anchor=west,xshift=0.6mm]
+  {GAPDH $\times2$};
+\draw[gpath] (bpg) -- (pg3) node[glabel,midway,yshift=-3.0mm] {PGK};
 \draw[gpath] (pg3) -- (pg2) node[glabel,midway,yshift=3.2mm] {PGM};
 \draw[gpath] (pg2) -- (pep) node[glabel,midway,yshift=3.2mm] {ENO};
 \draw[gpath] (pep) -- (pyr) node[glabel,midway,yshift=3.2mm] {PK};
 
-\node[catalyst,font=\scSmall,text=black] (poly) at (0.66,-2.42) {PolyP};
-\draw[cat,dashed] (poly.north) to[out=80,in=-100] ($(glc)!0.50!(g6p)$);
+% Ferredoxin bypass: GAP straight to 3PG, skipping BPG.
+\draw[gbypass] (gap.west) to[out=180,in=90,looseness=0.9] (pg3.north);
+\node[font=\scSmall,text=black,inner sep=0.8pt,align=center]
+  at (5.24,-2.68) {Fd$_{\rm ox}\!\to\,$Fd$_{\rm red}$\\bypass};
 
-\draw[gbypass] (gap.south) to[out=-80,in=18,looseness=1.1] (pg3.east);
-\node[font=\scSmall,text=black,fill=white,inner sep=1pt] at (4.58,-3.78)
-  {Fd$_{\rm ox}\!\to$Fd$_{\rm red}$ bypass};
+% Shared polyphosphate donor feeds the HK step.
+\node[catalyst,font=\scSmall,text=black] (poly) at (1.235,-2.30) {PolyP};
+\draw[cat,dashed] (poly.north) -- ($(glc)!0.50!(g6p)$);
 \end{scope}
 
 % (b) Full-width token map generated from the recorded certificate trajectory.

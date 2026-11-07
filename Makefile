@@ -11,14 +11,15 @@ REVIEW_ASSETS := Figure/visual_abstract.pdf \
 REPLAY_ASSETS := Figure/glycolysis_replay.pdf
 FIGURE_SOURCES := Figure/synstyle.tex Figure/arch.tex Figure/glycolysis.tex \
 	Figure/formose_chemistry.tex Figure/deficiency.tex Figure/analysis_overview.pdf \
-	Figure/performance_diagnostics.pdf Figure/formose_expansion.pdf $(REVIEW_ASSETS) $(REPLAY_ASSETS)
+	Figure/performance_diagnostics.pdf Figure/formose_dpo.pdf $(REVIEW_ASSETS) $(REPLAY_ASSETS)
 
 .PHONY: all final-main evidence-check document-check sync-values glycolysis-analysis review-experiments clean
 .NOTPARALLEL: all
 all: sync-values SI/si.pdf final-main evidence-check
 
-Figure/formose_expansion.pdf: analysis/scripts/formose_expansion_assets.py analysis/formose-expansion/comparison.json analysis/formose-expansion/route-comparison.json analysis/formose-expansion/variants.json
-	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) analysis/scripts/formose_expansion_assets.py
+
+Figure/formose_dpo.pdf: analysis/scripts/formose_dpo_assets.py analysis/scripts/result_style.py analysis/formose-expansion/dpo/comparison.json
+	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) analysis/scripts/formose_dpo_assets.py
 
 sync-values:
 	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) analysis/scripts/sync_manuscript.py

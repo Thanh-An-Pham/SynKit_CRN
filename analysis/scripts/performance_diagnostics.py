@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import result_style
-from schematics import arc, place, transition
 
 BLUE = "#0072B2"
 GREEN = "#009E73"
@@ -91,6 +90,23 @@ def task_panel(
             zorder=3,
         )
 
+    if task == "minimal_siphons":
+        for item in rows:
+            if item["family"] != "random_sparse" or item["seconds"] is None:
+                continue
+            ha, dx = ("right", -5) if item["n_species"] > 300 else ("left", 5)
+            ax.annotate(
+                str(item["result"]),
+                (item["n_species"], item["seconds"]),
+                xytext=(dx, 4),
+                textcoords="offset points",
+                ha=ha,
+                va="bottom",
+                fontsize=7,
+                color="black",
+                zorder=6,
+            )
+
     limited = [item for item in measurements if item["task"] == task
                and not item.get("complete", item["seconds"] is not None)
                and not item.get("error")]
@@ -123,43 +139,15 @@ def task_panel(
 
 
 def family_key(ax: plt.Axes) -> None:
-    """Draw each benchmark family beside the line style that plots it."""
-    ax.set(xlim=(0, 30), ylim=(-1.2, 1.25), aspect="equal")
+    """One-line legend for the three benchmark families."""
+    ax.set(xlim=(0, 30), ylim=(-0.7, 0.7))
     ax.axis("off")
-    r = 0.22
     for x0, family in ((0.4, "chain"), (10.6, "reversible_chain"), (20.8, "random_sparse")):
         label, (face, dash), marker = FAMILIES[family]
-        ax.plot([x0, x0 + 1.6], [0, 0], color="black", ls=dash, lw=0.8)
-        ax.plot([x0 + 0.8], [0], marker=marker, mfc=face, mec="black", mew=0.6,
+        ax.plot([x0, x0 + 1.8], [0, 0], color="black", ls=dash, lw=0.8)
+        ax.plot([x0 + 0.9], [0], marker=marker, mfc=face, mec="black", mew=0.6,
                 ms=3.6, color="black")
-        nx = x0 + 2.6
-        if family == "random_sparse":
-            # bimolecular reactions S_a + S_b -> S_c
-            pts = {"a": (nx, 0.45), "b": (nx, -0.45), "c": (nx + 2.0, 0.0),
-                   "d": (nx + 2.0, 0.9), "e": (nx + 4.0, 0.45)}
-            for x, y in pts.values():
-                place(ax, x, y, r=r)
-            for ins, t, out in ((("a", "b"), (nx + 1.0, 0.0), "c"),
-                                (("c", "d"), (nx + 3.0, 0.45), "e")):
-                transition(ax, *t, h=0.3)
-                for k in ins:
-                    arc(ax, pts[k], t, shrink_a=4, shrink_b=1.5)
-                arc(ax, t, pts[out], shrink_a=1.5, shrink_b=4)
-            ax.text(nx + 4.5, 0.45, "...", va="center", fontsize=8)
-        else:
-            for i in range(4):
-                place(ax, nx + 1.35 * i, 0, r=r)
-            for i in range(3):
-                a, b = (nx + 1.35 * i, 0), (nx + 1.35 * (i + 1), 0)
-                if family == "chain":
-                    arc(ax, a, b, shrink_a=4, shrink_b=4)
-                else:
-                    arc(ax, (a[0], 0.07), (b[0], 0.07), shrink_a=4, shrink_b=4)
-                    arc(ax, (b[0], -0.07), (a[0], -0.07), shrink_a=4, shrink_b=4)
-            ax.text(nx + 4.4, 0.0, "...", va="center", fontsize=8)
-        ax.text(x0 + 4.6, -0.85, label, ha="center", va="top", fontsize=8,
-                style="italic")
-
+        ax.text(x0 + 2.1, 0, label, va="center", fontsize=8, style="italic")
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -173,9 +161,9 @@ def main() -> None:
 
     configure()
     evidence = load(args.evidence)
-    fig, axes = plt.subplots(2, 2, figsize=(7.2, 6.4), constrained_layout=False)
+    fig, axes = plt.subplots(2, 2, figsize=(7.2, 5.4), constrained_layout=False)
     fig.subplots_adjust(
-        left=0.11, right=0.985, top=0.94, bottom=0.13, wspace=0.28, hspace=0.38
+        left=0.11, right=0.985, top=0.95, bottom=0.10, wspace=0.26, hspace=0.24
     )
 
     task_panel(
@@ -194,7 +182,7 @@ def main() -> None:
         (1e-1, 700),
     )
 
-    family_key(fig.add_axes([0.06, 0.0, 0.90, 0.085]))
+    family_key(fig.add_axes([0.06, 0.005, 0.90, 0.045]))
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(args.output, facecolor="white")

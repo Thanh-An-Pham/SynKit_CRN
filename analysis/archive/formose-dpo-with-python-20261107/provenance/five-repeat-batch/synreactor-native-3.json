@@ -1,0 +1,259 @@
+{
+  "backend": "synreactor-native",
+  "controller": "cpp",
+  "depth": 3,
+  "dpo_report": {
+    "binding_elapsed_ns": 84248,
+    "binding_tests": 25,
+    "component_policy": "union",
+    "controller": "cpp",
+    "engine": "synkit_dpo_cpp",
+    "executable": "/tmp/synkit-full-dpo-controller/synkit_dpo_crn_6dea09e230d7508b",
+    "hydrogen_model": "implicit",
+    "kernel": "synkit_dpo_cpp",
+    "kernel_abi": 1,
+    "kernel_calls": 10,
+    "kernel_elapsed_ns": 75056,
+    "protocol": 1,
+    "radical_policy": "ignore",
+    "rdkit_version": "2026.03.1",
+    "rules": [],
+    "status": "complete",
+    "steps": [
+      {
+        "applications": 1,
+        "bindings": 9,
+        "candidate_mixtures": 1,
+        "capped_rules": [],
+        "events": 1,
+        "frontier": 2,
+        "outcomes": 1,
+        "pool": 2,
+        "step": 1,
+        "task_budget_exhausted": false,
+        "tasks": 1
+      },
+      {
+        "applications": 3,
+        "bindings": 15,
+        "candidate_mixtures": 3,
+        "capped_rules": [],
+        "events": 3,
+        "frontier": 1,
+        "outcomes": 6,
+        "pool": 3,
+        "step": 2,
+        "task_budget_exhausted": false,
+        "tasks": 3
+      },
+      {
+        "applications": 6,
+        "bindings": 30,
+        "candidate_mixtures": 6,
+        "capped_rules": [],
+        "events": 6,
+        "frontier": 2,
+        "outcomes": 8,
+        "pool": 5,
+        "step": 3,
+        "task_budget_exhausted": false,
+        "tasks": 6
+      }
+    ],
+    "steps_run": 3,
+    "stop_reason": "repeats"
+  },
+  "engine": "SynReactor DPO; full matches; implicit H",
+  "kernel": "cpp",
+  "n_reactions": 10,
+  "n_species": 9,
+  "radical_policy": "ignore",
+  "samples": [
+    0.022373546002199873,
+    0.022207355999853462,
+    0.022876725997775793,
+    0.02208981302101165,
+    0.021860650012968108
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
+    "species": [
+      "C=O",
+      "O=CC(O)C(O)C(O)C(O)CO",
+      "O=CC(O)C(O)C(O)CO",
+      "O=CC(O)C(O)CO",
+      "O=CC(O)CO",
+      "O=CCO",
+      "OC=C(O)C(O)CO",
+      "OC=C(O)CO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete"
+}

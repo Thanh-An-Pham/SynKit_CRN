@@ -107,7 +107,7 @@ def biomodels_panel(ax, evidence):
     ax.minorticks_off()
     ax.legend(loc="lower right", handletextpad=0.3, borderaxespad=0.6,
               borderpad=0.4)
-    inset_label(ax, "b", y=0.99)
+    inset_label(ax, "a", y=0.99)
 
 
 def kegg_panel(ax, evidence):
@@ -148,7 +148,7 @@ def kegg_panel(ax, evidence):
     )
     ax.minorticks_off()
     ax.tick_params(axis="y", which="both", left=False, right=False)
-    inset_label(ax, "c", x=0.9)
+    inset_label(ax, "b", x=0.9)
 
 
 def main():

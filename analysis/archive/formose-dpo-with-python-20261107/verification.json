@@ -1,0 +1,272 @@
+{
+  "completed_networks": [
+    {
+      "depth": 1,
+      "backend": "synreactor-native",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_cpp",
+      "controller": "cpp"
+    },
+    {
+      "depth": 1,
+      "backend": "synreactor-python",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_python",
+      "controller": "python"
+    },
+    {
+      "depth": 1,
+      "backend": "mod",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "mod",
+      "controller": "external"
+    },
+    {
+      "depth": 1,
+      "backend": "molfoundry",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "molfoundry",
+      "controller": "external"
+    },
+    {
+      "depth": 2,
+      "backend": "synreactor-native",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_cpp",
+      "controller": "cpp"
+    },
+    {
+      "depth": 2,
+      "backend": "synreactor-python",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_python",
+      "controller": "python"
+    },
+    {
+      "depth": 2,
+      "backend": "mod",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "mod",
+      "controller": "external"
+    },
+    {
+      "depth": 2,
+      "backend": "molfoundry",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "molfoundry",
+      "controller": "external"
+    },
+    {
+      "depth": 3,
+      "backend": "synreactor-native",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_cpp",
+      "controller": "cpp"
+    },
+    {
+      "depth": 3,
+      "backend": "synreactor-python",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_python",
+      "controller": "python"
+    },
+    {
+      "depth": 3,
+      "backend": "mod",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "mod",
+      "controller": "external"
+    },
+    {
+      "depth": 3,
+      "backend": "molfoundry",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "molfoundry",
+      "controller": "external"
+    },
+    {
+      "depth": 4,
+      "backend": "synreactor-native",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_cpp",
+      "controller": "cpp"
+    },
+    {
+      "depth": 4,
+      "backend": "synreactor-python",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_python",
+      "controller": "python"
+    },
+    {
+      "depth": 4,
+      "backend": "mod",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "mod",
+      "controller": "external"
+    },
+    {
+      "depth": 4,
+      "backend": "molfoundry",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "molfoundry",
+      "controller": "external"
+    },
+    {
+      "depth": 5,
+      "backend": "synreactor-native",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "46884867f0c02c8972a41c92a4219ea49e7e40e5f076b969b6020591ec0e4a51",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_cpp",
+      "controller": "cpp"
+    },
+    {
+      "depth": 5,
+      "backend": "synreactor-python",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "46884867f0c02c8972a41c92a4219ea49e7e40e5f076b969b6020591ec0e4a51",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_python",
+      "controller": "python"
+    },
+    {
+      "depth": 5,
+      "backend": "mod",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "46884867f0c02c8972a41c92a4219ea49e7e40e5f076b969b6020591ec0e4a51",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "mod",
+      "controller": "external"
+    },
+    {
+      "depth": 5,
+      "backend": "molfoundry",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "46884867f0c02c8972a41c92a4219ea49e7e40e5f076b969b6020591ec0e4a51",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "molfoundry",
+      "controller": "external"
+    },
+    {
+      "depth": 6,
+      "backend": "synreactor-native",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "synkit_dpo_cpp",
+      "controller": "cpp"
+    },
+    {
+      "depth": 6,
+      "backend": "mod",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "mod",
+      "controller": "external"
+    },
+    {
+      "depth": 6,
+      "backend": "molfoundry",
+      "network_verified": true,
+      "carbon_balance_verified": true,
+      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6",
+      "warmups_verified": 3,
+      "measurements_verified": 20,
+      "engine": "molfoundry",
+      "controller": "external"
+    }
+  ],
+  "verified_expansions": 529,
+  "failures": [
+    {
+      "backend": "synreactor-python",
+      "depth": 6,
+      "failed_index": 0,
+      "failed_phase": "warmup",
+      "failure": "Per-expansion time limit reached",
+      "failure_stage": "expansion",
+      "log": "synreactor-python-6.log",
+      "result": "synreactor-python-6.json",
+      "status": "timeout",
+      "version": "1.6.5"
+    }
+  ]
+}

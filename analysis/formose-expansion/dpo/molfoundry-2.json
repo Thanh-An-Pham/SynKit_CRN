@@ -1,0 +1,229 @@
+{
+  "audits": [
+    {
+      "index": 0,
+      "phase": "warmup",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 1,
+      "phase": "warmup",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 2,
+      "phase": "warmup",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 0,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 1,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 2,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 3,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 4,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 5,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 6,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 7,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 8,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 9,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 10,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 11,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 12,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 13,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 14,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 15,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 16,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 17,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 18,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    },
+    {
+      "index": 19,
+      "phase": "measured",
+      "snapshot_sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c"
+    }
+  ],
+  "backend": "molfoundry",
+  "depth": 2,
+  "hydrogen_representation": "explicit vertices",
+  "n_reactions": 4,
+  "n_species": 5,
+  "samples": [
+    0.010081425018142909,
+    0.009828790003666654,
+    0.007178391009801999,
+    0.00528351598768495,
+    0.005224116990575567,
+    0.004114432987989858,
+    0.005238619982264936,
+    0.0023691350070293993,
+    0.002910063019953668,
+    0.003019222989678383,
+    0.004312569013563916,
+    0.003861614008201286,
+    0.0025636560167185962,
+    0.0033719309722073376,
+    0.004692210000939667,
+    0.004072627983987331,
+    0.0029788819956593215,
+    0.0025402379978913814,
+    0.0025219630042556673,
+    0.0027325989794917405
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "9b8177411b658784018357234328d61886e64cccddfa83ad3283fb9407106f8c",
+    "species": [
+      "C=O",
+      "O=CC(O)C(O)CO",
+      "O=CC(O)CO",
+      "O=CCO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete",
+  "version": "0.1.11",
+  "warmup_samples": [
+    0.039893405977636576,
+    0.013257020997116342,
+    0.011084227997343987
+  ]
+}

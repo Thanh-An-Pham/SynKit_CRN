@@ -1,0 +1,215 @@
+{
+  "audits": [
+    {
+      "index": 0,
+      "phase": "warmup",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 1,
+      "phase": "warmup",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 2,
+      "phase": "warmup",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 0,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 1,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 2,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 3,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 4,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 5,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 6,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 7,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 8,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 9,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 10,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 11,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 12,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 13,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 14,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 15,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 16,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 17,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 18,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 19,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    }
+  ],
+  "backend": "synreactor-native",
+  "controller": "cpp",
+  "depth": 1,
+  "dpo_report": {
+    "binding_elapsed_ns": 28341,
+    "binding_tests": 10,
+    "component_policy": "union",
+    "controller": "cpp",
+    "engine": "synkit_dpo_cpp",
+    "executable": "/tmp/synkit-full-dpo-controller/synkit_dpo_crn_6dea09e230d7508b",
+    "hydrogen_model": "implicit",
+    "kernel": "synkit_dpo_cpp",
+    "kernel_abi": 1,
+    "kernel_calls": 1,
+    "kernel_elapsed_ns": 2476,
+    "protocol": 1,
+    "radical_policy": "ignore",
+    "rdkit_version": "2026.03.1",
+    "rules": [],
+    "status": "complete",
+    "steps": [
+      {
+        "applications": 1,
+        "bindings": 9,
+        "candidate_mixtures": 1,
+        "capped_rules": [],
+        "events": 1,
+        "frontier": 2,
+        "outcomes": 1,
+        "pool": 2,
+        "step": 1,
+        "task_budget_exhausted": false,
+        "tasks": 1
+      }
+    ],
+    "steps_run": 1,
+    "stop_reason": "repeats"
+  },
+  "hydrogen_representation": "implicit counts",
+  "kernel": "cpp",
+  "n_reactions": 1,
+  "n_species": 3,
+  "radical_policy": "ignore",
+  "samples": [
+    0.035399133019382134,
+    0.03455928902258165,
+    0.03413204598473385,
+    0.03413971702684648,
+    0.024770341988187283,
+    0.014659224019851536,
+    0.015182165981968865,
+    0.015538320993073285,
+    0.015135997004108503,
+    0.014898185996571556,
+    0.015283182001439855,
+    0.030097871989710256,
+    0.014887716009980068,
+    0.014759290002984926,
+    0.015036972996313125,
+    0.015189360012300313,
+    0.014963496010750532,
+    0.01469351100968197,
+    0.015073269023559988,
+    0.01551326402113773
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+    "species": [
+      "C=O",
+      "O=CCO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete",
+  "version": "1.6.5",
+  "warmup_samples": [
+    0.1178276989958249,
+    0.03257402198505588,
+    0.03612458900897764
+  ]
+}

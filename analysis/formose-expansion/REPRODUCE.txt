@@ -1,3 +1,68 @@
+Primary comparison: native SynReactor DPO, MØD and MolFoundry
+
+Primary results: dpo/comparison.json and Figure/formose_dpo.pdf.
+CRNExpand(rule_backend="synreactor-native") selects SynKit's full C++ DPO
+controller and kernel. The paper compares this implementation with MØD and
+MolFoundry at depths 1--6.
+
+Build the native controller using the public API, with a molecular IO SDK
+(the reaction engine is not linked):
+  from synkit.Synthesis.Reactor import build_native_reactor
+  from synkit.CRN.Construct import build_native_dpo_expander
+  kernel = build_native_reactor("/tmp/synkit-dpo-kernel")
+  executable = build_native_dpo_expander("/tmp/synkit-dpo-controller", rdkit_dir="/path/to/rdkit-sdk", reactor_library=kernel)
+  print(kernel, executable)
+
+Then use the printed content-addressed paths:
+  PYTHONPATH=/path/to/SynKit python analysis/scripts/benchmark_formose_dpo.py --synkit-root /path/to/SynKit --library /path/to/kernel.so --dpo-expander /path/to/controller --external --repeats 20 --warmups 3 --timeout 180
+
+The driver runs native SynReactor, MØD and MolFoundry: three untimed warm-ups
+followed by 20 measurements per completed configuration. Only one expansion
+runs at a time, pinned to the same logical CPU. Tool order rotates each round.
+Each expansion has a 180-second deadline; independent audits have a separate
+deadline. The first failure stops that configuration. The address-space limit
+is 8 GiB per process; BLAS/OpenMP thread settings are one. No timing is
+extrapolated.
+
+Imports and engine startup are excluded, and the native controller persists
+between builds. Every call creates new rules, seeds and a network. Rule/seed
+preparation, molecular identity and network construction are timed. Fixed
+mapped-rule-to-GML translation and independent output audits are excluded.
+Every successful warm-up and measurement is audited against the exact matched
+canonical species and directed stoichiometric reaction sets, outside timing.
+Per-configuration JSON files retain snapshots and an audit hash for every run.
+
+The primary report retains the existing native/MØD/MolFoundry measurements
+unchanged. It is a selection from the complete measured batch archived in
+analysis/archive/formose-dpo-with-python-20261107/. Its selection metadata
+records the original report path and hash; script_source identifies the actual
+measured driver. The verifier checks that every selected result and schedule
+event matches that archive. The archived batch includes the removed reference
+implementations; they are excluded from the active driver, report and paper.
+New runs save the measured driver under dpo/provenance/drivers/ by its hash.
+
+The separate depth-seven binding-limit attempt is not part of the completed
+runtime series. Older five-repeat results and diagnostic controls are retained
+in the archive. Prepared-input microbenchmarks and interface profiles remain
+diagnostics, separate from the primary full-API timings.
+
+The formose benchmark explicitly selects union component matching and ignores
+synthetic radical guards of generic mapped carbon patterns. Host radical
+states retain zero deltas; strict guards remain the public default otherwise.
+The supported native profile uses persistent concrete heavy atoms, no
+stereochemistry/isotopes/aromaticity, and standard sigma/pi bond partitions.
+Unsupported states fail rather than falling back to another reaction engine.
+
+Regenerate the table/figure and verify saved network identities:
+  PYTHONPATH=analysis/scripts python analysis/scripts/formose_dpo_assets.py
+  make all
+
+Complete paper evidence was rerun against the native DPO source. Earlier
+reports are preserved under analysis/archive/pre-native-dpo-20261107/.
+All source fingerprints and kernel/controller manifests accompany the results.
+
+Historical RDKit controls follow below.
+
 Formose expansion comparison, 7 November 2026
 
 Evidence
@@ -58,9 +123,8 @@ This reads interpreter and native-executable paths from comparison.json.
 Use --wait-pid PID when the original benchmark is still running; controls
 wait until that process exits, so timed workers do not run concurrently.
 Both native hydrogen controls use the same RDKit C++ 2026.03.1 build. The
-Python/RDKit baseline uses the existing paper analysis environment's RDKit
-2025.09.3, so its comparison with the native controller includes a version
-difference as well as an implementation difference.
+Python/RDKit baseline also uses RDKit 2026.03.1, as saved in each variant
+report's rdkit_python_version field.
 
 With the normal manuscript analysis environment:
   PYTHONPATH=analysis/scripts python analysis/scripts/formose_expansion_assets.py

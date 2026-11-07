@@ -120,7 +120,7 @@ def structural_audit(out, library):
     """Cross-check complete C++ enumeration with the separate Python search."""
     from siphon_oracle import enumerate_models
     from Experiment.CRN.benchmarks import BENCHMARK_NETWORKS, build_kegg_crn
-    from Experiment.CRN.studies.scaling import generate_network
+    from Experiment.CRN.benchmarks.scaling import generate_network
     from Experiment.CRN.studies.formose_case_study import expand
     from Experiment.CRN.tools.common import environment, source_hashes
     from synkit.CRN import enumerate_semiflows, enumerate_structural_sets, read_sbml

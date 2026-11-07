@@ -1,0 +1,333 @@
+{
+  "audits": [
+    {
+      "index": 0,
+      "phase": "warmup",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 1,
+      "phase": "warmup",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 2,
+      "phase": "warmup",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 0,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 1,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 2,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 3,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 4,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 5,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 6,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 7,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 8,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 9,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 10,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 11,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 12,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 13,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 14,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 15,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 16,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 17,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 18,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    },
+    {
+      "index": 19,
+      "phase": "measured",
+      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+    }
+  ],
+  "backend": "molfoundry",
+  "depth": 3,
+  "hydrogen_representation": "explicit vertices",
+  "n_reactions": 10,
+  "n_species": 9,
+  "samples": [
+    0.008616628998424858,
+    0.0063030520104803145,
+    0.0060067870072089136,
+    0.0057133850059472024,
+    0.007316231989534572,
+    0.006712528003845364,
+    0.005163324996829033,
+    0.006802921008784324,
+    0.004564815986668691,
+    0.0049604410014580935,
+    0.004108200984774157,
+    0.005587117979303002,
+    0.005299654992995784,
+    0.007904744008556008,
+    0.003981793997809291,
+    0.0038371730188373476,
+    0.0038445180107373744,
+    0.0041189510084223,
+    0.0036291909927967936,
+    0.00381176799419336
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "C=O",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CC(O)CO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ],
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CC(O)C(O)CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ],
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
+    "species": [
+      "C=O",
+      "O=CC(O)C(O)C(O)C(O)CO",
+      "O=CC(O)C(O)C(O)CO",
+      "O=CC(O)C(O)CO",
+      "O=CC(O)CO",
+      "O=CCO",
+      "OC=C(O)C(O)CO",
+      "OC=C(O)CO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete",
+  "version": "0.1.11",
+  "warmup_samples": [
+    0.06558516400400549,
+    0.020517419994575903,
+    0.013053592992946506
+  ]
+}

@@ -1,0 +1,79 @@
+% ---------------------------------------------------------------------------
+% network_families.tex --- schematic of the three scaling-benchmark families.
+% Monochrome, serif, no colour; included inline by SI/si.tex.
+% ---------------------------------------------------------------------------
+\begingroup
+\definecolor{nfInk}{HTML}{000000}
+\definecolor{nfGray}{HTML}{595959}
+\newcommand{\nfBody}{\rmfamily\fontsize{7}{8.4}\selectfont\color{nfInk}}
+\newcommand{\nfSmall}{\rmfamily\fontsize{6.5}{7.8}\selectfont\color{nfGray}}
+\tikzset{
+  nfnode/.style={circle,draw=nfInk,fill=white,line width=0.5pt,
+    minimum size=4.4mm,inner sep=0pt,font=\nfBody},
+  nfbar/.style={rectangle,fill=nfInk,draw=none,
+    minimum width=1.2mm,minimum height=3.4mm,inner sep=0pt},
+  nfarc/.style={-{Latex[length=1.5mm,width=1.1mm]},line width=0.5pt,
+    draw=nfInk,shorten >=0.8pt,shorten <=0.8pt},
+}
+\newcommand{\nfhead}[3]{% coordinate, letter, title
+  \node[anchor=base west,inner sep=0pt,
+        font=\rmfamily\fontsize{8}{9}\selectfont\bfseries\color{nfInk}] (nh#2)
+        at ($#1+(0.05,-0.28)$) {(#2)};
+  \node[anchor=base west,inner sep=0pt,
+        font=\rmfamily\fontsize{7.5}{9}\selectfont\bfseries\color{nfInk}]
+        at ($(nh#2.base east)+(0.18,0)$) {#3};}
+
+\begin{tikzpicture}
+\path[use as bounding box] (0,0) rectangle (16.40,-3.20);
+
+% =========================================================================
+% (a) directed chain
+% =========================================================================
+\nfhead{(0,0)}{a}{Directed chain}
+\node[nfnode] (a1) at (0.9,-1.75) {$S_1$};
+\node[nfnode] (a2) at (1.8,-1.75) {$S_2$};
+\node[nfnode] (a3) at (2.7,-1.75) {$S_3$};
+\node[nfnode] (a4) at (3.6,-1.75) {$S_4$};
+\node[nfnode] (a5) at (4.5,-1.75) {$S_5$};
+\foreach \i/\j in {a1/a2,a2/a3,a3/a4,a4/a5}
+  \draw[nfarc] (\i) -- (\j);
+
+% =========================================================================
+% (b) reversible chain
+% =========================================================================
+\nfhead{(5.55,0)}{b}{Reversible chain}
+\node[nfnode] (b1) at (6.15,-1.75) {$S_1$};
+\node[nfnode] (b2) at (7.05,-1.75) {$S_2$};
+\node[nfnode] (b3) at (7.95,-1.75) {$S_3$};
+\node[nfnode] (b4) at (8.85,-1.75) {$S_4$};
+\node[nfnode] (b5) at (9.75,-1.75) {$S_5$};
+\foreach \i/\j in {b1/b2,b2/b3,b3/b4,b4/b5} {
+  \draw[nfarc] (\i) to[bend left=22] (\j);
+  \draw[nfarc] (\j) to[bend left=22] (\i);
+}
+
+% =========================================================================
+% (c) random sparse bimolecular network
+% =========================================================================
+\nfhead{(11.10,0)}{c}{Random sparse bimolecular}
+\node[nfnode] (cA) at (11.55,-1.05) {$A$};
+\node[nfnode] (cB) at (11.95,-2.20) {$B$};
+\node[nfnode] (cC) at (12.85,-0.95) {$C$};
+\node[nfnode] (cD) at (12.95,-2.75) {$D$};
+\node[nfnode] (cE) at (13.95,-1.45) {$E$};
+\node[nfnode] (cF) at (14.45,-2.55) {$F$};
+\node[nfnode] (cG) at (15.55,-1.15) {$G$};
+\node[nfbar] (r1) at (12.35,-1.60) {};
+\node[nfbar] (r2) at (13.40,-2.05) {};
+\node[nfbar] (r3) at (14.85,-1.90) {};
+\draw[nfarc] (cA) -- (r1);
+\draw[nfarc] (cB) -- (r1);
+\draw[nfarc] (r1) -- (cC);
+\draw[nfarc] (cC) -- (r2);
+\draw[nfarc] (cD) -- (r2);
+\draw[nfarc] (r2) -- (cE);
+\draw[nfarc] (cE) -- (r3);
+\draw[nfarc] (cF) -- (r3);
+\draw[nfarc] (r3) -- (cG);
+\end{tikzpicture}
+\endgroup

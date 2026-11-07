@@ -1,0 +1,197 @@
+{
+  "audits": [
+    {
+      "index": 0,
+      "phase": "warmup",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 1,
+      "phase": "warmup",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 2,
+      "phase": "warmup",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 0,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 1,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 2,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 3,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 4,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 5,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 6,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 7,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 8,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 9,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 10,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 11,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 12,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 13,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 14,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 15,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 16,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 17,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 18,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    },
+    {
+      "index": 19,
+      "phase": "measured",
+      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+    }
+  ],
+  "backend": "synreactor-python",
+  "controller": "python",
+  "depth": 1,
+  "dpo_report": {
+    "component_policy": "union",
+    "component_rejected_applications": 0,
+    "controller": "python",
+    "engine": "synkit_dpo_python",
+    "hydrogen_model": "implicit",
+    "kernel": "python",
+    "native_applications": null,
+    "native_candidates": null,
+    "native_elapsed_ns": null,
+    "partial": false,
+    "radical_policy": "ignore",
+    "reactor_library": null,
+    "rule_calls": 7,
+    "rules_compiled": 4,
+    "template_format": "tuple"
+  },
+  "hydrogen_representation": "implicit counts",
+  "kernel": "python",
+  "n_reactions": 1,
+  "n_species": 3,
+  "radical_policy": "ignore",
+  "samples": [
+    0.032930004002992064,
+    0.03180545099894516,
+    0.031812711007660255,
+    0.03255260500009172,
+    0.015086572006111965,
+    0.014777560019865632,
+    0.01496086100814864,
+    0.015226540010189638,
+    0.015763636998599395,
+    0.015019357990240678,
+    0.015233376005198807,
+    0.014710880001075566,
+    0.015271080017555505,
+    0.030414231005124748,
+    0.015399541007354856,
+    0.01470316099585034,
+    0.014558622002368793,
+    0.015276346995960921,
+    0.015034408977953717,
+    0.015265146997990087
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+    "species": [
+      "C=O",
+      "O=CCO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete",
+  "version": "1.6.5",
+  "warmup_samples": [
+    0.08680312699289061,
+    0.031753864022903144,
+    0.03292633601813577
+  ]
+}

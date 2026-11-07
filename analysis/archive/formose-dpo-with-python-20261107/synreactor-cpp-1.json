@@ -1,0 +1,57 @@
+{
+  "backend": "synreactor-cpp",
+  "controller": "python",
+  "depth": 1,
+  "dpo_report": {
+    "controller": "python",
+    "engine": "synkit_dpo_cpp",
+    "hydrogen_model": "implicit",
+    "kernel": "cpp",
+    "native_applications": 1,
+    "native_candidates": 1,
+    "native_elapsed_ns": 40757,
+    "partial": false,
+    "radical_policy": "ignore",
+    "reactor_library": "/tmp/synkit-dpo-crn-native/libsynkit_partial_c25e34c2c2aaf46cdad2.so",
+    "rule_calls": 7,
+    "rules_compiled": 4,
+    "template_format": "tuple"
+  },
+  "engine": "SynReactor DPO; full matches; implicit H",
+  "kernel": "cpp",
+  "n_reactions": 1,
+  "n_species": 3,
+  "radical_policy": "ignore",
+  "samples": [
+    0.015199746005237103,
+    0.015720374009106308,
+    0.01506952298223041,
+    0.017005255009280518,
+    0.015112455992493778
+  ],
+  "snapshot": {
+    "reactions": [
+      [
+        [
+          [
+            "O=CCO",
+            1
+          ]
+        ],
+        [
+          [
+            "OC=CO",
+            1
+          ]
+        ]
+      ]
+    ],
+    "sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+    "species": [
+      "C=O",
+      "O=CCO",
+      "OC=CO"
+    ]
+  },
+  "status": "complete"
+}

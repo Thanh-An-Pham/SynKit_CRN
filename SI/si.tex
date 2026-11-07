@@ -100,7 +100,7 @@
 \newcommand{\synkit}{\texttt{SynKit}\xspace}
 \newcommand{\synkitcrn}{\texttt{SynKit CRN}\xspace}
 % BEGIN GENERATED: review-macros
-\newcommand{\ReviewRandomMoietySeconds}{0.0514}
+\newcommand{\ReviewRandomMoietySeconds}{0.0789}
 % END GENERATED: review-macros
 \hyphenation{SynKit Bio-in-for-mat-ics Reactome Wiki-Pathways}
 
@@ -132,10 +132,15 @@
 \captionsetup{font=small,labelfont=bf}
 
 % ----- supplementary numbering -----
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thesubsection}{S\arabic{section}.\arabic{subsection}}
 \renewcommand{\thefigure}{S\arabic{figure}}
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thepage}{S\arabic{page}}
-\AtBeginDocument{\renewcommand{\thelstlisting}{S\arabic{lstlisting}}}
+\AtBeginDocument{
+  \renewcommand{\thelstlisting}{S\arabic{lstlisting}}
+  \renewcommand{\lstlistingname}{Code Example}
+}
 
 \begin{document}
 
@@ -149,21 +154,10 @@
 
 \maketitle
 
-\section{Software architecture and analysis interfaces}
+\section{Python interface example}
 \label{si:software}
 
-Fig.~\ref{fig:synkit_architecture} shows the input adapters and analysis interfaces of the chemical reaction network (CRN) submodule of \synkit. The shared reaction-system representation preserves reactant and product multiplicities, so derived stoichiometric matrices, Petri nets, and hypergraphs refer to the same reaction records and species identifiers. These representations connect model import and rule expansion to structural analysis and finite-inventory pathway verification.
-
-\begin{figure}[!htbp]
-    \centering
-    \input{../Figure/arch.tex}
-    \caption{Software architecture and data flow in the CRN submodule of \synkit. \textbf{(a)}~Input adapters for \texttt{KEGG} pathways, \texttt{SBML} Core, and reaction rules. \textbf{(b)}~Shared core records preserving reactant and product multiplicities. \textbf{(c)}~Derived stoichiometric, Petri-net, and hypergraph representations. \textbf{(d)}~Structural analyses: exact rational CRNT invariants, minimal conserved pools, Petri-net siphons/traps, and certified discrete pathway realizability (state/depth limits return \texttt{inconclusive}). Icons are schematic.}
-    \label{fig:synkit_architecture}
-\end{figure}
-
-\subsection{Python interface example}
-
-Listing~\ref{lst:usage} demonstrates the Python interface to the C++ backend using the glycolysis network. ATP/ADP/AMP, NAD(P)(H), water, phosphate, diphosphate, and protons are omitted in this example. The resulting certificate therefore concerns a reduced model. Section~\ref{si:kegg} specifies the requested flux and the participant and currency controls.
+Code Example~\ref{lst:usage} illustrates network construction, exact structural analysis, and discrete pathway verification through \synkit's Python interface. The script builds a 14-species glycolysis model (with currency metabolites omitted), evaluates chemical reaction network theory (CRNT) invariants and deficiency, isolates conserved pools and minimal siphons, and verifies that one glucose token can reach two pyruvates via an exact 15-step firing sequence.
 
 \begin{lstlisting}[float=htbp,caption={Python analysis of reduced \texttt{KEGG} glycolysis (\texttt{M00001}): network construction, exact structural analysis, discrete pathway verification, and \texttt{SBML} export.},label={lst:usage}]
 from synkit.CRN import (build_native, native_backend, crnt_summary,
@@ -190,125 +184,89 @@ with native_backend(library):
     sbml_document = crn_to_sbml(crn)
 \end{lstlisting}
 
-\section{Reference-network validation and numerical audit}
+\clearpage
+\section{Reference-network validation and numerical comparison}
 \label{si:validation}
 
-Table~\ref{tab:si_validation_sources} lists the twelve reference networks, their literature sources, and the structural properties they validate. Nine are established models from biochemical and CRNT literature, while three are constructed diagnostic models that test linkage-class separation, non-unit stoichiometric coefficients, and the zero complex. These benchmark models serve as targeted correctness tests across distinct topological and algebraic configurations.
+Table~\ref{tab:reference_audit} details the literature sources, targeted structural validation properties, and conservation-law audit for the twelve reference networks.
 
 \begin{table}[htbp]
 \centering
-\caption{Reference reaction networks, sources, and targeted structural validation properties (invariants reported in Table~\ref{main:tab:reference}).}
+\caption{Reference reaction networks: literature sources, targeted structural validation properties, and conservation-law numerical audit. SVD residual reports $\max|\mathbf S^TB|$ for a floating-point basis $B$, Rounded invalid counts columns of $\operatorname{round}(1000B)$ with non-zero integer residuals, and Exact residual evaluates \synkit's integer basis. The open reactor has a zero-dimensional conservation space.}
+\label{tab:reference_audit}
 \label{tab:si_validation_sources}
-\footnotesize
-\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\label{tab:numerical_audit}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.15cm}>{\raggedright\arraybackslash}p{2.85cm}Xrrr@{}}
 \toprule
-\textbf{Network model} & \textbf{Source} & \textbf{Targeted algebraic / topological property} \\
+\textbf{Network model} & \textbf{Source} & \textbf{Targeted property} & \textbf{SVD res.} & \textbf{Rounded inv.} & \textbf{Exact res.} \\
 \midrule
-Reversible isomerization & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Minimal weakly reversible system, Deficiency Zero Theorem (positive branch) \\
-Irreversible isomerization & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Deficiency Zero Theorem (negative branch) \\
-Isomerization cycle & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Weak reversibility without individual reversible steps \\
-Three disjoint reversible pairs & Constructed test network & Linkage-class partitioning on disconnected graphs, where minimal semiflow supports must isolate disjoint pairs rather than their union \\
-Disjoint pairs, non-unit stoichiometry & Constructed test network & As above, with $E \rightleftharpoons 2F$: exact conservation $2E+F$, which naive coefficient rounding can corrupt \\
-Michaelis-Menten & Michaelis \& Menten, Feinberg~\cite{feinberg2019foundations} & Archetypal enzyme mechanism with two conserved moiety pools, deficiency $\delta=0$, non-weakly reversible \\
-Reversible Michaelis-Menten & Feinberg~\cite{feinberg2019foundations} & Identical deficiency ($\delta=0$), weak reversibility restored \\
-Edelstein bistable switch & Edelstein~\cite{edelstein1970biochemical} & Minimal reversible deficiency-one network admitting multiple steady states \\
-Futile cycle (single-site) & Wang \& Sontag~\cite{wang2008multisite} & Distributive enzymatic cycle with three independent conservation pools \\
-Futile cycle (two-site) & Wang \& Sontag~\cite{wang2008multisite} & Exact conservation relations in a multistationarity motif \\
-Shinar-Feinberg ACR motif & Shinar \& Feinberg~\cite{shinar2010structural} & Absolute concentration robustness, with a minimal siphon that contains no P-semiflow support \\
-Open reactor ($0 \to A \to B \to 0$) & Constructed test network & Explicit zero-complex handling, where cycle closure changes weak reversibility \\
+Reversible isomerization & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Minimal weakly reversible; Deficiency Zero Theorem (positive branch) & 1.1e-16 & 0 & 0 \\
+Irreversible isomerization & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Deficiency Zero Theorem (negative branch) & 0.0e+00 & 0 & 0 \\
+Isomerization cycle & Feinberg~\cite{feinberg2019foundations}, Ch.~3 & Weak reversibility without individual reversible steps & 2.2e-16 & 0 & 0 \\
+Three disjoint reversible pairs & Constructed test network & Disconnected linkage classes; minimal semiflow supports isolate disjoint pairs, not their union & 1.1e-16 & 0 & 0 \\
+Disjoint pairs, non-unit stoichiometry & Constructed test network & As above with $E \rightleftharpoons 2F$: exact pool $2E+F$, which rounding can corrupt & 1.1e-16 & 0 & 0 \\
+Michaelis-Menten & Michaelis \& Menten, Feinberg~\cite{feinberg2019foundations} & Enzyme mechanism with two conserved pools, $\delta=0$, non-weakly reversible & 2.2e-16 & 1 & 0 \\
+Reversible Michaelis-Menten & Feinberg~\cite{feinberg2019foundations} & $\delta=0$; weak reversibility restored & 1.7e-16 & 1 & 0 \\
+Edelstein bistable switch & Edelstein~\cite{edelstein1970biochemical} & Minimal reversible $\delta=1$ network with multiple steady states & 0.0e+00 & 0 & 0 \\
+Futile cycle (single-site) & Wang \& Sontag~\cite{wang2008multisite} & Distributive cycle with three independent pools & 3.3e-16 & 3 & 0 \\
+Futile cycle (two-site) & Wang \& Sontag~\cite{wang2008multisite} & Exact conservation in a multistationarity motif & 5.3e-16 & 0 & 0 \\
+Shinar-Feinberg ACR motif & Shinar \& Feinberg~\cite{shinar2010structural} & ACR motif; a minimal siphon contains no P-semiflow support & 1.1e-16 & 0 & 0 \\
+Open reactor ($0 \to A \to B \to 0$) & Constructed test network & Zero-complex handling; cycle closure changes weak reversibility & 0.0e+00 & 0 & 0 \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Algebraic consistency and deficiency validation}
 
-The validation combines expected analytical values, alternative algebraic formulations, and checks on returned basis vectors. Specifically, using the complex composition matrix $\mathbf Y$ and the directed complex-graph incidence matrix $\mathbf I_a$, the stoichiometric matrix satisfies $\mathbf S = \mathbf Y\mathbf I_a$. The deficiency reported from complexes ($n$), linkage classes ($\ell$), and stoichiometric rank ($s$) must identically match the rank difference computed directly on the complex graph:
+We cross-checked deficiency using two formulations. With species-by-complex matrix $\mathbf Y$ and directed complex-graph incidence $\mathbf I_a$, we have $\mathbf S = \mathbf Y\mathbf I_a$ and
 \begin{equation}
 \label{eq:deficiency_crosscheck}
 \delta \;=\; n-\ell-\operatorname{rank}(\mathbf S)
 \;=\; \operatorname{rank}(\mathbf I_a)-\operatorname{rank}(\mathbf Y\mathbf I_a).
 \end{equation}
-Because the two sides compute intermediate quantities through independent algebraic pathways, this identity confirms internal consistency across graph partitioning, rank computation, and stoichiometric assembly.
-
-\subsection{Numerical nullspaces and exact integer conservation laws}
-\label{si:numerical}
-
-Conservation laws in reaction networks require non-negative integer vectors $y$ satisfying $y^T \mathbf{S} = 0$. Standard numerical libraries (e.g., SVD or QR nullspace in \texttt{SciPy}) compute basis vectors in floating-point arithmetic, which inevitably leaves small numerical residuals. When floating-point basis vectors are scaled and rounded to nearest integers, the resulting vectors often fail the exact conservation condition.
-
-We evaluated floating-point nullspace computation against \synkit's exact integer arithmetic across the twelve reference networks (Table~\ref{tab:numerical_audit}). While floating-point SVD leaves non-zero residuals on all closed networks, rounding fails to recover valid conservation vectors on three of the models (Michaelis--Menten, reversible Michaelis--Menten, and the one-site futile cycle). In contrast, \synkit's exact rational solver yields integer vectors that satisfy $y^T \mathbf{S} = 0$ exactly in every case.
-
-\begin{table}[htbp]
-\centering
-\caption{Conservation residuals of numerical versus exact integer kernel vectors across the reference networks. SVD residual reports $\max|\mathbf S^TB|$ for floating-point basis $B$, Rounded invalid counts columns of $\operatorname{round}(1000B)$ with non-zero integer residuals, and Exact residual evaluates \synkit's integer basis. The open reactor has a zero-dimensional conservation space.}
-\label{tab:numerical_audit}
-\small
-\begin{tabular}{@{}lrrr@{}}
-\toprule
-Network & SVD residual & Rounded invalid & Exact residual\\
-\midrule
-% BEGIN GENERATED: numerical-audit
-% Generated from crn-supplement-audit.json.
-Reversible isomerization & 1.1e-16 & 0 & 0 \\
-Irreversible isomerization & 0.0e+00 & 0 & 0 \\
-Isomerization cycle & 2.2e-16 & 0 & 0 \\
-Disjoint pairs & 1.1e-16 & 0 & 0 \\
-Non-unit disjoint pairs & 1.1e-16 & 0 & 0 \\
-Michaelis-Menten & 2.2e-16 & 1 & 0 \\
-Reversible Michaelis-Menten & 1.7e-16 & 1 & 0 \\
-Edelstein & 0.0e+00 & 0 & 0 \\
-One-site futile cycle & 3.3e-16 & 3 & 0 \\
-Two-site futile cycle & 5.3e-16 & 0 & 0 \\
-Shinar-Feinberg & 1.1e-16 & 0 & 0 \\
-Open reactor & 0.0e+00 & 0 & 0 \\
-% END GENERATED: numerical-audit
-\bottomrule
-\end{tabular}
-\end{table}
+Both formulations agreed for every benchmark, confirming consistency among complex partitioning, rank computation, and stoichiometric assembly. Fig.~\ref{fig:deficiency} illustrates the cross-check and the theorem verdicts on the Edelstein network.
 
 \begin{figure}[!htbp]
     \centering
-    \input{../Figure/deficiency.tex}
+    \input{../Figure/deficiency_oldschool_body.tex}
     \caption{Conservation structure and deficiency-theorem checks for the Edelstein network~\cite{edelstein1970biochemical}. \textbf{(a)}~Complex graph and its two linkage classes. \textbf{(b)}~Stoichiometric matrix beside the primitive conservation vector $y$, whose product $y^{\mathsf T}\mathbf S$ vanishes over $\mathbb Q$ and certifies the conserved pool $[\mathrm B]+[\mathrm C]$. \textbf{(c)}~Each classical deficiency theorem fails one hypothesis, leaving multistationarity undecided by deficiency alone.}
     \label{fig:deficiency}
 \end{figure}
 
+\subsection{Numerical nullspaces and exact integer conservation laws}
+\label{si:numerical}
+
+A conservation law is a non-zero integer vector $y$ with $y^T \mathbf{S} = 0$. Floating-point nullspace routines return approximate bases, and rounding scaled vectors to integers is a common shortcut. We compared this heuristic with \synkit's exact rational solver on the twelve reference networks (Table~\ref{tab:reference_audit}). SVD residuals were of order $10^{-16}$ on closed networks, but after scaling by $10^3$ and rounding, the recovered vectors violated $y^T \mathbf{S} = 0$ on three models: Michaelis--Menten, reversible Michaelis--Menten, and the one-site futile cycle. \synkit's exact elimination returned valid integer vectors in every case.
+
+
+
 \section{Computational cost across network families}
 \label{si:scaling}
 
-Computational scaling for minimal-siphon and conserved-pool enumeration was profiled across synthetic directed chains, reversible chains, and random sparse bimolecular networks. For minimal siphons, implication pruning avoids combinatorial subset explosion by selecting an initial species and propagating constraints: every reaction producing a chosen species must consume at least one member of the siphon.
+Fig.~\ref{fig:network_families} illustrates the three benchmark families. Fig.~\ref{fig:performance_diagnostics} reports the runtimes for the four structural analyses across these families; numbers beside the random-sparse siphon points give the number of minimal siphons.
 
-In the random sparse family, conserved-pool enumeration completes at 395 species in \ReviewRandomMoietySeconds~s. Table~\ref{tab:random_siphons} lists minimal-siphon counts and enumeration times for four seeded instances, showing that implication pruning scales tractably to hundreds of species. Fig.~\ref{fig:performance_diagnostics} summarizes the execution times across all structural analyses.
 
-\begin{table}[htbp]
-\centering
-\caption{Complete C++ minimal-siphon enumeration for the four seeded random-sparse instances. Each row is a single run; time includes the Python interface.}
-\label{tab:random_siphons}
-\begin{tabular}{@{}rrrr@{}}
-\toprule
-Species & Reactions & Minimal siphons & Time (s) \\
-\midrule
-% BEGIN GENERATED: random-siphons
-% Generated from crn-scaling.json.
-49 & 75 & 331 & 0.0554 \\
-99 & 150 & 272 & 0.0798 \\
-197 & 300 & 47 & 0.0177 \\
-395 & 600 & 87 & 0.158 \\
-% END GENERATED: random-siphons
-\bottomrule
-\end{tabular}
-\end{table}
+
+\begin{figure}[!htbp]
+    \centering
+    \input{../Figure/network_families.tex}
+    \caption{Network families used in the scaling benchmark. \textbf{(a)}~Directed chain with one-way conversion steps. \textbf{(b)}~Reversible chain with paired forward and reverse steps. \textbf{(c)}~Random sparse bimolecular network with two substrates per reaction and sparse connectivity. Circles denote species and bars denote reactions.}
+    \label{fig:network_families}
+\end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{../Figure/performance_diagnostics.pdf}
-    \caption{C++ structural-analysis runtimes across directed-chain, reversible-chain, and random-sparse networks. \textbf{(a)}~Minimal-siphon enumeration. \textbf{(b)}~Exact CRNT analysis. \textbf{(c)}~Graph canonicalization. \textbf{(d)}~Exact conserved-pool enumeration. Points and connecting lines show completed single-run measurements. The key draws a small member of each family (circles: species, bars: bimolecular reactions) beside its line style. All 60 measurements complete.}
+    \caption{Structural analysis runtimes across directed-chain, reversible-chain, and random-sparse networks. \textbf{(a)}~Minimal-siphon enumeration; numbers beside the random-sparse points give the number of minimal siphons. \textbf{(b)}~Exact CRNT analysis. \textbf{(c)}~Graph canonicalization. \textbf{(d)}~Exact conserved-pool enumeration. Points and connecting lines show completed single-run measurements. Line styles and markers distinguish the three families. All 60 measurements complete.}
     \label{fig:performance_diagnostics}
 \end{figure}
 
 \section{BioModels: structural SBML interoperability}
 \label{si:biomodels}
 
-The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \texttt{SBML} exchange across a size-stratified selection from \texttt{BioModels}. Ten models contain reaction structures and pass export and re-import checks without loss of stoichiometric multiplicities, while \texttt{BIOMD0000000562} serves as a reaction-free control.
+The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \texttt{SBML} exchange across a size-stratified selection from \texttt{BioModels}: ten models contain reaction structures and pass export and re-import checks without loss of stoichiometric multiplicities, while \texttt{BIOMD0000000562} serves as a reaction-free control. Across the selected models, \synkit preserves topological reaction networks and stoichiometric multiplicities.
 
 \begin{table}[htbp]
 \centering
@@ -316,7 +274,7 @@ The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \tex
 \label{tab:biomodels_models}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lrrrrrrcc@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrcc@{}}
 \toprule
 Model & $m$ & $r$ & $s$ & $\delta$ & P & S & RT & Covered \\
 \midrule
@@ -335,23 +293,21 @@ Model & $m$ & $r$ & $s$ & $\delta$ & P & S & RT & Covered \\
 \texttt{BIOMD0000000562} & 0 & 0 & -- & -- & -- & -- & -- & -- \\
 % END GENERATED: biomodels-models
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
-
-These benchmarks confirm that \synkit reliably extracts and preserves topological reaction networks and stoichiometric multiplicities across diverse curated models.
 
 \section{KEGG: module structure and glycolysis controls}
 \label{si:kegg}
 \label{sec:si_case_glycolysis}
 
-The four cached modules in Table~\ref{tab:kegg_modules} are the inputs used in main-text Section~\ref{main:sec:results_kegg}: glycolysis (\texttt{M00001}), pyruvate oxidation (\texttt{M00307}), the citrate cycle (\texttt{M00009}), and the pentose phosphate pathway (\texttt{M00004}). The reported invariants refer to their reduced reaction equations with shared participants retained.
+Table~\ref{tab:kegg_modules} summarizes structural deficiency and conserved moiety pools across four KEGG pathway modules: glycolysis (\texttt{M00001}), pyruvate oxidation (\texttt{M00307}), citrate cycle (\texttt{M00009}), and pentose phosphate (\texttt{M00004}). Conserved pools isolate nucleotide pairs, quinones, ferredoxins, and coenzyme~A without manual curation.
 
 \begin{table}[htbp]
 \centering
-\caption{Structural results for the four reduced KEGG modules. $m$: species; $r$: directed reactions; $n$: complexes; $\ell$: linkage classes; $s$: rank; $\delta=n-\ell-s$: deficiency; P: minimal conserved pools; S: minimal siphons.}
+\caption{Structural results for four reduced KEGG modules. $m$: species; $r$: directed reactions; $n$: complexes; $\ell$: linkage classes; $s$: rank; $\delta=n-\ell-s$: deficiency; P: minimal conserved pools; S: minimal siphons.}
 \label{tab:kegg_modules}
 \small
-\begin{tabular}{@{}lrrrrrrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrrr@{}}
 \toprule
 Module & $m$ & $r$ & $n$ & $\ell$ & $s$ & $\delta$ & P & S \\
 \midrule
@@ -363,20 +319,18 @@ Module & $m$ & $r$ & $n$ & $\ell$ & $s$ & $\delta$ & P & S \\
 \texttt{M00004} & 12 & 12 & 14 & 4 & 10 & 0 & 2 & 4 \\
 % END GENERATED: kegg-modules
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
-\subsection{Prescribed glycolytic flux and firing certificate}
+\subsection{Glucose-to-pyruvate pathway realization and invariants}
 
-The main glycolysis model contains 14 species and 15 directed reactions, with currency metabolites omitted and shared polyphosphate and the ferredoxin bypass retained. The largest minimal conservation support comprises eleven carbohydrate intermediates, with coefficient two on hexoses and one on trioses.
-
-Table~\ref{tab:glycolysis_flux} specifies the requested reaction multiset. Its ten reaction identifiers have a total multiplicity of 15; other reactions have zero requested multiplicity. The initial marking contains one \texttt{alpha-D-Glucose} token and zero tokens of every other species.
+Table~\ref{tab:glycolysis_flux} lists the reaction multiset converting one glucose to two pyruvates across a preparatory phase (reactions firing once) and payoff phase (firing twice). Aldolase (\texttt{R01068}) and triosephosphate isomerase (\texttt{R01015}) produce two glyceraldehyde 3-phosphate equivalents, directing payoff enzymes (\texttt{R01061}--\texttt{R00200}) to fire twice. State-space search yields a certified 15-step sequence (Fig.~5b) strictly preserving the weighted three-carbon backbone ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).
 
 \begin{table}[htbp]
 \centering
-\caption{Non-zero firing counts of the prescribed KEGG glycolysis flux. Identifiers match the cached \texttt{M00001} reaction records.}
+\caption{Non-zero firing counts of the prescribed KEGG glycolysis flux. Identifiers match \texttt{M00001} reaction records.}
 \label{tab:glycolysis_flux}
-\begin{tabular}{@{}lrlr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrlr@{}}
 \toprule
 Reaction & Count & Reaction & Count \\
 \midrule
@@ -389,27 +343,18 @@ Reaction & Count & Reaction & Count \\
 \texttt{R01015} & 1 & \texttt{R00200} & 2 \\
 % END GENERATED: glycolysis-flux
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
-Search explores 30 states and returns the following certificate, with reaction identifiers abbreviated to their numeric suffixes:
-\begin{equation}
-\begin{split}
-(&01786,13199,00756,01068,01015,01061,01061,01512,\\
- &01512,01518,00658,00200,01518,00658,00200).
-\end{split}
-\end{equation}
-Independent verification confirms enabling at every firing, non-negative intermediate markings, and a final marking of two pyruvate tokens, while the weighted carbohydrate pool remains two throughout all 15 steps.
+\subsection{Catalytic gating and cofactor boundary controls}
 
-\subsection{Shared-participant and currency controls}
-
-The shared-participant control requests one firing of \texttt{R02189} from one glucose token, comparing the retention of polyphosphate on both reaction sides with cancelling that common incidence. Species order, reaction order, and the net stoichiometric matrix remain identical. Table~\ref{tab:glycolysis_participant} demonstrates that retained polyphosphate must be present for enabling even though its net stoichiometric coefficient is zero.
+Table~\ref{tab:glycolysis_participant} evaluates participant reduction on glucokinase (\texttt{R02189}), which couples glucose phosphorylation to polyphosphate hydrolysis. While net stoichiometric reduction preserves the stoichiometric matrix $\mathbf S$, it drops deficiency ($\delta: 1 \to 0$) and destroys catalytic gating by allowing spontaneous firing without polyphosphate. Retaining the shared participant enforces this donor requirement.
 
 \begin{table}[htbp]
 \centering
 \caption{Shared-polyphosphate control for a single prescribed \texttt{R02189} firing. The glucose inventory is one in every row. $n$: complexes; $\ell$: linkage classes; $\delta$: deficiency.}
 \label{tab:glycolysis_participant}
-\begin{tabular}{@{}lrrrrl@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrl@{}}
 \toprule
 Shared participant & PolyP tokens & $n$ & $\ell$ & $\delta$ & Decision \\
 \midrule
@@ -421,16 +366,18 @@ Cancelled & 0 & 14 & 3 & 0 & fires \\
 Cancelled & 1 & 14 & 3 & 0 & fires \\
 % END GENERATED: glycolysis-participant-control
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
-The currency control applies the 15-firing flux of Table~\ref{tab:glycolysis_flux} to a glucose-only initial marking. Restoring the omitted currency metabolites produces a 24-species model (Table~\ref{tab:glycolysis_currency}). Without ATP supplied, hexokinase cannot fire and exhaustive search confirms that the pathway is unrealizable.
+\clearpage
+
+Table~\ref{tab:glycolysis_currency} tests execution across currency metabolite boundaries. Removing currency metabolites confirms topological realizability of the carbon backbone (14 species), whereas restoring currency metabolites (24 species) arrests hexokinase at step 0 due to unsupplied ATP.
 
 \begin{table}[htbp]
 \centering
 \caption{Currency-boundary control for the prescribed full glycolytic flux from one glucose and zero tokens of all other species. The negative decision is exhaustive for this reaction multiset.}
 \label{tab:glycolysis_currency}
-\begin{tabular}{@{}lrrlr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrlr@{}}
 \toprule
 Currency metabolites & Species & Reactions & Decision & Certificate length \\
 \midrule
@@ -440,7 +387,7 @@ Removed & 14 & 15 & realizable & 15 \\
 Retained & 24 & 15 & unrealizable & -- \\
 % END GENERATED: glycolysis-currency-control
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
 \section{Formose: carbon conservation and precursor requirements}
@@ -454,95 +401,58 @@ Table~\ref{tab:formose_growth} reports the recorded species and reaction counts 
 
 \begin{table}[htbp]
   \centering
-  \caption{Network size and cumulative generation time from the seeds through each expansion depth in the original single-run formose study. These timings include first-call overhead; Table~\ref{tab:formose_expansion_comparison} provides the repeated comparison after warm-up.}
+  \caption{Network size and cumulative generation time from the seeds through each expansion depth in the native SynReactor DPO study. These single-run timings include first-call overhead; Table~\ref{tab:formose_dpo_comparison} provides the repeated comparison after warm-up.}
   \label{tab:formose_growth}
   \scriptsize
   \setlength{\tabcolsep}{3.5pt}
-  \begin{tabular}{rrrr}
+  \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rrrr@{}}
   \toprule
   Iteration & Species & Reactions & Cumulative time (s) \\
   \midrule
 % BEGIN GENERATED: formose-growth
 % Generated from crn-formose.json.
-1 & 3 & 1 & 0.029 \\
-2 & 5 & 4 & 0.003 \\
-3 & 9 & 10 & 0.004 \\
-4 & 37 & 44 & 0.010 \\
+1 & 3 & 1 & 0.048 \\
+2 & 5 & 4 & 0.014 \\
+3 & 9 & 10 & 0.015 \\
+4 & 37 & 44 & 0.018 \\
 % END GENERATED: formose-growth
 \bottomrule
-  \end{tabular}
+  \end{tabular*}
 \end{table}
 
 The stoichiometric matrix $\mathbf S\in\mathbb Z^{37\times44}$ has a one-dimensional left nullspace whose positive primitive conservation vector agrees exactly with the molecular carbon count for every species, confirming that the generated reaction rules strictly conserve carbon.
 
-\subsection{Independent generation checks and expansion runtimes}
+\subsection{Native SynReactor DPO generation and comparison}
 
-The \synkit timings in the cross-tool comparison use the native CRN expander with Lewis hydrogen counts. Table~\ref{tab:formose_hydrogen_comparison} separately compares this implementation with native explicit-hydrogen expansion and the Python/RDKit construction path, so that backend and hydrogen-model differences remain visible.
+The default native formose study uses \texttt{CRNExpand(rule\_backend="synreactor-native")}. Rules are compiled once per expansion through \texttt{SynRule}'s tuple representation and the native DPO ABI compiler. The C++ controller performs candidate construction, frontier updates, calls to \synkit's DPO matching and rewriting kernel, product-component projection, and reaction integration. It retains native product graphs and prepares their component compatibility only when they become reactants. Native product graphs undergo molecular validation and canonical SMILES identification. Regression tests require the complete 37-species, 44-reaction formose result while disabling alternative reaction engines and the Python task runner.
 
-The same four element-and-bond rules are represented as mapped reaction \texttt{SMARTS} in \synkit and explicit-hydrogen DPO rules in \texttt{M{\O}D}~1.0.0.75 and \texttt{MolFoundry}~0.1.11. The translation preserves mapped atoms and the bonds removed, retained, and added. Both seeds are initially active. Each parallel expansion round requires at least one frontier reactant and excludes mixtures containing two copies of the same species, matching the published \synkit configuration. This mixture policy is a generation setting, not a chemical prohibition. No molecular-size cutoff is imposed. The \synkit task and mixture caps are raised to $2^{60}$, and completed runs are checked for truncation.
+Both seeds are initially active. Every expansion round requires a frontier reactant, and self-mixtures are excluded. The component policy is explicitly \texttt{union}, preserving \texttt{SynReactor}'s full matching over the selected molecular union, including intramolecular matches with unused spectators. The optional \texttt{distinct} policy requires separate selected molecules for disconnected rule components. They agree for this formose grammar. The generic mapped carbon patterns omit radical guards in the legacy representation; the typed comparison therefore explicitly selects \texttt{dpo\_radical\_policy="ignore"}, retaining zero radical deltas. Strict radical guards remain the default for other inputs and are tested separately. The native controller currently requires concrete, persistent, non-aromatic heavy-atom graphs with standard sigma/pi bond partitions. Unsupported isotope, aromatic, symbolic-port, or other unrepresented states fail explicitly.
 
-Each tool and depth runs in an isolated process pinned to the same logical CPU of an Intel Core Ultra~7 155H, with one warm-up followed by five timed expansions from fresh seeds. Timings include rule and seed parsing, expansion, and construction of each tool's network representation. They exclude imports, engine startup, the fixed \texttt{SMARTS}-to-GML translation, cross-tool identity checks, and structural analyses. \synkit uses its native Lewis-hydrogen expander (RDKit C++~2026.03.1); the other tools use explicit-hydrogen graph rewriting. The measurements therefore compare complete generation interfaces, including their representation and language-interface costs. Python versions, dependency lists, native build fingerprints, all samples, and exported network snapshots are saved with the benchmark evidence.
-
-For each completed run, exported molecular graphs are converted to canonical non-stereochemical SMILES with explicit hydrogens removed. Reactions are compared as directed pairs of reactant and product multisets, preserving multiplicities. The identity check ignores atom maps, rule labels, and alternative atom-level derivations of the same stoichiometric reaction. All three tools return identical species and directed stoichiometric reaction sets at every depth from one through six, including 302 species and 371 reactions at depth five and 10\,572 species and 11\,239 reactions at depth six. Carbon balance is independently checked for every exported reaction. Median times and the first and third quartiles are reported in Table~\ref{tab:formose_expansion_comparison}; Fig.~\ref{fig:formose_expansion_comparison} shows cross-tool runtimes and the implementation controls.
-
-Depth seven does not yield a complete network in the cross-tool comparison under these limits. The \synkit native Lewis worker times out at 180~s during its first expansion; \texttt{M{\O}D} raises \texttt{MemoryError} after approximately 176~s; and \texttt{MolFoundry}'s JavaScript runtime reports an out-of-memory failure and the worker exits with signal~11 after approximately 49~s. Counts and generation-time estimates are therefore withheld for that depth. These resource-limited attempts do not establish an intrinsic maximum expansion depth for any tool.
+Table~\ref{tab:formose_dpo_comparison} compares the full API runtime of native \texttt{SynReactor} DPO, \texttt{M{\O}D}, and \texttt{MolFoundry}. Every tool and completed depth has 20 timed expansions after three untimed warm-ups, on the same logical CPU and from fresh seeds. Timings include rule and seed compilation, expansion, molecular identity, and construction of each tool's network representation, including Python CRN construction for \synkit. Imports, library startup, and independent identity audits are excluded. Rules use each tool's input format; the fixed mapped-rule-to-GML translation for the external tools is performed before timing. Completed species sets and directed stoichiometric reaction multisets agree exactly with the independent tools. Complete source fingerprints, kernel/controller build hashes, all 20 samples, and output snapshots accompany the reports. Each tool and depth uses a separate process pinned to the same logical CPU of an Intel Core Ultra~7 155H. Only one expansion runs at a time. Tool configurations are interleaved, and their execution order is recorded in the evidence. Imported engines remain loaded; the native controller process is retained across calls. Every expansion starts from freshly parsed rules and seeds. No molecular-size cutoff is imposed; task and mixture caps are raised to $2^{60}$, and completed native runs are checked for truncation. Exported molecules are compared through canonical non-stereochemical SMILES with explicit hydrogen vertices removed. Directed reactant and product multisets retain their stoichiometric multiplicities; identity checks ignore atom maps, rule labels, and alternative atom-level derivations. Every exported reaction is independently checked for carbon balance. Fig.~\ref{main:fig:formose_dpo_runtime}b shows individual measurements, medians, and interquartile ranges.
 
 \begin{table}[htbp]
 \centering
-\caption{Cumulative formose generation times in seconds: median [first quartile, third quartile] over five runs after one warm-up. Counts describe the completed networks; identity is tested using the complete species and stoichiometric reaction sets. Each worker has a 180~s wall-clock budget covering startup, warm-up, five expansions, and identity audits, and an 8~GiB per-process address-space limit. A timeout or memory failure is an incomplete measurement, not evidence of chemical closure or target unreachability.}
-\label{tab:formose_expansion_comparison}
-\fontsize{6}{7.2}\selectfont
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{rrrlll}
-\toprule
-Depth & Species & Reactions & \synkit native (Lewis H) & \texttt{M{\O}D} & \texttt{MolFoundry} \\
-\midrule
-% BEGIN GENERATED: formose-expansion
-1 & 3 & 1 & 0.0004862 [0.0004809, 0.0004924] & 0.0003832 [0.000381, 0.0003981] & 0.0121 [0.0112, 0.01235] \\
-2 & 5 & 4 & 0.0008686 [0.0008619, 0.0008993] & 0.0005635 [0.0005559, 0.0005639] & 0.02453 [0.01532, 0.03018] \\
-3 & 9 & 10 & 0.001607 [0.001603, 0.001689] & 0.000969 [0.0009682, 0.0009777] & 0.02933 [0.01364, 0.03301] \\
-4 & 37 & 44 & 0.006683 [0.006673, 0.006729] & 0.002895 [0.002865, 0.002898] & 0.03722 [0.03364, 0.04229] \\
-5 & 302 & 371 & 0.07579 [0.07527, 0.07657] & 0.02843 [0.02816, 0.02858] & 0.1745 [0.1684, 0.1745] \\
-6 & 10572 & 11239 & 4.293 [4.259, 4.3] & 1.575 [1.566, 1.605] & 11.64 [11.5, 11.7] \\
-7 & -- & -- & timeout & memory limit & OOM crash \\
-% END GENERATED: formose-expansion
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth]{../Figure/formose_expansion.pdf}
-\caption{Formose expansion benchmark. \textbf{(a)}~Median cumulative generation time with first-to-third-quartile error bars over five runs after warm-up. \textbf{(b)}~Controlled comparison of \synkit's Python/RDKit construction path, native explicit-hydrogen expansion, and native Lewis-hydrogen expansion. Lines connect measured depths; incomplete depth-seven runs have no timing point.}
-\label{fig:formose_expansion_comparison}
-\end{figure}
-
-\begin{table}[htbp]
-\centering
-\caption{Implementation and hydrogen-representation controls in \synkit~1.6.5. Cumulative generation time in seconds is reported as median [first quartile, third quartile] across five runs after warm-up. The Python control uses \texttt{CRNExpand(rule\_backend="rdkit")}; both native controls use \texttt{rule\_backend="native"}, changing only \texttt{hydrogen\_model}. The Python/RDKit control uses RDKit~2025.09.3, whereas both native controls use RDKit C++~2026.03.1, so the Python--native comparison also includes an RDKit-version difference. The native Lewis column repeats the original comparison measurements. All completed controls reproduce the same complete molecular species and stoichiometric reaction sets. The worker limits match Table~\ref{tab:formose_expansion_comparison}.}
-\label{tab:formose_hydrogen_comparison}
+\caption{Full API runtime comparison. Times are median cumulative seconds from seeds over 20 timed runs after three warm-ups. Native \texttt{SynReactor} uses its C++ controller and DPO kernel with implicit hydrogen counts; \texttt{M{\O}D} and \texttt{MolFoundry} use explicit hydrogen vertices. Rule preparation and network construction are included for every tool. Counts describe identical completed species and stoichiometric reaction sets. Each expansion has a 180~s time limit and an 8~GiB per-process address-space limit. All 20 measurements and their quartiles are saved.}
+\label{tab:formose_dpo_comparison}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{rlll}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rrrrrr@{}}
 \toprule
-Depth & Python/RDKit, explicit H & Native, explicit H & Native, Lewis H \\
+Depth & Species & Reactions & \texttt{SynReactor} C++ DPO & \texttt{M{\O}D} & \texttt{MolFoundry} \\
 \midrule
-% BEGIN GENERATED: formose-variants
-1 & 0.000488 [0.0004786, 0.0005746] & 0.0005279 [0.0005199, 0.0005556] & 0.0004862 [0.0004809, 0.0004924] \\
-2 & 0.001311 [0.001284, 0.001317] & 0.001058 [0.001026, 0.001156] & 0.0008686 [0.0008619, 0.0008993] \\
-3 & 0.003154 [0.003039, 0.003355] & 0.002156 [0.002067, 0.002196] & 0.001607 [0.001603, 0.001689] \\
-4 & 0.01321 [0.01246, 0.01363] & 0.008774 [0.008767, 0.008798] & 0.006683 [0.006673, 0.006729] \\
-5 & 0.1756 [0.173, 0.1761] & 0.1009 [0.1006, 0.1039] & 0.07579 [0.07527, 0.07657] \\
-6 & 11.84 [11.75, 11.85] & 5.7 [5.692, 5.747] & 4.293 [4.259, 4.3] \\
-7 & memory limit & timeout & timeout \\
-% END GENERATED: formose-variants
+% BEGIN GENERATED: formose-dpo-comparison
+1 & 3 & 1 & 0.0152 & 0.000634 & 0.00233 \\
+2 & 5 & 4 & 0.0154 & 0.000778 & 0.00397 \\
+3 & 9 & 10 & 0.0157 & 0.00118 & 0.00523 \\
+4 & 37 & 44 & 0.0177 & 0.00291 & 0.0158 \\
+5 & 302 & 371 & 0.0417 & 0.0251 & 0.16 \\
+6 & 10572 & 11239 & 1.36 & 1.57 & 11.85 \\
+% END GENERATED: formose-dpo-comparison
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
-% BEGIN GENERATED: formose-control-summary
-At depth six, median generation times are 11.8~s for Python/RDKit, 5.7~s for native explicit hydrogen, and 4.29~s for native Lewis hydrogen. The native Lewis path is 1.33 times faster than the native explicit-hydrogen path and 2.76 times faster than the Python/RDKit path. A separate instrumented native Lewis control has a median total time of 4.27~s, with 4.09~s in the native request, including transport and decoding, and 0.163~s in Python-side network construction. The native-request measurement combines reaction matching, product sanitization, molecular canonicalization, and protocol costs.
-% END GENERATED: formose-control-summary
+Depth seven is excluded from the completed-runtime table and figure. In a separate attempt, native DPO reached its explicit binding-search limit of $5\times10^7$, while the preceding matched-input experiments recorded a memory-limit failure for \texttt{M{\O}D} and an out-of-memory runtime crash for \texttt{MolFoundry}. These incomplete attempts establish neither a maximum chemical expansion depth nor target unreachability.
 
 \subsection{Route definitions and finite precursor inventories}
 
@@ -552,7 +462,7 @@ The targets are an aldotetrose ($T_4$, \texttt{O=CC(O)C(O)CO}) and an aldohexose
 \centering
 \caption{Qualitative depths and prescribed discrete reaction multisets for the selected formose targets. Set reachability reuses a species once generated; discrete firing requires a separate token for each consumed molecule.}
 \label{tab:formose_routes}
-\begin{tabular}{@{}lrrl@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrl@{}}
 \toprule
 Target & Qualitative depth & Discrete firings & Prescribed multiset \\
 \midrule
@@ -562,7 +472,7 @@ $T_{4}$ & 2 & 2 & $r_{1}+r_{3}$ \\
 $T_{6}$ & 3 & 4 & $2r_{1}+r_{3}+r_{7}$ \\
 % END GENERATED: formose-routes
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
 \begin{figure}[!htbp]
@@ -578,7 +488,7 @@ Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor invento
 \centering
 \caption{Realizability of the prescribed tetrose and hexose routes across five precursor inventories. Counts denote molecules; total carbon counts carbon tokens. Yes indicates a verified certificate and No an exhaustive negative decision for the selected multiset.}
 \label{tab:formose_exact_benchmark}
-\begin{tabular}{@{}lrrrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
 \toprule
 Pool & $C_1$ count & $C_2$ count & Total carbon & $T_4$ & $T_6$ \\
 \midrule
@@ -591,7 +501,7 @@ $M_4$ & 2 & 2 & 6 & yes & no \\
 $M_5$ & 0 & 3 & 6 & yes & yes \\
 % END GENERATED: formose-inventories
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
 The tetrose route converts glycolaldehyde to enediol ($r_1$), then couples that enediol with a second glycolaldehyde ($r_3$). It requires two glycolaldehyde molecules and leaves formaldehyde untouched; pools $M_4$ and $M_5$ support it, whereas $M_3$ (which contains only one glycolaldehyde) cannot. The hexose route requires two enediol tokens, consuming three glycolaldehyde molecules in total ($2r_1 + r_3 + r_7$), which only pool $M_5$ satisfies. The three six-carbon inventories ($M_3$, $M_4$, and $M_5$) thus produce different realizability outcomes despite having equal total carbon budgets.

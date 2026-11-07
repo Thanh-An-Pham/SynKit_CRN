@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT))
 from analysis_overview import reference_table
 from glycolysis_analysis import render_tex
 from review_figures import render_tables
-from formose_expansion_assets import table as expansion_table, variant_table, control_summary
+from formose_dpo_assets import table as dpo_table, macros as dpo_macros
 
 
 def biomodels_table(report):
@@ -109,14 +109,6 @@ def generated_blocks(paper=PAPER):
     tables = render_tables(evidence)
     def read(name):
         return json.loads((evidence / name).read_text())
-    expansion = read('formose-expansion/comparison.json')
-    variants = read('formose-expansion/variants.json')
-    expansion_macros = ['% Generated from formose-expansion/comparison.json.']
-    for tool, name in [('synkit','Synkit'),('mod','Mod'),('molfoundry','Molfoundry')]:
-        for depth, word in [(4,'Four'),(6,'Six')]:
-            row = next(r for r in expansion['runs'] if r['tool']==tool and r['depth']==depth)
-            if row['status']=='complete':
-                expansion_macros.append(r'\newcommand{\Formose'+name+word+'Seconds}{'+f"{row['median_seconds']:.3g}"+'}')
     macros = tables["crn-review-macros.tex"]
     si_macros = "\n".join(
         line for line in macros.splitlines()
@@ -124,7 +116,7 @@ def generated_blocks(paper=PAPER):
     ) + "\n"
     return {
         "main.tex": {
-            "formose-expansion-macros": '\n'.join(expansion_macros)+'\n',
+            "dpo-generation-macros": dpo_macros(),
             "review-macros": macros,
             "glycolysis-macros": render_tex(read("glycolysis_analysis.json")),
             "reference-networks": reference_table(
@@ -132,9 +124,7 @@ def generated_blocks(paper=PAPER):
             ),
         },
         "SI/si.tex": {
-            "formose-control-summary": control_summary(expansion, variants),
-            "formose-variants": variant_table(expansion, variants),
-            "formose-expansion": expansion_table(expansion),
+            "formose-dpo-comparison": dpo_table(),
             "review-macros": si_macros,
             "biomodels-models": biomodels_table(read("crn-biomodels.json")),
             "kegg-modules": kegg_table(read("crn-kegg.json")),
@@ -144,8 +134,6 @@ def generated_blocks(paper=PAPER):
             "formose-growth": tables["crn-formose-growth.tex"],
             "formose-routes": formose_route_table(read("crn-supplement-audit.json")),
             "formose-inventories": formose_inventory_table(read("crn-supplement-audit.json")),
-            "numerical-audit": tables["crn-numerical-audit.tex"],
-            "random-siphons": tables["crn-random-siphons.tex"],
         },
     }
 

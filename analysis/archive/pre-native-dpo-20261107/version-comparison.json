@@ -1,0 +1,45 @@
+{
+  "reference_reported_version": "1.6.3",
+  "reference_results": "SynKit/Experiment/CRN/results/full",
+  "scope": "Compares scientific outputs, decisions and input hashes; excludes wall times, environment/source metadata, external execution provenance and claim-boundary text.",
+  "status": "PASS",
+  "studies": {
+    "crn-biomodels.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-external-crnt4sbml.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-formose.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-glycolysis-donors.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-kegg.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-representation.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-scaling.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-supplementary.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    },
+    "crn-validation.json": {
+      "differences": [],
+      "scientific_outputs_unchanged": true
+    }
+  },
+  "synkit": "1.6.5"
+}

@@ -42,13 +42,13 @@ def control_summary(original, variants):
     baseline=next(r for r in original['runs'] if r['tool']=='synkit' and r['depth']==6)
     lewis=baseline['median_seconds'];explicit=rows['native-explicit']['median_seconds'];python=rows['python-explicit']['median_seconds']
     instrumented=rows['native-lewis']
-    return (f"At depth six, median generation times are {python:.3g}~s for Python/RDKit, {explicit:.3g}~s for native explicit hydrogen, "
-            f"and {lewis:.3g}~s for native Lewis hydrogen. The native Lewis path is {explicit/lewis:.2f} times faster than "
-            f"the native explicit-hydrogen path and {python/lewis:.2f} times faster than the Python/RDKit path. "
-            f"A separate instrumented native Lewis control has a median total time of {instrumented['median_seconds']:.3g}~s, "
+    return (f"At depth six, median generation times are {python:.3g}~s for Python/RDKit, {explicit:.3g}~s for RDKit C++ with explicit hydrogen, "
+            f"and {lewis:.3g}~s for RDKit C++ with Lewis hydrogen counts. The RDKit C++ Lewis path is {explicit/lewis:.2f} times faster than "
+            f"the RDKit C++ explicit-hydrogen path and {python/lewis:.2f} times faster than the Python/RDKit path. "
+            f"A separate instrumented RDKit C++ Lewis control has a median total time of {instrumented['median_seconds']:.3g}~s, "
             f"with {instrumented['median_native_request_seconds']:.3g}~s in the native request, including transport and decoding, "
             f"and {instrumented['median_python_construction_seconds']:.3g}~s in Python-side network construction. "
-            "The native-request measurement combines reaction matching, product sanitization, molecular canonicalization, and protocol costs.\n")
+            "This measurement concerns the RDKit SMARTS controller; SynReactor DPO execution is a separate backend.\n")
 
 
 def table(report):
