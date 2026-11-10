@@ -1,7 +1,3 @@
-% ---------------------------------------------------------------------------
-% network_families.tex --- schematic of the three scaling-benchmark families.
-% Monochrome, serif, no colour; included inline by SI/si.tex.
-% ---------------------------------------------------------------------------
 \begingroup
 \definecolor{nfInk}{HTML}{000000}
 \definecolor{nfGray}{HTML}{595959}
@@ -15,7 +11,7 @@
   nfarc/.style={-{Latex[length=1.5mm,width=1.1mm]},line width=0.5pt,
     draw=nfInk,shorten >=0.8pt,shorten <=0.8pt},
 }
-\newcommand{\nfhead}[3]{% coordinate, letter, title
+\newcommand{\nfhead}[3]{%
   \node[anchor=base west,inner sep=0pt,
         font=\rmfamily\fontsize{8}{9}\selectfont\bfseries\color{nfInk}] (nh#2)
         at ($#1+(0.05,-0.28)$) {(#2)};
@@ -26,9 +22,6 @@
 \begin{tikzpicture}
 \path[use as bounding box] (0,0) rectangle (16.40,-3.20);
 
-% =========================================================================
-% (a) directed chain
-% =========================================================================
 \nfhead{(0,0)}{a}{Directed chain}
 \node[nfnode] (a1) at (0.9,-1.75) {$S_1$};
 \node[nfnode] (a2) at (1.8,-1.75) {$S_2$};
@@ -38,9 +31,6 @@
 \foreach \i/\j in {a1/a2,a2/a3,a3/a4,a4/a5}
   \draw[nfarc] (\i) -- (\j);
 
-% =========================================================================
-% (b) reversible chain
-% =========================================================================
 \nfhead{(5.55,0)}{b}{Reversible chain}
 \node[nfnode] (b1) at (6.15,-1.75) {$S_1$};
 \node[nfnode] (b2) at (7.05,-1.75) {$S_2$};
@@ -52,9 +42,6 @@
   \draw[nfarc] (\j) to[bend left=22] (\i);
 }
 
-% =========================================================================
-% (c) random sparse bimolecular network
-% =========================================================================
 \nfhead{(11.10,0)}{c}{Random sparse bimolecular}
 \node[nfnode] (cA) at (11.55,-1.05) {$A$};
 \node[nfnode] (cB) at (11.95,-2.20) {$B$};

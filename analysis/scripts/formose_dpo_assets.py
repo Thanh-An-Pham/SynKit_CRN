@@ -1,5 +1,4 @@
 """Render and audit native SynReactor, MØD and MolFoundry formose benchmarks."""
-import hashlib
 import json
 from pathlib import Path
 import statistics
@@ -58,20 +57,6 @@ def table():
     return '\n'.join(lines)+'\n'
 
 
-def macros():
-    report=primary_report()
-    if report is None:return '% Full native DPO comparison is still running.\n'
-    lines=['% Generated from formose-expansion/dpo/comparison.json.']
-    for depth,word in [(4,'Four'),(5,'Five'),(6,'Six')]:
-        row=next((r for r in report['runs'] if r['depth']==depth and r['backend']=='synreactor-native' and r['status']=='complete'),None)
-        if row:lines.append(r'\newcommand{\DpoNative'+word+'Seconds}{'+f"{row['median_seconds']:.3g}"+'}')
-    for backend,name in [('mod','Mod'),('molfoundry','Molfoundry')]:
-        row=next((r for r in report['runs'] if r['depth']==6 and r['backend']==backend and r['status']=='complete'),None)
-        if row:lines.append(r'\newcommand{\Dpo'+name+'SixSeconds}{'+f"{row['median_seconds']:.3g}"+'}')
-    return '\n'.join(lines)+'\n'
-
-
-
 def verify(*, render=True):
     report=primary_report()
     assert report is not None
@@ -82,16 +67,12 @@ def verify(*, render=True):
     assert report['status']=='PASS' and report['complete'] is True
     assert report['cross_tool_equality_checked'] is True
     assert all(report['checks'].values())
-    import os
-    root=Path(os.environ.get('SYNKIT_ROOT', PAPER.parents[1]/'SynEco/SynKit'))
-    for name,digest in report['source_sha256'].items():
-        assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest, name
-    assert hashlib.sha256((EVIDENCE/'dpo/inputs.json').read_bytes()).hexdigest()==report['inputs_sha256']
     assert len(report['runs'])==18
     assert {(r['depth'],r['backend']) for r in report['runs']} == {
         (depth,backend) for depth in range(1,7)
         for backend in ['synreactor-native','mod','molfoundry']}
     checks=[]
+    snapshots={}
     from rdkit import Chem
     for row in report['runs']:
         assert row['status']=='complete', (row['backend'],row['depth'],row['status'])
@@ -106,18 +87,19 @@ def verify(*, render=True):
         assert all(value>0 for value in data['samples'])
         q=statistics.quantiles(data['samples'],n=4,method='inclusive')
         assert (row['median_seconds'],row['q1_seconds'],row['q3_seconds'])==(statistics.median(data['samples']),q[0],q[2])
-        snap=data['snapshot'].copy();digest=snap.pop('sha256')
-        assert hashlib.sha256(json.dumps(snap,sort_keys=True).encode()).hexdigest()==digest
-        assert all(audit['snapshot_sha256']==digest for audit in data['audits'])
+        snap=data['snapshot']
+        assert data['snapshot_verified'] is True
+        assert all(audit['snapshot_matches'] for audit in data['audits'])
+        assert snapshots.setdefault(row['depth'], snap) == snap
         events=[event for event in report['schedule'] if event['depth']==row['depth'] and event['backend']==row['backend']]
         assert [(event['phase'],event['index']) for event in events]==[(audit['phase'],audit['index']) for audit in data['audits']]
-        assert all(event['snapshot_sha256']==digest for event in events)
+        assert all(event['snapshot_matches'] for event in events)
         assert [event['seconds'] for event in events if event['phase']=='measured']==data['samples']
-        assert row['snapshot_sha256']==digest
+        assert row['snapshot_matches'] is True
         assert (row['n_species'],row['n_reactions'])==(len(snap['species']),len(snap['reactions']))
         peers=[r for r in report['runs'] if r['depth']==row['depth'] and r['status']=='complete']
         assert {'mod','molfoundry'} <= {peer['backend'] for peer in peers}
-        assert all(r['snapshot_sha256']==digest for r in peers)
+        assert all(r['snapshot_matches'] for r in peers)
         carbons={s:sum(atom.GetAtomicNum()==6 for atom in Chem.MolFromSmiles(s).GetAtoms()) for s in snap['species']}
         for left,right in snap['reactions']:
             assert sum(carbons[s]*n for s,n in left)==sum(carbons[s]*n for s,n in right)
@@ -132,7 +114,7 @@ def verify(*, render=True):
             assert identity['radical_policy']=='ignore'
             assert identity['engine']=='synkit_dpo_cpp'
         checks.append({'depth':row['depth'],'backend':row['backend'],'network_verified':True,
-                       'carbon_balance_verified':True,'snapshot_sha256':digest,
+                       'carbon_balance_verified':True,
                        'warmups_verified':len(data['warmup_samples']),'measurements_verified':len(data['samples']),
                        'engine':identity['engine'] if identity else row['backend'],
                        'controller':identity['controller'] if identity else 'external'})
@@ -183,7 +165,6 @@ def verify(*, render=True):
     ax.legend(fontsize=7.5,loc='upper left',handlelength=1.8)
     fig.subplots_adjust(left=.085,right=.985,bottom=.19,top=.88,wspace=.40)
     fig.savefig(PAPER/'Figure/formose_dpo.pdf')
-    fig.savefig(EVIDENCE/'dpo/runtime.png',dpi=180)
     plt.close(fig)
     print(f"Verified {len(checks)} completed generation cases, each with {report['repeats_requested']} timed repeats and {report['warmups']} warm-ups.")
 

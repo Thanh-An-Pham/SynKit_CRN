@@ -1,74 +1,6 @@
 {
-  "checks": {
-    "all_networks_agree_with_independent_recomputation": true,
-    "all_networks_reproduce_expected_verdicts": true,
-    "deficiency_identity_holds_everywhere": true
-  },
-  "claim_boundary": "These are structural, operation-specific verdicts rather than predictions at a fitted parametrization. Deficiency-theorem conclusions apply to mass-action systems under their reported hypotheses. The Angeli-De Leenheer-Sontag persistence test is sufficient, not necessary, so a failing condition does not prove that a species can be driven to extinction.",
-  "environment": {
-    "boost": "1.90",
-    "boost_include": "/home/lolo/miniforge3/pkgs/libboost-headers-1.90.0-h707e725_3/include",
-    "cmake": "cmake version 3.31.11",
-    "compiler": "c++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)",
-    "cpu_count": 22,
-    "crn_backend": {
-      "build_sha256": "24b48cd2ced132e808bbd64d17beafe1cf832d3bdd0f091c3eba5ca4e932e5a2",
-      "capabilities": [
-        "closure",
-        "structural_sets",
-        "structural_unlimited",
-        "exhaustive_siphons",
-        "exact_semiflows",
-        "exact_algebra",
-        "crnt",
-        "pathway",
-        "symmetry"
-      ],
-      "library_path": "/tmp/synkit-170-evidence/native/libsynkit_crn_24b48cd2ced132e8.so",
-      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
-      "native_operations": {
-        "crnt": 12,
-        "matrix": 12,
-        "semiflows": 46,
-        "structural_sets": 12
-      },
-      "production_backend": "cpp"
-    },
-    "crn_dpo_expander": {
-      "build_sha256": "bce495c880cb9d28be4b1a9a64284988b329dfe8049a51b0a5956f894e5fbf88",
-      "controller": "cpp",
-      "engine": "synkit_dpo_cpp",
-      "executable": "/tmp/synkit-170-evidence/native/dpo-expander/synkit_dpo_crn_bce495c880cb9d28",
-      "executable_sha256": "26f441778a28a9cf6cdbb176c65828b4b12cb642522a512e5c14b5302745e413",
-      "kernel": "synkit_dpo_cpp",
-      "kernel_abi": 1,
-      "kernel_library": "/tmp/synkit-170-evidence/native/dpo-expander/kernel/libsynkit_partial_c25e34c2c2aaf46cdad2.so",
-      "kernel_library_sha256": "9aa07f7f395783d2075bae80d1d9183bde4388c583ec3a0b68821deec184abd1",
-      "rdkit_cpp_version": "2026.03.1",
-      "reaction_engine": "SynReactor DPO"
-    },
-    "crn_expander": {
-      "build_sha256": "4e11e00457206f4b8eca458372e506a68822481f42722a2fe4f4751195e0fb12",
-      "engine": "synkit_crn_expand",
-      "executable": "/tmp/synkit-170-evidence/native/expander/synkit_crn_expand_4e11e00457206f4b",
-      "executable_sha256": "3b0fe9b29bbee5d0993f3f76cefaa3516c6dd1370209afa8af992ec1ad7ed5e5",
-      "rdkit_cpp_version": "2026.03.1",
-      "reaction_engine": "RDKit reaction SMARTS"
-    },
-    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
-    "git_dirty": true,
-    "machine": "x86_64",
-    "networkx": "3.6.1",
-    "numpy": "2.4.4",
-    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
-    "processor": null,
-    "python": "3.12.12",
-    "rdkit": "2026.03.1",
-    "rdkit_sdk": "/home/lolo/.cache/synkit/rdkit-cpp-2026.03.1",
-    "scipy": "1.17.0",
-    "synkit": "1.7.0"
-  },
-  "n_networks": 12,
+  "schema": "synkit.crn-validation/1",
+  "status": "PASS",
   "networks": [
     {
       "computed": {
@@ -923,7 +855,12 @@
       ]
     }
   ],
-  "schema": "synkit.crn-validation/1",
-  "seconds": 0.06606266599555966,
-  "status": "PASS"
+  "claim_boundary": "These are structural, operation-specific verdicts rather than predictions at a fitted parametrization. Deficiency-theorem conclusions apply to mass-action systems under their reported hypotheses. The Angeli-De Leenheer-Sontag persistence test is sufficient, not necessary, so a failing condition does not prove that a species can be driven to extinction.",
+  "n_networks": 12,
+  "seconds": 0.08515011200506706,
+  "checks": {
+    "all_networks_agree_with_independent_recomputation": true,
+    "all_networks_reproduce_expected_verdicts": true,
+    "deficiency_identity_holds_everywhere": true
+  }
 }

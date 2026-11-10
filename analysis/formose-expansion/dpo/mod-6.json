@@ -1,124 +1,124 @@
 {
+  "status": "complete",
   "audits": [
     {
       "index": 0,
       "phase": "warmup",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "warmup",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "warmup",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 0,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 3,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 4,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 5,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 6,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 7,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 8,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 9,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 10,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 11,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 12,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 13,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 14,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 15,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 16,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 17,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 18,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     },
     {
       "index": 19,
       "phase": "measured",
-      "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6"
+      "snapshot_matches": true
     }
   ],
   "backend": "mod",
   "depth": 6,
-  "log": "mod-6.log",
   "median_seconds": 2.2172133084968664,
   "n_reactions": 11239,
   "n_species": 10572,
@@ -201181,7 +201181,6 @@
         ]
       ]
     ],
-    "sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6",
     "species": [
       "C=O",
       "O=C(C(O)C(O)C(O)C(O)C(O)C(O)CO)C(O)(CO)C(O)(C(O)C(O)C(O)CO)C(O)C(O)(C(O)CO)C(O)C(O)C(O)C(O)C(O)C(O)CO",
@@ -211757,12 +211756,12 @@
       "OCC(O)C(O)C(O)C(O)=C(O)C(O)C(O)C(O)CO"
     ]
   },
-  "snapshot_sha256": "9f3c38e63c4d21afb2578ce127586b04668370b164c6a7bf7dee0d7e23978cc6",
-  "status": "complete",
   "version": "1.0.0.75",
   "warmup_samples": [
     2.7039544040017063,
     2.4740109349950217,
     2.244606792999548
-  ]
+  ],
+  "snapshot_matches": true,
+  "snapshot_verified": true
 }

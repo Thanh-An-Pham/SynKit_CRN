@@ -6,13 +6,24 @@ from pathlib import Path
 from collections import Counter
 
 import molfoundry as mf
-from formose_expansion_worker import canonical, rule_gml
+import os
+import sys
+from rdkit import Chem
+sys.path.insert(0, str(Path(os.environ.get('SYNKIT_ROOT', Path(__file__).resolve().parents[4] / 'SynEco/SynKit'))))
+from Experiment.CRN.studies.formose_dpo import rule_gml
+
+def canonical(s):
+    from rdkit import Chem
+    m = Chem.MolFromSmiles(s)
+    if m is None:
+        raise ValueError(f'Invalid exported molecule: {s}')
+    return Chem.MolToSmiles(Chem.RemoveHs(m), canonical=True, isomericSmiles=False)
 
 
 def main():
     paper = Path(__file__).resolve().parents[2]
     root = paper/'analysis/formose-expansion'
-    inputs = json.loads((root/'inputs.json').read_text())
+    inputs = json.loads((root/'dpo/inputs.json').read_text())
     gs = [mf.smiles(s, add=False) for s in inputs['seeds']]
     rules = [mf.ruleGMLString(rule_gml(s,f'r{i}'),add=False) for i,s in enumerate(inputs['rules'])]
     dg = mf.DG(graphDatabase=gs)
@@ -55,8 +66,6 @@ def main():
                      'requested_flux':flux,'synkit_realizable':outcome['realizable'],
                      'molfoundry_realizable':answer,'certificate':sequence,'independent_replay_ok':replay})
     result={'schema':'synkit.formose-route-comparison/1','molfoundry_version':importlib.metadata.version('molfoundry'),
-            'source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-            'synkit_evidence_sha256':hashlib.sha256(original.read_bytes()).hexdigest(),
             'all_ten_agree':len(rows)==10,'positive_certificates_replayed':sum(r['independent_replay_ok'] is True for r in rows),
             'scope':'Fixed reaction multisets from finite initial markings; does not test unrestricted target reachability. FlowSolution is constructed directly, including infeasible candidates, without solving an aggregate hyperflow model.',
             'rows':rows}

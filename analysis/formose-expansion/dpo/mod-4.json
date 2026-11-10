@@ -1,124 +1,124 @@
 {
+  "status": "complete",
   "audits": [
     {
       "index": 0,
       "phase": "warmup",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "warmup",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "warmup",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 0,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 3,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 4,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 5,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 6,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 7,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 8,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 9,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 10,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 11,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 12,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 13,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 14,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 15,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 16,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 17,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 18,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     },
     {
       "index": 19,
       "phase": "measured",
-      "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7"
+      "snapshot_matches": true
     }
   ],
   "backend": "mod",
   "depth": 4,
-  "log": "mod-4.log",
   "median_seconds": 0.0036893854921800084,
   "n_reactions": 44,
   "n_species": 37,
@@ -903,7 +903,6 @@
         ]
       ]
     ],
-    "sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7",
     "species": [
       "C=O",
       "O=C(C(O)CO)C(O)C(O)C(O)C(O)C(O)C(O)CO",
@@ -944,12 +943,12 @@
       "OC=CO"
     ]
   },
-  "snapshot_sha256": "d49bb06ab4f669bfc66f3cca2108004a2b170a52cabb66b07bbc2601ce8ea7b7",
-  "status": "complete",
   "version": "1.0.0.75",
   "warmup_samples": [
     0.007324071004404686,
     0.008351452997885644,
     0.0029965220019221306
-  ]
+  ],
+  "snapshot_matches": true,
+  "snapshot_verified": true
 }

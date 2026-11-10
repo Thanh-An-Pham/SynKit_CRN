@@ -1,4 +1,206 @@
 {
+  "schema": "synkit.crn-formose/1",
+  "status": "PASS",
+  "growth": [
+    {
+      "component_policy": "union",
+      "controller": "cpp",
+      "engine": "synkit_dpo_cpp",
+      "hydrogen_model": "implicit",
+      "implicit_h": true,
+      "iteration": 1,
+      "kernel": "synkit_dpo_cpp",
+      "n_reactions": 1,
+      "n_species": 3,
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 9,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "outcomes": 1,
+          "pool": 2,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        }
+      ],
+      "radical_policy": "ignore",
+      "reaction_engine": "SynReactor DPO",
+      "rule_backend": "synreactor-native",
+      "seconds": 0.06212149799102917
+    },
+    {
+      "component_policy": "union",
+      "controller": "cpp",
+      "engine": "synkit_dpo_cpp",
+      "hydrogen_model": "implicit",
+      "implicit_h": true,
+      "iteration": 2,
+      "kernel": "synkit_dpo_cpp",
+      "n_reactions": 4,
+      "n_species": 5,
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 9,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "outcomes": 1,
+          "pool": 2,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        },
+        {
+          "applications": 3,
+          "bindings": 15,
+          "candidate_mixtures": 3,
+          "capped_rules": [],
+          "events": 3,
+          "frontier": 1,
+          "outcomes": 6,
+          "pool": 3,
+          "step": 2,
+          "task_budget_exhausted": false,
+          "tasks": 3
+        }
+      ],
+      "radical_policy": "ignore",
+      "reaction_engine": "SynReactor DPO",
+      "rule_backend": "synreactor-native",
+      "seconds": 0.037275987007888034
+    },
+    {
+      "component_policy": "union",
+      "controller": "cpp",
+      "engine": "synkit_dpo_cpp",
+      "hydrogen_model": "implicit",
+      "implicit_h": true,
+      "iteration": 3,
+      "kernel": "synkit_dpo_cpp",
+      "n_reactions": 10,
+      "n_species": 9,
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 9,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "outcomes": 1,
+          "pool": 2,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        },
+        {
+          "applications": 3,
+          "bindings": 15,
+          "candidate_mixtures": 3,
+          "capped_rules": [],
+          "events": 3,
+          "frontier": 1,
+          "outcomes": 6,
+          "pool": 3,
+          "step": 2,
+          "task_budget_exhausted": false,
+          "tasks": 3
+        },
+        {
+          "applications": 6,
+          "bindings": 30,
+          "candidate_mixtures": 6,
+          "capped_rules": [],
+          "events": 6,
+          "frontier": 2,
+          "outcomes": 8,
+          "pool": 5,
+          "step": 3,
+          "task_budget_exhausted": false,
+          "tasks": 6
+        }
+      ],
+      "radical_policy": "ignore",
+      "reaction_engine": "SynReactor DPO",
+      "rule_backend": "synreactor-native",
+      "seconds": 0.025568975004716776
+    },
+    {
+      "component_policy": "union",
+      "controller": "cpp",
+      "engine": "synkit_dpo_cpp",
+      "hydrogen_model": "implicit",
+      "implicit_h": true,
+      "iteration": 4,
+      "kernel": "synkit_dpo_cpp",
+      "n_reactions": 44,
+      "n_species": 37,
+      "native_steps": [
+        {
+          "applications": 1,
+          "bindings": 9,
+          "candidate_mixtures": 1,
+          "capped_rules": [],
+          "events": 1,
+          "frontier": 2,
+          "outcomes": 1,
+          "pool": 2,
+          "step": 1,
+          "task_budget_exhausted": false,
+          "tasks": 1
+        },
+        {
+          "applications": 3,
+          "bindings": 15,
+          "candidate_mixtures": 3,
+          "capped_rules": [],
+          "events": 3,
+          "frontier": 1,
+          "outcomes": 6,
+          "pool": 3,
+          "step": 2,
+          "task_budget_exhausted": false,
+          "tasks": 3
+        },
+        {
+          "applications": 6,
+          "bindings": 30,
+          "candidate_mixtures": 6,
+          "capped_rules": [],
+          "events": 6,
+          "frontier": 2,
+          "outcomes": 8,
+          "pool": 5,
+          "step": 3,
+          "task_budget_exhausted": false,
+          "tasks": 6
+        },
+        {
+          "applications": 20,
+          "bindings": 72,
+          "candidate_mixtures": 20,
+          "capped_rules": [],
+          "events": 34,
+          "frontier": 4,
+          "outcomes": 36,
+          "pool": 9,
+          "step": 4,
+          "task_budget_exhausted": false,
+          "tasks": 20
+        }
+      ],
+      "radical_policy": "ignore",
+      "reaction_engine": "SynReactor DPO",
+      "rule_backend": "synreactor-native",
+      "seconds": 0.031094756996026263
+    }
+  ],
   "carbon_conservation": {
     "coefficient_equals_carbon_count": true,
     "entries": [
@@ -190,80 +392,7 @@
     ],
     "n_species": 37
   },
-  "checks": {
-    "all_structural_analyses_complete": true,
-    "conservation_law_is_carbon_count": true,
-    "deficiency_identity_holds": true,
-    "iteration_4_size_is_stable": true,
-    "single_conservation_law": true,
-    "single_minimal_p_semiflow": true,
-    "two_minimal_siphons": true
-  },
   "claim_boundary": "The expansion enumerates rule applications; it does not model kinetics, selectivity, thermodynamic favourability or yield. Recovering carbon conservation is a statement about the generated stoichiometry, not evidence about prebiotic plausibility.",
-  "environment": {
-    "boost": "1.90",
-    "boost_include": "/home/lolo/miniforge3/pkgs/libboost-headers-1.90.0-h707e725_3/include",
-    "cmake": "cmake version 3.31.11",
-    "compiler": "c++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)",
-    "cpu_count": 22,
-    "crn_backend": {
-      "build_sha256": "24b48cd2ced132e808bbd64d17beafe1cf832d3bdd0f091c3eba5ca4e932e5a2",
-      "capabilities": [
-        "closure",
-        "structural_sets",
-        "structural_unlimited",
-        "exhaustive_siphons",
-        "exact_semiflows",
-        "exact_algebra",
-        "crnt",
-        "pathway",
-        "symmetry"
-      ],
-      "library_path": "/tmp/synkit-170-evidence/native/libsynkit_crn_24b48cd2ced132e8.so",
-      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
-      "native_operations": {
-        "crnt": 1,
-        "matrix": 1,
-        "native_dpo_rule_expansion": 4,
-        "semiflows": 3,
-        "structural_sets": 3
-      },
-      "production_backend": "cpp"
-    },
-    "crn_dpo_expander": {
-      "build_sha256": "bce495c880cb9d28be4b1a9a64284988b329dfe8049a51b0a5956f894e5fbf88",
-      "controller": "cpp",
-      "engine": "synkit_dpo_cpp",
-      "executable": "/tmp/synkit-170-evidence/native/dpo-expander/synkit_dpo_crn_bce495c880cb9d28",
-      "executable_sha256": "26f441778a28a9cf6cdbb176c65828b4b12cb642522a512e5c14b5302745e413",
-      "kernel": "synkit_dpo_cpp",
-      "kernel_abi": 1,
-      "kernel_library": "/tmp/synkit-170-evidence/native/dpo-expander/kernel/libsynkit_partial_c25e34c2c2aaf46cdad2.so",
-      "kernel_library_sha256": "9aa07f7f395783d2075bae80d1d9183bde4388c583ec3a0b68821deec184abd1",
-      "rdkit_cpp_version": "2026.03.1",
-      "reaction_engine": "SynReactor DPO"
-    },
-    "crn_expander": {
-      "build_sha256": "4e11e00457206f4b8eca458372e506a68822481f42722a2fe4f4751195e0fb12",
-      "engine": "synkit_crn_expand",
-      "executable": "/tmp/synkit-170-evidence/native/expander/synkit_crn_expand_4e11e00457206f4b",
-      "executable_sha256": "3b0fe9b29bbee5d0993f3f76cefaa3516c6dd1370209afa8af992ec1ad7ed5e5",
-      "rdkit_cpp_version": "2026.03.1",
-      "reaction_engine": "RDKit reaction SMARTS"
-    },
-    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
-    "git_dirty": true,
-    "machine": "x86_64",
-    "networkx": "3.6.1",
-    "numpy": "2.4.4",
-    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
-    "processor": null,
-    "python": "3.12.12",
-    "rdkit": "2026.03.1",
-    "rdkit_sdk": "/home/lolo/.cache/synkit/rdkit-cpp-2026.03.1",
-    "scipy": "1.17.0",
-    "synkit": "1.7.0"
-  },
   "generation": {
     "component_policy": "union",
     "controller": "cpp",
@@ -275,206 +404,6 @@
     "reaction_engine": "SynReactor DPO",
     "rule_backend": "synreactor-native"
   },
-  "growth": [
-    {
-      "component_policy": "union",
-      "controller": "cpp",
-      "engine": "synkit_dpo_cpp",
-      "hydrogen_model": "implicit",
-      "implicit_h": true,
-      "iteration": 1,
-      "kernel": "synkit_dpo_cpp",
-      "n_reactions": 1,
-      "n_species": 3,
-      "native_steps": [
-        {
-          "applications": 1,
-          "bindings": 9,
-          "candidate_mixtures": 1,
-          "capped_rules": [],
-          "events": 1,
-          "frontier": 2,
-          "outcomes": 1,
-          "pool": 2,
-          "step": 1,
-          "task_budget_exhausted": false,
-          "tasks": 1
-        }
-      ],
-      "radical_policy": "ignore",
-      "reaction_engine": "SynReactor DPO",
-      "rule_backend": "synreactor-native",
-      "seconds": 0.04316974100947846
-    },
-    {
-      "component_policy": "union",
-      "controller": "cpp",
-      "engine": "synkit_dpo_cpp",
-      "hydrogen_model": "implicit",
-      "implicit_h": true,
-      "iteration": 2,
-      "kernel": "synkit_dpo_cpp",
-      "n_reactions": 4,
-      "n_species": 5,
-      "native_steps": [
-        {
-          "applications": 1,
-          "bindings": 9,
-          "candidate_mixtures": 1,
-          "capped_rules": [],
-          "events": 1,
-          "frontier": 2,
-          "outcomes": 1,
-          "pool": 2,
-          "step": 1,
-          "task_budget_exhausted": false,
-          "tasks": 1
-        },
-        {
-          "applications": 3,
-          "bindings": 15,
-          "candidate_mixtures": 3,
-          "capped_rules": [],
-          "events": 3,
-          "frontier": 1,
-          "outcomes": 6,
-          "pool": 3,
-          "step": 2,
-          "task_budget_exhausted": false,
-          "tasks": 3
-        }
-      ],
-      "radical_policy": "ignore",
-      "reaction_engine": "SynReactor DPO",
-      "rule_backend": "synreactor-native",
-      "seconds": 0.07912608399055898
-    },
-    {
-      "component_policy": "union",
-      "controller": "cpp",
-      "engine": "synkit_dpo_cpp",
-      "hydrogen_model": "implicit",
-      "implicit_h": true,
-      "iteration": 3,
-      "kernel": "synkit_dpo_cpp",
-      "n_reactions": 10,
-      "n_species": 9,
-      "native_steps": [
-        {
-          "applications": 1,
-          "bindings": 9,
-          "candidate_mixtures": 1,
-          "capped_rules": [],
-          "events": 1,
-          "frontier": 2,
-          "outcomes": 1,
-          "pool": 2,
-          "step": 1,
-          "task_budget_exhausted": false,
-          "tasks": 1
-        },
-        {
-          "applications": 3,
-          "bindings": 15,
-          "candidate_mixtures": 3,
-          "capped_rules": [],
-          "events": 3,
-          "frontier": 1,
-          "outcomes": 6,
-          "pool": 3,
-          "step": 2,
-          "task_budget_exhausted": false,
-          "tasks": 3
-        },
-        {
-          "applications": 6,
-          "bindings": 30,
-          "candidate_mixtures": 6,
-          "capped_rules": [],
-          "events": 6,
-          "frontier": 2,
-          "outcomes": 8,
-          "pool": 5,
-          "step": 3,
-          "task_budget_exhausted": false,
-          "tasks": 6
-        }
-      ],
-      "radical_policy": "ignore",
-      "reaction_engine": "SynReactor DPO",
-      "rule_backend": "synreactor-native",
-      "seconds": 0.03765997300797608
-    },
-    {
-      "component_policy": "union",
-      "controller": "cpp",
-      "engine": "synkit_dpo_cpp",
-      "hydrogen_model": "implicit",
-      "implicit_h": true,
-      "iteration": 4,
-      "kernel": "synkit_dpo_cpp",
-      "n_reactions": 44,
-      "n_species": 37,
-      "native_steps": [
-        {
-          "applications": 1,
-          "bindings": 9,
-          "candidate_mixtures": 1,
-          "capped_rules": [],
-          "events": 1,
-          "frontier": 2,
-          "outcomes": 1,
-          "pool": 2,
-          "step": 1,
-          "task_budget_exhausted": false,
-          "tasks": 1
-        },
-        {
-          "applications": 3,
-          "bindings": 15,
-          "candidate_mixtures": 3,
-          "capped_rules": [],
-          "events": 3,
-          "frontier": 1,
-          "outcomes": 6,
-          "pool": 3,
-          "step": 2,
-          "task_budget_exhausted": false,
-          "tasks": 3
-        },
-        {
-          "applications": 6,
-          "bindings": 30,
-          "candidate_mixtures": 6,
-          "capped_rules": [],
-          "events": 6,
-          "frontier": 2,
-          "outcomes": 8,
-          "pool": 5,
-          "step": 3,
-          "task_budget_exhausted": false,
-          "tasks": 6
-        },
-        {
-          "applications": 20,
-          "bindings": 72,
-          "candidate_mixtures": 20,
-          "capped_rules": [],
-          "events": 34,
-          "frontier": 4,
-          "outcomes": 36,
-          "pool": 9,
-          "step": 4,
-          "task_budget_exhausted": false,
-          "tasks": 20
-        }
-      ],
-      "radical_policy": "ignore",
-      "reaction_engine": "SynReactor DPO",
-      "rule_backend": "synreactor-native",
-      "seconds": 0.03443328999856021
-    }
-  ],
   "inputs": {
     "analysed_iteration": 4,
     "rules": [
@@ -488,8 +417,6 @@
       "OCC=O"
     ]
   },
-  "schema": "synkit.crn-formose/1",
-  "status": "PASS",
   "structure": {
     "deficiency": 1,
     "minimal_siphons": [
@@ -521,14 +448,23 @@
     "n_reactions": 44,
     "n_species": 37,
     "n_terminal_strong_linkage_classes": 29,
-    "persistence_seconds": 0.004819314999622293,
+    "persistence_seconds": 0.004184161996818148,
     "persistent": false,
     "rank": 36,
     "reversible": false,
     "right_nullity": 8,
-    "siphon_seconds": 0.0011433409963501617,
-    "t_semiflow_seconds": 0.003723690999322571,
-    "trap_seconds": 0.001017288988805376,
+    "siphon_seconds": 0.0018622959905769676,
+    "t_semiflow_seconds": 0.005914948997087777,
+    "trap_seconds": 0.0016244650032604113,
     "weakly_reversible": false
+  },
+  "checks": {
+    "all_structural_analyses_complete": true,
+    "conservation_law_is_carbon_count": true,
+    "deficiency_identity_holds": true,
+    "iteration_4_size_is_stable": true,
+    "single_conservation_law": true,
+    "single_minimal_p_semiflow": true,
+    "two_minimal_siphons": true
   }
 }

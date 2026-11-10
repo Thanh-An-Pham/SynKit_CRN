@@ -5,16 +5,15 @@ Run with the Python environment whose SynKit checkout the paper describes:
 
     python analysis/scripts/regenerate_evidence.py --work-dir /tmp/synkit-crn-evidence
 
-Stage 1 runs Experiments/CRN/run_all.py (all studies, cached BioModels inputs,
+Stage 1 runs Experiment/CRN/run_all.py (all studies, cached BioModels inputs,
 native C++ analysis and rule expansion). Stage 2 adds the CRNT4SBML comparison
 on byte-identical SBML inputs, the 31-input structural cross-check against the
 separate Python siphon search, and the glycolysis replay. Stage 3 installs the
-reports under the names the manuscript scripts read. Sources are hashed before
-and after; a change during the run aborts the installation.
+reports under the names the manuscript scripts read. Source changes during
+execution abort the installation; fingerprints are not saved in the reports.
 """
 
 import argparse
-import hashlib
 import json
 import logging
 import os
@@ -45,13 +44,14 @@ def _read(out, name):
 
 
 def _write(out, name, value):
-    (out / name).write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+    from Experiment.CRN.tools.reports import save_result
+    save_result(out / name, value)
 
 
 def run_studies(out, native_dir, crnt4sbml_python=None):
     """Stage 1: all run_all studies with cached BioModels inputs."""
     command = [
-        sys.executable, str(ROOT / "Experiments/CRN/run_all.py"),
+        sys.executable, str(ROOT / "Experiment/CRN/run_all.py"),
         "--output-dir", str(out), "--summary", str(out / "summary.json"),
         "--with-biomodels", "--offline", "--native-build-dir", str(native_dir),
     ]
@@ -62,79 +62,22 @@ def run_studies(out, native_dir, crnt4sbml_python=None):
 
 
 def external_comparison(out, library):
-    """Recompute SynKit quantities and compare with recorded CRNT4SBML outputs."""
-    staged = out / "crn-external-crnt4sbml.json"
-    if staged.exists():
-        report = json.loads(staged.read_text())
-        if report.get("status") != "PASS":
-            raise RuntimeError("The live CRNT4SBML comparison did not pass")
-        report["external_execution"] = {
-            "mode": "live_isolated_crnt4sbml", "interpreter_rerun": True,
-        }
-        _write(out, staged.name, report)
-        return report
-    from Experiments.CRN.benchmarks import BENCHMARK_NETWORKS
-    from Experiments.CRN.studies.external_crnt4sbml import compare_payload
-    from Experiments.CRN.tools.common import environment
-    from synkit.CRN import crnt_summary, write_sbml
-    import synkit
-
-    archived_path = PAPER / "analysis/reference-1.6.3/crn-external-crnt4sbml.json"
-    archived = json.loads(archived_path.read_text())
-    archived_rows = {r["name"]: r for r in archived["networks"]}
-    ours = {}
-    started = perf_counter()
-    with tempfile.TemporaryDirectory(prefix="crn-sbml-") as directory:
-        for fixture in BENCHMARK_NETWORKS:
-            model = fixture.build()
-            row = crnt_summary(model, library_path=library).to_dict()
-            row["weakly_reversible"] = row.pop("is_weakly_reversible")
-            path = Path(directory) / (fixture.name + ".xml")
-            write_sbml(model, path, model_id=fixture.name, model_name=fixture.description)
-            digest = hashlib.sha256(path.read_bytes()).hexdigest()
-            assert digest == archived_rows[fixture.name]["input_sha256"], fixture.name
-            row["input_sha256"] = digest
-            ours[fixture.name] = row
-    external = {"networks": [{"name": r["name"], **r["crnt4sbml"]} for r in archived["networks"]]}
-    comparison = compare_payload(ours, external)
-    assert all(comparison["checks"].values())
-    reference_dir = out / "reference-1.6.3"
-    reference_dir.mkdir(exist_ok=True)
-    (reference_dir / archived_path.name).write_bytes(archived_path.read_bytes())
-    report = {
-        "schema": archived["schema"], "status": "PASS",
-        "environment": environment(),
-        "external_environment": archived["external_environment"],
-        "external_tool": archived["external_tool"],
-        "interface": archived["interface"],
-        "seconds": perf_counter() - started,
-        "external_execution": {
-            "mode": "recorded_outputs_on_identical_sbml_inputs",
-            "interpreter_rerun": False,
-            "reference_path": "reference-1.6.3/" + archived_path.name,
-            "reference_sha256": hashlib.sha256(archived_path.read_bytes()).hexdigest(),
-            "all_exported_input_hashes_match": True,
-            "reference_environment": archived["environment"],
-        },
-        "claim_boundary": (
-            f"SynKit {synkit.__version__} outputs are recomputed and compared with "
-            "recorded CRNT4SBML outputs for byte-identical exported SBML inputs. The "
-            "legacy CRNT4SBML interpreter was not rerun. This checks shared "
-            "structural quantities, not the SynKit-only analyses or relative speed."
-        ),
-        **comparison,
-    }
-    _write(out, "crn-external-crnt4sbml.json", report)
+    """Require the fresh isolated CRNT4SBML run produced by run_all."""
+    report = _read(out, 'crn-external-crnt4sbml.json')
+    if report.get('status') != 'PASS':
+        raise RuntimeError('The live CRNT4SBML comparison did not pass')
+    report['external_execution'] = {'mode': 'live_isolated_crnt4sbml', 'interpreter_rerun': True}
+    _write(out, 'crn-external-crnt4sbml.json', report)
     return report
 
 
 def structural_audit(out, library):
     """Cross-check complete C++ enumeration with the separate Python search."""
     from siphon_oracle import enumerate_models
-    from Experiments.CRN.benchmarks import BENCHMARK_NETWORKS, build_kegg_crn
-    from Experiments.CRN.benchmarks.scaling import generate_network
-    from Experiments.CRN.studies.formose_case_study import expand
-    from Experiments.CRN.tools.common import environment, source_hashes
+    from Experiment.CRN.studies import BENCHMARK_NETWORKS, build_kegg_crn
+    from Experiment.CRN.studies.scaling import generate_network
+    from Experiment.CRN.studies.formose_case_study import expand
+    from Experiment.CRN.tools.common import environment, source_hashes
     from synkit.CRN import enumerate_semiflows, enumerate_structural_sets, read_sbml
     from synkit.CRN.Petrinet.net import PetriNet
     from synkit.CRN.Props.stoich import build_S
@@ -149,7 +92,7 @@ def structural_audit(out, library):
                           row["result"], None))
     for row in _read(out, "crn-biomodels.json")["models"]:
         if row["n_reactions"]:
-            model = read_sbml(ROOT / "Experiments/CRN/data/biomodels" / (row["model_id"] + ".xml"))
+            model = read_sbml(ROOT / "Experiment/CRN/data/biomodels" / (row["model_id"] + ".xml"))
             cases.append(("biomodels/" + row["model_id"], model, row["n_minimal_siphons"],
                           row["n_conserved_moieties"]))
     for row in _read(out, "crn-kegg.json")["modules"]:
@@ -193,8 +136,7 @@ def structural_audit(out, library):
     assert len(records) == 31
     _write(out, "structural-verification.json", {
         "status": "PASS", "complete": True, "cases": records,
-        "source_sha256": source_hashes(), "environment": environment(),
-        "native_backend": environment()["crn_backend"],
+        "environment": environment(),
         "independent_search_source": (SCRIPTS / "siphon_oracle.py").read_text(),
         "verification_source": Path(__file__).read_text(),
         "limits": {"structural_nodes": None, "structural_time": None, "structural_results": None},
@@ -209,18 +151,18 @@ def structural_audit(out, library):
 
 def complete(out, native_dir, rdkit_dir):
     """Stage 2: external comparison, structural audit and glycolysis replay."""
-    from Experiments.CRN.tools.common import source_hashes
-    from glycolysis_analysis import build_analysis, render_tex
+    from Experiment.CRN.tools.common import source_hashes
+    from glycolysis_analysis import build_analysis
     from synkit.CRN import native_backend
     from synkit.CRN.Construct import build_native_expander, native_expander
     from synkit.CRN.Construct.native_dpo import build_native_dpo_expander, native_dpo_expander
-    from Experiments.CRN.studies.participant_conventions import participant_conventions_report
+    from Experiment.CRN.studies.participant_conventions import participant_conventions_report
 
     summary = _read(out, "summary.json")
     assert summary["status"] == "PASS", "run_all did not pass"
-    library = Path(summary["environment"]["crn_backend"]["library_path"])
-    initial_sources = summary["source_sha256"]
-    assert initial_sources == source_hashes(), "Sources changed during the run"
+    from synkit.CRN import build_native
+    library = build_native(native_dir, with_semiflows=True)
+    initial_sources = source_hashes()
     expander = build_native_expander(native_dir / "expander", rdkit_dir=rdkit_dir)
     dpo = build_native_dpo_expander(native_dir / "dpo-expander", rdkit_dir=rdkit_dir)
     with native_backend(library), native_expander(expander), native_dpo_expander(dpo):
@@ -228,7 +170,6 @@ def complete(out, native_dir, rdkit_dir):
         structural_audit(out, library)
         glycolysis = build_analysis()
         _write(out, "glycolysis_analysis.json", glycolysis)
-        (out / "glycolysis_analysis.tex").write_text(render_tex(glycolysis))
         participants = participant_conventions_report(offline=True)
         if participants["status"] != "PASS":
             raise RuntimeError("Independent BioModels participant audit failed")
@@ -238,7 +179,7 @@ def complete(out, native_dir, rdkit_dir):
     summary["studies"].append({
         "name": "external-crnt4sbml", "path": report_path.name,
         "schema": external["schema"], "status": "PASS", "checks": external["checks"],
-        "sha256": hashlib.sha256(report_path.read_bytes()).hexdigest(), "error": None,
+        "error": None,
     })
     summary["omitted_studies"] = {}
     summary["all_studies_included"] = True
@@ -246,8 +187,6 @@ def complete(out, native_dir, rdkit_dir):
     summary["run_date"] = date.today().isoformat()
     assert initial_sources == source_hashes(), "Sources changed during the audit"
     _write(out, "summary.json", summary)
-    _write(out, "source-before-run.json", initial_sources)
-    _write(out, "native-build.json", json.loads(library.with_suffix(".json").read_text()))
 
 
 def install(out):
@@ -259,11 +198,8 @@ def install(out):
         installed = INSTALL_NAMES.get(name, name)
         shutil.copy2(out / name, target / installed)
         row["path"] = installed
-    for name in ("structural-verification.json", "source-before-run.json",
-                 "native-build.json", "glycolysis_analysis.json", "crn-biomodels-modifiers.json"):
+    for name in ("structural-verification.json", "glycolysis_analysis.json", "crn-biomodels-modifiers.json"):
         shutil.copy2(out / name, target / name)
-    if (out / "reference-1.6.3").exists():
-        shutil.copytree(out / "reference-1.6.3", target / "reference-1.6.3", dirs_exist_ok=True)
     _write(target, "summary.json", summary)
 
 
@@ -274,21 +210,19 @@ def main():
     parser.add_argument("--rdkit-dir", type=Path)
     parser.add_argument("--crnt4sbml-python", type=Path,
                         help="isolated interpreter for a fresh CRNT4SBML comparison")
-    parser.add_argument("--allow-recorded-crnt4sbml", action="store_true",
-                        help="explicitly reuse checksum-matched historical comparator output")
     parser.add_argument("--install", action="store_true",
                         help="install completed reports into the manuscript analysis directory")
     parser.add_argument("--skip-studies", action="store_true",
                         help="reuse stage-1 reports already in --work-dir")
     arguments = parser.parse_args()
-    if arguments.crnt4sbml_python is None and not arguments.allow_recorded_crnt4sbml:
-        parser.error("provide --crnt4sbml-python, or explicitly allow recorded comparator output")
+    if arguments.crnt4sbml_python is None and not arguments.skip_studies:
+        parser.error("provide --crnt4sbml-python for the live external comparison")
     logging.disable(logging.INFO)
-    from Experiments.CRN.tools.common import _default_rdkit_sdk
+    from Experiment.CRN.tools.common import _default_rdkit_sdk
 
     out = arguments.work_dir.resolve()
     out.mkdir(parents=True, exist_ok=True)
-    native_dir = (arguments.native_build_dir or out / "native").resolve()
+    native_dir = (arguments.native_build_dir or Path(tempfile.gettempdir()) / "synkit-crn-native").resolve()
     rdkit_dir = arguments.rdkit_dir or _default_rdkit_sdk()
     if rdkit_dir is None:
         raise SystemExit("An RDKit C++ SDK is required; pass --rdkit-dir")

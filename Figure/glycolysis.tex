@@ -1,25 +1,8 @@
-% ---------------------------------------------------------------------------
-% glycolysis.tex --- KEGG M00001 end to end: topology, exact structure, the
-% returned firing certificate, and every recorded token marking.
-%
-% Source fragment: loaded directly by main.tex.
-%
-% Numerical macros are embedded in main.tex from analysis/glycolysis_analysis.json.
-%
-% The top panel shows the reduced pathway across the full figure width.
-% The full-width lower panel is generated from the complete recorded trajectory.
-% ---------------------------------------------------------------------------
-% Figure styles are supplied by the manuscript preamble.
-
 \begingroup
-% Use the full 16.40 cm manuscript width without stretching text or symbols.
 \colorlet{scInk}{black}
 \colorlet{scInkM}{black}
 \renewcommand{\scBody}{\scArial\fontsize{7}{8.4}\selectfont\color{black}}
 \renewcommand{\scSmall}{\scArial\fontsize{8}{9.6}\selectfont\color{black}}
-% Carbon skeleton glyph: #1 carbon dots in a zigzag, #2 circled phosphates on
-% the chain ends (as in Figures 5 and 6). Hexoses carry six dots and trioses
-% three, so the weighted pool of panel b can be read off the drawing.
 \newcommand{\gchain}[2]{\tikz[x=1.2cm,y=1.2cm,baseline=(gc1.base)]{%
   \foreach \i in {1,...,#1}{\pgfmathsetmacro\gy{mod(\i,2)*0.055}%
     \coordinate (gc\i) at ({(\i-1)*0.115},\gy);}%
@@ -35,7 +18,6 @@
          font=\scArial\fontsize{4.5}{4.5}\selectfont] {P};\fi
   \path (0,-0.05) (0,0.32);}}
 \tikzset{
-  % metabolite: carbon glyph over its abbreviation; the text names it
   gmet/.style={draw=none,fill=none,font=\scSmall,text=scInk,align=center,
                inner sep=1pt},
   gsmall/.style={rounded rectangle,fill=white,draw=black,line width=0.4pt,
@@ -45,26 +27,18 @@
                 line width=0.8pt,shorten >=1.4pt,shorten <=1.4pt},
   gbypass/.style={-{Stealth[round,length=1.7mm,width=1.3mm]},draw=figMuted,
                   line width=0.6pt,dashed,shorten >=1.4pt,shorten <=1.4pt},
-  % enzyme labels: 6 pt is the floor, and they knock out the edge behind them
   glabel/.style={font=\scSmall,text=scInkM,fill=white,inner sep=0.9pt},
 }
-% A siphon covered by a conservation law (teal check) or not (gray cross).
 \newcommand{\gcov}{\textcolor{scAccent}{$\checkmark$}}
 \newcommand{\gunc}{\textcolor{scInkM}{$\times$}}
 
-\def\ry{-4.25}          % top edge of the bottom row
+\def\ry{-4.25}          %
 
 \begin{tikzpicture}[syn,x=1.258384cm]
 \scCanvas{10.9}
 
-% =========================================================================
-% (a) module topology
-%     upper chain -1.48 | lower chain -3.05 | note -3.95
-% =========================================================================
 \scHead{(0.22,-0.16)}{a}{}{}
 
-% Spread the pathway over the width released by the former right-hand panel.
-% Position scaling leaves the larger labels and molecular glyphs undistorted.
 \begin{scope}[xscale=1.9]
 \node[gmet] (glc)  at (0.55,-1.48) {\gchain{6}{0}\\Glc};
 \node[gmet] (g6p)  at (1.92,-1.48) {\gchain{6}{1}\\G6P};
@@ -73,7 +47,6 @@
 \node[gmet] (dhap) at (5.72,-0.98) {\gchain{3}{1}\\DHAP};
 \node[gmet] (gap)  at (5.72,-1.98) {\gchain{3}{1}\\GAP};
 
-% Labels ride above their edges: at 6 pt they do not fit between the nodes.
 \draw[gpath] (glc) -- (g6p) node[glabel,midway,yshift=3.4mm] {HK $\times3$};
 \draw[gpath] (g6p) -- (f6p) node[glabel,midway,yshift=3.4mm] {PGI};
 \draw[gpath] (f6p) -- (fbp) node[glabel,midway,yshift=3.4mm] {PFK $\times2$};
@@ -83,8 +56,6 @@
 \draw[gpath] (dhap) to[out=-12,in=12,looseness=1.8] (gap);
 \node[glabel] at (6.18,-1.56) {TPI};
 
-% Lower chain runs back right to left under the triose pair, so GAPDH is a
-% short vertical step and the ferredoxin bypass can arc over PGK.
 \node[gmet] (bpg) at (5.72,-3.30) {\gchain{3}{2}\\BPG};
 \node[gmet] (pg3) at (4.62,-3.30) {\gchain{3}{1}\\3PG};
 \node[gmet] (pg2) at (3.62,-3.30) {\gchain{3}{1}\\2PG};
@@ -98,17 +69,14 @@
 \draw[gpath] (pg2) -- (pep) node[glabel,midway,yshift=3.2mm] {ENO};
 \draw[gpath] (pep) -- (pyr) node[glabel,midway,yshift=3.2mm] {PK};
 
-% Ferredoxin bypass: GAP straight to 3PG, skipping BPG.
 \draw[gbypass] (gap.west) to[out=180,in=90,looseness=0.9] (pg3.north);
 \node[font=\scSmall,text=black,inner sep=0.8pt,align=center]
   at (5.24,-2.68) {Fd$_{\rm ox}\!\to\,$Fd$_{\rm red}$\\bypass};
 
-% Shared polyphosphate donor feeds the HK step.
 \node[catalyst,font=\scSmall,text=black] (poly) at (1.235,-2.30) {PolyP};
 \draw[cat,dashed] (poly.north) -- ($(glc)!0.50!(g6p)$);
 \end{scope}
 
-% (b) Full-width token map generated from the recorded certificate trajectory.
 \node[anchor=north west,inner sep=0pt] at (0,\ry)
   {\includegraphics[width=16.4cm]{Figure/glycolysis_replay.pdf}};
 \end{tikzpicture}

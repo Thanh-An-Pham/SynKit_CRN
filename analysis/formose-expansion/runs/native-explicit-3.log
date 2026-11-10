@@ -1,6 +1,0 @@
-{"phase": "generation_complete", "mode": "native-explicit", "depth": 3, "repeat": 0, "seconds": 0.013334552000742406, "native_request_seconds": 0.012787332001607865}
-{"phase": "generation_complete", "mode": "native-explicit", "depth": 3, "repeat": 1, "seconds": 0.002274455997394398, "native_request_seconds": 0.0019981439982075244}
-{"phase": "generation_complete", "mode": "native-explicit", "depth": 3, "repeat": 2, "seconds": 0.002155731985112652, "native_request_seconds": 0.0018798370147123933}
-{"phase": "generation_complete", "mode": "native-explicit", "depth": 3, "repeat": 3, "seconds": 0.00219577900134027, "native_request_seconds": 0.0019099040073342621}
-{"phase": "generation_complete", "mode": "native-explicit", "depth": 3, "repeat": 4, "seconds": 0.0020671480160672218, "native_request_seconds": 0.0018182480125688016}
-{"phase": "generation_complete", "mode": "native-explicit", "depth": 3, "repeat": 5, "seconds": 0.0019665660220198333, "native_request_seconds": 0.0017343419895041734}

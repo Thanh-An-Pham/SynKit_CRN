@@ -1,19 +1,3 @@
-% ---------------------------------------------------------------------------
-% formose_chemistry.tex --- the prescribed formose routes as one convergent
-% scheme: three glycolaldehyde molecules, two enolizations (r1), the tetrose
-% aldol (r3), and the hexose aldol (r7).
-%
-% Source fragment: loaded by SI/si.tex.
-%
-% Skeletal structures, hydrogens on carbon implicit.  No atom mapping and no
-% stereochemical outcome is asserted: the rule-generated network does not
-% assign stereocentres.  Reactions are drawn as Petri-net bars, as in the main
-% text, so each glycolaldehyde molecule is a separate input; the shaded block
-% is the T4 route (r1 + r3), the whole scheme the T6 route (2 r1 + r3 + r7).
-% Black and white, after the shared result-figure style.
-% ---------------------------------------------------------------------------
-% Figure styles are supplied by the manuscript preamble.
-
 \begingroup
 \setchemfig{atom sep=17pt,bond style={line width=0.5pt},bond offset=1.1pt}
 \renewcommand*\printatom[1]{\ensuremath{\mathsf{#1}}}
@@ -35,7 +19,6 @@
   rlab/.style={font=\scSmall,text=black,anchor=south,inner sep=1.5pt},
   note/.style={font=\scSmall,text=black,align=left,anchor=north west},
 }
-% reaction bar: \rbar{name}{x}{y}{label}
 \newcommand{\rbar}[4]{%
   \coordinate (#1) at (#2,#3);
   \draw[line width=2.4pt] (#2,#3-0.30) -- (#2,#3+0.30);
@@ -43,18 +26,13 @@
   \coordinate (#1w) at (#2-0.06,#3);
   \coordinate (#1e) at (#2+0.06,#3);}
 
-% Main chain on one line: glycolaldehyde -> r3 -> T4 -> r7 -> T6.  Each aldol
-% takes its enediol from a separate enolization, fed from above (r3) or below
-% (r7), so the three glycolaldehyde inputs are drawn as three molecules.
-\def\ym{-2.35}   % main chain
-\def\yt{-0.85}   % first enolization
-\def\yl{-4.30}   % second enolization
+\def\ym{-2.35}   %
+\def\yt{-0.85}   %
+\def\yl{-4.30}   %
 
-% --- T4 route (r1 + r3): shaded block --------------------------------------
 \fill[black!7] (0.15,-0.12) rectangle (9.85,-3.62);
 \node[note] at (0.25,-2.55) {$T_4$ route: $r_1+r_3$\\2 firings\\2 glycolaldehyde};
 
-% --- first enolization (top) and tetrose aldol (main chain) ----------------
 \node[mol] (ga) at (1.55,\yt) {\mfont\glycolald};
 \rbar{ra}{3.05}{\yt}{$r_1$}
 \node[mol] (ea) at (4.40,\yt) {\mfont\enediol};
@@ -68,7 +46,6 @@
 \node[mol] (t4) at (8.10,\ym) {\mfont\tetrose};
 \draw[feed] (rbe) -- (t4.west);
 
-% --- second enolization (bottom) and hexose aldol (main chain) -------------
 \node[mol] (gc) at (5.20,\yl) {\mfont\glycolald};
 \rbar{rc}{6.70}{\yl}{$r_1$}
 \node[mol] (ec) at (8.10,\yl) {\mfont\enediol};
@@ -81,7 +58,6 @@
 \node[mol] (t6) at (13.40,\ym) {\mfont\hexose};
 \draw[feed] (rde) -- (t6.west);
 
-% --- names under each structure ---------------------------------------------
 \foreach \n/\t in {ga/glycolaldehyde 1, gb/glycolaldehyde 2,
                    gc/glycolaldehyde 3, ea/enediol, ec/enediol}
   \node[sname] at ([yshift=-0.5mm]\n.south) {\t};

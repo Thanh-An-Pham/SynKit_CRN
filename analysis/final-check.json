@@ -1,0 +1,76 @@
+{
+  "schema": "synkit.paper-final-check/1",
+  "status": "PASS",
+  "tex_cleanup": {
+    "revision_wrappers_remaining": 0,
+    "explanatory_comment_lines_remaining": 0,
+    "inline_tikz_sources": 5,
+    "standalone_tikz_pdfs": 0,
+    "data_plot_pdfs": 8
+  },
+  "scientific_reproduction": {
+    "default_studies": 10,
+    "live_crnt4sbml": "PASS",
+    "independent_structural_cases": 31,
+    "exact_saved_result_comparisons": 34,
+    "generation_configurations": 18,
+    "fresh_warmups_per_configuration": 1,
+    "fresh_measurements_per_configuration": 2,
+    "fresh_expansions": 54,
+    "generation_sets_match_saved_results": true,
+    "saved_full_benchmark_expansions_verified": 414,
+    "timings_expected_to_match_exactly": false
+  },
+  "clean_build": {
+    "initial_pdf_files": 0,
+    "regenerated_data_plots": 8,
+    "build": "PASS",
+    "documents": {
+      "main.pdf": {
+        "pages": 19,
+        "text_matches_clean_rebuild": true,
+        "scientific_body_unchanged": true
+      },
+      "SI/si.pdf": {
+        "pages": 9,
+        "text_matches_clean_rebuild": true,
+        "scientific_body_unchanged": true
+      }
+    },
+    "template_files_required": 0
+  },
+  "si_code_example": "PASS",
+  "layout_embedding": {
+    "shared_helper_removed": true,
+    "settings_embedded_in": [
+      "main.tex",
+      "SI/si.tex"
+    ],
+    "documents": {
+      "main.pdf": {
+        "pages": 19,
+        "scientific_body_unchanged": true
+      },
+      "SI/si.pdf": {
+        "pages": 9,
+        "scientific_body_unchanged": true
+      }
+    },
+    "build": "PASS"
+  },
+  "template_removal": {
+    "template_directory_removed": true,
+    "document_class": "article",
+    "bibliography_style": "unsrtnat",
+    "formatting_embedded_in": [
+      "main.tex",
+      "SI/si.tex"
+    ],
+    "abstract_and_scientific_body_unchanged": true,
+    "citation_keys_and_order_unchanged": true,
+    "tex_errors": 0,
+    "overfull_boxes": 0,
+    "unresolved_citations_and_references": 0,
+    "clean_build": "PASS"
+  }
+}

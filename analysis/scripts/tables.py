@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep numerical values in main.tex and SI/si.tex tied to the saved evidence."""
+"""Table rows used to check the manuscript against saved results."""
 
 import json
 import os
@@ -12,9 +12,7 @@ ROOT = Path(os.environ.get("SYNKIT_ROOT", PAPER.parents[1] / "SynEco/SynKit"))
 sys.path.insert(0, str(ROOT))
 
 from analysis_overview import reference_table
-from glycolysis_analysis import render_tex
-from review_figures import render_tables
-from formose_dpo_assets import table as dpo_table, macros as dpo_macros
+from formose_dpo_assets import table as dpo_table
 
 
 def biomodels_table(report):
@@ -118,70 +116,24 @@ def formose_inventory_table(report):
     return "\n".join(rows) + "\n"
 
 
-def generated_blocks(paper=PAPER):
-    """Return the expected inline blocks without writing source or figures."""
-    evidence = paper / "analysis"
-    tables = render_tables(evidence)
+def table_blocks(paper=PAPER):
+    """Return table rows calculated from the saved scientific results."""
+    evidence = paper / 'analysis'
     def read(name):
         return json.loads((evidence / name).read_text())
-    macros = tables["crn-review-macros.tex"]
-    si_macros = "\n".join(
-        line for line in macros.splitlines()
-        if line.startswith(r"\newcommand{\ReviewRandomMoietySeconds}")
-    ) + "\n"
     return {
-        "main.tex": {
-            "dpo-generation-macros": dpo_macros(),
-            "review-macros": macros,
-            "glycolysis-macros": render_tex(read("glycolysis_analysis.json")),
-            "reference-networks": reference_table(
-                read("crn-validation.json"), read("crn-external-crnt4sbml.json")
-            ),
+        'main.tex': {
+            'reference-networks': reference_table(read('crn-validation.json'), read('crn-external-crnt4sbml.json')),
         },
-        "SI/si.tex": {
-            "formose-dpo-comparison": dpo_table(),
-            "review-macros": si_macros,
-            "biomodels-models": biomodels_table(read("crn-biomodels.json")),
-            "biomodels-modifiers": biomodels_modifier_table(read("crn-biomodels-modifiers.json")),
-            "kegg-modules": kegg_table(read("crn-kegg.json")),
-            "glycolysis-flux": glycolysis_flux_table(read("crn-kegg.json")),
-            "glycolysis-currency-control": glycolysis_currency_table(read("crn-review-experiments.json")),
-            "glycolysis-inventory-controls": glycolysis_inventory_table(read("crn-review-experiments.json")),
-            "formose-routes": formose_route_table(read("crn-supplement-audit.json")),
-            "formose-inventories": formose_inventory_table(read("crn-supplement-audit.json")),
+        'SI/si.tex': {
+            'formose-dpo-comparison': dpo_table(),
+            'biomodels-models': biomodels_table(read('crn-biomodels.json')),
+            'biomodels-modifiers': biomodels_modifier_table(read('crn-biomodels-modifiers.json')),
+            'kegg-modules': kegg_table(read('crn-kegg.json')),
+            'glycolysis-flux': glycolysis_flux_table(read('crn-kegg.json')),
+            'glycolysis-currency-control': glycolysis_currency_table(read('crn-review-experiments.json')),
+            'glycolysis-inventory-controls': glycolysis_inventory_table(read('crn-review-experiments.json')),
+            'formose-routes': formose_route_table(read('crn-supplement-audit.json')),
+            'formose-inventories': formose_inventory_table(read('crn-supplement-audit.json')),
         },
     }
-
-
-def block_pattern(name):
-    return re.compile(
-        r"^% BEGIN GENERATED: " + re.escape(name) + r"\n.*?"
-        r"^% END GENERATED: " + re.escape(name) + r"$",
-        re.M | re.S,
-    )
-
-
-def marked_block(name, body):
-    return (
-        f"% BEGIN GENERATED: {name}\n" + body.rstrip() + "\n"
-        f"% END GENERATED: {name}"
-    )
-
-
-def main():
-    for filename, blocks in generated_blocks().items():
-        path = PAPER / filename
-        previous = path.read_text()
-        text = previous
-        for name, body in blocks.items():
-            pattern = block_pattern(name)
-            if len(pattern.findall(text)) != 1:
-                raise ValueError(f"Expected one {name} block in {filename}")
-            text = pattern.sub(lambda match: marked_block(name, body), text)
-        if text != previous:
-            path.write_text(text)
-            print(f"Updated numerical values in {filename}")
-
-
-if __name__ == "__main__":
-    main()

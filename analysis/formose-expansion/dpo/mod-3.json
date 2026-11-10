@@ -1,124 +1,124 @@
 {
+  "status": "complete",
   "audits": [
     {
       "index": 0,
       "phase": "warmup",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "warmup",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "warmup",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 0,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 3,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 4,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 5,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 6,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 7,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 8,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 9,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 10,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 11,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 12,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 13,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 14,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 15,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 16,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 17,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 18,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     },
     {
       "index": 19,
       "phase": "measured",
-      "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c"
+      "snapshot_matches": true
     }
   ],
   "backend": "mod",
   "depth": 3,
-  "log": "mod-3.log",
   "median_seconds": 0.0015232415025820956,
   "n_reactions": 10,
   "n_species": 9,
@@ -315,7 +315,6 @@
         ]
       ]
     ],
-    "sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
     "species": [
       "C=O",
       "O=CC(O)C(O)C(O)C(O)CO",
@@ -328,12 +327,12 @@
       "OC=CO"
     ]
   },
-  "snapshot_sha256": "1cc08b1d62a33c3df466ba9af25610e4e05e59612312fcc95b712156a068739c",
-  "status": "complete",
   "version": "1.0.0.75",
   "warmup_samples": [
     0.0019251630001235753,
     0.0015862639993429184,
     0.0013901260099373758
-  ]
+  ],
+  "snapshot_matches": true,
+  "snapshot_verified": true
 }

@@ -1,31 +1,35 @@
 \begin{thebibliography}{4}
 \providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{{#1}}
-\providecommand{\urlprefix}{URL }
+\providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
-  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
-  \urlstyle{rm}\Url}\fi
-\providecommand{\eprint}[2][]{\url{#2}}
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[{Feinberg(2019)}]{feinberg2019foundations}
-Feinberg M (2019) Foundations of Chemical Reaction Network Theory, Applied
-  Mathematical Sciences, vol 202. Springer, Cham,
-  \doi{10.1007/978-3-030-03858-8}
+\bibitem[Feinberg(2019)]{feinberg2019foundations}
+Martin Feinberg.
+\newblock \emph{Foundations of Chemical Reaction Network Theory}, volume 202 of
+  \emph{Applied Mathematical Sciences}.
+\newblock Springer, Cham, 2019.
+\newblock \doi{10.1007/978-3-030-03858-8}.
 
-\bibitem[{Edelstein(1970)}]{edelstein1970biochemical}
-Edelstein BB (1970) Biochemical model with multiple steady states and
-  hysteresis. Journal of Theoretical Biology 29(1):57--62,
-  \doi{10.1016/0022-5193(70)90118-9}
+\bibitem[Edelstein(1970)]{edelstein1970biochemical}
+Boris~B Edelstein.
+\newblock Biochemical model with multiple steady states and hysteresis.
+\newblock \emph{Journal of Theoretical Biology}, 29\penalty0 (1):\penalty0
+  57--62, 1970.
+\newblock \doi{10.1016/0022-5193(70)90118-9}.
 
-\bibitem[{Wang and Sontag(2008)}]{wang2008multisite}
-Wang L, Sontag ED (2008) On the number of steady states in a multiple futile
-  cycle. Journal of Mathematical Biology 57(1):29--52,
-  \doi{10.1007/s00285-007-0145-z}
+\bibitem[Wang and Sontag(2008)]{wang2008multisite}
+Liming Wang and Eduardo~D Sontag.
+\newblock On the number of steady states in a multiple futile cycle.
+\newblock \emph{Journal of Mathematical Biology}, 57\penalty0 (1):\penalty0
+  29--52, 2008.
+\newblock \doi{10.1007/s00285-007-0145-z}.
 
-\bibitem[{Shinar and Feinberg(2010)}]{shinar2010structural}
-Shinar G, Feinberg M (2010) Structural sources of robustness in biochemical
-  reaction networks. Science 327(5971):1389--1391,
-  \doi{10.1126/science.1183372}
+\bibitem[Shinar and Feinberg(2010)]{shinar2010structural}
+Guy Shinar and Martin Feinberg.
+\newblock Structural sources of robustness in biochemical reaction networks.
+\newblock \emph{Science}, 327\penalty0 (5971):\penalty0 1389--1391, 2010.
+\newblock \doi{10.1126/science.1183372}.
 
 \end{thebibliography}

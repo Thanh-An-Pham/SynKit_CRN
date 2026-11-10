@@ -76,7 +76,7 @@ def configure():
 def heading(ax, letter, title, y=1.06):
     """Panel header: an ink badge carrying the letter, then the title.
 
-    The badge is the shared panel marker of the manuscript (paper_layout.tex):
+    The badge is the shared panel marker defined in the manuscript preambles:
     panel identity is encoded by the letter, not by colour alone, so the header
     survives greyscale printing.  Both pieces are offset from the axes origin in
     points, so the badge clears the figure edge whatever the axes width is.

@@ -1,262 +1,343 @@
-\begin{thebibliography}{42}
+\begin{thebibliography}{40}
 \providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{{#1}}
-\providecommand{\urlprefix}{URL }
+\providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{DOI~\discretionary{}{}{}#1}\else
-  \providecommand{\doi}{DOI~\discretionary{}{}{}\begingroup
-  \urlstyle{rm}\Url}\fi
-\providecommand{\eprint}[2][]{\url{#2}}
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[{Kanehisa et~al(2025)Kanehisa, Furumichi, Sato, Matsuura, and
-  Ishiguro-Watanabe}]{kanehisa2025kegg}
-Kanehisa M, Furumichi M, Sato Y, Matsuura Y, Ishiguro-Watanabe M (2025) {KEGG}:
-  biological systems database as a model of the real world. Nucleic Acids
-  Research 53(D1):D672--D677, \doi{10.1093/nar/gkae909}
+\bibitem[Kanehisa et~al.(2025)Kanehisa, Furumichi, Sato, Matsuura, and
+  Ishiguro-Watanabe]{kanehisa2025kegg}
+Minoru Kanehisa, Miho Furumichi, Yoko Sato, Yuriko Matsuura, and Mari
+  Ishiguro-Watanabe.
+\newblock {KEGG}: biological systems database as a model of the real world.
+\newblock \emph{Nucleic Acids Research}, 53\penalty0 (D1):\penalty0 D672--D677,
+  2025.
+\newblock \doi{10.1093/nar/gkae909}.
 
-\bibitem[{Ragueneau et~al(2026)Ragueneau, Gong, Sinquin, Sevilla, Beavers,
-  Grentner, Griss, Hogue, Li, Matthews et~al}]{ragueneau2026reactome}
-Ragueneau E, Gong C, Sinquin P, Sevilla C, Beavers D, Grentner A, Griss J,
-  Hogue GF, Li NT, Matthews L, et~al (2026) The {Reactome} {Knowledgebase}
-  2026. Nucleic Acids Research 54(D1):D673--D681, \doi{10.1093/nar/gkaf1223}
+\bibitem[Ragueneau et~al.(2026)Ragueneau, Gong, Sinquin, Sevilla, Beavers,
+  Grentner, Griss, Hogue, Li, Matthews, et~al.]{ragueneau2026reactome}
+Eliot Ragueneau, Chuqiao Gong, Pierre Sinquin, Cristoffer Sevilla, Deidre
+  Beavers, Alexander Grentner, Johannes Griss, Gregory~FJ Hogue, Nancy~T Li,
+  Lisa Matthews, et~al.
+\newblock The {Reactome} {Knowledgebase} 2026.
+\newblock \emph{Nucleic Acids Research}, 54\penalty0 (D1):\penalty0 D673--D681,
+  2026.
+\newblock \doi{10.1093/nar/gkaf1223}.
 
-\bibitem[{Agrawal et~al(2024)Agrawal, Balc{\i}, Hanspers, Coort, Martens,
-  Slenter, Ehrhart, Digles, Waagmeester, Wassink
-  et~al}]{agrawal2024wikipathways}
-Agrawal A, Balc{\i} H, Hanspers K, Coort SL, Martens M, Slenter DN, Ehrhart F,
-  Digles D, Waagmeester A, Wassink I, et~al (2024) {WikiPathways} 2024: next
-  generation pathway database. Nucleic Acids Research 52(D1):D679--D689,
-  \doi{10.1093/nar/gkad960}
+\bibitem[Agrawal et~al.(2024)Agrawal, Balc{\i}, Hanspers, Coort, Martens,
+  Slenter, Ehrhart, Digles, Waagmeester, Wassink,
+  et~al.]{agrawal2024wikipathways}
+Ayushi Agrawal, Hasan Balc{\i}, Kristina Hanspers, Susan~L Coort, Marvin
+  Martens, Denise~N Slenter, Friederike Ehrhart, Daniela Digles, Andra
+  Waagmeester, Isabel Wassink, et~al.
+\newblock {WikiPathways} 2024: next generation pathway database.
+\newblock \emph{Nucleic Acids Research}, 52\penalty0 (D1):\penalty0 D679--D689,
+  2024.
+\newblock \doi{10.1093/nar/gkad960}.
 
-\bibitem[{Andersen et~al(2016)Andersen, Flamm, Merkle, and
-  Stadler}]{andersen2016mod}
-Andersen JL, Flamm C, Merkle D, Stadler PF (2016) A software package for
-  chemically inspired graph transformation. In: International conference on
-  graph transformation, Springer, Lecture Notes in Computer Science, vol 9761,
-  pp 73--88, \doi{10.1007/978-3-319-40530-8_5}
+\bibitem[Andersen et~al.(2016)Andersen, Flamm, Merkle, and
+  Stadler]{andersen2016mod}
+Jakob~Lykke Andersen, Christoph Flamm, Daniel Merkle, and Peter~F. Stadler.
+\newblock A software package for chemically inspired graph transformation.
+\newblock In \emph{International conference on graph transformation}, volume
+  9761 of \emph{Lecture Notes in Computer Science}, pages 73--88. Springer,
+  2016.
+\newblock \doi{10.1007/978-3-319-40530-8_5}.
 
-\bibitem[{Famili and Palsson(2003)}]{famili2003leftnullspace}
-Famili I, Palsson BO (2003) The convex basis of the left null space of the
-  stoichiometric matrix leads to the definition of metabolically meaningful
-  pools. Biophysical Journal 85(1):16--26, \doi{10.1016/S0006-3495(03)74450-6}
+\bibitem[Famili and Palsson(2003)]{famili2003leftnullspace}
+Iman Famili and Bernhard~O Palsson.
+\newblock The convex basis of the left null space of the stoichiometric matrix
+  leads to the definition of metabolically meaningful pools.
+\newblock \emph{Biophysical Journal}, 85\penalty0 (1):\penalty0 16--26, 2003.
+\newblock \doi{10.1016/S0006-3495(03)74450-6}.
 
-\bibitem[{Feinberg(1987)}]{feinberg1987deficiency}
-Feinberg M (1987) Chemical reaction network structure and the stability of
-  complex isothermal reactors---i. the deficiency zero and deficiency one
-  theorems. Chemical Engineering Science 42(10):2229--2268,
-  \doi{10.1016/0009-2509(87)80099-4}
+\bibitem[Feinberg(1987)]{feinberg1987deficiency}
+Martin Feinberg.
+\newblock Chemical reaction network structure and the stability of complex
+  isothermal reactors---i. the deficiency zero and deficiency one theorems.
+\newblock \emph{Chemical Engineering Science}, 42\penalty0 (10):\penalty0
+  2229--2268, 1987.
+\newblock \doi{10.1016/0009-2509(87)80099-4}.
 
-\bibitem[{Gunawardena(2003)}]{gunawardena2003crnt}
-Gunawardena J (2003) Chemical reaction network theory for in-silico biologists.
-  \url{https://vcp.med.harvard.edu/papers/crnt.pdf}, preprint
+\bibitem[Gunawardena(2003)]{gunawardena2003crnt}
+Jeremy Gunawardena.
+\newblock Chemical reaction network theory for in-silico biologists.
+\newblock \url{https://vcp.med.harvard.edu/papers/crnt.pdf}, 2003.
+\newblock Preprint.
 
-\bibitem[{Andersen et~al(2023)Andersen, Banke, Fagerberg, Flamm, Merkle, and
-  Stadler}]{andersen2023realisability}
-Andersen JL, Banke S, Fagerberg R, Flamm C, Merkle D, Stadler PF (2023) On the
-  realisability of chemical pathways. In: Bioinformatics Research and
-  Applications, International Symposium on Bioinformatics Research and
-  Applications, vol 14248, Springer, pp 409--419,
-  \doi{10.1007/978-981-99-7074-2_32}
+\bibitem[Andersen et~al.(2023)Andersen, Banke, Fagerberg, Flamm, Merkle, and
+  Stadler]{andersen2023realisability}
+Jakob~L. Andersen, Sissel Banke, Rolf Fagerberg, Christoph Flamm, Daniel
+  Merkle, and Peter~F. Stadler.
+\newblock On the realisability of chemical pathways.
+\newblock In \emph{Bioinformatics Research and Applications}, volume 14248 of
+  \emph{International Symposium on Bioinformatics Research and Applications},
+  pages 409--419. Springer, 2023.
+\newblock \doi{10.1007/978-981-99-7074-2_32}.
 
-\bibitem[{Franzese et~al(2019)Franzese, Groce, Murali, and
-  Ritz}]{franzese2019hypergraph}
-Franzese N, Groce A, Murali T, Ritz A (2019) Hypergraph-based connectivity
-  measures for signaling pathway topologies. PLoS Computational Biology
-  15(10):e1007,384, \doi{10.1371/journal.pcbi.1007384}
+\bibitem[Franzese et~al.(2019)Franzese, Groce, Murali, and
+  Ritz]{franzese2019hypergraph}
+Nicholas Franzese, Adam Groce, TM~Murali, and Anna Ritz.
+\newblock Hypergraph-based connectivity measures for signaling pathway
+  topologies.
+\newblock \emph{PLoS Computational Biology}, 15\penalty0 (10):\penalty0
+  e1007384, 2019.
+\newblock \doi{10.1371/journal.pcbi.1007384}.
 
-\bibitem[{Ebrahim et~al(2013)Ebrahim, Lerman, Palsson, and
-  Hyduke}]{ebrahim2013cobrapy}
-Ebrahim A, Lerman JA, Palsson BO, Hyduke DR (2013) {COBRApy}:
-  {COnstraints-Based} reconstruction and analysis for {Python}. BMC Systems
-  Biology 7:74, \doi{10.1186/1752-0509-7-74}
+\bibitem[Ebrahim et~al.(2013)Ebrahim, Lerman, Palsson, and
+  Hyduke]{ebrahim2013cobrapy}
+Ali Ebrahim, Joshua~A Lerman, Bernhard~O Palsson, and Daniel~R Hyduke.
+\newblock {COBRApy}: {COnstraints-Based} reconstruction and analysis for
+  {Python}.
+\newblock \emph{BMC Systems Biology}, 7:\penalty0 74, 2013.
+\newblock \doi{10.1186/1752-0509-7-74}.
 
-\bibitem[{Orth et~al(2010)Orth, Thiele, and Palsson}]{orth2010fba}
-Orth JD, Thiele I, Palsson B{\O} (2010) What is flux balance analysis? Nature
-  Biotechnology 28(3):245--248, \doi{10.1038/nbt.1614}
+\bibitem[Orth et~al.(2010)Orth, Thiele, and Palsson]{orth2010fba}
+Jeffrey~D Orth, Ines Thiele, and Bernhard~{\O} Palsson.
+\newblock What is flux balance analysis?
+\newblock \emph{Nature Biotechnology}, 28\penalty0 (3):\penalty0 245--248,
+  2010.
+\newblock \doi{10.1038/nbt.1614}.
 
-\bibitem[{Reyes et~al(2020)Reyes, Otero-Muras, Shuen, Tartakovsky, and
-  Petyuk}]{reyes2020crnt4sbml}
-Reyes BC, Otero-Muras I, Shuen MT, Tartakovsky AM, Petyuk VA (2020)
-  {CRNT4SBML}: a {Python} package for the detection of bistability in
-  biochemical reaction networks. Bioinformatics 36(12):3922--3924,
-  \doi{10.1093/bioinformatics/btaa241}
+\bibitem[Reyes et~al.(2020)Reyes, Otero-Muras, Shuen, Tartakovsky, and
+  Petyuk]{reyes2020crnt4sbml}
+Brandon~C Reyes, Irene Otero-Muras, Michael~T Shuen, Alexandre~M Tartakovsky,
+  and Vladislav~A Petyuk.
+\newblock {CRNT4SBML}: a {Python} package for the detection of bistability in
+  biochemical reaction networks.
+\newblock \emph{Bioinformatics}, 36\penalty0 (12):\penalty0 3922--3924, 2020.
+\newblock \doi{10.1093/bioinformatics/btaa241}.
 
-\bibitem[{Choi et~al(2018)Choi, Medley, K{\"o}nig, Stocking, Smith, Gu, and
-  Sauro}]{choi2018tellurium}
-Choi K, Medley JK, K{\"o}nig M, Stocking K, Smith L, Gu S, Sauro HM (2018)
-  Tellurium: An extensible {Python}-based modeling environment for systems and
-  synthetic biology. BioSystems 171:74--79,
-  \doi{10.1016/j.biosystems.2018.07.006}
+\bibitem[Choi et~al.(2018)Choi, Medley, K{\"o}nig, Stocking, Smith, Gu, and
+  Sauro]{choi2018tellurium}
+Kiri Choi, J~Kyle Medley, Matthias K{\"o}nig, Kaylene Stocking, Lucian Smith,
+  Stanley Gu, and Herbert~M Sauro.
+\newblock Tellurium: An extensible {Python}-based modeling environment for
+  systems and synthetic biology.
+\newblock \emph{BioSystems}, 171:\penalty0 74--79, 2018.
+\newblock \doi{10.1016/j.biosystems.2018.07.006}.
 
-\bibitem[{Welsh et~al(2023)Welsh, Xu, Smith, K{\"o}nig, Choi, and
-  Sauro}]{welsh2023libroadrunner}
-Welsh C, Xu J, Smith L, K{\"o}nig M, Choi K, Sauro HM (2023) {libRoadRunner}
-  2.0: a high performance {SBML} simulation and analysis library.
-  Bioinformatics 39(1):btac770, \doi{10.1093/bioinformatics/btac770}
+\bibitem[Welsh et~al.(2023)Welsh, Xu, Smith, K{\"o}nig, Choi, and
+  Sauro]{welsh2023libroadrunner}
+Ciaran Welsh, Jin Xu, Lucian Smith, Matthias K{\"o}nig, Kiri Choi, and
+  Herbert~M Sauro.
+\newblock {libRoadRunner} 2.0: a high performance {SBML} simulation and
+  analysis library.
+\newblock \emph{Bioinformatics}, 39\penalty0 (1):\penalty0 btac770, 2023.
+\newblock \doi{10.1093/bioinformatics/btac770}.
 
-\bibitem[{Zevedei-Oancea and Schuster(2003)}]{zevedei2003topological}
-Zevedei-Oancea I, Schuster S (2003) Topological analysis of metabolic networks
-  based on {P}etri net theory. In Silico Biology 3(3):323--345
+\bibitem[Zevedei-Oancea and Schuster(2003)]{zevedei2003topological}
+Ionela Zevedei-Oancea and Stefan Schuster.
+\newblock Topological analysis of metabolic networks based on {P}etri net
+  theory.
+\newblock \emph{In Silico Biology}, 3\penalty0 (3):\penalty0 323--345, 2003.
 
-\bibitem[{Murata(1989)}]{murata1989petri}
-Murata T (1989) Petri nets: Properties, analysis and applications. Proceedings
-  of the IEEE 77(4):541--580, \doi{10.1109/5.24143}
+\bibitem[Murata(1989)]{murata1989petri}
+Tadao Murata.
+\newblock Petri nets: Properties, analysis and applications.
+\newblock \emph{Proceedings of the IEEE}, 77\penalty0 (4):\penalty0 541--580,
+  1989.
+\newblock \doi{10.1109/5.24143}.
 
-\bibitem[{Hucka et~al(2003)Hucka, Finney, Sauro, Bolouri, Doyle, Kitano, Arkin,
-  Bornstein, Bray, Cornish-Bowden et~al}]{hucka2003sbml}
-Hucka M, Finney A, Sauro HM, Bolouri H, Doyle JC, Kitano H, Arkin AP, Bornstein
-  BJ, Bray D, Cornish-Bowden A, et~al (2003) The systems biology markup
-  language ({SBML}): a medium for representation and exchange of biochemical
-  network models. Bioinformatics 19(4):524--531,
-  \doi{10.1093/bioinformatics/btg015}
+\bibitem[Hucka et~al.(2003)Hucka, Finney, Sauro, Bolouri, Doyle, Kitano, Arkin,
+  Bornstein, Bray, Cornish-Bowden, et~al.]{hucka2003sbml}
+Michael Hucka, Andrew Finney, Herbert~M Sauro, Hamid Bolouri, John~C Doyle,
+  Hiroaki Kitano, Adam~P Arkin, Benjamin~J Bornstein, Dennis Bray, Athel
+  Cornish-Bowden, et~al.
+\newblock The systems biology markup language ({SBML}): a medium for
+  representation and exchange of biochemical network models.
+\newblock \emph{Bioinformatics}, 19\penalty0 (4):\penalty0 524--531, 2003.
+\newblock \doi{10.1093/bioinformatics/btg015}.
 
-\bibitem[{Bergmann et~al(2014)Bergmann, Adams, Moodie, Cooper, Glont,
-  Golebiewski, Hucka, Laibe, Miller, Nickerson et~al}]{bergmann2014combine}
-Bergmann FT, Adams R, Moodie S, Cooper J, Glont M, Golebiewski M, Hucka M,
-  Laibe C, Miller AK, Nickerson DP, et~al (2014) {COMBINE} archive and {OMEX}
-  format: one file to share all information to reproduce a modeling project.
-  BMC Bioinformatics 15(1):369, \doi{10.1186/s12859-014-0369-z}
+\bibitem[Bergmann et~al.(2014)Bergmann, Adams, Moodie, Cooper, Glont,
+  Golebiewski, Hucka, Laibe, Miller, Nickerson, et~al.]{bergmann2014combine}
+Frank~T Bergmann, Richard Adams, Stuart Moodie, Jonathan Cooper, Mihai Glont,
+  Martin Golebiewski, Michael Hucka, Camille Laibe, Andrew~K Miller, David~P
+  Nickerson, et~al.
+\newblock {COMBINE} archive and {OMEX} format: one file to share all
+  information to reproduce a modeling project.
+\newblock \emph{BMC Bioinformatics}, 15\penalty0 (1):\penalty0 369, 2014.
+\newblock \doi{10.1186/s12859-014-0369-z}.
 
-\bibitem[{Wrzodek et~al(2011)Wrzodek, Dr{\"a}ger, and
-  Zell}]{wrzodek2011keggtranslator}
-Wrzodek C, Dr{\"a}ger A, Zell A (2011) {KEGGtranslator}: visualizing and
-  converting the {KEGG} {PATHWAY} database to various formats. Bioinformatics
-  27(16):2314--2315, \doi{10.1093/bioinformatics/btr377}
+\bibitem[Wrzodek et~al.(2011)Wrzodek, Dr{\"a}ger, and
+  Zell]{wrzodek2011keggtranslator}
+Clemens Wrzodek, Andreas Dr{\"a}ger, and Andreas Zell.
+\newblock {KEGGtranslator}: visualizing and converting the {KEGG} {PATHWAY}
+  database to various formats.
+\newblock \emph{Bioinformatics}, 27\penalty0 (16):\penalty0 2314--2315, 2011.
+\newblock \doi{10.1093/bioinformatics/btr377}.
 
-\bibitem[{Butlerow(1861)}]{butlerov1861formose}
-Butlerow A (1861) Bildung einer zuckerartigen {Substanz} durch {Synthese}.
-  Justus Liebigs Annalen der Chemie 120(3):295--298,
-  \doi{10.1002/jlac.18611200308}
+\bibitem[Butlerow(1861)]{butlerov1861formose}
+Alexander Butlerow.
+\newblock Bildung einer zuckerartigen {Substanz} durch {Synthese}.
+\newblock \emph{Justus Liebigs Annalen der Chemie}, 120\penalty0 (3):\penalty0
+  295--298, 1861.
+\newblock \doi{10.1002/jlac.18611200308}.
 
-\bibitem[{Phan et~al(2025)Phan, Gonz{\'a}lez~Laffitte, Weinbauer, Merkle,
-  Andersen, Fagerberg, Gatter, and Stadler}]{phan2025synkit}
-Phan TL, Gonz{\'a}lez~Laffitte ME, Weinbauer K, Merkle D, Andersen JL,
-  Fagerberg R, Gatter T, Stadler PF (2025) {SynKit}: A graph-based {Python}
-  framework for rule-based reaction modeling and analysis. Journal of Chemical
-  Information and Modeling 65(24):13,012--13,019,
-  \doi{10.1021/acs.jcim.5c02123}
+\bibitem[Phan et~al.(2025)Phan, Gonz{\'a}lez~Laffitte, Weinbauer, Merkle,
+  Andersen, Fagerberg, Gatter, and Stadler]{phan2025synkit}
+Tieu-Long Phan, Marcos~E. Gonz{\'a}lez~Laffitte, Klaus Weinbauer, Daniel
+  Merkle, Jakob~Lykke Andersen, Rolf Fagerberg, Thomas Gatter, and Peter~F.
+  Stadler.
+\newblock {SynKit}: A graph-based {Python} framework for rule-based reaction
+  modeling and analysis.
+\newblock \emph{Journal of Chemical Information and Modeling}, 65\penalty0
+  (24):\penalty0 13012--13019, 2025.
+\newblock \doi{10.1021/acs.jcim.5c02123}.
 
-\bibitem[{Hagberg et~al(2008)Hagberg, Swart, and Schult}]{hagberg2008networkx}
-Hagberg A, Swart PJ, Schult DA (2008) Exploring network structure, dynamics,
-  and function using {NetworkX}. In: Proceedings of the Python in Science
-  Conference, pp 11--15, \doi{10.25080/TCWV9851}
+\bibitem[Hagberg et~al.(2008)Hagberg, Swart, and Schult]{hagberg2008networkx}
+Aric Hagberg, Pieter~J Swart, and Daniel~A Schult.
+\newblock Exploring network structure, dynamics, and function using {NetworkX}.
+\newblock In \emph{Proceedings of the Python in Science Conference}, pages
+  11--15, 2008.
+\newblock \doi{10.25080/TCWV9851}.
 
-\bibitem[{M{\"u}ller et~al(2022)M{\"u}ller, Flamm, and
-  Stadler}]{muller2022chemical}
-M{\"u}ller S, Flamm C, Stadler PF (2022) What makes a reaction network
-  “chemical”? Journal of Cheminformatics 14(1):63,
-  \doi{10.1186/s13321-022-00621-8}
+\bibitem[M{\"u}ller et~al.(2022)M{\"u}ller, Flamm, and
+  Stadler]{muller2022chemical}
+Stefan M{\"u}ller, Christoph Flamm, and Peter~F. Stadler.
+\newblock What makes a reaction network “chemical”?
+\newblock \emph{Journal of Cheminformatics}, 14\penalty0 (1):\penalty0 63,
+  2022.
+\newblock \doi{10.1186/s13321-022-00621-8}.
 
-\bibitem[{Colom and Silva(1991)}]{colom1991convex}
-Colom JM, Silva M (1991) Convex geometry and semiflows in {P/T} nets: A
-  comparative study of algorithms for computation of minimal p-semiflows. In:
-  Advances in Petri Nets 1990, Lecture Notes in Computer Science, vol 483,
-  Springer, pp 79--112, \doi{10.1007/3-540-53863-1\_22}
+\bibitem[Colom and Silva(1991)]{colom1991convex}
+Jos{\'e}~Manuel Colom and Manuel Silva.
+\newblock Convex geometry and semiflows in {P/T} nets: A comparative study of
+  algorithms for computation of minimal p-semiflows.
+\newblock In \emph{Advances in Petri Nets 1990}, volume 483 of \emph{Lecture
+  Notes in Computer Science}, pages 79--112. Springer, 1991.
+\newblock \doi{10.1007/3-540-53863-1\_22}.
 
-\bibitem[{Horn and Jackson(1972)}]{horn1972general}
-Horn F, Jackson R (1972) General mass action kinetics. Archive for rational
-  mechanics and analysis 47(2):81--116, \doi{10.1007/BF00251225}
+\bibitem[Horn and Jackson(1972)]{horn1972general}
+Fritz Horn and Roy Jackson.
+\newblock General mass action kinetics.
+\newblock \emph{Archive for rational mechanics and analysis}, 47\penalty0
+  (2):\penalty0 81--116, 1972.
+\newblock \doi{10.1007/BF00251225}.
 
-\bibitem[{Feinberg(1995)}]{feinberg1995existence}
-Feinberg M (1995) The existence and uniqueness of steady states for a class of
-  chemical reaction networks. Archive for Rational Mechanics and Analysis
-  132(4):311--370, \doi{10.1007/BF00375614}
+\bibitem[Feinberg(1995)]{feinberg1995existence}
+Martin Feinberg.
+\newblock The existence and uniqueness of steady states for a class of chemical
+  reaction networks.
+\newblock \emph{Archive for Rational Mechanics and Analysis}, 132\penalty0
+  (4):\penalty0 311--370, 1995.
+\newblock \doi{10.1007/BF00375614}.
 
-\bibitem[{Craciun and Feinberg(2005)}]{craciun2005injectivity}
-Craciun G, Feinberg M (2005) Multiple equilibria in complex chemical reaction
-  networks: {I}. the injectivity property. SIAM Journal on Applied Mathematics
-  65(5):1526--1546, \doi{10.1137/S0036139904440278}
+\bibitem[Craciun and Feinberg(2005)]{craciun2005injectivity}
+Gheorghe Craciun and Martin Feinberg.
+\newblock Multiple equilibria in complex chemical reaction networks: {I}. the
+  injectivity property.
+\newblock \emph{SIAM Journal on Applied Mathematics}, 65\penalty0 (5):\penalty0
+  1526--1546, 2005.
+\newblock \doi{10.1137/S0036139904440278}.
 
-\bibitem[{Shinar and Feinberg(2012)}]{shinar2012concordant}
-Shinar G, Feinberg M (2012) Concordant chemical reaction networks. Mathematical
-  biosciences 240(2):92--113, \doi{10.1016/j.mbs.2012.05.004}
+\bibitem[Shinar and Feinberg(2012)]{shinar2012concordant}
+Guy Shinar and Martin Feinberg.
+\newblock Concordant chemical reaction networks.
+\newblock \emph{Mathematical biosciences}, 240\penalty0 (2):\penalty0 92--113,
+  2012.
+\newblock \doi{10.1016/j.mbs.2012.05.004}.
 
-\bibitem[{Mincheva and Roussel(2007)}]{mincheva2007graph1}
-Mincheva M, Roussel MR (2007) Graph-theoretic methods for the analysis of
-  chemical and biochemical networks. i. multistability and oscillations in
-  ordinary differential equation models. Journal of Mathematical Biology
-  55(1):61--86, \doi{10.1007/s00285-007-0099-1}
+\bibitem[Mincheva and Roussel(2007)]{mincheva2007graph1}
+Maya Mincheva and Marc~R. Roussel.
+\newblock Graph-theoretic methods for the analysis of chemical and biochemical
+  networks. i. multistability and oscillations in ordinary differential
+  equation models.
+\newblock \emph{Journal of Mathematical Biology}, 55\penalty0 (1):\penalty0
+  61--86, 2007.
+\newblock \doi{10.1007/s00285-007-0099-1}.
 
-\bibitem[{Cordone et~al(2005)Cordone, Ferrarini, and
-  Piroddi}]{cordone2005enumeration}
-Cordone R, Ferrarini L, Piroddi L (2005) Enumeration algorithms for minimal
-  siphons in {P}etri nets based on place constraints. IEEE Transactions on
-  Systems, Man, and Cybernetics -- Part A: Systems and Humans 35(6):844--854,
-  \doi{10.1109/TSMCA.2005.853504}
+\bibitem[Cordone et~al.(2005)Cordone, Ferrarini, and
+  Piroddi]{cordone2005enumeration}
+Roberto Cordone, Luca Ferrarini, and Luigi Piroddi.
+\newblock Enumeration algorithms for minimal siphons in {P}etri nets based on
+  place constraints.
+\newblock \emph{IEEE Transactions on Systems, Man, and Cybernetics -- Part A:
+  Systems and Humans}, 35\penalty0 (6):\penalty0 844--854, 2005.
+\newblock \doi{10.1109/TSMCA.2005.853504}.
 
-\bibitem[{Angeli et~al(2007)Angeli, De~Leenheer, and
-  Sontag}]{angeli2007persistence}
-Angeli D, De~Leenheer P, Sontag ED (2007) A {Petri} net approach to the study
-  of persistence in chemical reaction networks. Mathematical Biosciences
-  210(2):598--618, \doi{10.1016/j.mbs.2007.07.003}
+\bibitem[Angeli et~al.(2007)Angeli, De~Leenheer, and
+  Sontag]{angeli2007persistence}
+David Angeli, Patrick De~Leenheer, and Eduardo~D Sontag.
+\newblock A {Petri} net approach to the study of persistence in chemical
+  reaction networks.
+\newblock \emph{Mathematical Biosciences}, 210\penalty0 (2):\penalty0 598--618,
+  2007.
+\newblock \doi{10.1016/j.mbs.2007.07.003}.
 
-\bibitem[{Andersen et~al(2014)Andersen, Flamm, Merkle, and
-  Stadler}]{andersen2014strategies}
-Andersen JL, Flamm C, Merkle D, Stadler PF (2014) Generic strategies for
-  chemical space exploration. International Journal of Computational Biology
-  and Drug Design 7(2/3):225--258, \doi{10.1504/IJCBDD.2014.061649}
+\bibitem[Andersen et~al.(2014)Andersen, Flamm, Merkle, and
+  Stadler]{andersen2014strategies}
+Jakob~L. Andersen, Christoph Flamm, Daniel Merkle, and Peter~F. Stadler.
+\newblock Generic strategies for chemical space exploration.
+\newblock \emph{International Journal of Computational Biology and Drug
+  Design}, 7\penalty0 (2/3):\penalty0 225--258, 2014.
+\newblock \doi{10.1504/IJCBDD.2014.061649}.
 
-\bibitem[{Donnell et~al(2014)Donnell, Banaji, Marginean, and
-  Pantea}]{donnell2014control}
-Donnell P, Banaji M, Marginean A, Pantea C (2014) {CoNtRol}: an open source
-  framework for the analysis of chemical reaction networks. Bioinformatics
-  30(11):1633--1634, \doi{10.1093/bioinformatics/btu063}
+\bibitem[Donnell et~al.(2014)Donnell, Banaji, Marginean, and
+  Pantea]{donnell2014control}
+Patrick Donnell, Murad Banaji, Anca Marginean, and Casian Pantea.
+\newblock {CoNtRol}: an open source framework for the analysis of chemical
+  reaction networks.
+\newblock \emph{Bioinformatics}, 30\penalty0 (11):\penalty0 1633--1634, 2014.
+\newblock \doi{10.1093/bioinformatics/btu063}.
 
-\bibitem[{Tonello(2016)}]{tonello2016crnpy}
-Tonello E (2016) crnpy: A {P}ython library for the analysis of chemical
-  reaction networks. \url{https://github.com/etonello/crnpy}, accessed 7
-  November 2026
+\bibitem[Tonello(2016)]{tonello2016crnpy}
+Elisa Tonello.
+\newblock crnpy: A {P}ython library for the analysis of chemical reaction
+  networks.
+\newblock \url{https://github.com/etonello/crnpy}, 2016.
+\newblock Accessed 7 November 2026.
 
-\bibitem[{Friedrichs(2026)}]{friedrichs2026molfoundry}
-Friedrichs M (2026) {MolFoundry}: rule-based graph transformation for
-  chemistry, version 0.1.11. \url{https://py.molfoundry.de/docs/}, software
-  documentation, accessed 7 November 2026
+\bibitem[Friedrichs(2026)]{friedrichs2026molfoundry}
+Marcel Friedrichs.
+\newblock {MolFoundry}: rule-based graph transformation for chemistry, version
+  0.1.11.
+\newblock \url{https://py.molfoundry.de/docs/}, 2026.
+\newblock Software documentation, accessed 7 November 2026.
 
-\bibitem[{Wang and Sontag(2008)}]{wang2008multisite}
-Wang L, Sontag ED (2008) On the number of steady states in a multiple futile
-  cycle. Journal of Mathematical Biology 57(1):29--52,
-  \doi{10.1007/s00285-007-0145-z}
+\bibitem[Wang and Sontag(2008)]{wang2008multisite}
+Liming Wang and Eduardo~D Sontag.
+\newblock On the number of steady states in a multiple futile cycle.
+\newblock \emph{Journal of Mathematical Biology}, 57\penalty0 (1):\penalty0
+  29--52, 2008.
+\newblock \doi{10.1007/s00285-007-0145-z}.
 
-\bibitem[{Edelstein(1970)}]{edelstein1970biochemical}
-Edelstein BB (1970) Biochemical model with multiple steady states and
-  hysteresis. Journal of Theoretical Biology 29(1):57--62,
-  \doi{10.1016/0022-5193(70)90118-9}
+\bibitem[Edelstein(1970)]{edelstein1970biochemical}
+Boris~B Edelstein.
+\newblock Biochemical model with multiple steady states and hysteresis.
+\newblock \emph{Journal of Theoretical Biology}, 29\penalty0 (1):\penalty0
+  57--62, 1970.
+\newblock \doi{10.1016/0022-5193(70)90118-9}.
 
-\bibitem[{Shinar and Feinberg(2010)}]{shinar2010structural}
-Shinar G, Feinberg M (2010) Structural sources of robustness in biochemical
-  reaction networks. Science 327(5971):1389--1391,
-  \doi{10.1126/science.1183372}
+\bibitem[Shinar and Feinberg(2010)]{shinar2010structural}
+Guy Shinar and Martin Feinberg.
+\newblock Structural sources of robustness in biochemical reaction networks.
+\newblock \emph{Science}, 327\penalty0 (5971):\penalty0 1389--1391, 2010.
+\newblock \doi{10.1126/science.1183372}.
 
-\bibitem[{Malik-Sheriff et~al(2020)Malik-Sheriff, Glont, Nguyen, Tiwari,
+\bibitem[Malik-Sheriff et~al.(2020)Malik-Sheriff, Glont, Nguyen, Tiwari,
   Roberts, Xavier, Vu, Men, Maire, Kananathan, Fairbanks, Meyer, Arankalle,
   Varusai, Knight-Schrijver, Li, Due{\~n}as-Roca, Dass, Keating, Park, Buso,
-  Rodriguez, Hucka, and Hermjakob}]{maliksheriff2020biomodels}
-Malik-Sheriff RS, Glont M, Nguyen TVN, Tiwari K, Roberts MG, Xavier A, Vu MT,
-  Men J, Maire M, Kananathan S, Fairbanks EL, Meyer JP, Arankalle C, Varusai
-  TM, Knight-Schrijver V, Li L, Due{\~n}as-Roca C, Dass G, Keating SM, Park YM,
-  Buso N, Rodriguez N, Hucka M, Hermjakob H (2020) {BioModels}---15 years of
-  sharing computational models in life science. Nucleic Acids Research
-  48(D1):D407--D415, \doi{10.1093/nar/gkz1055}
+  Rodriguez, Hucka, and Hermjakob]{maliksheriff2020biomodels}
+Rahuman~S Malik-Sheriff, Mihai Glont, Tung V~N Nguyen, Krishna Tiwari,
+  Matthew~G Roberts, Ashley Xavier, Manh~T Vu, Jinghao Men, Matthieu Maire,
+  Sarubini Kananathan, Emma~L Fairbanks, Johannes~P Meyer, Chinmay Arankalle,
+  Thawfeek~M Varusai, Vincent Knight-Schrijver, Lu~Li, Corina Due{\~n}as-Roca,
+  Gaurhari Dass, Sarah~M Keating, Young~M Park, Nicola Buso, Nicolas Rodriguez,
+  Michael Hucka, and Henning Hermjakob.
+\newblock {BioModels}---15 years of sharing computational models in life
+  science.
+\newblock \emph{Nucleic Acids Research}, 48\penalty0 (D1):\penalty0 D407--D415,
+  2020.
+\newblock \doi{10.1093/nar/gkz1055}.
 
-\bibitem[{Phan and Weinbauer(2026)}]{synkit170snapshot}
-Phan TL, Weinbauer K (2026) {SynKit}, version 1.7.0 development snapshot.
-  Unreleased development source checkout,
-  \urlprefix\url{https://github.com/TieuLongPhan/SynKit}, source-file hashes,
-  native build identifiers and runtime environments are recorded in the
-  accompanying experiment reports; public versioned release and archival DOI
-  pending
-
-\bibitem[{Harris et~al(2020)Harris, Millman, van~der Walt, Gommers, Virtanen,
-  Cournapeau, Wieser, Taylor, Berg, Smith et~al}]{harris2020numpy}
-Harris CR, Millman KJ, van~der Walt SJ, Gommers R, Virtanen P, Cournapeau D,
-  Wieser E, Taylor J, Berg S, Smith NJ, et~al (2020) Array programming with
-  {NumPy}. Nature 585(7825):357--362, \doi{10.1038/s41586-020-2649-2}
-
-\bibitem[{Virtanen et~al(2020)Virtanen, Gommers, Oliphant, Haberland, Reddy,
-  Cournapeau, Burovski, Peterson, Weckesser, Bright et~al}]{virtanen2020scipy}
-Virtanen P, Gommers R, Oliphant TE, Haberland M, Reddy T, Cournapeau D,
-  Burovski E, Peterson P, Weckesser W, Bright J, et~al (2020) {SciPy} 1.0:
-  fundamental algorithms for scientific computing in {P}ython. Nature Methods
-  17(3):261--272, \doi{10.1038/s41592-019-0686-2}
+\bibitem[Phan and Weinbauer(2026)]{synkit170snapshot}
+Tieu~Long Phan and Klaus Weinbauer.
+\newblock {SynKit}, version 1.7.0 development snapshot.
+\newblock Unreleased development source checkout, 2026.
+\newblock URL \url{https://github.com/TieuLongPhan/SynKit}.
+\newblock Source-file hashes, native build identifiers and runtime environments
+  are recorded in the accompanying experiment reports; public versioned release
+  and archival DOI pending.
 
 \end{thebibliography}

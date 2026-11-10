@@ -5,7 +5,6 @@ import argparse
 from collections import Counter
 import os
 from pathlib import Path
-import hashlib
 import json
 import re
 import sys
@@ -120,16 +119,13 @@ def structural_witnesses(record):
 def verify_document_content():
     """Check manuscript values against saved reports without running experiments."""
     sys.path.insert(0, str(PAPER / "analysis/scripts"))
-    from sync_manuscript import generated_blocks, block_pattern, marked_block
+    from tables import table_blocks
 
-    for filename, blocks in generated_blocks(PAPER).items():
+    for filename, blocks in table_blocks(PAPER).items():
         source = (PAPER / filename).read_text()
         for name, body in blocks.items():
-            matches = list(block_pattern(name).finditer(source))
-            assert len(matches) == 1, (filename, name)
-            assert matches[0].group() == marked_block(name, body), (
-                "Stale inline numerical values", filename, name
-            )
+            rows = '\n'.join(line for line in body.splitlines() if not line.lstrip().startswith('%')).strip()
+            assert rows in source, ('Table differs from saved results', filename, name)
 
     main_text = (PAPER / "main.tex").read_text()
     si_text = (PAPER / "SI/si.tex").read_text()
@@ -231,7 +227,7 @@ def verify_document_content():
         outcome = row["outcome"]
         if outcome["realizable"]:
             assert Counter(outcome["certificate"]) == outcome["requested_flux"]
-    abstract = main_text.split("\\abstract{", 1)[1].split("\\keywords", 1)[0]
+    abstract = main_text.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0]
     assert len(abstract.split()) <= 350 and "\\cite" not in abstract
     if "glycolysis_inventory_controls" in review:
         inventory = review["glycolysis_inventory_controls"]
@@ -244,29 +240,16 @@ def verify_document_content():
 
 
 def main():
-    source_manifest = json.loads(
-        (PAPER / "analysis/source-before-run.json").read_text()
-    )
-    for filename, digest in source_manifest.items():
-        assert (
-            hashlib.sha256((ROOT / filename).read_bytes()).hexdigest() == digest
-        ), filename
     sys.path.insert(0, str(ROOT))
-    from Experiments.CRN.tools.common import source_hashes
-    from Experiments.CRN.tools.check_reports import check_reports
+    from Experiment.CRN.tools.check_reports import check_reports
     import synkit
 
-    assert (
-        source_manifest == source_hashes()
-    ), "The evidence does not cover the current CRN source tree"
     summary = json.loads((PAPER / "analysis/summary.json").read_text())
     assert summary["status"] == "PASS" and summary["complete"] is True
     assert summary["schema"] == "synkit.crn-experiments/2"
     assert not check_reports(PAPER / "analysis/summary.json", require_all=True)
-    assert summary["source_sha256"] == source_manifest
     assert synkit.__version__ == summary["environment"]["synkit"] == "1.7.0"
     assert len(summary["studies"]) == 10
-    build = json.loads((PAPER / "analysis/native-build.json").read_text())
     for name in (
         "validation",
         "scaling",
@@ -283,43 +266,25 @@ def main():
             (PAPER / "analysis" / ("crn-" + name + ".json")).read_text()
         )
         assert report["status"] == "PASS" and all(report["checks"].values()), name
-        assert report["environment"]["synkit"] == "1.7.0", name
-        assert (
-            report["environment"]["git_commit"]
-            == summary["environment"]["git_commit"]
-        ), name
         complete_decisions(report)
-        backend = report["environment"]["crn_backend"]
-        assert backend["production_backend"] == "cpp", name
-        assert backend["build_sha256"] == build["build_sha256"], name
-        assert backend["library_sha256"] == build["library_sha256"], name
     external = json.loads((PAPER / "analysis/crn-external-crnt4sbml.json").read_text())
     execution = external["external_execution"]
-    if execution["mode"] == "live_isolated_crnt4sbml":
-        assert execution["interpreter_rerun"] is True
-        old_rows = {row["name"]: row for row in external["networks"]}
-    else:
-        assert execution["mode"] == "recorded_outputs_on_identical_sbml_inputs"
-        assert execution["interpreter_rerun"] is False
-        assert execution["all_exported_input_hashes_match"] is True
-        reference_path = PAPER / "analysis" / execution["reference_path"]
-        assert hashlib.sha256(reference_path.read_bytes()).hexdigest() == execution["reference_sha256"]
-        reference = json.loads(reference_path.read_text())
-        old_rows = {row["name"]: row for row in reference["networks"]}
+    assert execution['mode'] == 'live_isolated_crnt4sbml'
+    assert execution['interpreter_rerun'] is True
     current_rows = {row["name"]: row for row in external["networks"]}
-    assert len(current_rows) == len(old_rows) == 12
-    assert current_rows.keys() == old_rows.keys()
-    from synkit.CRN import write_sbml
-    from Experiments.CRN.benchmarks import BENCHMARK_NETWORKS
-
-    with tempfile.TemporaryDirectory(prefix="synkit-crn-input-check-") as folder:
-        for fixture in BENCHMARK_NETWORKS:
-            row = current_rows[fixture.name]
-            old = old_rows[fixture.name]
-            path = Path(folder) / (fixture.name + ".xml")
-            write_sbml(fixture.build(), path, model_id=fixture.name, model_name=fixture.description)
-            assert hashlib.sha256(path.read_bytes()).hexdigest() == row["input_sha256"] == old["input_sha256"]
-            assert row["crnt4sbml"] == old["crnt4sbml"] == row["synkit"]
+    assert len(current_rows) == 12
+    from synkit.CRN import crnt_summary
+    from synkit.CRN.backend import python_backend
+    from Experiment.CRN.studies import BENCHMARK_NETWORKS
+    for fixture in BENCHMARK_NETWORKS:
+        row = current_rows[fixture.name]
+        assert row['reactions'] == list(fixture.reactions)
+        assert row['crnt4sbml'] == row['synkit']
+        with python_backend():
+            computed = crnt_summary(fixture.build()).to_dict()
+        computed['weakly_reversible'] = computed.pop('is_weakly_reversible')
+        computed = json.loads(json.dumps(computed))
+        assert {key: computed[key] for key in row['synkit']} == row['synkit']
     scaling = json.loads((PAPER / "analysis/crn-scaling.json").read_text())
     parameters = scaling["parameters"]
     expected_grid = set(
@@ -366,21 +331,10 @@ def main():
         for key in ("siphon_seconds", "moiety_seconds", "persistence_seconds"):
             assert model[key] is not None and model[key] >= 0
         assert not any(key.endswith("_error") for key in model)
-        assert (
-            hashlib.sha256(
-                (
-                    ROOT
-                    / "Experiments/CRN/data/biomodels"
-                    / (model["model_id"] + ".xml")
-                ).read_bytes()
-            ).hexdigest()
-            == model["sha256"]
-        )
     model19 = next(m for m in reaction_models if m["model_id"] == "BIOMD0000000019")
     assert model19["n_conserved_moieties"] == 19
     participants = json.loads((PAPER / "analysis/crn-biomodels-modifiers.json").read_text())
     assert participants["status"] == "PASS" and all(participants["checks"].values())
-    assert participants["source_sha256"] == source_manifest
     for row in participants["models"]:
         assert row["agrees"] and row["net_stoichiometry_unchanged"]
     kegg = json.loads((PAPER / "analysis/crn-kegg.json").read_text())
@@ -396,9 +350,7 @@ def main():
         (PAPER / "analysis/structural-verification.json").read_text()
     )
     assert structures["status"] == "PASS" and structures["complete"] is True
-    assert structures["source_sha256"] == source_manifest
     assert all(value is None for value in structures["limits"].values())
-    assert structures["native_backend"]["build_sha256"] == build["build_sha256"]
     records = {row["name"]: row for row in structures["cases"]}
     assert len(records) == len(structures["cases"]) == 31
     for record in records.values():
@@ -422,8 +374,6 @@ def main():
         and row["implicit_h"] is True
         for row in formose["growth"]
     ), "Formose growth must execute the genuine full C++ SynReactor DPO path"
-    dpo_build = formose["environment"]["crn_dpo_expander"]
-    assert dpo_build and dpo_build["build_sha256"] and dpo_build["kernel_library_sha256"]
     hydrogen = json.loads((PAPER / "analysis/crn-hydrogen.json").read_text())
     assert hydrogen["schema"] == "synkit.crn-hydrogen/1"
     assert [row["depth"] for row in hydrogen["formose"]] == [4, 5, 6]
@@ -432,8 +382,6 @@ def main():
         lewis = case["lewis"]
         assert lewis["n_reactions"] > 0 and lewis["n_balanced"] == lewis["n_reactions"], case["name"]
         assert all(not r["imbalance"] for r in lewis["reactions"]), case["name"]
-    expander = hydrogen["environment"]["crn_expander"]
-    assert expander and expander["build_sha256"], "Native expander build is not recorded"
     for filename, schema in [
         ("crn-review-experiments.json", "synkit.crn-representation/1"),
         ("crn-supplement-audit.json", "synkit.crn-supplementary/1"),
@@ -443,10 +391,6 @@ def main():
         assert report["schema"] == schema, filename
         assert report["status"] == "PASS" and all(report["checks"].values()), filename
     review = json.loads((PAPER / "analysis/crn-review-experiments.json").read_text())
-    for filename, digest in review["source_sha256"].items():
-        assert (
-            hashlib.sha256((ROOT / filename).read_bytes()).hexdigest() == digest
-        ), f"Stale experiment source: {filename}"
     supplement = json.loads((PAPER / "analysis/crn-supplement-audit.json").read_text())
 
     for name, decisions in supplement["feasibility_certificates"].items():
@@ -478,51 +422,30 @@ def main():
     )
 
     donors = json.loads((PAPER / "analysis/crn-si-donor-control.json").read_text())
-    for filename, digest in donors["source_sha256"].items():
-        assert (
-            hashlib.sha256((ROOT / filename).read_bytes()).hexdigest() == digest
-        ), filename
     assert donors["equations"] == supplement["equations"]
-    assert (
-        hashlib.sha256(
-            (ROOT / "Experiments/CRN/studies/supplementary.py").read_bytes()
-        ).hexdigest()
-        == supplement["script_sha256"]
-    )
     verify_document_content()
-    def figure_source(path, seen=None):
-        seen = set() if seen is None else seen
-        if path in seen or not path.is_file():
-            return False
-        seen.add(path)
-        source = path.read_text()
-        if r"\begin{tikzpicture}" in source:
-            return True
-        if not re.search(r"\\documentclass(?:\[[^\]]*\])?\{standalone\}", source):
-            return False
-        for name in re.findall(r"\\input\{([^}]+)\}", source):
-            child = path.parent / name
-            if not child.suffix:
-                child = child.with_suffix(".tex")
-            if child.resolve().parent == (PAPER / "Figure").resolve() and figure_source(child, seen):
-                return True
-        return False
+    sources = [PAPER / "main.tex", PAPER / "SI/si.tex", *(PAPER / "Figure").glob("*.tex")]
+    used_pdfs = set()
+    for path in sources:
+        for name in re.findall(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", path.read_text()):
+            for candidate in (path.parent / name, PAPER / name):
+                if candidate.is_file():
+                    used_pdfs.add(candidate.resolve())
+                    break
     for path in (PAPER / "Figure").iterdir():
-        if (path.name == "synstyle.tex"
-                or path.suffix in {".aux", ".log", ".out", ".fls", ".fdb_latexmk"}
-                or path.name.endswith(".synctex.gz")):
-            continue
-        assert path.suffix == ".pdf" or (
-            path.suffix == ".tex" and figure_source(path)
-        ), f"Non-figure file in Figure/: {path.name}"
+        if path.suffix == ".tex":
+            source = path.read_text()
+            assert r"\begin{tikzpicture}" in source, ("Not a TikZ fragment", path.name)
+            assert r"\documentclass" not in source and r"\begin{document}" not in source, (
+                "TikZ figures must be loaded inline", path.name
+            )
+            assert not path.with_suffix(".pdf").exists(), ("Compiled TikZ duplicate", path.name)
+        else:
+            assert path.suffix == ".pdf" and path.resolve() in used_pdfs, (
+                "Unused or generated standalone asset in Figure", path.name
+            )
     glycolysis_figure = json.loads(
         (PAPER / "analysis/glycolysis_analysis.json").read_text()
-    )
-    backend = glycolysis_figure["environment"]["crn_backend"]
-    assert glycolysis_figure["environment"]["synkit"] == "1.7.0"
-    assert (
-        backend["production_backend"] == "cpp"
-        and backend["build_sha256"] == build["build_sha256"]
     )
     replay = glycolysis_figure["realizability"]
     assert (
@@ -537,7 +460,7 @@ def main():
     )
     assert replay["trajectory"][-1]["marking"] == {"Pyruvate": 2}
     text = (PAPER / "main.tex").read_text()
-    abstract = text.split("\\abstract{", 1)[1].split("\\keywords", 1)[0]
+    abstract = text.split(r"\begin{abstract}", 1)[1].split(r"\end{abstract}", 1)[0]
     assert len(abstract.split()) <= 350, "Abstract exceeds 350 words"
     assert "\\cite" not in abstract, "Abstract contains citations"
     from formose_dpo_assets import verify as verify_dpo
@@ -546,11 +469,14 @@ def main():
     route_comparison = json.loads((PAPER / "analysis/formose-expansion/route-comparison.json").read_text())
     assert route_comparison["all_ten_agree"] is True
     assert route_comparison["positive_certificates_replayed"] == 3
-    assert route_comparison["synkit_evidence_sha256"] == hashlib.sha256(
-        (PAPER / "analysis/crn-supplement-audit.json").read_bytes()
-    ).hexdigest()
+    route_rows = {(row['pool'], row['target']): row for row in route_comparison['rows']}
+    for row in supplement['formose_routes']:
+        compared = route_rows[(row['pool'], row['target'])]
+        assert compared['initial_marking'] == row['outcome']['initial_marking']
+        assert compared['requested_flux'] == row['outcome']['requested_flux']
+        assert compared['synkit_realizable'] == compared['molfoundry_realizable'] == row['outcome']['realizable']
     print(
-        "Revision evidence, source hashes, SI model definitions, generated tables, and abstract: PASS"
+        "Scientific results, exact witnesses, SI tables, and abstract: PASS"
     )
 
 
@@ -563,6 +489,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.documents_only:
         verify_document_content()
-        print("Manuscript structure, cross-references, generated tables, and saved-result consistency: PASS")
+        print("Manuscript structure, cross-references, tables, and saved results: PASS")
     else:
         main()

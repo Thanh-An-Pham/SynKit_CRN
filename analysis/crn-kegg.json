@@ -1,119 +1,6 @@
 {
-  "checks": {
-    "all_enumerations_complete": true,
-    "certificate_matches_requested_flux": true,
-    "deficiency_identity_holds": true,
-    "every_module_analysed": true,
-    "ferredoxin_couple_recovered": true,
-    "glucose_is_a_minimal_siphon": true,
-    "glycolysis_carbon_backbone_recovered": true,
-    "glycolytic_flux_is_realizable": true
-  },
-  "claim_boundary": "Conserved moieties, siphons and persistence are structural properties of the stoichiometry as curated by KEGG. They describe the module as written, not the in vivo pathway, and say nothing about flux magnitude, regulation or kinetics.",
-  "environment": {
-    "boost": "1.90",
-    "boost_include": "/home/lolo/miniforge3/pkgs/libboost-headers-1.90.0-h707e725_3/include",
-    "cmake": "cmake version 3.31.11",
-    "compiler": "c++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)",
-    "cpu_count": 22,
-    "crn_backend": {
-      "build_sha256": "24b48cd2ced132e808bbd64d17beafe1cf832d3bdd0f091c3eba5ca4e932e5a2",
-      "capabilities": [
-        "closure",
-        "structural_sets",
-        "structural_unlimited",
-        "exhaustive_siphons",
-        "exact_semiflows",
-        "exact_algebra",
-        "crnt",
-        "pathway",
-        "symmetry"
-      ],
-      "library_path": "/tmp/synkit-170-evidence/native/libsynkit_crn_24b48cd2ced132e8.so",
-      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
-      "native_operations": {
-        "crnt": 4,
-        "pathway": 1,
-        "semiflows": 4,
-        "structural_sets": 4
-      },
-      "production_backend": "cpp"
-    },
-    "crn_dpo_expander": {
-      "build_sha256": "bce495c880cb9d28be4b1a9a64284988b329dfe8049a51b0a5956f894e5fbf88",
-      "controller": "cpp",
-      "engine": "synkit_dpo_cpp",
-      "executable": "/tmp/synkit-170-evidence/native/dpo-expander/synkit_dpo_crn_bce495c880cb9d28",
-      "executable_sha256": "26f441778a28a9cf6cdbb176c65828b4b12cb642522a512e5c14b5302745e413",
-      "kernel": "synkit_dpo_cpp",
-      "kernel_abi": 1,
-      "kernel_library": "/tmp/synkit-170-evidence/native/dpo-expander/kernel/libsynkit_partial_c25e34c2c2aaf46cdad2.so",
-      "kernel_library_sha256": "9aa07f7f395783d2075bae80d1d9183bde4388c583ec3a0b68821deec184abd1",
-      "rdkit_cpp_version": "2026.03.1",
-      "reaction_engine": "SynReactor DPO"
-    },
-    "crn_expander": {
-      "build_sha256": "4e11e00457206f4b8eca458372e506a68822481f42722a2fe4f4751195e0fb12",
-      "engine": "synkit_crn_expand",
-      "executable": "/tmp/synkit-170-evidence/native/expander/synkit_crn_expand_4e11e00457206f4b",
-      "executable_sha256": "3b0fe9b29bbee5d0993f3f76cefaa3516c6dd1370209afa8af992ec1ad7ed5e5",
-      "rdkit_cpp_version": "2026.03.1",
-      "reaction_engine": "RDKit reaction SMARTS"
-    },
-    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
-    "git_dirty": true,
-    "machine": "x86_64",
-    "networkx": "3.6.1",
-    "numpy": "2.4.4",
-    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
-    "processor": null,
-    "python": "3.12.12",
-    "rdkit": "2026.03.1",
-    "rdkit_sdk": "/home/lolo/.cache/synkit/rdkit-cpp-2026.03.1",
-    "scipy": "1.17.0",
-    "synkit": "1.7.0"
-  },
-  "glycolysis_flux": {
-    "certificate": [
-      "R01786",
-      "R13199",
-      "R00756",
-      "R01068",
-      "R01015",
-      "R01061",
-      "R01061",
-      "R01512",
-      "R01512",
-      "R01518",
-      "R00658",
-      "R00200",
-      "R01518",
-      "R00658",
-      "R00200"
-    ],
-    "exhaustive": false,
-    "explored_states": 30,
-    "flux": {
-      "R00200": 2,
-      "R00658": 2,
-      "R00756": 1,
-      "R01015": 1,
-      "R01061": 2,
-      "R01068": 1,
-      "R01512": 2,
-      "R01518": 2,
-      "R01786": 1,
-      "R13199": 1
-    },
-    "initial_marking": {
-      "alpha-D-Glucose": 1
-    },
-    "max_depth_reached": 15,
-    "realizable": true,
-    "seconds": 0.001701881003100425,
-    "status": "realizable",
-    "termination_reason": "certificate"
-  },
+  "schema": "synkit.crn-kegg/1",
+  "status": "PASS",
   "modules": [
     {
       "deficiency": 1,
@@ -147,7 +34,7 @@
       "n_species": 14,
       "persistent": false,
       "rank": 11,
-      "seconds": 0.006346406997181475,
+      "seconds": 0.007056624002871104,
       "siphon_termination_reason": "complete",
       "siphons": [
         [
@@ -221,7 +108,7 @@
       "n_species": 13,
       "persistent": false,
       "rank": 6,
-      "seconds": 0.0034882589970948175,
+      "seconds": 0.005152967001777142,
       "siphon_termination_reason": "complete",
       "siphons": [
         [
@@ -338,7 +225,7 @@
       "n_species": 22,
       "persistent": false,
       "rank": 12,
-      "seconds": 0.005051835993072018,
+      "seconds": 0.006911549004144035,
       "siphon_termination_reason": "complete",
       "siphons": [
         [
@@ -448,7 +335,7 @@
       "n_species": 12,
       "persistent": false,
       "rank": 10,
-      "seconds": 0.003931215003831312,
+      "seconds": 0.004736609989777207,
       "siphon_termination_reason": "complete",
       "siphons": [
         [
@@ -542,11 +429,61 @@
       "weakly_reversible": false
     }
   ],
-  "schema": "synkit.crn-kegg/1",
+  "claim_boundary": "Conserved moieties, siphons and persistence are structural properties of the stoichiometry as curated by KEGG. They describe the module as written, not the in vivo pathway, and say nothing about flux magnitude, regulation or kinetics.",
+  "glycolysis_flux": {
+    "certificate": [
+      "R01786",
+      "R13199",
+      "R00756",
+      "R01068",
+      "R01015",
+      "R01061",
+      "R01061",
+      "R01512",
+      "R01512",
+      "R01518",
+      "R00658",
+      "R00200",
+      "R01518",
+      "R00658",
+      "R00200"
+    ],
+    "exhaustive": false,
+    "explored_states": 30,
+    "flux": {
+      "R00200": 2,
+      "R00658": 2,
+      "R00756": 1,
+      "R01015": 1,
+      "R01061": 2,
+      "R01068": 1,
+      "R01512": 2,
+      "R01518": 2,
+      "R01786": 1,
+      "R13199": 1
+    },
+    "initial_marking": {
+      "alpha-D-Glucose": 1
+    },
+    "max_depth_reached": 15,
+    "realizable": true,
+    "seconds": 0.0018312330066692084,
+    "status": "realizable",
+    "termination_reason": "certificate"
+  },
   "source": {
     "database": "KEGG MODULE (https://www.kegg.jp/kegg/module.html)",
     "drop_currency": true,
     "retrieved": "2026-08-16"
   },
-  "status": "PASS"
+  "checks": {
+    "all_enumerations_complete": true,
+    "certificate_matches_requested_flux": true,
+    "deficiency_identity_holds": true,
+    "every_module_analysed": true,
+    "ferredoxin_couple_recovered": true,
+    "glucose_is_a_minimal_siphon": true,
+    "glycolysis_carbon_backbone_recovered": true,
+    "glycolytic_flux_is_realizable": true
+  }
 }

@@ -1,119 +1,120 @@
 {
+  "status": "complete",
   "audits": [
     {
       "index": 0,
       "phase": "warmup",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "warmup",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "warmup",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 0,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 1,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 2,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 3,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 4,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 5,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 6,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 7,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 8,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 9,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 10,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 11,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 12,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 13,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 14,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 15,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 16,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 17,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 18,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     },
     {
       "index": 19,
       "phase": "measured",
-      "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df"
+      "snapshot_matches": true
     }
   ],
   "backend": "synreactor-native",
@@ -124,7 +125,6 @@
     "component_policy": "union",
     "controller": "cpp",
     "engine": "synkit_dpo_cpp",
-    "executable": "/tmp/synkit-170-dpo-build/synkit_dpo_crn_e7fc57b31891691c",
     "hydrogen_model": "implicit",
     "kernel": "synkit_dpo_cpp",
     "kernel_abi": 1,
@@ -153,7 +153,6 @@
     "steps_run": 1,
     "stop_reason": "repeats"
   },
-  "log": "synreactor-native-1.log",
   "median_seconds": 0.027460380500997417,
   "n_reactions": 1,
   "n_species": 3,
@@ -200,19 +199,18 @@
         ]
       ]
     ],
-    "sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
     "species": [
       "C=O",
       "O=CCO",
       "OC=CO"
     ]
   },
-  "snapshot_sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
-  "status": "complete",
   "version": "1.7.0",
   "warmup_samples": [
     0.07437570400361437,
     0.0421344340138603,
     0.04818546000751667
-  ]
+  ],
+  "snapshot_matches": true,
+  "snapshot_verified": true
 }

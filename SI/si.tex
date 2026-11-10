@@ -1,25 +1,204 @@
-%% Supplementary Information in the Springer Nature manuscript format.
 \RequirePackage{xr-hyper}
-\documentclass[pdflatex,referee]{../template/sn-jnl}
-\input{../paper_layout.tex}
+\documentclass[10pt,a4paper,fleqn]{article}
+\usepackage{geometry}
+\geometry{reset,a4paper,left=22mm,right=24mm,top=20mm,bottom=22mm,
+          bindingoffset=0mm,footskip=10mm}
+\usepackage{setspace}
+\doublespacing
+\usepackage{etoolbox}
+\usepackage{authblk}
+\renewcommand{\Authfont}{\normalfont\large}
+\renewcommand{\Affilfont}{\normalfont\small}
+\setlength{\affilsep}{8pt}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\fontsize{14}{16}\selectfont\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{12}{14}\selectfont\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{11}{13}\selectfont\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{9pt}
+\titlespacing*{\subsection}{0pt}{12pt plus 4pt minus 2pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt plus 4pt minus 2pt}{6pt}
+\setlength{\parindent}{1.5em}
+\frenchspacing
+\clubpenalty=10000
+\widowpenalty=10000
+\pagestyle{plain}
+\raggedbottom
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{.95}
+\renewcommand{\bottomfraction}{.90}
+\renewcommand{\textfraction}{.05}
+\renewcommand{\floatpagefraction}{.80}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{10pt plus 2pt minus 2pt}
+\newcommand{\authorcontact}[1]{\def\@authorcontact{#1}}
+\newcommand{\@authorcontact}{}
+\renewcommand{\maketitle}{%
+  \par\begingroup
+    \singlespacing\centering
+    {\fontsize{17}{22.5}\selectfont\@title\par}
+    \vspace{12pt}
+    {\@author\par}
+    \vspace{10pt}
+    {\small\@authorcontact\par}
+  \endgroup\par\vspace{12pt}}
+\makeatother
 
-% Uncomment if you want numbered sections in the SI:
-% \setcounter{secnumdepth}{3}
+\newcommand{\yes}{\ensuremath{\checkmark}}
+\newcommand{\no}{\ensuremath{\times}}
+\newcommand{\pmark}{\ensuremath{(\checkmark)}}
+\newcommand{\rot}[1]{\rotatebox[origin=l]{90}{#1}}
 
-% ----- encoding and typography -----
+\AtEndPreamble{%
+\RequirePackage[no-math]{fontspec}
+\newfontfamily\scArial{lmroman10}[NFSSFamily=scArial,Ligatures=TeX,
+  Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,
+  ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+\RequirePackage[subdued,italic]{mathastext}
+\MTDeclareVersion{synarial}{TU}{scArial}{m}{n}
+\SetMathAlphabet{\Mathsf}{synarial}{TU}{scArial}{m}{n}
+\SetMathAlphabet{\Mathtt}{synarial}{TU}{scArial}{m}{n}
+\IfFontExistsTF{Arial}%
+  {\newfontfamily\scSans{Arial}[NFSSFamily=scSans,Ligatures=TeX]}%
+  {\newfontfamily\scSans{Liberation Sans}[NFSSFamily=scSans,Ligatures=TeX]}
+\MTDeclareVersion{synsans}{TU}{scSans}{m}{n}
+
+\usetikzlibrary{positioning,calc,fit,backgrounds,arrows.meta,shapes.geometric,
+                shapes.misc,decorations.pathreplacing,patterns,math}
+
+\newlength{\scW}\setlength{\scW}{13.0326cm}
+\providecommand{\scWnum}{13.0326}
+\providecommand{\scCanvas}[1]{%
+  \path[use as bounding box] (0,0) rectangle (\scWnum,-#1);}
+
+\definecolor{npgOrange}{gray}{0.35}
+\definecolor{npgSky}{gray}{0.55}
+\definecolor{npgGreen}{gray}{0}
+\definecolor{npgYellow}{gray}{0.75}
+\definecolor{npgBlue}{gray}{0}
+\definecolor{npgVermillion}{gray}{0.45}
+\definecolor{npgPurple}{gray}{0.4}
+\definecolor{figInk}{gray}{0}
+\definecolor{figMuted}{gray}{0.3}
+\definecolor{figHair}{gray}{0.72}
+\definecolor{figWash}{gray}{1}
+
+\colorlet{scInk}{figInk}              %
+\colorlet{scInkM}{figMuted}           %
+\colorlet{scPaper}{figWash}           %
+\colorlet{scSpF}{npgSky!12}           %
+\colorlet{scSpE}{npgBlue}             %
+\colorlet{scRxF}{npgOrange!12}        %
+\colorlet{scRxE}{npgOrange!88!black}  %
+\colorlet{scReac}{npgBlue!78!black}   %
+\colorlet{scProd}{npgGreen!82!black}  %
+\colorlet{scHiF}{npgOrange!13}        %
+\colorlet{scHiE}{npgOrange!82!black}  %
+\colorlet{stAF}{npgGreen!9}\colorlet{stAE}{npgGreen}
+\colorlet{stBF}{npgOrange!11}\colorlet{stBE}{npgOrange}
+\colorlet{stCF}{npgBlue!9}\colorlet{stCE}{npgBlue}
+\colorlet{stDF}{npgPurple!10}\colorlet{stDE}{npgPurple!85!black}
+\colorlet{stEF}{npgVermillion!9}\colorlet{stEE}{npgVermillion}
+
+\colorlet{scAccent}{stAE}\colorlet{scAccentF}{stAF}   %
+\colorlet{scMark}{stBE}\colorlet{scMarkF}{stBF}       %
+\colorlet{scRef}{stCE}\colorlet{scRefF}{stCF}         %
+\colorlet{scAlert}{stEE}\colorlet{scAlertF}{stEF}     %
+\colorlet{scRule}{figHair}                            %
+\colorlet{scRuleL}{figHair!55}                        %
+
+\providecommand{\scTitle}{\scArial\fontsize{8}{9.6}\selectfont\color{scInk}}
+\providecommand{\scBody}{\scArial\fontsize{7}{8.4}\selectfont\color{scInk}}
+\providecommand{\scSmall}{\scArial\fontsize{6.5}{7.8}\selectfont\color{scInk}}
+\providecommand{\scSub}[1]{{\scSmall\itshape #1}}
+\providecommand{\scPanel}[1]{{\scTitle(#1)}}
+\providecommand{\scNum}{\scArial\fontsize{10}{11}\selectfont\bfseries\color{scInk}}
+
+\tikzset{
+  every node/.append style={execute at begin node={%
+      \hyphenpenalty=10000 \exhyphenpenalty=10000 \hbadness=10000 }},
+  syn/.style={font=\scArial,color=scInk,
+              execute at begin picture={\MTversion*{synarial}},
+              >={Stealth[round,length=2.4mm,width=1.9mm]}},
+  panel/.style={fill=none,draw=none},
+  card/.style={fill=none,draw=none,inner sep=5pt,align=left,anchor=north west},
+  note/.style={fill=none,draw=none,inner xsep=6pt,inner ysep=3.5pt,align=left,
+               font=\scSmall},
+  chip/.style={fill=none,draw=none,inner xsep=4pt,inner ysep=2pt,font=\scSmall},
+  hbullet/.style={circle,fill=scInk,text=white,draw=none,
+                  font=\scArial\fontsize{6}{6}\selectfont\bfseries,
+                  minimum size=4.2mm,inner sep=0pt},
+  ctag/.style={font=\scTitle,anchor=north west,text=scInk},
+  species/.style={rounded rectangle,fill=scSpF,draw=scSpE,line width=0.45pt,
+                  inner xsep=2.4pt,inner ysep=1.6pt,font=\scSmall,
+                  text=scInk,minimum height=3.6mm},
+  cofactor/.style={species,fill=scRefF,draw=scRef},
+  catalyst/.style={species,fill=scHiF,draw=scHiE},
+  rxn/.style={rectangle,fill=scRxF,draw=scRxE,line width=0.45pt,
+              inner sep=1.2pt,font=\scSmall,text=scInk,
+              minimum width=3.0mm,minimum height=3.0mm},
+  place/.style={circle,fill=scSpF,draw=scSpE,line width=0.45pt,
+                minimum size=4.0mm,inner sep=0pt},
+  trans/.style={rectangle,fill=scRxE,draw=scRxE,minimum width=1.1mm,
+                minimum height=3.6mm,inner sep=0pt},
+  token/.style={circle,fill=scInk,minimum size=1.1mm,inner sep=0pt},
+  reac/.style={->,line width=0.5pt,draw=scReac,shorten >=0.8pt,shorten <=0.8pt},
+  prod/.style={->,line width=0.5pt,draw=scProd,shorten >=0.8pt,shorten <=0.8pt},
+  cat/.style={->,line width=0.5pt,draw=scHiE,shorten >=0.8pt,shorten <=0.8pt},
+  flow/.style={-{Stealth[round,length=2.2mm,width=1.8mm]},line width=1.1pt,
+               draw=scInkM!45},
+  flab/.style={font=\scSmall,text=scInkM,inner sep=2pt},
+  stoi/.style={font=\scSmall,text=scInkM,inner sep=0.8pt},
+  vpass/.style={circle,fill=none,draw=none,text=black,
+                font=\fontsize{6}{6}\selectfont\bfseries,
+                minimum size=3.2mm,inner sep=0pt},
+  vfail/.style={circle,fill=none,draw=none,text=black,
+                font=\fontsize{6}{6}\selectfont\bfseries,
+                minimum size=3.2mm,inner sep=0pt},
+  callout/.style={font=\scSmall,text=scInkM,align=left},
+}
+
+\providecommand{\scHead}[5][scInk]{%
+  \node[anchor=north west,inner sep=0pt,font=\scTitle] at #2
+    {(\MakeLowercase{#3})};}
+
+\ifdefined\pgfplotsset
+  \pgfplotsset{compat=1.18}
+  \pgfplotsset{
+    synaxis/.style={
+      scale only axis,
+      tick align=outside, tick pos=left,
+      axis line style={draw=scInkM!55,line width=0.4pt},
+      ymajorgrids=true, xmajorgrids=false,
+      major grid style={draw=scRuleL,line width=0.3pt},
+      major tick length=1.6pt,
+      label style={font=\scBody,color=scInk},
+      tick label style={font=\scSmall,color=scInkM},
+      legend style={font=\scSmall,draw=none,fill=none,inner sep=1pt,
+                    row sep=0.4pt,legend columns=1},
+      legend cell align=left,
+      every axis plot/.append style={line width=0.7pt,mark size=1.2pt},
+    },
+  }
+\fi
+
+}
+
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{xcolor}
 \usepackage{xspace}
 \usepackage{microtype}
 
-% ----- math / symbols -----
 \usepackage{amsmath,amssymb,mathtools,amsthm}
 \usepackage{mathrsfs}
 
-% ----- figures, tables, floats -----
 \usepackage{graphicx}
 \usepackage{subcaption}
+\captionsetup{font=small,labelfont=bf,labelsep=space,
+              justification=justified,singlelinecheck=false}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -31,19 +210,15 @@
 \usepackage{seqsplit}
 \usepackage{enumitem}
 
-% ----- chemistry / units -----
 \usepackage{siunitx}
 \usepackage[version=4]{mhchem}
 \usepackage{chemfig}
 \usepackage{tikz}
-% The architecture figure is the TikZ source itself, not a compiled PDF.
 \setchemfig{
   atom sep=2.4em,
   bond offset=2pt
 }
 
-% ----- code / listings -----
-\usepackage{xcolor}
 \usepackage{listings}
 \lstset{
   basicstyle=\scriptsize\ttfamily\color{black},
@@ -66,11 +241,11 @@
   xrightmargin=0.5em
 }
 
-% ----- bibliography -----
 \usepackage[numbers,square]{natbib}
-\bibliographystyle{../template/spbasic_u}
+\bibliographystyle{unsrtnat}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0pt plus 0.3ex}
 
-% ----- hyperlinks -----
 \usepackage{hyperref}
 \hypersetup{
   bookmarksdepth=2,
@@ -83,26 +258,16 @@
   pdfauthor={Thanh-An Pham and Tieu-Long Phan}
 }
 
-% (Cross-references into the main manuscript are declared after the project
-% macros below, because xr-hyper expands the main manuscript's captions.)
+\theoremstyle{plain}\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}\theoremstyle{definition}\newtheorem{example}{Example}\newtheorem{remark}{Remark}\theoremstyle{remark}\newtheorem{definition}{Definition}
 
-% ----- theorem environments -----
-\theoremstyle{plain}%
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}[theorem]{Proposition}%
-\theoremstyle{definition}%
-\newtheorem{example}{Example}%
-\newtheorem{remark}{Remark}%
-\theoremstyle{remark}%
-\newtheorem{definition}{Definition}
-
-% ----- project macros -----
 \newcommand{\synkit}{\texttt{SynKit}\xspace}
 \newcommand{\synkitcrn}{\texttt{SynKit CRN}\xspace}
-% BEGIN GENERATED: review-macros
-\newcommand{\ReviewRandomMoietySeconds}{0.11}
-% END GENERATED: review-macros
+
 \hyphenation{SynKit Bio-in-for-mat-ics Reactome Wiki-Pathways}
+\emergencystretch=2em
+\tolerance=2000
+\hbadness=2000
 
 \newcommand{\pkg}[1]{\texttt{#1}\xspace}
 \newcommand{\code}[1]{\texttt{#1}\xspace}
@@ -110,7 +275,6 @@
 \newcommand{\func}[1]{\texttt{#1()}\xspace}
 \newcommand{\option}[1]{\texttt{#1}\xspace}
 \newcommand{\smilescode}[1]{{\ttfamily\seqsplit{#1}}}
-% Cross-references into the main manuscript, prefixed with `main:`.
 \externaldocument[main:]{../main}
 
 \newcommand{\figref}[1]{Fig.~\ref{#1}}
@@ -121,17 +285,12 @@
 \newcommand{\pipcmd}[1]{\texttt{pip install #1}\xspace}
 \newcommand{\pkgver}[2]{\pkg{#1}~(#2)\xspace}
 
-% ----- siunitx config -----
 \sisetup{
   detect-all,
   range-phrase = --,
   per-mode = symbol
 }
 
-% ----- caption style -----
-\captionsetup{font=small,labelfont=bf}
-
-% ----- supplementary numbering -----
 \renewcommand{\thesection}{S\arabic{section}}
 \renewcommand{\thesubsection}{S\arabic{section}.\arabic{subsection}}
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -142,38 +301,39 @@
   \renewcommand{\lstlistingname}{Code Example}
 }
 
+\title{Supplementary Information\\
+On the Conservation Laws and Pathway Realizability\\
+of Biochemical Reaction Networks}
+\author[1]{Thanh-An Pham}
+\author[1,2,*]{Tieu-Long Phan}
+\affil[1]{Bioinformatics Group, Department of Computer Science \& Interdisciplinary Center for Bioinformatics \& School for Embedded and Composite Artificial Intelligence (SECAI), Leipzig University, H{\"a}rtelstra{\ss}e 16--18, D-04107 Leipzig, Germany}
+\affil[2]{Department of Mathematics and Computer Science, University of Southern Denmark, DK-5230 Odense M, Denmark}
+\authorcontact{*Corresponding author: \href{mailto:tieu@bioinf.uni-leipzig.de}{tieu@bioinf.uni-leipzig.de}\\
+Thanh-An Pham: \href{mailto:thanh-an.pham@uni-leipzig.de}{thanh-an.pham@uni-leipzig.de}}
+
 \begin{document}
-
-\title[Supplementary Information]{Supplementary Information\hb On the Conservation Laws and Pathway Realizability\hb of Biochemical Reaction Networks}
-
-\author[1]{\fnm{Thanh-An} \sur{Pham}}\email{thanh-an.pham@uni-leipzig.de}
-\author*[1,2]{\fnm{Tieu-Long} \sur{Phan}}\email{tieu@bioinf.uni-leipzig.de}
-
-\affil[1]{\orgdiv{Bioinformatics Group, Department of Computer Science \& Interdisciplinary Center for Bioinformatics \& School for Embedded and Composite Artificial Intelligence (SECAI)}, \orgname{Leipzig University}, \orgaddress{\street{H{\"a}rtelstra{\ss}e 16--18}, \postcode{D-04107}, \city{Leipzig}, \country{Germany}}}
-\affil[2]{\orgdiv{Department of Mathematics and Computer Science}, \orgname{University of Southern Denmark}, \orgaddress{\postcode{DK-5230}, \city{Odense M}, \country{Denmark}}}
-
 \maketitle
 
 \section{Python interface example}
 \label{si:software}
 
 Code Example~\ref{lst:usage} illustrates network construction, exact structural analysis, and discrete pathway verification through \synkit's Python interface. The script builds a 14-species glycolysis model (with currency metabolites omitted), evaluates chemical reaction network theory (CRNT) invariants and deficiency, isolates conserved pools and minimal siphons, and verifies that one glucose token can reach two pyruvates via an exact 15-step firing sequence.
-Run this example from the \synkit source tree or unpacked source distribution: the research modules under \texttt{Experiments/CRN} are distributed with the source, separately from the installed runtime wheel.
+Run this example from the \synkit source tree or unpacked source distribution: the research modules under \texttt{Experiment/CRN} are distributed with the source, separately from the installed runtime wheel.
 
 \begin{lstlisting}[float=htbp,caption={Python analysis of reduced \texttt{KEGG} glycolysis (\texttt{M00001}): network construction, exact structural analysis, discrete pathway verification, and \texttt{SBML} export.},label={lst:usage}]
 from synkit.CRN import (build_native, native_backend, crnt_summary,
     conserved_moieties, find_siphons, siphon_persistence_details,
     PathwayRealizability, crn_to_sbml)
-from Experiments.CRN.benchmarks import build_kegg_crn, GLYCOLYSIS_FLUX
+from Experiment.CRN.studies import build_kegg_crn, GLYCOLYSIS_FLUX
 
 library = build_native("/tmp/synkit-crn", with_semiflows=True)
 with native_backend(library):
     crn = build_kegg_crn("M00001", drop_currency=True)
-    crn.n_species, crn.n_reactions                     # (14, 15)
+    crn.n_species, crn.n_reactions
     report = crnt_summary(crn)
-    report.deficiency, report.is_weakly_reversible     # (1, False)
-    len(conserved_moieties(crn)), len(find_siphons(crn)) # (3, 3)
-    siphon_persistence_details(crn).persistence_ok     # False
+    report.deficiency, report.is_weakly_reversible
+    len(conserved_moieties(crn)), len(find_siphons(crn))
+    siphon_persistence_details(crn).persistence_ok
 
     check = PathwayRealizability().load_syncrn_and_flow(
         crn, flow=GLYCOLYSIS_FLUX,
@@ -181,7 +341,7 @@ with native_backend(library):
         species="label", reaction="label")
     check.build_petri_net_from_flow()
     outcome = check.realizability_result()
-    outcome.status.value, len(outcome.certificate) # ("realizable", 15)
+    outcome.status.value, len(outcome.certificate)
     sbml_document = crn_to_sbml(crn)
 \end{lstlisting}
 
@@ -230,7 +390,7 @@ Both formulations agreed for every benchmark, confirming consistency among compl
 
 \begin{figure}[!htbp]
     \centering
-    \input{../Figure/deficiency_oldschool_body.tex}
+    \input{../Figure/deficiency.tex}
     \caption{Conservation structure and deficiency-theorem checks for the Edelstein network~\cite{edelstein1970biochemical}. \textbf{(a)}~Complex graph and its two linkage classes. \textbf{(b)}~Stoichiometric matrix beside the primitive conservation vector $y$, whose product $y^{\mathsf T}\mathbf S$ vanishes over $\mathbb Q$ and certifies the conserved pool $[\mathrm B]+[\mathrm C]$. \textbf{(c)}~Each classical deficiency theorem fails one hypothesis, leaving multistationarity undecided by deficiency alone.}
     \label{fig:deficiency}
 \end{figure}
@@ -240,14 +400,10 @@ Both formulations agreed for every benchmark, confirming consistency among compl
 
 We audit integer representatives $y$ satisfying $y^T\mathbf S=0$ on the twelve reference networks (Table~\ref{tab:reference_audit}). The floating-point basis $B$ is computed by \texttt{scipy.linalg.null\_space} applied to $\mathbf S^T$. Its maximum absolute residual ranges from zero to $5.3\times10^{-16}$; irreversible isomerization and the Edelstein network have zero reported residual. We separately evaluate the heuristic $\operatorname{round}(10^3B)$ on the integer matrix. It produces vectors with non-zero exact residuals in Michaelis--Menten, reversible Michaelis--Menten, and the one-site futile cycle. This audit demonstrates the effect of this particular scaling and rounding choice on integer identities. \synkit's exact rational elimination returns a basis of the expected dimension for every network, including the empty basis for the open reactor; every returned integer vector satisfies the conservation identity exactly.
 
-
-
 \section{Computational cost across network families}
 \label{si:scaling}
 
 Fig.~\ref{fig:network_families} illustrates the three benchmark families. The complete scaling report contains 60 measurements: three families, four requested sizes, and five tasks. Fig.~\ref{fig:performance_diagnostics} shows the 48 measurements for four structural analyses, with numbers beside the random-sparse siphon points giving the number of minimal siphons. The remaining twelve measurements are standalone exact-rank computations; the reversible-chain rank timings also appear in Fig.~\ref{main:fig:scaling}c.
-
-
 
 \begin{figure}[!htbp]
     \centering
@@ -266,7 +422,7 @@ Fig.~\ref{fig:network_families} illustrates the three benchmark families. The co
 \section{BioModels: structural SBML interoperability}
 \label{si:biomodels}
 
-The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \texttt{SBML} exchange across a size-stratified selection from \texttt{BioModels}: ten reaction-bearing models pass export and re-import checks without loss of integer stoichiometric multiplicities, while \texttt{BIOMD0000000562} serves as a reaction-free control. \rev{The packaged independent reference, \texttt{sbml\_reference.py} in \texttt{Experiments/CRN/benchmarks}, computes eight shared CRNT quantities directly from the \texttt{SBML} XML using only the Python standard library and exact rational arithmetic. The participant-conventions study compares this reference with the public importer for the retained, cancelled and modifier-added readings of every reaction-bearing model. Inputs are verified against the packaged SHA-256 manifest. Reversible reactions are expanded into distinct directed steps: an omitted flag means true in Level~2; Level~3 requires an explicit flag, with a strict error or lenient warning when absent. The BioModels enumeration uses a 1\,000\,000-node budget; incomplete searches are flagged and excluded from completed counts and timings.}
+The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \texttt{SBML} exchange across a size-stratified selection from \texttt{BioModels}: ten reaction-bearing models pass export and re-import checks without loss of integer stoichiometric multiplicities, while \texttt{BIOMD0000000562} serves as a reaction-free control. The packaged independent reference, \texttt{sbml\_reference.py} in \texttt{Experiment/CRN/studies}, computes eight shared CRNT quantities directly from the \texttt{SBML} XML using only the Python standard library and exact rational arithmetic. The participant-conventions study compares this reference with the public importer for the retained, cancelled and modifier-added readings of every reaction-bearing model. Inputs are verified against the packaged SHA-256 manifest. Reversible reactions are expanded into distinct directed steps: an omitted flag means true in Level~2; Level~3 requires an explicit flag, with a strict error or lenient warning when absent. The BioModels enumeration uses a 1\,000\,000-node budget; incomplete searches are flagged and excluded from completed counts and timings.
 
 \begin{table}[htbp]
 \centering
@@ -278,8 +434,6 @@ The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \tex
 \toprule
 Model & $m$ & $r$ & $s$ & $\delta$ & P & S & RT & Covered \\
 \midrule
-% BEGIN GENERATED: biomodels-models
-% Generated from crn-biomodels.json.
 \texttt{BIOMD0000000001} & 12 & 34 & 11 & 0 & 1 & 1 & yes & yes \\
 \texttt{BIOMD0000000010} & 8 & 10 & 5 & 0 & 3 & 3 & yes & yes \\
 \texttt{BIOMD0000000051} & 18 & 96 & 18 & 8 & 0 & 0 & yes & yes \\
@@ -291,22 +445,19 @@ Model & $m$ & $r$ & $s$ & $\delta$ & P & S & RT & Covered \\
 \texttt{BIOMD0000000175} & 120 & 194 & 94 & 6 & 30 & 145 & yes & no \\
 \texttt{BIOMD0000000255} & 504 & 1654 & 486 & 317 & 17 & 23 & yes & no \\
 \texttt{BIOMD0000000562} & 0 & 0 & -- & -- & -- & -- & -- & -- \\
-% END GENERATED: biomodels-models
 \bottomrule
 \end{tabular*}
 \end{table}
 
 \begin{table}[htbp]
 \centering
-\caption{\rev{Catalyst conventions in the \texttt{BioModels} entries. Mod.: number of \texttt{SBML} modifier references, which the reader does not import. $\delta$ is the deficiency with species listed on both sides kept (as imported), with those species cancelled as in net-stoichiometry tools, and with every modifier added to both sides of its reaction. The reaction-free control \texttt{BIOMD0000000562} is omitted. Input files are those of Table~\ref{tab:biomodels_models}, checked by SHA-256.}}
+\caption{Catalyst conventions in the \texttt{BioModels} entries. Mod.: number of \texttt{SBML} modifier references, which the reader does not import. $\delta$ is the deficiency with species listed on both sides kept (as imported), with those species cancelled as in net-stoichiometry tools, and with every modifier added to both sides of its reaction. The reaction-free control \texttt{BIOMD0000000562} is omitted. Input files are those of Table~\ref{tab:biomodels_models}, checked by SHA-256.}
 \label{tab:biomodels_modifiers}
 \small
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
 \toprule
 Model & Mod. & $\delta$ kept & $\delta$ cancelled & $\delta$ with modifiers \\
 \midrule
-% BEGIN GENERATED: biomodels-modifiers
-% Generated from crn-biomodels-modifiers.json.
 \texttt{BIOMD0000000001} & 0 & 0 & 0 & 0 \\
 \texttt{BIOMD0000000010} & 5 & 0 & 0 & 5 \\
 \texttt{BIOMD0000000051} & 5 & 8 & 8 & 13 \\
@@ -317,7 +468,6 @@ Model & Mod. & $\delta$ kept & $\delta$ cancelled & $\delta$ with modifiers \\
 \texttt{BIOMD0000000019} & 0 & 41 & 41 & 41 \\
 \texttt{BIOMD0000000175} & 142 & 6 & 6 & 8 \\
 \texttt{BIOMD0000000255} & 0 & 317 & 317 & 317 \\
-% END GENERATED: biomodels-modifiers
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -337,13 +487,10 @@ Table~\ref{tab:kegg_modules} summarizes structural deficiency and conserved moie
 \toprule
 Module & $m$ & $r$ & $n$ & $\ell$ & $s$ & $\delta$ & P & S \\
 \midrule
-% BEGIN GENERATED: kegg-modules
-% Generated from crn-kegg.json.
 \texttt{M00001} & 14 & 15 & 16 & 4 & 11 & 1 & 3 & 3 \\
 \texttt{M00307} & 13 & 8 & 14 & 7 & 6 & 1 & 8 & 6 \\
 \texttt{M00009} & 22 & 12 & 23 & 11 & 12 & 0 & 12 & 9 \\
 \texttt{M00004} & 12 & 12 & 14 & 4 & 10 & 0 & 2 & 4 \\
-% END GENERATED: kegg-modules
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -360,22 +507,18 @@ Table~\ref{tab:glycolysis_flux} lists the reaction multiset converting one gluco
 \toprule
 Reaction & Count & Reaction & Count \\
 \midrule
-% BEGIN GENERATED: glycolysis-flux
-% Generated from crn-kegg.json.
 \texttt{R01786} & 1 & \texttt{R01061} & 2 \\
 \texttt{R13199} & 1 & \texttt{R01512} & 2 \\
 \texttt{R00756} & 1 & \texttt{R01518} & 2 \\
 \texttt{R01068} & 1 & \texttt{R00658} & 2 \\
 \texttt{R01015} & 1 & \texttt{R00200} & 2 \\
-% END GENERATED: glycolysis-flux
 \bottomrule
 \end{tabular*}
 \end{table}
 
-\subsection{\texorpdfstring{\rev{Generic compound identifiers}}{Generic compound identifiers} and cofactor boundary controls}
+\subsection{\texorpdfstring{Generic compound identifiers}{Generic compound identifiers} and cofactor boundary controls}
 
-\rev{\texttt{KEGG} writes polyphosphate glucokinase (\texttt{R02189}, EC~2.7.1.63) as \texttt{C00404 + C00267 <=> C00404 + C00668}. The identifier \texttt{C00404} names a polyphosphate chain of any length, so (Phosphate)$_n$ on the left and (Phosphate)$_{n-1}$ on the right share it and the polymer appears on both sides. Counting phosphorus shows that one phosphate moves from the polymer to glucose: polyphosphate is a phosphoryl donor, not a retained catalyst. \synkit keeps the equation as written, so in the reduced glycolysis model the polymer is a species that this reaction never consumes. We therefore do not use \texttt{R02189} as an example of participant retention; the main text uses the catalysts of \texttt{BIOMD0000000404} instead (Table~\ref{tab:biomodels_modifiers}).} \revdel{Table on shared-polyphosphate control (participant retained versus cancelled)}
-
+\texttt{KEGG} writes polyphosphate glucokinase (\texttt{R02189}, EC~2.7.1.63) as \texttt{C00404 + C00267 <=> C00404 + C00668}. The identifier \texttt{C00404} names a polyphosphate chain of any length, so (Phosphate)$_n$ on the left and (Phosphate)$_{n-1}$ on the right share it and the polymer appears on both sides. Counting phosphorus shows that one phosphate moves from the polymer to glucose: polyphosphate is a phosphoryl donor, not a retained catalyst. \synkit keeps the equation as written, so in the reduced glycolysis model the polymer is a species that this reaction never consumes. We therefore do not use \texttt{R02189} as an example of participant retention; the main text uses the catalysts of \texttt{BIOMD0000000404} instead (Table~\ref{tab:biomodels_modifiers}).
 
 Table~\ref{tab:glycolysis_currency} tests the prescribed reaction multiset from one glucose token and zero tokens of every other species. Removing currency metabolites permits the 15-step carbon-backbone certificate (14 species). Retaining them (24 species) leaves hexokinase without ATP, and no reaction of the requested multiset can fire from the initial marking. The negative result concerns this flux and inventory.
 
@@ -387,21 +530,17 @@ Table~\ref{tab:glycolysis_currency} tests the prescribed reaction multiset from 
 \toprule
 Currency metabolites & Species & Reactions & Decision & Certificate length \\
 \midrule
-% BEGIN GENERATED: glycolysis-currency-control
-% Generated from crn-review-experiments.json.
 Removed & 14 & 15 & realizable & 15 \\
 Retained & 24 & 15 & unrealizable & -- \\
-% END GENERATED: glycolysis-currency-control
 \bottomrule
 \end{tabular*}
 \end{table}
 
-
 \subsection{Initial cofactor inventories and firing order}
 
-\rev{Table~\ref{tab:glycolysis_inventory_controls} holds the full prescribed reaction multiset fixed and varies only the initial inventory. From glucose alone ($I_0$), the adenylate set $\{\mathrm{ATP},\mathrm{ADP}\}$ is an empty siphon in the selected reaction subnet, which rules out ATP-dependent startup. Supplying ATP alone ($I_1$, $I_2$) still leaves net deficits of two ADP, two NAD$^+$ and two orthophosphate tokens. Adding NAD$^+$ removes only its deficit ($I_3$); adding phosphate as well still leaves an ADP deficit ($I_4$). These obstructions follow already from $m_0+\mathbf Sf\not\ge0$.}
+Table~\ref{tab:glycolysis_inventory_controls} holds the full prescribed reaction multiset fixed and varies only the initial inventory. From glucose alone ($I_0$), the adenylate set $\{\mathrm{ATP},\mathrm{ADP}\}$ is an empty siphon in the selected reaction subnet, which rules out ATP-dependent startup. Supplying ATP alone ($I_1$, $I_2$) still leaves net deficits of two ADP, two NAD$^+$ and two orthophosphate tokens. Adding NAD$^+$ removes only its deficit ($I_3$); adding phosphate as well still leaves an ADP deficit ($I_4$). These obstructions follow already from $m_0+\mathbf Sf\not\ge0$.
 
-\rev{Inventory $I_5$ supplies one ATP, two ADP, two NAD$^+$ and two orthophosphate tokens alongside glucose. Its predicted final inventory is non-negative, but the prescribed multiset is unrealizable: two ATP-consuming preparatory steps must occur before any ATP-producing payoff reaction. Exhaustive search stops after three markings. With two initial ATP instead ($I_6$), an independently replayed 15-step certificate completes the same multiset after exploring 30 markings. The final inventory is two pyruvates, four ATP, two NADH, two water and two protons, with no unlisted tokens. No case receives replenishment during firing. This paired control distinguishes aggregate stoichiometric sufficiency from an enabled firing order.}
+Inventory $I_5$ supplies one ATP, two ADP, two NAD$^+$ and two orthophosphate tokens alongside glucose. Its predicted final inventory is non-negative, but the prescribed multiset is unrealizable: two ATP-consuming preparatory steps must occur before any ATP-producing payoff reaction. Exhaustive search stops after three markings. With two initial ATP instead ($I_6$), an independently replayed 15-step certificate completes the same multiset after exploring 30 markings. The final inventory is two pyruvates, four ATP, two NADH, two water and two protons, with no unlisted tokens. No case receives replenishment during firing. This paired control distinguishes aggregate stoichiometric sufficiency from an enabled firing order.
 
 \begin{table}[htbp]
 \centering
@@ -413,8 +552,6 @@ Retained & 24 & 15 & unrealizable & -- \\
 \toprule
 Case & ATP & ADP & NAD$^+$ & $\mathrm P_i$ & Net & Decision & States & Length \\
 \midrule
-% BEGIN GENERATED: glycolysis-inventory-controls
-% Generated from crn-review-experiments.json.
 $I_0$ & 0 & 0 & 0 & 0 & no & unrealizable & 1 & -- \\
 $I_1$ & 1 & 0 & 0 & 0 & no & unrealizable & 3 & -- \\
 $I_2$ & 2 & 0 & 0 & 0 & no & unrealizable & 6 & -- \\
@@ -422,7 +559,6 @@ $I_3$ & 2 & 0 & 2 & 0 & no & unrealizable & 6 & -- \\
 $I_4$ & 2 & 0 & 2 & 2 & no & unrealizable & 27 & -- \\
 $I_5$ & 1 & 2 & 2 & 2 & yes & unrealizable & 3 & -- \\
 $I_6$ & 2 & 2 & 2 & 2 & yes & realizable & 30 & 15 \\
-% END GENERATED: glycolysis-inventory-controls
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -450,14 +586,12 @@ Table~\ref{tab:formose_dpo_comparison} compares the full API runtime of \texttt{
 \toprule
 Depth & Species & Reactions & \texttt{SynReactor} C++ DPO & \texttt{M{\O}D} & \texttt{MolFoundry} \\
 \midrule
-% BEGIN GENERATED: formose-dpo-comparison
 1 & 3 & 1 & 0.0275 & 0.000705 & 0.0031 \\
 2 & 5 & 4 & 0.0326 & 0.000947 & 0.00634 \\
 3 & 9 & 10 & 0.0272 & 0.00152 & 0.00793 \\
 4 & 37 & 44 & 0.0283 & 0.00369 & 0.0229 \\
 5 & 302 & 371 & 0.0642 & 0.0362 & 0.26 \\
 6 & 10572 & 11239 & 1.86 & 2.22 & 15.1 \\
-% END GENERATED: formose-dpo-comparison
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -474,22 +608,18 @@ The targets are an aldotetrose ($T_4$, \texttt{O=CC(O)C(O)CO}) and an aldohexose
 \toprule
 Target & Qualitative depth & Discrete firings & Prescribed multiset \\
 \midrule
-% BEGIN GENERATED: formose-routes
-% Generated from crn-supplement-audit.json.
 $T_{4}$ & 2 & 2 & $r_{1}+r_{3}$ \\
 $T_{6}$ & 3 & 4 & $2r_{1}+r_{3}+r_{7}$ \\
-% END GENERATED: formose-routes
 \bottomrule
 \end{tabular*}
 \end{table}
 
 \begin{figure}[!htbp]
 \centering
-\input{../Figure/formose_chemistry.tex}   % TikZ/chemfig source, typeset inline at \textwidth
-\caption{Precursor requirements of the selected formose routes. Bars are reactions, as in the Petri nets of the main text, and each glycolaldehyde is drawn as a separate molecule because discrete firing consumes one token per molecule. Keto--enol tautomerization ($r_1$) supplies the enediol consumed by each aldol addition ($r_3$, $r_7$). The shaded block is the $T_4$ route ($r_1+r_3$: two firings, two glycolaldehyde), and the whole scheme is the $T_6$ route ($2r_1+r_3+r_7$: four firings, three glycolaldehyde). Structures are constitutional, with no stereochemistry or atom mapping assigned.}
+\input{../Figure/formose_chemistry.tex}
+    \caption{Precursor requirements of the selected formose routes. Bars are reactions, as in the Petri nets of the main text, and each glycolaldehyde is drawn as a separate molecule because discrete firing consumes one token per molecule. Keto--enol tautomerization ($r_1$) supplies the enediol consumed by each aldol addition ($r_3$, $r_7$). The shaded block is the $T_4$ route ($r_1+r_3$: two firings, two glycolaldehyde), and the whole scheme is the $T_6$ route ($2r_1+r_3+r_7$: four firings, three glycolaldehyde). Structures are constitutional, with no stereochemistry or atom mapping assigned.}
 \label{fig:formose_reaction_motifs}
 \end{figure}
-
 
 Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor inventories. Formaldehyde is $C_1$ and glycolaldehyde is $C_2$. Every positive sequence is confirmed by a replayable firing sequence, while negative decisions are established by exhaustive search over the prescribed multiset. For an independent check, the same reaction multisets and initial markings are supplied to \texttt{MolFoundry}'s \texttt{FlowSolution}, without optimizing a new hyperflow. Its \texttt{is\_realizable()} method and SMT certificate enumeration agree with all ten \synkit decisions. All three positive certificates are independently replayed, checking enabling before every firing, the requested reaction multiplicities, and target production. This comparison concerns the prescribed routes, rather than unrestricted target reachability. Both prescribed routes consume no formaldehyde: their different outcomes among the equal-carbon inventories follow from glycolaldehyde counts.
 
@@ -501,19 +631,17 @@ Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor invento
 \toprule
 Pool & $C_1$ count & $C_2$ count & Total carbon & $T_4$ & $T_6$ \\
 \midrule
-% BEGIN GENERATED: formose-inventories
-% Generated from crn-supplement-audit.json.
 $M_1$ & 1 & 1 & 3 & no & no \\
 $M_2$ & 2 & 1 & 4 & no & no \\
 $M_3$ & 4 & 1 & 6 & no & no \\
 $M_4$ & 2 & 2 & 6 & yes & no \\
 $M_5$ & 0 & 3 & 6 & yes & yes \\
-% END GENERATED: formose-inventories
 \bottomrule
 \end{tabular*}
 \end{table}
 
-The tetrose route converts glycolaldehyde to enediol ($r_1$) and couples that intermediate with a second glycolaldehyde ($r_3$). This motif requires two glycolaldehyde precursors and consumes no formaldehyde, so inventories $M_4$ and $M_5$ support it while $M_3$ (containing only one glycolaldehyde) cannot. The hexose route requires two successive aldol couplings consuming two enediol equivalents, demanding three glycolaldehyde precursors in total ($2r_1 + r_3 + r_7$), which only pool $M_5$ satisfies. Consequently, the selected multisets have different realizability outcomes in the three six-carbon inventories ($M_3$, $M_4$, and $M_5$). The negative decisions do not exclude alternative target-producing multisets from these mixed inventories.\par\rev{An independent structural obstruction applies to a formaldehyde-only inventory: one eight-species minimal siphon of the generated network contains glycolaldehyde (\texttt{O=CCO}), its enediol (\texttt{OC=CO}), and both targets, but excludes formaldehyde (\texttt{C=O}). If all eight species are absent initially, no reaction can produce a member, so formaldehyde alone cannot initiate either target. Each inventory $M_1$--$M_5$ already marks this siphon through glycolaldehyde; their selected-route decisions therefore require the separate multiplicity analysis above.}
+The tetrose route converts glycolaldehyde to enediol ($r_1$) and couples that intermediate with a second glycolaldehyde ($r_3$). This motif requires two glycolaldehyde precursors and consumes no formaldehyde, so inventories $M_4$ and $M_5$ support it while $M_3$ (containing only one glycolaldehyde) cannot. The hexose route requires two successive aldol couplings consuming two enediol equivalents, demanding three glycolaldehyde precursors in total ($2r_1 + r_3 + r_7$), which only pool $M_5$ satisfies. Consequently, the selected multisets have different realizability outcomes in the three six-carbon inventories ($M_3$, $M_4$, and $M_5$). The negative decisions do not exclude alternative target-producing multisets from these mixed inventories.\par
+An independent structural obstruction applies to a formaldehyde-only inventory: one eight-species minimal siphon of the generated network contains glycolaldehyde (\texttt{O=CCO}), its enediol (\texttt{OC=CO}), and both targets, but excludes formaldehyde (\texttt{C=O}). If all eight species are absent initially, no reaction can produce a member, so formaldehyde alone cannot initiate either target. Each inventory $M_1$--$M_5$ already marks this siphon through glycolaldehyde; their selected-route decisions therefore require the separate multiplicity analysis above.
 
 \bibliography{../refs}
 

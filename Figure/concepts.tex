@@ -1,23 +1,3 @@
-% ---------------------------------------------------------------------------
-% concepts.tex --- the Implementation section worked on one toy network.
-%
-% Source fragment: loaded directly by main.tex (Section 2).
-%
-%   r1: 2A -> B     r2: B + E -> C + E     r3: C -> 2A     r4: C -> D
-%
-% (a) Petri net, (b) S^-, S^+ and the net S (the catalyst row cancels),
-% (c) P- and T-semiflows, (d) minimal siphons and coverage,
-% (e) one requested flux under three finite inventories.
-%
-% Every number is hand-checkable:
-%   y1 = (1,2,2,2,0), y2 = (0,0,0,0,1)    y^T S = 0
-%   x  = (1,1,1,0)                        S x  = 0
-%   minimal siphons {E} (trap, covered) and {A,B,C} (not a trap, uncovered)
-%
-% Colour follows Fig. 1 (visual_abstract.py): blue species, orange enzyme,
-% green verified, gray arrows.  A muted red marks blocked or uncovered.
-% ---------------------------------------------------------------------------
-
 \begingroup
 \definecolor{cInk}{HTML}{193342}
 \definecolor{cBlue}{HTML}{0072B2}
@@ -59,13 +39,12 @@
               line width=0.6pt,minimum width=1.10cm,minimum height=0.66cm,
               inner sep=0pt},
 }
-\newcommand{\cpanel}[3]{% coordinate, letter, title
+\newcommand{\cpanel}[3]{%
   \node[anchor=base west,inner sep=0pt,
         font=\scSans\fontsize{9}{9}\selectfont\bfseries\color{cInk}] (cp#2)
         at ($#1+(0,-0.28)$) {#2};
   \node[chd,anchor=base west] at ($(cp#2.base east)+(0.18,0)$) {#3};}
 
-% \toynet{<prefix>}  places A..D on one line, E above r2, r3 below.
 \newcommand{\toynet}[1]{%
   \node[cpl]  (#1A) at (0,0)      {$A$};
   \node[ctr]  (#1r1) at (0.75,0)  {};
@@ -92,11 +71,8 @@
   \node[crl,below=1.2pt] at (#1r4.south) {$r_4$};
 }
 
-% \csign=-1 paints the positive entries of S^- as consumption (dark blue)
-% heat-map matrix, 5 species x 4 reactions.  Negative entries dark blue,
-% positive light blue, zeros pale; the enzyme row (index 4) orange.
 \def\cw{0.37}\def\rh{0.33}
-\newcommand{\cmat}[4]{% x0, y0 (centre of first cell), header, rows
+\newcommand{\cmat}[4]{%
   \node[font=\cB,anchor=south] at ({#1+1.5*\cw},{#2+0.36}) {#3};
   \foreach \lab [count=\j from 0] in {r_1,r_2,r_3,r_4}
     \node[font=\cT] at ({#1+\j*\cw},{#2+0.26}) {$\lab$};
@@ -120,8 +96,7 @@
       \fi}}
 }
 
-% a marking: five slots A..E, n tokens per slot (0, 1 or 2)
-\newcommand{\cmark}[7]{% name, centre, nA, nB, nC, nD, nE
+\newcommand{\cmark}[7]{%
   \node[cmk] (#1) at #2 {};
   \foreach \n/\col [count=\k from 0] in {#3/cBlue,#4/cBlue,#5/cBlue,#6/cBlue,#7/cOrange} {
     \pgfmathsetmacro\sx{-0.42+\k*0.21}
@@ -140,9 +115,6 @@
 \begin{tikzpicture}[csyn]
 \path[use as bounding box] (0,0) rectangle (16.40,-10.05);
 
-% =========================================================================
-% (a) the toy network as a Petri net
-% =========================================================================
 \cpanel{(0.05,-0.05)}{a}{Reaction network}
 \begin{scope}[shift={(0.45,-2.10)}]
   \toynet{a}
@@ -151,12 +123,8 @@
   $r_1\colon 2A\to B$\qquad\ \ $r_2\colon B+E\to C+E$\\[1pt]
   $r_3\colon C\to 2A$\qquad\ \ $r_4\colon C\to D$};
 
-% =========================================================================
-% (b) reactant, product and net incidence
-% =========================================================================
 \cpanel{(5.60,-0.05)}{b}{Incidence and net stoichiometry}
 \def\my{-1.70}
-% the catalyst row: present in S^- and S^+, cancelled in S
 \fill[cOrF!45,rounded corners=1.5pt] (5.78,{\my-4*\rh+0.21}) rectangle (11.35,{\my-4*\rh-0.21});
 \foreach \s [count=\i from 0] in {A,B,C,D}
   \node[font=\cB,anchor=east] at (6.12,{\my-\i*\rh}) {$\s$};
@@ -166,9 +134,6 @@
 \cmat{10.00}{\my}{$\mathbf S$}{{-2,0,2,0},{1,-1,0,0},{0,1,-1,-1},{0,0,0,1},{0,0,0,0}}
 \node[font=\cB] at (8.57,-3.55) {$\mathbf S=\mathbf S^+-\mathbf S^-$};
 
-% =========================================================================
-% (c) P- and T-semiflows
-% =========================================================================
 \cpanel{(11.45,-0.05)}{c}{Semiflows}
 \begin{scope}[shift={(11.85,-1.40)},x=0.86cm]
   \node[cplS] (pA) at (0,0)   {$A$};
@@ -213,9 +178,6 @@
   T-semiflow $\mathbf Sx=0$, $x\ge0$:\\
   \textcolor{cBlue}{$x=(1,1,1,0)$}};
 
-% =========================================================================
-% (d) minimal siphons and coverage
-% =========================================================================
 \cpanel{(0.05,-5.45)}{d}{Siphons and traps}
 \begin{scope}[shift={(0.45,-7.05)}]
   \node[cplR] (dA) at (0,0)      {$A$};
@@ -245,16 +207,12 @@
     \bottomrule
   \end{tabular}};
 
-% =========================================================================
-% (e) one requested flux, three inventories
-% =========================================================================
 \cpanel{(5.60,-5.45)}{e}{Pathway realizability of $f=(1,1,0,1)$}
 \def\xa{7.45}\def\xb{9.05}\def\xc{10.65}\def\xd{12.25}
 \def\xq{14.15}\def\xf{15.65}
 \node[font=\cS,align=center] at (6.10,-6.30) {initial\\marking $m$};
 \node[font=\cS,align=center] at (\xq,-6.30) {$D$ reachable\\(qualitative)};
 \node[font=\cS,align=center] at (\xf,-6.30) {$f$ realizable\\(tokens)};
-% row i: realizable, with certificate
 \def\ya{-7.05}
 \node[font=\cB,anchor=west] at (5.80,\ya) {$2A{+}E$};
 \cmark{m11}{(\xa,\ya)}{2}{0}{0}{0}{1}
@@ -266,7 +224,6 @@
 \draw[carc] (m13) -- (m14) node[crl,midway,above=1pt] {$r_4$};
 \node[font=\cB] at (\xq,\ya) {\cyes};
 \node[font=\cB] at (\xf,\ya) {\cyes};
-% row ii: too few A for r1
 \def\yb{-8.15}
 \node[font=\cB,anchor=west] at (5.80,\yb) {$A{+}E$};
 \cmark{m21}{(\xa,\yb)}{1}{0}{0}{0}{1}
@@ -274,7 +231,6 @@
   node[font=\cB,anchor=west,inner sep=1pt,xshift=2pt] {\cno\ \ $m_A=1<2=s^-_{A r_1}$};
 \node[font=\cB] at (\xq,\yb) {\cyes};
 \node[font=\cB] at (\xf,\yb) {\cno};
-% row iii: no enzyme, the empty siphon {E} blocks r2
 \def\yc{-9.25}
 \node[font=\cB,anchor=west] at (5.80,\yc) {$2A$};
 \cmark{m31}{(\xa,\yc)}{2}{0}{0}{0}{0}

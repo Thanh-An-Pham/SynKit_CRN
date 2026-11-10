@@ -1,7 +1,193 @@
-% Springer Nature manuscript format (vendored under LPPL for a self-contained archive).
 \RequirePackage{xr-hyper}
-\documentclass[pdflatex,referee]{template/sn-jnl}
-\input{paper_layout.tex}
+\documentclass[10pt,a4paper,fleqn]{article}
+\usepackage{geometry}
+\geometry{reset,a4paper,left=22mm,right=24mm,top=20mm,bottom=22mm,
+          bindingoffset=0mm,footskip=10mm}
+\usepackage{setspace}
+\doublespacing
+\usepackage{etoolbox}
+\usepackage{authblk}
+\renewcommand{\Authfont}{\normalfont\large}
+\renewcommand{\Affilfont}{\normalfont\small}
+\setlength{\affilsep}{8pt}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\fontsize{14}{16}\selectfont\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{12}{14}\selectfont\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{11}{13}\selectfont\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{9pt}
+\titlespacing*{\subsection}{0pt}{12pt plus 4pt minus 2pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt plus 4pt minus 2pt}{6pt}
+\setlength{\parindent}{1.5em}
+\frenchspacing
+\clubpenalty=10000
+\widowpenalty=10000
+\pagestyle{plain}
+\raggedbottom
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{.95}
+\renewcommand{\bottomfraction}{.90}
+\renewcommand{\textfraction}{.05}
+\renewcommand{\floatpagefraction}{.80}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{10pt plus 2pt minus 2pt}
+\newcommand{\authorcontact}[1]{\def\@authorcontact{#1}}
+\newcommand{\@authorcontact}{}
+\renewcommand{\maketitle}{%
+  \par\begingroup
+    \singlespacing\centering
+    {\fontsize{17}{22.5}\selectfont\@title\par}
+    \vspace{12pt}
+    {\@author\par}
+    \vspace{10pt}
+    {\small\@authorcontact\par}
+  \endgroup\par\vspace{12pt}}
+\makeatother
+\renewenvironment{abstract}
+  {\begin{quote}\small\noindent\textbf{\abstractname}\par\noindent}
+  {\end{quote}}
+
+\newcommand{\yes}{\ensuremath{\checkmark}}
+\newcommand{\no}{\ensuremath{\times}}
+\newcommand{\pmark}{\ensuremath{(\checkmark)}}
+\newcommand{\rot}[1]{\rotatebox[origin=l]{90}{#1}}
+
+\AtEndPreamble{%
+\RequirePackage[no-math]{fontspec}
+\newfontfamily\scArial{lmroman10}[NFSSFamily=scArial,Ligatures=TeX,
+  Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,
+  ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
+\RequirePackage[subdued,italic]{mathastext}
+\MTDeclareVersion{synarial}{TU}{scArial}{m}{n}
+\SetMathAlphabet{\Mathsf}{synarial}{TU}{scArial}{m}{n}
+\SetMathAlphabet{\Mathtt}{synarial}{TU}{scArial}{m}{n}
+\IfFontExistsTF{Arial}%
+  {\newfontfamily\scSans{Arial}[NFSSFamily=scSans,Ligatures=TeX]}%
+  {\newfontfamily\scSans{Liberation Sans}[NFSSFamily=scSans,Ligatures=TeX]}
+\MTDeclareVersion{synsans}{TU}{scSans}{m}{n}
+
+\usetikzlibrary{positioning,calc,fit,backgrounds,arrows.meta,shapes.geometric,
+                shapes.misc,decorations.pathreplacing,patterns,math}
+
+\newlength{\scW}\setlength{\scW}{13.0326cm}
+\providecommand{\scWnum}{13.0326}
+\providecommand{\scCanvas}[1]{%
+  \path[use as bounding box] (0,0) rectangle (\scWnum,-#1);}
+
+\definecolor{npgOrange}{gray}{0.35}
+\definecolor{npgSky}{gray}{0.55}
+\definecolor{npgGreen}{gray}{0}
+\definecolor{npgYellow}{gray}{0.75}
+\definecolor{npgBlue}{gray}{0}
+\definecolor{npgVermillion}{gray}{0.45}
+\definecolor{npgPurple}{gray}{0.4}
+\definecolor{figInk}{gray}{0}
+\definecolor{figMuted}{gray}{0.3}
+\definecolor{figHair}{gray}{0.72}
+\definecolor{figWash}{gray}{1}
+
+\colorlet{scInk}{figInk}              %
+\colorlet{scInkM}{figMuted}           %
+\colorlet{scPaper}{figWash}           %
+\colorlet{scSpF}{npgSky!12}           %
+\colorlet{scSpE}{npgBlue}             %
+\colorlet{scRxF}{npgOrange!12}        %
+\colorlet{scRxE}{npgOrange!88!black}  %
+\colorlet{scReac}{npgBlue!78!black}   %
+\colorlet{scProd}{npgGreen!82!black}  %
+\colorlet{scHiF}{npgOrange!13}        %
+\colorlet{scHiE}{npgOrange!82!black}  %
+\colorlet{stAF}{npgGreen!9}\colorlet{stAE}{npgGreen}
+\colorlet{stBF}{npgOrange!11}\colorlet{stBE}{npgOrange}
+\colorlet{stCF}{npgBlue!9}\colorlet{stCE}{npgBlue}
+\colorlet{stDF}{npgPurple!10}\colorlet{stDE}{npgPurple!85!black}
+\colorlet{stEF}{npgVermillion!9}\colorlet{stEE}{npgVermillion}
+
+\colorlet{scAccent}{stAE}\colorlet{scAccentF}{stAF}   %
+\colorlet{scMark}{stBE}\colorlet{scMarkF}{stBF}       %
+\colorlet{scRef}{stCE}\colorlet{scRefF}{stCF}         %
+\colorlet{scAlert}{stEE}\colorlet{scAlertF}{stEF}     %
+\colorlet{scRule}{figHair}                            %
+\colorlet{scRuleL}{figHair!55}                        %
+
+\providecommand{\scTitle}{\scArial\fontsize{8}{9.6}\selectfont\color{scInk}}
+\providecommand{\scBody}{\scArial\fontsize{7}{8.4}\selectfont\color{scInk}}
+\providecommand{\scSmall}{\scArial\fontsize{6.5}{7.8}\selectfont\color{scInk}}
+\providecommand{\scSub}[1]{{\scSmall\itshape #1}}
+\providecommand{\scPanel}[1]{{\scTitle(#1)}}
+\providecommand{\scNum}{\scArial\fontsize{10}{11}\selectfont\bfseries\color{scInk}}
+
+\tikzset{
+  every node/.append style={execute at begin node={%
+      \hyphenpenalty=10000 \exhyphenpenalty=10000 \hbadness=10000 }},
+  syn/.style={font=\scArial,color=scInk,
+              execute at begin picture={\MTversion*{synarial}},
+              >={Stealth[round,length=2.4mm,width=1.9mm]}},
+  panel/.style={fill=none,draw=none},
+  card/.style={fill=none,draw=none,inner sep=5pt,align=left,anchor=north west},
+  note/.style={fill=none,draw=none,inner xsep=6pt,inner ysep=3.5pt,align=left,
+               font=\scSmall},
+  chip/.style={fill=none,draw=none,inner xsep=4pt,inner ysep=2pt,font=\scSmall},
+  hbullet/.style={circle,fill=scInk,text=white,draw=none,
+                  font=\scArial\fontsize{6}{6}\selectfont\bfseries,
+                  minimum size=4.2mm,inner sep=0pt},
+  ctag/.style={font=\scTitle,anchor=north west,text=scInk},
+  species/.style={rounded rectangle,fill=scSpF,draw=scSpE,line width=0.45pt,
+                  inner xsep=2.4pt,inner ysep=1.6pt,font=\scSmall,
+                  text=scInk,minimum height=3.6mm},
+  cofactor/.style={species,fill=scRefF,draw=scRef},
+  catalyst/.style={species,fill=scHiF,draw=scHiE},
+  rxn/.style={rectangle,fill=scRxF,draw=scRxE,line width=0.45pt,
+              inner sep=1.2pt,font=\scSmall,text=scInk,
+              minimum width=3.0mm,minimum height=3.0mm},
+  place/.style={circle,fill=scSpF,draw=scSpE,line width=0.45pt,
+                minimum size=4.0mm,inner sep=0pt},
+  trans/.style={rectangle,fill=scRxE,draw=scRxE,minimum width=1.1mm,
+                minimum height=3.6mm,inner sep=0pt},
+  token/.style={circle,fill=scInk,minimum size=1.1mm,inner sep=0pt},
+  reac/.style={->,line width=0.5pt,draw=scReac,shorten >=0.8pt,shorten <=0.8pt},
+  prod/.style={->,line width=0.5pt,draw=scProd,shorten >=0.8pt,shorten <=0.8pt},
+  cat/.style={->,line width=0.5pt,draw=scHiE,shorten >=0.8pt,shorten <=0.8pt},
+  flow/.style={-{Stealth[round,length=2.2mm,width=1.8mm]},line width=1.1pt,
+               draw=scInkM!45},
+  flab/.style={font=\scSmall,text=scInkM,inner sep=2pt},
+  stoi/.style={font=\scSmall,text=scInkM,inner sep=0.8pt},
+  vpass/.style={circle,fill=none,draw=none,text=black,
+                font=\fontsize{6}{6}\selectfont\bfseries,
+                minimum size=3.2mm,inner sep=0pt},
+  vfail/.style={circle,fill=none,draw=none,text=black,
+                font=\fontsize{6}{6}\selectfont\bfseries,
+                minimum size=3.2mm,inner sep=0pt},
+  callout/.style={font=\scSmall,text=scInkM,align=left},
+}
+
+\providecommand{\scHead}[5][scInk]{%
+  \node[anchor=north west,inner sep=0pt,font=\scTitle] at #2
+    {(\MakeLowercase{#3})};}
+
+\ifdefined\pgfplotsset
+  \pgfplotsset{compat=1.18}
+  \pgfplotsset{
+    synaxis/.style={
+      scale only axis,
+      tick align=outside, tick pos=left,
+      axis line style={draw=scInkM!55,line width=0.4pt},
+      ymajorgrids=true, xmajorgrids=false,
+      major grid style={draw=scRuleL,line width=0.3pt},
+      major tick length=1.6pt,
+      label style={font=\scBody,color=scInk},
+      tick label style={font=\scSmall,color=scInkM},
+      legend style={font=\scSmall,draw=none,fill=none,inner sep=1pt,
+                    row sep=0.4pt,legend columns=1},
+      legend cell align=left,
+      every axis plot/.append style={line width=0.7pt,mark size=1.2pt},
+    },
+  }
+\fi
+
+}
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -13,6 +199,8 @@
 \usepackage{amsmath,amssymb}
 \usepackage{mathrsfs}
 \usepackage{subcaption}
+\captionsetup{font=footnotesize,labelfont=bf,labelsep=space,
+              justification=justified,singlelinecheck=false}
 \usepackage{float}
 \usepackage{tabularx}
 \usepackage{longtable}
@@ -27,16 +215,15 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 
-% Evidence figures are regenerated from JSON, and the glycolysis diagram uses TikZ.
-% Shared figure styling is defined in paper_layout.tex.
 \usepackage[numbers,square]{natbib}
-\bibliographystyle{template/spbasic_u}
+\bibliographystyle{unsrtnat}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0pt plus 0.3ex}
 
 \newcommand{\synkit}{\texttt{SynKit}\xspace}
 \newcommand{\synkitcrn}{\texttt{SynKit CRN}\xspace}
 \hyphenation{SynKit Bio-in-for-mat-ics Reactome Wiki-Pathways}
 
-% Help TeX avoid underfull lines in justified text
 \emergencystretch=2em
 \tolerance=2000
 \hbadness=2000
@@ -55,87 +242,41 @@
 
 \externaldocument[supp:]{SI/si}
 
+\title{On the Conservation Laws and Pathway Realizability\\
+of Biochemical Reaction Networks}
+\author[1]{Thanh-An Pham}
+\author[1,2,*]{Tieu-Long Phan}
+\affil[1]{Bioinformatics Group, Department of Computer Science \& Interdisciplinary Center for Bioinformatics \& School for Embedded and Composite Artificial Intelligence (SECAI), Leipzig University, H{\"a}rtelstra{\ss}e 16--18, D-04107 Leipzig, Germany}
+\affil[2]{Department of Mathematics and Computer Science, University of Southern Denmark, DK-5230 Odense M, Denmark}
+\authorcontact{*Corresponding author: \href{mailto:tieu@bioinf.uni-leipzig.de}{tieu@bioinf.uni-leipzig.de}\\
+Thanh-An Pham: \href{mailto:thanh-an.pham@uni-leipzig.de}{thanh-an.pham@uni-leipzig.de}}
+
 \begin{document}
+\maketitle
 
-\title[On the Conservation Laws and Pathway Realizability]{On the Conservation Laws and Pathway Realizability\hb of Biochemical Reaction Networks}
-
-\author[1]{\fnm{Thanh-An} \sur{Pham}}\email{thanh-an.pham@uni-leipzig.de}
-\author*[1,2]{\fnm{Tieu-Long} \sur{Phan}}\email{tieu@bioinf.uni-leipzig.de}
-
-\affil[1]{\orgdiv{Bioinformatics Group, Department of Computer Science \& Interdisciplinary Center for Bioinformatics \& School for Embedded and Composite Artificial Intelligence (SECAI)}, \orgname{Leipzig University}, \orgaddress{\street{H{\"a}rtelstra{\ss}e 16--18}, \postcode{D-04107}, \city{Leipzig}, \country{Germany}}}
-\affil[2]{\orgdiv{Department of Mathematics and Computer Science}, \orgname{University of Southern Denmark}, \orgaddress{\postcode{DK-5230}, \city{Odense M}, \country{Denmark}}}
-
-% Generated numerical values shared with the supplement.
-% BEGIN GENERATED: review-macros
-% Generated from crn-review-experiments.json; do not edit.
-\newcommand{\ReviewExhaustiveMilliseconds}{30.71}
-\newcommand{\ReviewClosureMilliseconds}{0.84}
-\newcommand{\ReviewRoundedFailures}{3}
-\newcommand{\ReviewRatioSmall}{1.0}
-\newcommand{\ReviewRatioLarge}{36.5}
-\newcommand{\ReviewReversibleSiphonSeconds}{0.275}
-\newcommand{\ReviewReversibleCanonicalSeconds}{0.58}
-\newcommand{\ReviewReversibleMoietySeconds}{1.54}
-\newcommand{\ReviewReversibleRankSeconds}{3.48}
-\newcommand{\ReviewRandomSiphonSeconds}{0.129}
-\newcommand{\ReviewRandomMoietySeconds}{0.11}
-\newcommand{\ReviewBioModelSiphonSeconds}{1.22}
-\newcommand{\ReviewBioModelMoietySeconds}{9.15}
-% END GENERATED: review-macros
-
-
-% BEGIN GENERATED: dpo-generation-macros
-% Generated from formose-expansion/dpo/comparison.json.
-\newcommand{\DpoNativeFourSeconds}{0.0283}
-\newcommand{\DpoNativeFiveSeconds}{0.0642}
-\newcommand{\DpoNativeSixSeconds}{1.86}
-\newcommand{\DpoModSixSeconds}{2.22}
-\newcommand{\DpoMolfoundrySixSeconds}{15.1}
-% END GENERATED: dpo-generation-macros
-
-% BEGIN GENERATED: glycolysis-macros
-% Generated by glycolysis_analysis.py; do not edit by hand.
-\def\GlySpecies{14}
-\def\GlyReactions{15}
-\def\GlyComplexes{16}
-\def\GlyLinkage{4}
-\def\GlyRank{11}
-\def\GlyDeficiency{1}
-\def\GlyMoieties{3}
-\def\GlyBackboneSupport{11}
-\def\GlySiphons{3}
-\def\GlyUncovered{2}
-\def\GlyCertificateLength{15}
-\def\GlyExplored{30}
-\def\GlyDepth{15}
-\def\GlyUpperFirings{5}
-\def\GlyLowerFirings{10}
-\def\GlySplitStep{4}
-\def\GlyTrajectory{0/1/2,1/1/2,2/1/2,3/1/2,4/2/2,5/2/2,6/2/2,7/2/2,8/2/2,9/2/2,10/2/2,11/2/2,12/2/2,13/2/2,14/2/2,15/2/2}
-% END GENERATED: glycolysis-macros
-
-\abstract{
+\begin{abstract}
 \textbf{Background:} Conserved metabolite pools and substrate availability constrain biochemical pathways before kinetic parameters are known. These properties are usually evaluated on incompatible mathematical abstractions: stoichiometric nullspaces omit shared catalytic participants, while graph reachability ignores token multiplicities. Because participants that appear identically on both reaction sides are eliminated under net stoichiometry despite being required for firing, standard reductions can destroy catalytic gating and alter deficiency.
 
 \textbf{Results:} We present the chemical reaction network (CRN) submodule of \synkit, an open-source Python toolkit with an optimized C++ core. Networks imported from \texttt{KEGG}, structural \texttt{SBML} models, or generative rules share a bipartite representation preserving distinct reactant and product incidences. The toolkit computes exact conservation laws, minimal semiflows and siphons, deficiency, and discrete firing certificates for prescribed reaction multisets. Twelve reference networks match analytical values and agree with \texttt{CRNT4SBML} across eight structural invariants. Ten reaction-bearing \texttt{BioModels} entries, up to 504 species and 1\,654 directed reactions, pass structural round trips. In one model, cancelling shared catalysts leaves net stoichiometry unchanged but lowers deficiency from 13 to 11. Matched formose expansions reach identical sets of 10\,572 species and 11\,239 reactions across six depths in \synkit, \texttt{M\O D}, and \texttt{MolFoundry}. For a prescribed glycolytic flux with ADP, NAD$^+$ and phosphate supplied, one initial ATP gives a non-negative predicted final inventory yet blocks execution; two initial ATP permit a 15-step certificate. In the 37-species formose network, conservation weights reproduce carbon counts. Two prescribed target routes require two or three glycolaldehyde molecules and consume no formaldehyde, explaining their different outcomes across inventories with equal carbon budgets.
 
 \textbf{Conclusions:} Stoichiometric conservation is necessary but insufficient to guarantee pathway execution. By unifying conservation analysis, deficiency invariants, and Petri-net reachability on a single incidence representation with exact rational arithmetic, \synkit makes participant retention, cofactor boundaries, and precursor constraints explicit and testable. Source code, recorded benchmarks, and reproducible analysis workflows accompany the manuscript.
-}
-\keywords{Chemical reaction networks, chemical reaction network theory, Petri nets, conserved moieties, stoichiometry, pathway realizability, \texttt{SBML}}
-\maketitle
+\end{abstract}
+\begin{quote}
+\footnotesize\textbf{Keywords:} Chemical reaction networks, chemical reaction network theory, Petri nets, conserved moieties, stoichiometry, pathway realizability, \texttt{SBML}
+\end{quote}
 
 \section{Background}
 \label{sec:intro}
 
 Curated databases such as \texttt{KEGG}~\cite{kanehisa2025kegg}, \texttt{Reactome}~\cite{ragueneau2026reactome}, and \texttt{WikiPathways}~\cite{agrawal2024wikipathways} catalog known metabolic pathways and biochemical reactions, while graph-transformation methods enumerate candidate reactions from molecular seeds and transformation rules~\cite{andersen2016mod}. Before assigning kinetic parameters, structural analyses clarify the behavioral constraints imposed by network topology. Specifically, researchers examine which metabolite pools are conserved by stoichiometric invariants~\cite{famili2003leftnullspace}, which qualitative dynamical bounds or multistationarity criteria are governed by reaction network structure~\cite{feinberg1987deficiency,gunawardena2003crnt}, and whether a candidate pathway is realizable from a finite substrate inventory~\cite{andersen2023realisability}.
 
-Assessing these constraints simultaneously is difficult because each analysis relies on a different mathematical abstraction of the biochemical system. A species graph captures connectivity between metabolites but loses the joint requirement of multiple co-substrates~\cite{franzese2019hypergraph}. The net stoichiometric matrix records net changes in species abundance but omits participants that appear identically as reactants and products, such as catalysts or recycled cofactors. For example, a catalyzed reaction $A+C\to B+C$ and the uncatalyzed conversion $A\to B$ yield identical net columns in $\mathbf S$, yet only the first requires the catalyst $C$ to \rev{proceed. Under mass-action kinetics its rate also depends on $C$. The standalone networks both have deficiency zero ($n=2$, $\ell=1$, $s=1$), although their complexes differ. Within a larger network, cancelling shared participants can change complex identifications and linkage classes, and hence deficiency. The risk lies in tools that store reactions as net coefficient maps: \texttt{COBRApy}~0.32.1~\cite{ebrahim2013cobrapy}, for example, stores $A+C\to B+C$ as $A\to B$, both when a reaction is built in Python and when it is read from \texttt{SBML}.} Similarly, a balanced reaction combination or a qualitatively reachable product does not establish that the reactions can proceed in an admissible sequence from a finite inventory~\cite{andersen2023realisability}. Representation choices during model import can therefore compromise the assumptions of another analysis.
+Assessing these constraints simultaneously is difficult because each analysis relies on a different mathematical abstraction of the biochemical system. A species graph captures connectivity between metabolites but loses the joint requirement of multiple co-substrates~\cite{franzese2019hypergraph}. The net stoichiometric matrix records net changes in species abundance but omits participants that appear identically as reactants and products, such as catalysts or recycled cofactors. For example, a catalyzed reaction $A+C\to B+C$ and the uncatalyzed conversion $A\to B$ yield identical net columns in $\mathbf S$, yet only the first requires the catalyst $C$ to proceed. Under mass-action kinetics its rate also depends on $C$. The standalone networks both have deficiency zero ($n=2$, $\ell=1$, $s=1$), although their complexes differ. Within a larger network, cancelling shared participants can change complex identifications and linkage classes, and hence deficiency. The risk lies in tools that store reactions as net coefficient maps: \texttt{COBRApy}~0.32.1~\cite{ebrahim2013cobrapy}, for example, stores $A+C\to B+C$ as $A\to B$, both when a reaction is built in Python and when it is read from \texttt{SBML}. Similarly, a balanced reaction combination or a qualitatively reachable product does not establish that the reactions can proceed in an admissible sequence from a finite inventory~\cite{andersen2023realisability}. Representation choices during model import can therefore compromise the assumptions of another analysis.
 
 Because of these distinct formulations, existing software packages specialize in separate subsets of analyses: \texttt{COBRApy}~\cite{ebrahim2013cobrapy} supports constraint-based flux analysis~\cite{orth2010fba}, \texttt{CRNT4SBML}~\cite{reyes2020crnt4sbml} evaluates deficiency and potential bistability, \texttt{M\O D}~\cite{andersen2016mod} explores rule-generated reaction spaces, \texttt{Tellurium}~\cite{choi2018tellurium} and \texttt{libRoadRunner}~\cite{welsh2023libroadrunner} simulate kinetic ODEs, and Petri-net methods analyze metabolic invariants~\cite{zevedei2003topological,murata1989petri} and provide pathway realizability certificates~\cite{andersen2023realisability}. Standard exchange formats such as \texttt{SBML}~\cite{hucka2003sbml} and \texttt{COMBINE}~\cite{bergmann2014combine}, alongside converters like \texttt{KEGGtranslator}~\cite{wrzodek2011keggtranslator}, facilitate model transfer. However, converting models between separate formats can inadvertently discard structural features, such as catalysts or boundary species, that specific analyses require.
 
 Conserved pools and substrate sufficiency therefore need to be examined on the same underlying reaction model. In glycolysis~\cite{kanehisa2025kegg}, a route appears connected from glucose to pyruvate when cofactors are omitted, yet the prescribed flux cannot proceed when currency metabolites are retained and their initial inventories are zero. In a rule-generated formose network~\cite{butlerov1861formose}, every reaction may conserve carbon, yet a proposed pathway remains unrealizable if its reactions require more glycolaldehyde molecules than the initial precursor pool provides. In both cases, conservation laws alone cannot establish whether a reaction sequence is realizable from a specified finite inventory~\cite{andersen2023realisability}.
 
-Here, we present the chemical reaction network (CRN) submodule of \synkit~\cite{phan2025synkit} to evaluate these constraints on a shared representation. By connecting \texttt{KEGG} pathway import, structural \texttt{SBML} exchange, and rule-based generation to exact conservation laws, deficiency theory, and Petri-net reachability, the toolkit tests whether reaction sequences can execute without discarding catalysts or cofactors. We validate the implementation across twelve reference networks against \texttt{CRNT4SBML}, verify structural round trips on ten \texttt{BioModels} entries, and benchmark exact enumeration limits. \rev{A curated \texttt{BioModels} entry shows how participant retention changes deficiency without changing net stoichiometry. Case studies in glycolysis and formose show how cofactor boundaries and precursor inventories affect execution of prescribed reaction multisets.}
+Here, we present the chemical reaction network (CRN) submodule of \synkit~\cite{phan2025synkit} to evaluate these constraints on a shared representation. By connecting \texttt{KEGG} pathway import, structural \texttt{SBML} exchange, and rule-based generation to exact conservation laws, deficiency theory, and Petri-net reachability, the toolkit tests whether reaction sequences can execute without discarding catalysts or cofactors. We validate the implementation across twelve reference networks against \texttt{CRNT4SBML}, verify structural round trips on ten \texttt{BioModels} entries, and benchmark exact enumeration limits. A curated \texttt{BioModels} entry shows how participant retention changes deficiency without changing net stoichiometry. Case studies in glycolysis and formose show how cofactor boundaries and precursor inventories affect execution of prescribed reaction multisets.
 
 \section{Implementation}
 \label{sec:description}
@@ -146,7 +287,6 @@ Here, we present the chemical reaction network (CRN) submodule of \synkit~\cite{
 
 \texttt{SynCRN} serves as the core reaction-network data structure in \synkit, maintaining species, reactions, transformation rules, and chemical annotations (Fig.~\ref{fig:synkit_architecture}). It derives bipartite digraphs in \texttt{NetworkX}~\cite{hagberg2008networkx}, stoichiometric matrices, and Petri nets for downstream structural analysis. The bipartite digraph has species vertices $X$ and reaction vertices $\mathscr{R}$, and each reaction vertex is linked to its reactants and products. It is therefore the incidence representation of a directed hypergraph in which every reaction is a hyperedge, so multi-substrate requirements remain joint hyperedge tails rather than pairwise species edges.
 
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{Figure/visual_abstract.pdf}
@@ -154,14 +294,13 @@ Here, we present the chemical reaction network (CRN) submodule of \synkit~\cite{
 \label{fig:synkit_architecture}
 \end{figure}
 
-
 For reaction $r$, reactant and product multisets have coefficients $s^-_{xr}$ and $s^+_{xr}$, defining separate reactant and product (pre/post) incidence matrices $\mathbf S^-=(s^-_{xr})$ and $\mathbf S^+=(s^+_{xr})$ alongside the net stoichiometry $\mathbf S=\mathbf S^+-\mathbf S^-$. Retaining participants present on both sides in both matrices preserves catalytic and cofactor requirements. Their net coefficients cancel in $\mathbf S$, but they still govern reaction enabling and define distinct reaction complexes (Fig.~\ref{fig:concepts}a,b). In Petri-net terms, such shared species form self-loops, and the net incidence matrix alone cannot determine whether transitions are enabled~\cite{murata1989petri}. Construction does not establish elemental balance automatically, so chemical interpretation requires suitable input equations and annotations. The conditions under which a reaction network represents genuine chemical transformations are themselves a subject of study~\cite{muller2022chemical}.
 
 Reaction networks can be constructed from curated databases, generative chemistry, or standard model files. The \texttt{Query} module parses reaction equations from \texttt{KEGG}, \texttt{Construct} expands networks from chemical seeds using reaction rules, and \texttt{IO} imports models from \texttt{SBML}. During construction, reversible reactions can be partitioned into directed steps. Users can also choose whether to retain cofactors (such as ATP and NADH) and boundary species, which determines the resulting conserved moieties, network deficiency, and discrete pathway realizability.
 
-\rev{Some database equations need care before analysis. \texttt{KEGG} writes polyphosphate glucokinase (\texttt{R02189}) as \texttt{C00404 + C00267 <=> C00404 + C00668}, because one identifier stands for both (Phosphate)$_n$ and (Phosphate)$_{n-1}$. Read literally, the polymer looks like a retained catalyst; chemically it donates one phosphate. \synkit keeps such equations as written, and we exclude them from the participant-retention examples below.}
+Some database equations need care before analysis. \texttt{KEGG} writes polyphosphate glucokinase (\texttt{R02189}) as \texttt{C00404 + C00267 <=> C00404 + C00668}, because one identifier stands for both (Phosphate)$_n$ and (Phosphate)$_{n-1}$. Read literally, the polymer looks like a retained catalyst; chemically it donates one phosphate. \synkit keeps such equations as written, and we exclude them from the participant-retention examples below.
 
-\rev{In \texttt{SBML}, a catalyst appears either as a species listed on both sides, which \rev{\synkit's} reader keeps, or as a modifier, which it does not import. Six of the ten \texttt{BioModels} entries used here contain modifiers; adding them to both sides as participants changes the deficiency of four (Table~\ref{supp:tab:biomodels_modifiers}). Because modifiers also encode inhibitors and activators, we do not convert them automatically.}
+In \texttt{SBML}, a catalyst appears either as a species listed on both sides, which \synkit's reader keeps, or as a modifier, which it does not import. Six of the ten \texttt{BioModels} entries used here contain modifiers; adding them to both sides as participants changes the deficiency of four (Table~\ref{supp:tab:biomodels_modifiers}). Because modifiers also encode inhibitors and activators, we do not convert them automatically.
 
 \subsection{Conserved moiety and stoichiometric analysis}
 \label{sec:analysis}
@@ -195,16 +334,16 @@ A siphon is a non-empty species set for which every reaction producing a member 
 
 The package checks whether every minimal siphon contains the support of a P-semiflow, and we call such a siphon covered. Under the boundedness and kinetic assumptions of the corresponding persistence result, this provides a sufficient persistence certificate for positive initial conditions~\cite{angeli2007persistence}. An uncovered siphon means the test is insufficient, and does not prove extinction or identify a unique nutrient supplementation strategy. The returned details expose these uncovered sets.
 
-A marking $m$ specifies the non-negative integer inventory of each species. Reaction $r$ is enabled precisely when $m_x\ge s^-_{xr}$ for every species, and firing gives $m'=m+\mathbf S_{\cdot r}$. Qualitative reachability instead accumulates reachable species sets and ignores consumption and multiplicity. Given a requested flux $f\in\mathbb N_0^{|\mathscr R|}$, realizability search seeks an enabled sequence firing each reaction exactly $f_r$ times~\cite{andersen2023realisability}. A positive result includes a certificate consisting of an ordered reaction list that can be checked by updating the inventory after every step. An exhaustive negative result is \texttt{unrealizable}, while reaching a state or depth limit is \texttt{inconclusive}. \rev{The minimal-siphon interface defaults to a 200\,000-node search budget and raises \texttt{SiphonSearchLimit} on incomplete enumeration; explicitly requesting partial output emits a warning. The BioModels experiment uses an explicit 1\,000\,000-node budget and records completion status.} Fig.~\ref{fig:concepts}e contrasts the two notions on one requested flux. Certificates establish firing in the specified discrete model only.
+A marking $m$ specifies the non-negative integer inventory of each species. Reaction $r$ is enabled precisely when $m_x\ge s^-_{xr}$ for every species, and firing gives $m'=m+\mathbf S_{\cdot r}$. Qualitative reachability instead accumulates reachable species sets and ignores consumption and multiplicity. Given a requested flux $f\in\mathbb N_0^{|\mathscr R|}$, realizability search seeks an enabled sequence firing each reaction exactly $f_r$ times~\cite{andersen2023realisability}. A positive result includes a certificate consisting of an ordered reaction list that can be checked by updating the inventory after every step. An exhaustive negative result is \texttt{unrealizable}, while reaching a state or depth limit is \texttt{inconclusive}. The minimal-siphon interface defaults to a 200\,000-node search budget and raises \texttt{SiphonSearchLimit} on incomplete enumeration; explicitly requesting partial output emits a warning. The BioModels experiment uses an explicit 1\,000\,000-node budget and records completion status. Fig.~\ref{fig:concepts}e contrasts the two notions on one requested flux. Certificates establish firing in the specified discrete model only.
 
 \subsection{Implementation and software comparison}
 \label{sec:sbml}
 \label{sec:usage}
 \label{sec:comparison}
 
-The software employs a hybrid architecture where users interact entirely through a high-level Python interface, while computationally intensive tasks are transparently dispatched to an optimized C++17 library. These native routines compute exact rational nullspaces, CRNT deficiency invariants, minimal semiflows, siphon enumeration, and discrete firing sequences. To eliminate floating-point rounding errors and ensure exact certificates, linear-algebraic and combinatorial routines use arbitrary-precision integer arithmetic via Boost.Multiprecision. For generative chemistry, \texttt{SynReactor} applies double-pushout graph transformations with implicit hydrogen counts. Its native C++20 controller performs candidate construction, frontier updates, matching, rewriting, and reaction integration from seed molecules. The controller and benchmark drivers are included in the version~1.7.0 development snapshot described under Availability and requirements. Following the \texttt{M\O D} strategy framework~\cite{andersen2014strategies}, each rule application must use at least one newly generated molecule.
+The software employs a hybrid architecture where users interact entirely through a high-level Python interface, while computationally intensive tasks are transparently dispatched to an optimized C++17 library. These native routines compute exact rational nullspaces, CRNT deficiency invariants, minimal semiflows, siphon enumeration, and discrete firing sequences. To eliminate floating-point rounding errors and ensure exact certificates, linear-algebraic and combinatorial routines use arbitrary-precision integer arithmetic via Boost.Multiprecision. For generative chemistry, \texttt{SynReactor} applies double-pushout graph transformations with implicit hydrogen counts. Its native C++20 controller performs candidate construction, frontier updates, matching, rewriting, and reaction integration from seed molecules. The controller and benchmark drivers are included in the version~1.7.0 development snapshot described under Availability of data and materials. Following the \texttt{M\O D} strategy framework~\cite{andersen2014strategies}, each rule application must use at least one newly generated molecule.
 
-\rev{\synkit imports static integer reaction topology from \texttt{SBML} Levels~2 and~3 and exports Level~3 Version~2 Core. Species identifiers, compartments, and integer stoichiometries are preserved; fractional coefficients and \texttt{stoichiometryMath} are rejected rather than approximated. Reversible reactions expand into directed copies with distinct source identifiers. An omitted \texttt{reversible} attribute defaults to true in Level~2. Level~3 requires the attribute: omission raises in strict mode, while the default lenient mode warns and assumes false. Kinetic laws, events, rules, modifiers and package extensions are outside the imported semantics.} Exported topology can provide a foundation for subsequent parameterization in kinetic simulators like \texttt{Tellurium} or constraint-based packages like \texttt{COBRApy}.
+\synkit imports static integer reaction topology from \texttt{SBML} Levels~2 and~3 and exports Level~3 Version~2 Core. Species identifiers, compartments, and integer stoichiometries are preserved; fractional coefficients and \texttt{stoichiometryMath} are rejected rather than approximated. Reversible reactions expand into directed copies with distinct source identifiers. An omitted \texttt{reversible} attribute defaults to true in Level~2. Level~3 requires the attribute: omission raises in strict mode, while the default lenient mode warns and assumes false. Kinetic laws, events, rules, modifiers and package extensions are outside the imported semantics. Exported topology can provide a foundation for subsequent parameterization in kinetic simulators like \texttt{Tellurium} or constraint-based packages like \texttt{COBRApy}.
 
 Through this design, \synkit occupies a distinct niche in the systems biology software ecosystem (Table~\ref{tab:software}). Established packages typically specialize in continuous kinetic simulation (\texttt{Tellurium}), flux-balance analysis (\texttt{COBRApy}), or algebraic deficiency testing (\texttt{CRNT4SBML}). While \texttt{crnpy} evaluates exact semiflows and \texttt{MolFoundry} solves rule-based hyperflows, \synkit unifies rule generation, deficiency, minimal siphons, and discrete firing certificates on a shared model. Downstream analyses can then build on exported \texttt{SBML} networks. Section~1 of the Supplementary Information and Listing~\ref{supp:lst:usage} provide complete implementation details and usage examples.
 
@@ -285,8 +424,6 @@ All twelve reference networks match their analytical and algebraic ground-truth 
 \toprule
 Network & Species & Reactions & $n$ & $\ell$ & $s$ & $\delta$ & Laws & WR \\
 \midrule
-% BEGIN GENERATED: reference-networks
-% Generated by analysis_overview.py from crn-validation.json.
 Reversible isomerization & 2 & 2 & 2 & 1 & 1 & 0 & 1 & yes \\
 Irreversible isomerization & 2 & 1 & 2 & 1 & 1 & 0 & 1 & no \\
 Isomerization cycle & 3 & 3 & 3 & 1 & 2 & 0 & 1 & yes \\
@@ -299,7 +436,6 @@ Phosphorylation: one site & 6 & 6 & 6 & 2 & 3 & 1 & 3 & no \\
 Phosphorylation: two sites & 9 & 12 & 10 & 2 & 6 & 2 & 3 & no \\
 Shinar--Feinberg motif & 2 & 2 & 4 & 2 & 1 & 1 & 1 & no \\
 Open reactor & 2 & 3 & 3 & 1 & 2 & 0 & 0 & yes \\
-% END GENERATED: reference-networks
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -309,7 +445,7 @@ To benchmark structural interoperability, \texttt{CRNT4SBML}~0.0.15 independentl
 \subsection{Computational cost of exact structural enumeration}
 \label{sec:results_scaling}
 
-Enumerating minimal siphons (Fig.~\ref{fig:concepts}d) and exact conserved pools (Fig.~\ref{fig:concepts}c) identifies \rev{species sets that stay empty once depleted} and mass conservation laws, but naive search scales exponentially with $2^N - 1$ candidate subsets. To prevent combinatorial explosion, implication pruning propagates stoichiometric constraints along active reactions during search (Fig.~\ref{fig:scaling}a). In reversible chains, selecting an initial species forces each adjacent neighbor, isolating the entire chain as the unique minimal siphon without evaluating spurious sub-combinations. Across five repeats per size, pruned search returns identical siphon sets with a \ReviewRatioLarge-fold speedup at 21 species (\ReviewClosureMilliseconds~ms versus \ReviewExhaustiveMilliseconds~ms for exhaustive search, Fig.~\ref{fig:scaling}b).
+Enumerating minimal siphons (Fig.~\ref{fig:concepts}d) and exact conserved pools (Fig.~\ref{fig:concepts}c) identifies species sets that stay empty once depleted and mass conservation laws, but naive search scales exponentially with $2^N - 1$ candidate subsets. To prevent combinatorial explosion, implication pruning propagates stoichiometric constraints along active reactions during search (Fig.~\ref{fig:scaling}a). In reversible chains, selecting an initial species forces each adjacent neighbor, isolating the entire chain as the unique minimal siphon without evaluating spurious sub-combinations. Across five repeats per size, pruned search returns identical siphon sets with a 41.6-fold speedup at 21 species (0.89~ms versus 37.11~ms for exhaustive search, Fig.~\ref{fig:scaling}b).
 
 \begin{figure}[!htbp]
 \centering
@@ -318,14 +454,14 @@ Enumerating minimal siphons (Fig.~\ref{fig:concepts}d) and exact conserved pools
 \label{fig:scaling}
 \end{figure}
 
-The broader benchmark suite evaluates scalability across directed chains, reversible chains, and random sparse bimolecular networks (Fig.~\ref{supp:fig:performance_diagnostics}). All 60 requested configurations complete without numerical failure. On the 401-species reversible chain, minimal siphons (Fig.~\ref{fig:concepts}d) take \ReviewReversibleSiphonSeconds~s, canonicalization \ReviewReversibleCanonicalSeconds~s, exact conserved pools (Fig.~\ref{fig:concepts}c) \ReviewReversibleMoietySeconds~s, and standalone exact rank \ReviewReversibleRankSeconds~s (Fig.~\ref{fig:scaling}c). The random networks with 49, 99, 197, and 395 species contain 331, 272, 47, and 87 minimal siphons, completing siphon and conserved-pool enumeration in \ReviewRandomSiphonSeconds~s and \ReviewRandomMoietySeconds~s at 395 species. Stoichiometric implication pruning and rational nullspace methods thus keep exact structural enumeration computationally practical on networks with hundreds of species.
+The broader benchmark suite evaluates scalability across directed chains, reversible chains, and random sparse bimolecular networks (Fig.~\ref{supp:fig:performance_diagnostics}). All 60 requested configurations complete without numerical failure. On the 401-species reversible chain, minimal siphons (Fig.~\ref{fig:concepts}d) take 0.515~s, canonicalization 0.568~s, exact conserved pools (Fig.~\ref{fig:concepts}c) 1.75~s, and standalone exact rank 3.36~s (Fig.~\ref{fig:scaling}c). The random networks with 49, 99, 197, and 395 species contain 331, 272, 47, and 87 minimal siphons, completing siphon and conserved-pool enumeration in 0.149~s and 0.0697~s at 395 species. Stoichiometric implication pruning and rational nullspace methods thus keep exact structural enumeration computationally practical on networks with hundreds of species.
 
 \subsection{Structural \texttt{SBML} round-trip validation in \texttt{BioModels}}
 \label{sec:results_biomodels}
 
-To test real-world structural interoperability and scalability, we evaluated eleven curated \texttt{BioModels}~\cite{maliksheriff2020biomodels} entries spanning diverse sizes, including ten reaction networks and one qualitative network control (\texttt{SBML-qual}). \rev{All ten reaction-bearing models round-trip through the \texttt{SBML} reader and writer without loss of stoichiometry, and their ranks and deficiencies agree with an independent exact-rational computation from the \texttt{SBML} reaction lists (Table~\ref{supp:tab:biomodels_models}).} Even on the largest model (\texttt{BIOMD0000000255}, with 504 species and 1\,654 directed reactions), \synkit identifies 23 minimal siphons in \ReviewBioModelSiphonSeconds~s and 17 exact conserved pools in \ReviewBioModelMoietySeconds~s (Fig.~\ref{fig:evidence_overview}a). Testing siphon coverage by conserved pools \rev{gives a sufficient condition for structural protection from extinction}. \rev{In \texttt{BIOMD0000000255} and the 100-species model \texttt{BIOMD0000000019} (19 siphons, 19 pools), at least one minimal siphon contains no conserved-pool support, so the sufficient persistence condition~\cite{angeli2007persistence} cannot certify these models. This does not imply that any species goes extinct; it identifies the species sets that a kinetic analysis should examine first.} The qualitative control \texttt{BIOMD0000000562} is correctly identified as reaction-free for Core structural analysis.
+To test real-world structural interoperability and scalability, we evaluated eleven curated \texttt{BioModels}~\cite{maliksheriff2020biomodels} entries spanning diverse sizes, including ten reaction networks and one qualitative network control (\texttt{SBML-qual}). All ten reaction-bearing models round-trip through the \texttt{SBML} reader and writer without loss of stoichiometry, and their ranks and deficiencies agree with an independent exact-rational computation from the \texttt{SBML} reaction lists (Table~\ref{supp:tab:biomodels_models}). Even on the largest model (\texttt{BIOMD0000000255}, with 504 species and 1\,654 directed reactions), \synkit identifies 23 minimal siphons in 1.2~s and 17 exact conserved pools in 9.74~s (Fig.~\ref{fig:evidence_overview}a). Testing siphon coverage by conserved pools gives a sufficient condition for structural protection from extinction. In \texttt{BIOMD0000000255} and the 100-species model \texttt{BIOMD0000000019} (19 siphons, 19 pools), at least one minimal siphon contains no conserved-pool support, so the sufficient persistence condition~\cite{angeli2007persistence} cannot certify these models. This does not imply that any species goes extinct; it identifies the species sets that a kinetic analysis should examine first. The qualitative control \texttt{BIOMD0000000562} is correctly identified as reaction-free for Core structural analysis.
 
-\rev{Participant retention matters in curated models as well. In \texttt{BIOMD0000000404}, two dephosphorylation reactions of phosphorylated CheY (\texttt{Yp}) list their catalysts, the phosphatase CheZ (\texttt{Z}) and the receptor complex \texttt{Tasp\_WA}, as both reactant and product, for example $\texttt{Yp}+\texttt{Z}\to\texttt{Y}+\texttt{Z}$. Cancelling these participants, as net-stoichiometry tools do, leaves $\mathbf S$ unchanged but lowers the deficiency from 13 to 11 (Table~\ref{supp:tab:biomodels_modifiers}), and it lets dephosphorylation fire without CheZ.}
+Participant retention matters in curated models as well. In \texttt{BIOMD0000000404}, two dephosphorylation reactions of phosphorylated CheY (\texttt{Yp}) list their catalysts, the phosphatase CheZ (\texttt{Z}) and the receptor complex \texttt{Tasp\_WA}, as both reactant and product, for example $\texttt{Yp}+\texttt{Z}\to\texttt{Y}+\texttt{Z}$. Cancelling these participants, as net-stoichiometry tools do, leaves $\mathbf S$ unchanged but lowers the deficiency from 13 to 11 (Table~\ref{supp:tab:biomodels_modifiers}), and it lets dephosphorylation fire without CheZ.
 
 \begin{figure}[!htbp]
     \centering
@@ -339,7 +475,7 @@ To test real-world structural interoperability and scalability, we evaluated ele
 
 Four \texttt{KEGG}~\cite{kanehisa2025kegg} pathway modules illustrate structural conservation across metabolic subsystems: glycolysis (\texttt{M00001}), pyruvate oxidation (\texttt{M00307}), the citrate cycle (\texttt{M00009}), and the pentose phosphate pathway (\texttt{M00004}). Their conserved-pool supports appear in Fig.~\ref{fig:evidence_overview}b. In the reduced citrate-cycle network, minimal non-negative conservation vectors automatically isolate key metabolic moiety pools, recovering nucleotide pairs, a quinone pair, a ferredoxin pair, coenzyme~A, and a lipoyl cofactor pool without manual annotation.
 
-The reduced glycolysis model contains 14 species and 15 directed reactions ($n=16$, $\ell=4$, rank $s=11$, and deficiency $\delta=1$). Its primary conserved moiety spans eleven carbohydrate intermediates, assigning weight two to hexoses and one to trioses (Fig.~\ref{fig:glycolysis}), capturing exact three-carbon backbone conservation across aldolase cleavage. \rev{Glucose and oxidized ferredoxin form uncovered singleton siphons: if either species is absent, the reduced network cannot produce it. This property alone does not require supplementation for every flux. The prescribed glucose-to-pyruvate flux below does not use the ferredoxin bypass.}
+The reduced glycolysis model contains 14 species and 15 directed reactions ($n=16$, $\ell=4$, rank $s=11$, and deficiency $\delta=1$). Its primary conserved moiety spans eleven carbohydrate intermediates, assigning weight two to hexoses and one to trioses (Fig.~\ref{fig:glycolysis}), capturing exact three-carbon backbone conservation across aldolase cleavage. Glucose and oxidized ferredoxin form uncovered singleton siphons: if either species is absent, the reduced network cannot produce it. This property alone does not require supplementation for every flux. The prescribed glucose-to-pyruvate flux below does not use the ferredoxin bypass.
 
 From a single initial glucose molecule, the prescribed glycolytic flux yields a certified 15-step pathway realization terminating in two pyruvates, exploring 30 intermediate markings. Aldolase cleavage generates two triose equivalents that feed the repeated lower payoff phase. Step-by-step certificate replay confirms intermediate availability at every enzyme step and verifies exact invariance of the weighted three-carbon backbone pool ($2\times\text{hexoses} + 1\times\text{trioses} = 2$). Attempting to execute the lower payoff phase from glucose alone fails because the preparatory intermediates have not yet formed.
 
@@ -350,20 +486,20 @@ From a single initial glucose molecule, the prescribed glycolytic flux yields a 
     \label{fig:glycolysis}
 \end{figure}
 
-\rev{Restoring currency metabolites yields the 24-species model. From one glucose and zero tokens of every other species, the prescribed flux cannot fire: ATP and ADP form an initially empty siphon in the selected reaction subnet, and hexokinase lacks ATP (Fig.~\ref{fig:representation}). Supplying ATP alone still leaves net deficits of ADP, NAD$^+$ and orthophosphate. A stronger control supplies two ADP, two NAD$^+$ and two orthophosphate tokens alongside glucose. With one initial ATP, $m_0+\mathbf Sf\ge0$, yet the flux remains unrealizable because its two ATP-consuming preparatory steps precede ATP production. Raising the initial ATP count to two yields an independently replayed 15-step certificate ending with two pyruvates and four ATP. These decisions concern the same prescribed multiset under different finite inventories (Table~\ref{supp:tab:glycolysis_inventory_controls}).}
+Restoring currency metabolites yields the 24-species model. From one glucose and zero tokens of every other species, the prescribed flux cannot fire: ATP and ADP form an initially empty siphon in the selected reaction subnet, and hexokinase lacks ATP (Fig.~\ref{fig:representation}). Supplying ATP alone still leaves net deficits of ADP, NAD$^+$ and orthophosphate. A stronger control supplies two ADP, two NAD$^+$ and two orthophosphate tokens alongside glucose. With one initial ATP, $m_0+\mathbf Sf\ge0$, yet the flux remains unrealizable because its two ATP-consuming preparatory steps precede ATP production. Raising the initial ATP count to two yields an independently replayed 15-step certificate ending with two pyruvates and four ATP. These decisions concern the same prescribed multiset under different finite inventories (Table~\ref{supp:tab:glycolysis_inventory_controls}).
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=\linewidth]{Figure/representation_sensitivity.pdf}
-\caption{\rev{Pathway realizability of the prescribed glycolytic flux from one glucose under retained versus removed currency metabolites.} \revdel{panels a and b on polyphosphate; figure redrawn at full width} Left: hexokinase (\texttt{R01786}) at step 0. Right: pathway reachability from initial glucose (open circle) through intermediate steps (dots) to two pyruvates (ringed dot).}\label{fig:representation}
+\caption{Pathway realizability of the prescribed glycolytic flux from one glucose under retained versus removed currency metabolites.  Left: hexokinase (\texttt{R01786}) at step 0. Right: pathway reachability from initial glucose (open circle) through intermediate steps (dots) to two pyruvates (ringed dot).}\label{fig:representation}
 \end{figure}
 
 \subsection{Generative chemistry: carbon conservation and precursor requirements in formose}
 \label{sec:usecase_expand}
 
-The formose reaction, the classic prebiotic condensation of formaldehyde into diverse sugars~\cite{butlerov1861formose}, provides an open-ended, rule-generated benchmark complementary to curated metabolic networks. Seeded with formaldehyde ($C_1$) and glycolaldehyde ($C_2$), four core transformation rules (aldol addition, retro-aldol cleavage, and reversible keto-enol tautomerization through an enediol intermediate) iteratively construct the reaction space. After four expansion rounds, the network comprises 37 species and 44 directed reactions ($n=54$ complexes, $\ell=17$ linkage classes, rank $s=36$, and deficiency $\delta=1$), reaching decose ($C_{10}$) species. Median cumulative generation time with the native \texttt{SynReactor} DPO controller is \DpoNativeFourSeconds~s across 20 timed runs after three warm-ups.
+The formose reaction, the classic prebiotic condensation of formaldehyde into diverse sugars~\cite{butlerov1861formose}, provides an open-ended, rule-generated benchmark complementary to curated metabolic networks. Seeded with formaldehyde ($C_1$) and glycolaldehyde ($C_2$), four core transformation rules (aldol addition, retro-aldol cleavage, and reversible keto-enol tautomerization through an enediol intermediate) iteratively construct the reaction space. After four expansion rounds, the network comprises 37 species and 44 directed reactions ($n=54$ complexes, $\ell=17$ linkage classes, rank $s=36$, and deficiency $\delta=1$), reaching decose ($C_{10}$) species. Median cumulative generation time with the native \texttt{SynReactor} DPO controller is 0.0283~s across 20 timed runs after three warm-ups.
 
-Matched expansions in \texttt{M{\O}D}~1.0.0.75~\cite{andersen2016mod} and \texttt{MolFoundry}~0.1.11~\cite{friedrichs2026molfoundry} independently validate network generation across six expansion depths (Fig.~\ref{fig:formose_dpo_runtime}a). At depth six, all three tools generate identical sets of 10\,572 species and 11\,239 stoichiometric reactions. Median cumulative generation times with all tool processes bound to one logical CPU are \DpoNativeSixSeconds~s for native \texttt{SynReactor} DPO, \DpoModSixSeconds~s for \texttt{M{\O}D}, and \DpoMolfoundrySixSeconds~s for \texttt{MolFoundry} (Fig.~\ref{fig:formose_dpo_runtime}b and Table~\ref{supp:tab:formose_dpo_comparison}). These end-to-end API measurements encompass rule parsing, frontier updates, and Python graph construction for \synkit without isolating native kernel execution.
+Matched expansions in \texttt{M{\O}D}~1.0.0.75~\cite{andersen2016mod} and \texttt{MolFoundry}~0.1.11~\cite{friedrichs2026molfoundry} independently validate network generation across six expansion depths (Fig.~\ref{fig:formose_dpo_runtime}a). At depth six, all three tools generate identical sets of 10\,572 species and 11\,239 stoichiometric reactions. Median cumulative generation times with all tool processes bound to one logical CPU are 1.86~s for native \texttt{SynReactor} DPO, 2.22~s for \texttt{M{\O}D}, and 15.1~s for \texttt{MolFoundry} (Fig.~\ref{fig:formose_dpo_runtime}b and Table~\ref{supp:tab:formose_dpo_comparison}). These end-to-end API measurements encompass rule parsing, frontier updates, and Python graph construction for \synkit without isolating native kernel execution.
 
 \begin{figure}[!htbp]
 \centering
@@ -381,29 +517,16 @@ Exact nullspace analysis of the four-iteration stoichiometric matrix reveals a o
     \label{fig:formose}
 \end{figure}
 
-\rev{Qualitative hypergraph search reaches representative aldotetrose ($T_4$) and aldohexose ($T_6$) targets from the seed species. We then test two prescribed routes: the tetrose route consumes two glycolaldehyde molecules and the hexose route three, while neither consumes formaldehyde. Consequently, six-carbon inventories containing one ($M_3$), two ($M_4$), or three ($M_5$) glycolaldehydes support neither route, only the tetrose route, or both routes, respectively (Fig.~\ref{fig:formose}c). These decisions establish the precursor requirements of the selected reaction multisets. They do not rule out other routes from the mixed inventories. Separately, an eight-species minimal siphon contains glycolaldehyde, its enediol, and both targets but excludes formaldehyde. If initially empty, this set stays empty, showing why formaldehyde alone cannot initiate target production within the generated network. All ten selected-route decisions match independent evaluation in \texttt{MolFoundry}, and all positive certificates pass independent replay (Supplementary Section~\ref{supp:sec:si_case_formose}).}
+Qualitative hypergraph search reaches representative aldotetrose ($T_4$) and aldohexose ($T_6$) targets from the seed species. We then test two prescribed routes: the tetrose route consumes two glycolaldehyde molecules and the hexose route three, while neither consumes formaldehyde. Consequently, six-carbon inventories containing one ($M_3$), two ($M_4$), or three ($M_5$) glycolaldehydes support neither route, only the tetrose route, or both routes, respectively (Fig.~\ref{fig:formose}c). These decisions establish the precursor requirements of the selected reaction multisets. They do not rule out other routes from the mixed inventories. Separately, an eight-species minimal siphon contains glycolaldehyde, its enediol, and both targets but excludes formaldehyde. If initially empty, this set stays empty, showing why formaldehyde alone cannot initiate target production within the generated network. All ten selected-route decisions match independent evaluation in \texttt{MolFoundry}, and all positive certificates pass independent replay (Supplementary Section~\ref{supp:sec:si_case_formose}).
 
 \section{Conclusions}
 \label{sec:discussion}
 
-The CRN submodule of \synkit unites stoichiometric conservation, chemical reaction network theory, and pathway realizability on a bipartite representation preserving distinct reactant and product incidences. Across curated \rev{models}, metabolic modules and generative chemistries, these analyses demonstrate that net stoichiometric reduction obscures essential physical constraints. Retaining shared participants preserves network deficiency and \rev{keeps catalysts such as the phosphatase CheZ required for firing}. Similarly, omitting currency metabolites exposes carbon backbone realizability, while their retention makes execution depend on the specified cofactor and phosphate inventories. In the generated formose network, carbon conservation alone does not establish execution of the selected routes, whose reaction multisets require particular glycolaldehyde inventories. By employing exact rational arithmetic and replayable certificates, \synkit makes these modeling assumptions explicit, reproducible, and testable.
+The CRN submodule of \synkit unites stoichiometric conservation, chemical reaction network theory, and pathway realizability on a bipartite representation preserving distinct reactant and product incidences. Across curated models, metabolic modules and generative chemistries, these analyses demonstrate that net stoichiometric reduction obscures essential physical constraints. Retaining shared participants preserves network deficiency and keeps catalysts such as the phosphatase CheZ required for firing. Similarly, omitting currency metabolites exposes carbon backbone realizability, while their retention makes execution depend on the specified cofactor and phosphate inventories. In the generated formose network, carbon conservation alone does not establish execution of the selected routes, whose reaction multisets require particular glycolaldehyde inventories. By employing exact rational arithmetic and replayable certificates, \synkit makes these modeling assumptions explicit, reproducible, and testable.
 
 These analyses characterize structural enabling and discrete token sufficiency rather than continuous reaction rates, concentrations, thermodynamic driving forces, or \textit{in vivo} regulatory kinetics. Reachability certificates evaluate prescribed reaction multisets rather than unrestricted \textit{de novo} route synthesis, and exact siphon and semiflow enumeration faces combinatorial scaling on dense networks. Structural \texttt{SBML} exchange is confined to static integer reaction topology, excluding kinetic rate laws, rules, modifiers and non-core extensions.
 
 Future work will couple discrete firing certificates with estimated reaction free energies ($\Delta_r G$) to filter generated reaction spaces thermodynamically before kinetic simulation. Integrating \synkit's incidence representation with constraint-based flux methods and dynamic ODE simulators will bridge topological feasibility with quantitative metabolic phenotypes, while reducing cross-boundary serialization will scale exploration across complex prebiotic reaction spaces.
-
-\vspace{1em}
-\section*{Availability and requirements}
-\begin{itemize}[leftmargin=*,label={},itemsep=0pt]
-\item \textbf{Project name:} \synkit (CRN submodule)
-\item \textbf{Project home page:} \href{https://github.com/TieuLongPhan/SynKit}{github.com/TieuLongPhan/SynKit}
-\item \textbf{Software version:} \synkit~1.7.0 development snapshot~\cite{synkit170snapshot}; public versioned release and archival DOI pending.
-\item \textbf{Operating system(s):} Platform independent (Linux, macOS, Windows)
-\item \textbf{Programming language:} Python, C++17, and C++20
-\item \textbf{Other requirements:} Python~$\ge$~3.10, \texttt{NetworkX}~$\ge$~3.3, \texttt{NumPy}~\cite{harris2020numpy}, \texttt{SciPy}~\cite{virtanen2020scipy}, \texttt{RDKit}, Boost headers, CMake. Evidence was generated with Python~3.12.12, NumPy~2.4.4, NetworkX~3.6.1, SciPy~1.17.0, RDKit~2026.03.1 and Boost~1.90. The source snapshot includes pinned Python constraints in \texttt{Experiments/CRN/environments/crn-1.7.0-linux.constraints.txt} and records native toolchain versions in each report.
-\item \textbf{License:} MIT
-\item \textbf{Any restrictions to use by non-academics:} None
-\end{itemize}
 
 \section*{List of abbreviations}
 \noindent \textbf{ACR}: Absolute concentration robustness, \textbf{CRN}: Chemical reaction network, \textbf{CRNT}: Chemical reaction network theory, \textbf{DPO}: Double pushout, \textbf{EMP}: Embden--Meyerhof--Parnas, \textbf{FBA}: Flux balance analysis, \textbf{\texttt{KEGG}}: Kyoto Encyclopedia of Genes and Genomes, \textbf{\texttt{SBML}}: Systems Biology Markup Language, \textbf{\texttt{SMARTS}}: SMILES arbitrary target specification, \textbf{TCA}: Tricarboxylic acid, \textbf{WR}: Weakly reversible.
@@ -416,10 +539,9 @@ Not applicable.
 \subsection*{Consent for publication}
 Not applicable.
 
-
 \subsection*{Availability of data and materials}
 The CRN submodule is distributed with \synkit under the MIT License.
-The project repository is \href{https://github.com/TieuLongPhan/SynKit}{github.com/TieuLongPhan/SynKit}. The accompanying version~1.7.0 development snapshot~\cite{synkit170snapshot} contains the reproducibility drivers, inputs and environment constraints under \texttt{Experiments/CRN}; the experiment reports record source-file hashes, build identifiers and runtime environments. A public versioned release and archival DOI remain pending, so the snapshot is not cited as an already published release.
+The project repository is \href{https://github.com/TieuLongPhan/SynKit}{github.com/TieuLongPhan/SynKit}. The accompanying version~1.7.0 development snapshot~\cite{synkit170snapshot} contains the reproducibility drivers, inputs and environment constraints under \texttt{Experiment/CRN}; the experiment reports record inputs, software versions, runtime environments and completion checks. A public versioned release and archival DOI remain pending, so the snapshot is not cited as an already published release.
 \texttt{KEGG}~\cite{kanehisa2025kegg} pathways remain subject to \texttt{KEGG} terms, and \texttt{BioModels} entries are distributed under the CC0 1.0 Public Domain Dedication.
 
 \subsection*{Use of generative AI}
@@ -440,7 +562,6 @@ Author contributions are reported using the CRediT taxonomy. \textbf{T.-A.P.}: S
 \subsection*{Acknowledgements}
 Not applicable.
 
-% Bibliography
 \bibliography{refs}
 
 \end{document}
