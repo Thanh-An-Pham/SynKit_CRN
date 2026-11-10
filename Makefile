@@ -25,7 +25,7 @@ sync-values:
 	PYTHONPATH=analysis/scripts MPLCONFIGDIR=$(MPL_CACHE) $(PYTHON) analysis/scripts/sync_manuscript.py
 
 review-experiments:
-	OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 $(PYTHON) $(SYNKIT_ROOT)/Experiment/CRN/studies/representation.py --output analysis/crn-review-experiments.json
+	OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 $(PYTHON) $(SYNKIT_ROOT)/Experiments/CRN/studies/representation.py --output analysis/crn-review-experiments.json
 
 glycolysis-analysis:
 	PYTHONPATH=$(SYNKIT_ROOT):analysis/scripts $(PYTHON) analysis/scripts/glycolysis_analysis.py --backend cpp --json analysis/glycolysis_analysis.json

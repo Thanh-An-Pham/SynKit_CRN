@@ -1,0 +1,24 @@
+{
+  "reactions": [
+    [
+      [
+        [
+          "O=CCO",
+          1
+        ]
+      ],
+      [
+        [
+          "OC=CO",
+          1
+        ]
+      ]
+    ]
+  ],
+  "sha256": "07bcfccb9038cc441e0ff9bfc9eea2078099c69584c434b047409434127446df",
+  "species": [
+    "C=O",
+    "O=CCO",
+    "OC=CO"
+  ]
+}

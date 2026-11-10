@@ -1,0 +1,211 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3434557,
+      "path": "/tmp/synkit-170-artifacts/synkit-1.7.0.tar.gz",
+      "sha256": "7060ee4f3b320bb16d892cd35c3f161bf36ef840b438b5f30b8940adfd8c8e27"
+    },
+    {
+      "bytes": 2916562,
+      "path": "/tmp/synkit-170-artifacts/synkit-1.7.0-py3-none-linux_x86_64.whl",
+      "sha256": "e60395aa4fb7803ac9659ed0c2f20b261fdcfd6fbad932688c0db739ef5ec028"
+    }
+  ],
+  "attempts_preserved": [
+    "/tmp/synkit-170-evidence-attempt1",
+    "/tmp/synkit-170-formose-cpu21-aborted"
+  ],
+  "canonical_research_path": "Experiments/CRN",
+  "dpo_comparison": {
+    "audited_expansions": 414,
+    "complete": true,
+    "configurations": 18,
+    "cpu_affinity": [
+      0
+    ],
+    "depth6_median_seconds": {
+      "mod": 2.2172133084968664,
+      "molfoundry": 15.110146545004682,
+      "synreactor-native": 1.8614751349959988
+    },
+    "measurements_per_configuration": 20,
+    "report": "analysis/formose-expansion/dpo/comparison.json",
+    "sources_unchanged": true,
+    "status": "PASS",
+    "warmups_per_configuration": 3
+  },
+  "environment": {
+    "boost": "1.90",
+    "boost_include": "/home/lolo/miniforge3/pkgs/libboost-headers-1.90.0-h707e725_3/include",
+    "cmake": "cmake version 3.31.11",
+    "compiler": "c++ (GCC) 15.2.1 20260123 (Red Hat 15.2.1-7)",
+    "cpu_count": 22,
+    "crn_backend": {
+      "build_sha256": "24b48cd2ced132e808bbd64d17beafe1cf832d3bdd0f091c3eba5ca4e932e5a2",
+      "capabilities": [
+        "closure",
+        "structural_sets",
+        "structural_unlimited",
+        "exhaustive_siphons",
+        "exact_semiflows",
+        "exact_algebra",
+        "crnt",
+        "pathway",
+        "symmetry"
+      ],
+      "library_path": "/tmp/synkit-170-evidence/native/libsynkit_crn_24b48cd2ced132e8.so",
+      "library_sha256": "66bf9655b93ab3c667696704734b01163cf94852545d945ee9eb6e9124d26200",
+      "native_operations": {},
+      "production_backend": "cpp"
+    },
+    "crn_dpo_expander": {
+      "build_sha256": "bce495c880cb9d28be4b1a9a64284988b329dfe8049a51b0a5956f894e5fbf88",
+      "controller": "cpp",
+      "engine": "synkit_dpo_cpp",
+      "executable": "/tmp/synkit-170-evidence/native/dpo-expander/synkit_dpo_crn_bce495c880cb9d28",
+      "executable_sha256": "26f441778a28a9cf6cdbb176c65828b4b12cb642522a512e5c14b5302745e413",
+      "kernel": "synkit_dpo_cpp",
+      "kernel_abi": 1,
+      "kernel_library": "/tmp/synkit-170-evidence/native/dpo-expander/kernel/libsynkit_partial_c25e34c2c2aaf46cdad2.so",
+      "kernel_library_sha256": "9aa07f7f395783d2075bae80d1d9183bde4388c583ec3a0b68821deec184abd1",
+      "rdkit_cpp_version": "2026.03.1",
+      "reaction_engine": "SynReactor DPO"
+    },
+    "crn_expander": {
+      "build_sha256": "4e11e00457206f4b8eca458372e506a68822481f42722a2fe4f4751195e0fb12",
+      "engine": "synkit_crn_expand",
+      "executable": "/tmp/synkit-170-evidence/native/expander/synkit_crn_expand_4e11e00457206f4b",
+      "executable_sha256": "3b0fe9b29bbee5d0993f3f76cefaa3516c6dd1370209afa8af992ec1ad7ed5e5",
+      "rdkit_cpp_version": "2026.03.1",
+      "reaction_engine": "RDKit reaction SMARTS"
+    },
+    "git_commit": "5951b401b161187cb62095ddb136ee354a40c101",
+    "git_dirty": true,
+    "machine": "x86_64",
+    "networkx": "3.6.1",
+    "numpy": "2.4.4",
+    "platform": "Linux-6.19.14-108.fc42.x86_64-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.12.12",
+    "rdkit": "2026.03.1",
+    "rdkit_sdk": "/home/lolo/.cache/synkit/rdkit-cpp-2026.03.1",
+    "scipy": "1.17.0",
+    "synkit": "1.7.0"
+  },
+  "external_crnt4sbml": {
+    "interpreter_rerun": true,
+    "mode": "live_isolated_crnt4sbml"
+  },
+  "full_studies": {
+    "biomodels": {
+      "sha256": "904b9b00233a4070802a3fcc154897eb981cf7a5f4c5730f800315a2f8d814eb",
+      "status": "PASS"
+    },
+    "external-crnt4sbml": {
+      "sha256": "9bfcbccb653685a19393fa86ee320343caa642e22565afb5733da7a15f353c7d",
+      "status": "PASS"
+    },
+    "formose": {
+      "sha256": "0b43315c7ce37020186de07f2c90383c50cfbd138b890203970375363d8b939e",
+      "status": "PASS"
+    },
+    "glycolysis-donors": {
+      "sha256": "46cdbdf0df86286688d521674c41309d27e2e2d59e9d1b382832a5c2964d5f0d",
+      "status": "PASS"
+    },
+    "hydrogen": {
+      "sha256": "a77db2562bc9723c5779cbbd29e6c51f27cbb3ef426877c0606d55d067affdf8",
+      "status": "PASS"
+    },
+    "kegg": {
+      "sha256": "199d35e5cb18e1dce898211a59bb957b9dcbc7d9da2dbb6688158288340b15de",
+      "status": "PASS"
+    },
+    "representation": {
+      "sha256": "41a9f621b2e7c536f94adc5e53a1d61d33d0f0e7c4c14893c26385ae91d497f6",
+      "status": "PASS"
+    },
+    "scaling": {
+      "sha256": "e0eba3a1ebe38d1bede5c5cb4cc1fe890c58b6c2d03cae3b82fa901dccf7d775",
+      "status": "PASS"
+    },
+    "supplementary": {
+      "sha256": "ed20ef3f5a358530e2037500eb28705d79a13edd2b848da161b113e58dbe874b",
+      "status": "PASS"
+    },
+    "validation": {
+      "sha256": "926a011c2d1c7cfe21c5c78156cd9c270f2e83b21664fd65d7c32c5b28dafe38",
+      "status": "PASS"
+    }
+  },
+  "independent_xml_audit": {
+    "models": 11,
+    "reaction_model_variants": 30,
+    "status": "PASS"
+  },
+  "manuscript_checks": {
+    "clean_pdf_checks": {
+      "SI/si.pdf": {
+        "deletion_and_todo_markers_absent": true,
+        "pages": 9,
+        "revision_text_black": true,
+        "sha256": "9f1c50a3d6e6e994c28c4b04963a766308c5995b9e86369ac083b94ab943de9a"
+      },
+      "main.pdf": {
+        "deletion_and_todo_markers_absent": true,
+        "pages": 20,
+        "revision_text_black": true,
+        "sha256": "73d38d51610f020829463f1e1620396ddebd064873264185bb95c00d699c5a1b"
+      }
+    },
+    "full_make_all": "PASS",
+    "full_source_and_evidence_verifier": "PASS",
+    "generated_tables_and_cross_references": "PASS",
+    "main_pdf": "main.pdf",
+    "remaining_revision_todos": 0,
+    "revision_highlighting_enabled": false,
+    "si_followup_consistency": "PASS: numerical audit, generated tables, scaling48/60 scope, timing precision, inventories, references and executed Python example",
+    "si_pagination": {
+      "cross_references": "PASS",
+      "explicit_clearpage_commands_removed": 3,
+      "pages_after": 9,
+      "pages_before": 11,
+      "visual_layout_review": "PASS"
+    },
+    "supplement_pdf": "SI/si.pdf"
+  },
+  "molfoundry_fixed_route_comparison": true,
+  "overall_status": "PASS: local 1.7.0 preparation and reproduction complete",
+  "package_checks": {
+    "actual_wheel_dpo_build_and_api_smoke": "PASS",
+    "archive_inspection": "PASS",
+    "extracted_sdist_native_dpo_smoke": "PASS",
+    "installed_native_wheel_smoke": "PASS",
+    "wheel_build": "PASS"
+  },
+  "pending": [
+    "User review and commit of intended changes in both repositories",
+    "User release/tag/push and archival DOI",
+    "Replace unpublished snapshot citation with actual release/DOI and verify against the tag"
+  ],
+  "preexisting_dpo_backup": "/tmp/synkit-170-prior-dpo",
+  "preexisting_pdf_and_bibliography_backup": "/tmp/synkit-170-paper-before-build",
+  "release_status": "unpublished development snapshot",
+  "removed_runtime_package": "synkit/CRN/Benchmark",
+  "repositories": {
+    "paper": "/home/lolo/Documents/TACsy/paper/SynKit_CRN",
+    "synkit": "/home/lolo/Documents/TACsy/SynEco/SynKit"
+  },
+  "source_files": 691,
+  "sources_unchanged_during_run": true,
+  "structural_audit": {
+    "cases": 31,
+    "status": "PASS"
+  },
+  "target_version": "1.7.0",
+  "tests": {
+    "additional_model175_budget_regression_passed": 1,
+    "full_crn_passed": 1048,
+    "subtests_passed": 487
+  }
+}

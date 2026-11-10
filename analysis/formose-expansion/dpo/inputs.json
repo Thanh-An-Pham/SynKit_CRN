@@ -1,0 +1,18 @@
+{
+  "gml_rules": [
+    "rule [ ruleID \"r0\" left [\nedge [ source 1 target 2 label \"-\" ]\nedge [ source 1 target 4 label \"-\" ]\nedge [ source 2 target 3 label \"=\" ]\n] context [\nnode [ id 1 label \"C\" ]\nnode [ id 2 label \"C\" ]\nnode [ id 3 label \"O\" ]\nnode [ id 4 label \"H\" ]\n\n] right [\nedge [ source 1 target 2 label \"=\" ]\nedge [ source 2 target 3 label \"-\" ]\nedge [ source 3 target 4 label \"-\" ]\n] ]",
+    "rule [ ruleID \"r1\" left [\nedge [ source 1 target 2 label \"=\" ]\nedge [ source 2 target 3 label \"-\" ]\nedge [ source 3 target 4 label \"-\" ]\nedge [ source 5 target 6 label \"=\" ]\n] context [\nnode [ id 1 label \"C\" ]\nnode [ id 2 label \"C\" ]\nnode [ id 3 label \"O\" ]\nnode [ id 4 label \"H\" ]\nnode [ id 5 label \"O\" ]\nnode [ id 6 label \"C\" ]\n\n] right [\nedge [ source 1 target 2 label \"-\" ]\nedge [ source 1 target 6 label \"-\" ]\nedge [ source 2 target 3 label \"=\" ]\nedge [ source 4 target 5 label \"-\" ]\nedge [ source 5 target 6 label \"-\" ]\n] ]",
+    "rule [ ruleID \"r2\" left [\nedge [ source 1 target 2 label \"=\" ]\nedge [ source 2 target 3 label \"-\" ]\nedge [ source 3 target 4 label \"-\" ]\n] context [\nnode [ id 1 label \"C\" ]\nnode [ id 2 label \"C\" ]\nnode [ id 3 label \"O\" ]\nnode [ id 4 label \"H\" ]\n\n] right [\nedge [ source 1 target 2 label \"-\" ]\nedge [ source 1 target 4 label \"-\" ]\nedge [ source 2 target 3 label \"=\" ]\n] ]",
+    "rule [ ruleID \"r3\" left [\nedge [ source 1 target 2 label \"-\" ]\nedge [ source 1 target 6 label \"-\" ]\nedge [ source 2 target 3 label \"=\" ]\nedge [ source 4 target 5 label \"-\" ]\nedge [ source 5 target 6 label \"-\" ]\n] context [\nnode [ id 1 label \"C\" ]\nnode [ id 2 label \"C\" ]\nnode [ id 3 label \"O\" ]\nnode [ id 4 label \"H\" ]\nnode [ id 5 label \"O\" ]\nnode [ id 6 label \"C\" ]\n\n] right [\nedge [ source 1 target 2 label \"=\" ]\nedge [ source 2 target 3 label \"-\" ]\nedge [ source 3 target 4 label \"-\" ]\nedge [ source 5 target 6 label \"=\" ]\n] ]"
+  ],
+  "rules": [
+    "[C:1]([C:2]=[O:3])[H:4]>>[C:1]=[C:2][O:3][H:4]",
+    "[C:1]=[C:2][O:3][H:4].[O:5]=[C:6]>>[C:1]([C:2]=[O:3])[C:6][O:5][H:4]",
+    "[C:1]=[C:2][O:3][H:4]>>[C:1]([C:2]=[O:3])[H:4]",
+    "[C:1]([C:2]=[O:3])[C:6][O:5][H:4]>>[C:1]=[C:2][O:3][H:4].[O:5]=[C:6]"
+  ],
+  "seeds": [
+    "C=O",
+    "OCC=O"
+  ]
+}

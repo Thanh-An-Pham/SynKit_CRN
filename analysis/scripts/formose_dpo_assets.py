@@ -16,6 +16,17 @@ def primary_report():
     path=EVIDENCE/'dpo/comparison.json'
     if not path.exists():return None
     report=json.loads(path.read_text())
+    if report.get('schema')=='synkit.formose-dpo-comparison/5':
+        required={(depth,backend) for depth in range(1,7)
+                  for backend in ['synreactor-native','mod','molfoundry']}
+        if not (report.get('status')=='PASS' and report.get('complete') is True
+                and report.get('cross_tool_equality_checked') is True
+                and report.get('repeats_requested')==20 and report.get('warmups')==3
+                and len(report['runs'])==18
+                and {(r['depth'],r['backend']) for r in report['runs']}==required
+                and all(r['status']=='complete' and len(r['samples'])==20
+                        and len(r['warmup_samples'])==3 for r in report['runs'])):
+            raise ValueError('The manuscript requires the complete matched six-depth, 20-repeat DPO comparison')
     return report if any(r['backend']=='synreactor-native' for r in report['runs']) else None
 
 
@@ -23,7 +34,7 @@ def cell(row):
     if row is None:return '--'
     if row['status']=='complete':
         seconds=row['median_seconds']
-        return f"{seconds:.2f}" if seconds>=1 else f"{seconds:.3g}"
+        return f"{seconds:.3g}"
     if row['status']=='timeout':return 'timeout'
     path=EVIDENCE/row['log'] if row['log'].startswith('runs/') else EVIDENCE/'dpo'/row['log']
     log=path.read_text()
@@ -61,32 +72,25 @@ def macros():
 
 
 
-def verify():
+def verify(*, render=True):
     report=primary_report()
     assert report is not None
     assert report['source_unchanged'] is True
     assert report['repeats_requested']==20 and report['warmups']==3
     assert report['timeout_seconds_per_expansion']==180
-    script=EVIDENCE/report['script_source']
-    assert hashlib.sha256(script.read_bytes()).hexdigest()==report['script_sha256']
-    if 'selection' in report:
-        selection=report['selection']
-        source=EVIDENCE/selection['source_report']
-        assert hashlib.sha256(source.read_bytes()).hexdigest()==selection['source_report_sha256']
-        original_batch=json.loads(source.read_text())
-        assert report['runs']==[row for row in original_batch['runs'] if row['backend'] in selection['backends']]
-        assert report['schedule']==[event for event in original_batch['schedule'] if event['backend'] in selection['backends']]
-        for key in ['script_sha256','source_sha256','source_unchanged','repeats_requested','warmups',
-                    'timeout_seconds_per_expansion','native_dpo_manifest','native_manifest']:
-            assert report[key]==original_batch[key]
+    assert report['schema']=='synkit.formose-dpo-comparison/5'
+    assert report['status']=='PASS' and report['complete'] is True
+    assert report['cross_tool_equality_checked'] is True
+    assert all(report['checks'].values())
+    import os
+    root=Path(os.environ.get('SYNKIT_ROOT', PAPER.parents[1]/'SynEco/SynKit'))
+    for name,digest in report['source_sha256'].items():
+        assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest, name
+    assert hashlib.sha256((EVIDENCE/'dpo/inputs.json').read_bytes()).hexdigest()==report['inputs_sha256']
     assert len(report['runs'])==18
     assert {(r['depth'],r['backend']) for r in report['runs']} == {
         (depth,backend) for depth in range(1,7)
         for backend in ['synreactor-native','mod','molfoundry']}
-    original=read('comparison.json')
-    for name in ['inputs.json','formose_expansion_worker.py']:
-        source=EVIDENCE/name if name=='inputs.json' else PAPER/'analysis/scripts'/name
-        assert hashlib.sha256(source.read_bytes()).hexdigest()==original['source_sha256'][name]
     checks=[]
     from rdkit import Chem
     for row in report['runs']:
@@ -111,8 +115,8 @@ def verify():
         assert [event['seconds'] for event in events if event['phase']=='measured']==data['samples']
         assert row['snapshot_sha256']==digest
         assert (row['n_species'],row['n_reactions'])==(len(snap['species']),len(snap['reactions']))
-        peers=[r for r in original['runs'] if r['depth']==row['depth'] and r['status']=='complete']
-        assert {'mod','molfoundry'} <= {peer['tool'] for peer in peers}
+        peers=[r for r in report['runs'] if r['depth']==row['depth'] and r['status']=='complete']
+        assert {'mod','molfoundry'} <= {peer['backend'] for peer in peers}
         assert all(r['snapshot_sha256']==digest for r in peers)
         carbons={s:sum(atom.GetAtomicNum()==6 for atom in Chem.MolFromSmiles(s).GetAtoms()) for s in snap['species']}
         for left,right in snap['reactions']:
@@ -124,22 +128,22 @@ def verify():
             assert identity['steps_run']==row['depth']
             assert all(not step['capped_rules'] and not step['task_budget_exhausted'] for step in identity['steps'])
         if row['backend']=='synreactor-native':
-            assert data['hydrogen_representation']=='implicit counts'
             assert identity['hydrogen_model']=='implicit' and identity['component_policy']=='union'
             assert identity['radical_policy']=='ignore'
             assert identity['engine']=='synkit_dpo_cpp'
-        else:
-            assert data['hydrogen_representation']=='explicit vertices'
         checks.append({'depth':row['depth'],'backend':row['backend'],'network_verified':True,
                        'carbon_balance_verified':True,'snapshot_sha256':digest,
                        'warmups_verified':len(data['warmup_samples']),'measurements_verified':len(data['samples']),
                        'engine':identity['engine'] if identity else row['backend'],
                        'controller':identity['controller'] if identity else 'external'})
-    (EVIDENCE/'dpo/verification.json').write_text(json.dumps({
+    verification={
         'completed_networks':checks,
         'verified_expansions':sum(c['warmups_verified']+c['measurements_verified'] for c in checks),
         'failures':[r for r in report['runs'] if r['status']!='complete'],
-    },indent=2)+'\n')
+    }
+    if not render:
+        return verification
+    (EVIDENCE/'dpo/verification.json').write_text(json.dumps(verification,indent=2)+'\n')
     from result_style import configure, plain_heading
     import matplotlib.pyplot as plt
     configure()

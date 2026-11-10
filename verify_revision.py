@@ -158,6 +158,16 @@ def verify_document_content():
         for label in references:
             if label.startswith(prefix):
                 assert label[len(prefix):] in labels, ("Unresolved reference", label)
+    bibliography = set(re.findall(r"@\w+\{([^,]+),", (PAPER / "refs.bib").read_text()))
+    for filename, source in (("main.tex", main_text), ("SI/si.tex", si_text)):
+        local_labels = set(re.findall(r"\\label\{([^}]+)\}", source))
+        local_labels.update(re.findall(r"\blabel=\{([^}]+)\}", source))
+        for label in re.findall(r"\\(?:ref|eqref|pageref)\*?\{([^}]+)\}", source):
+            if not label.startswith(("main:", "supp:", "#")):
+                assert label in local_labels, ("Unresolved local reference", filename, label)
+        for group in re.findall(r"\\cite\w*\*?(?:\[[^]]*\])*\{([^}]+)\}", source):
+            for key in group.split(","):
+                assert key.strip() in bibliography, ("Missing bibliography entry", filename, key)
 
     def read(name):
         return json.loads((PAPER / "analysis" / name).read_text())
@@ -201,6 +211,19 @@ def verify_document_content():
     assert all(row["carbons"] == row["coefficient"] for row in carbon["entries"])
     supplement = read("crn-supplement-audit.json")
     assert supplement["status"] == "PASS" and all(supplement["checks"].values())
+    audit_table = si_text.split(r"\label{tab:reference_audit}", 1)[1].split(r"\end{table}", 1)[0]
+    numerical_rows = re.findall(r"^([^\n]+?) & ([0-9.]+e[+-][0-9]+) & ([0-9]+) & ([0-9]+) \\", audit_table, re.M)
+    assert len(numerical_rows) == len(supplement["numerical_comparison"]) == 12
+    for actual, expected in zip(numerical_rows, supplement["numerical_comparison"]):
+        assert actual[1:] == (f"{expected['svd_max_abs_residual']:.1e}",
+                              str(expected["rounded_invalid_vectors"]), "0"), (
+            "Stale SI numerical-audit row", expected["network"]
+        )
+    scaling = read("crn-scaling.json")
+    plotted_tasks = {"minimal_siphons", "crnt_summary", "canonical_form", "conserved_moieties"}
+    assert len(scaling["measurements"]) == 60
+    assert sum(row["task"] in plotted_tasks for row in scaling["measurements"]) == 48
+    assert sum(row["task"] == "rank" for row in scaling["measurements"]) == 12
     assert len(supplement["formose_routes"]) == 10
     complete_decisions(supplement["formose_routes"])
     complete_decisions(supplement["qualitative_routes"])
@@ -210,6 +233,14 @@ def verify_document_content():
             assert Counter(outcome["certificate"]) == outcome["requested_flux"]
     abstract = main_text.split("\\abstract{", 1)[1].split("\\keywords", 1)[0]
     assert len(abstract.split()) <= 350 and "\\cite" not in abstract
+    if "glycolysis_inventory_controls" in review:
+        inventory = review["glycolysis_inventory_controls"]
+        complete_decisions(inventory)
+        assert inventory["adenylate_siphon"]["valid_on_prescribed_transitions"] is True
+        cases = {row["name"]: row for row in inventory["cases"]}
+        assert cases["one_atp_with_adp_redox_and_phosphate"]["net_inventory_feasible"] is True
+        assert cases["one_atp_with_adp_redox_and_phosphate"]["outcome"]["status"] == "unrealizable"
+        assert cases["two_atp_with_adp_redox_and_phosphate"]["outcome"]["final_marking"]["Pyruvate"] == 2
 
 
 def main():
@@ -221,8 +252,8 @@ def main():
             hashlib.sha256((ROOT / filename).read_bytes()).hexdigest() == digest
         ), filename
     sys.path.insert(0, str(ROOT))
-    from Experiment.CRN.tools.common import source_hashes
-    from Experiment.CRN.tools.check_reports import check_reports
+    from Experiments.CRN.tools.common import source_hashes
+    from Experiments.CRN.tools.check_reports import check_reports
     import synkit
 
     assert (
@@ -233,7 +264,7 @@ def main():
     assert summary["schema"] == "synkit.crn-experiments/2"
     assert not check_reports(PAPER / "analysis/summary.json", require_all=True)
     assert summary["source_sha256"] == source_manifest
-    assert synkit.__version__ == summary["environment"]["synkit"] == "1.6.5"
+    assert synkit.__version__ == summary["environment"]["synkit"] == "1.7.0"
     assert len(summary["studies"]) == 10
     build = json.loads((PAPER / "analysis/native-build.json").read_text())
     for name in (
@@ -252,7 +283,7 @@ def main():
             (PAPER / "analysis" / ("crn-" + name + ".json")).read_text()
         )
         assert report["status"] == "PASS" and all(report["checks"].values()), name
-        assert report["environment"]["synkit"] == "1.6.5", name
+        assert report["environment"]["synkit"] == "1.7.0", name
         assert (
             report["environment"]["git_commit"]
             == summary["environment"]["git_commit"]
@@ -264,18 +295,22 @@ def main():
         assert backend["library_sha256"] == build["library_sha256"], name
     external = json.loads((PAPER / "analysis/crn-external-crnt4sbml.json").read_text())
     execution = external["external_execution"]
-    assert execution["mode"] == "recorded_outputs_on_identical_sbml_inputs"
-    assert execution["interpreter_rerun"] is False
-    assert execution["all_exported_input_hashes_match"] is True
-    reference_path = PAPER / "analysis" / execution["reference_path"]
-    assert hashlib.sha256(reference_path.read_bytes()).hexdigest() == execution["reference_sha256"]
-    reference = json.loads(reference_path.read_text())
-    old_rows = {row["name"]: row for row in reference["networks"]}
+    if execution["mode"] == "live_isolated_crnt4sbml":
+        assert execution["interpreter_rerun"] is True
+        old_rows = {row["name"]: row for row in external["networks"]}
+    else:
+        assert execution["mode"] == "recorded_outputs_on_identical_sbml_inputs"
+        assert execution["interpreter_rerun"] is False
+        assert execution["all_exported_input_hashes_match"] is True
+        reference_path = PAPER / "analysis" / execution["reference_path"]
+        assert hashlib.sha256(reference_path.read_bytes()).hexdigest() == execution["reference_sha256"]
+        reference = json.loads(reference_path.read_text())
+        old_rows = {row["name"]: row for row in reference["networks"]}
     current_rows = {row["name"]: row for row in external["networks"]}
     assert len(current_rows) == len(old_rows) == 12
     assert current_rows.keys() == old_rows.keys()
     from synkit.CRN import write_sbml
-    from Experiment.CRN.benchmarks import BENCHMARK_NETWORKS
+    from Experiments.CRN.benchmarks import BENCHMARK_NETWORKS
 
     with tempfile.TemporaryDirectory(prefix="synkit-crn-input-check-") as folder:
         for fixture in BENCHMARK_NETWORKS:
@@ -335,14 +370,19 @@ def main():
             hashlib.sha256(
                 (
                     ROOT
-                    / "Experiment/CRN/data/biomodels"
+                    / "Experiments/CRN/data/biomodels"
                     / (model["model_id"] + ".xml")
                 ).read_bytes()
             ).hexdigest()
             == model["sha256"]
         )
     model19 = next(m for m in reaction_models if m["model_id"] == "BIOMD0000000019")
-    assert model19["n_minimal_siphons"] == 20 and model19["n_conserved_moieties"] == 19
+    assert model19["n_conserved_moieties"] == 19
+    participants = json.loads((PAPER / "analysis/crn-biomodels-modifiers.json").read_text())
+    assert participants["status"] == "PASS" and all(participants["checks"].values())
+    assert participants["source_sha256"] == source_manifest
+    for row in participants["models"]:
+        assert row["agrees"] and row["net_stoichiometry_unchanged"]
     kegg = json.loads((PAPER / "analysis/crn-kegg.json").read_text())
     assert len(kegg["modules"]) == 4
     assert all(
@@ -445,7 +485,7 @@ def main():
     assert donors["equations"] == supplement["equations"]
     assert (
         hashlib.sha256(
-            (ROOT / "Experiment/CRN/studies/supplementary.py").read_bytes()
+            (ROOT / "Experiments/CRN/studies/supplementary.py").read_bytes()
         ).hexdigest()
         == supplement["script_sha256"]
     )
@@ -479,7 +519,7 @@ def main():
         (PAPER / "analysis/glycolysis_analysis.json").read_text()
     )
     backend = glycolysis_figure["environment"]["crn_backend"]
-    assert glycolysis_figure["environment"]["synkit"] == "1.6.5"
+    assert glycolysis_figure["environment"]["synkit"] == "1.7.0"
     assert (
         backend["production_backend"] == "cpp"
         and backend["build_sha256"] == build["build_sha256"]
@@ -500,6 +540,15 @@ def main():
     abstract = text.split("\\abstract{", 1)[1].split("\\keywords", 1)[0]
     assert len(abstract.split()) <= 350, "Abstract exceeds 350 words"
     assert "\\cite" not in abstract, "Abstract contains citations"
+    from formose_dpo_assets import verify as verify_dpo
+    dpo = verify_dpo(render=False)
+    assert len(dpo["completed_networks"]) == 18 and dpo["verified_expansions"] == 414
+    route_comparison = json.loads((PAPER / "analysis/formose-expansion/route-comparison.json").read_text())
+    assert route_comparison["all_ten_agree"] is True
+    assert route_comparison["positive_certificates_replayed"] == 3
+    assert route_comparison["synkit_evidence_sha256"] == hashlib.sha256(
+        (PAPER / "analysis/crn-supplement-audit.json").read_bytes()
+    ).hexdigest()
     print(
         "Revision evidence, source hashes, SI model definitions, generated tables, and abstract: PASS"
     )

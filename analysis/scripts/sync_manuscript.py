@@ -79,6 +79,18 @@ def glycolysis_currency_table(report):
     return "\n".join(rows) + "\n"
 
 
+def glycolysis_inventory_table(report):
+    rows = ["% Generated from crn-review-experiments.json."]
+    for index, row in enumerate(report["glycolysis_inventory_controls"]["cases"]):
+        outcome = row["outcome"]
+        inventory = outcome["initial_marking"]
+        values = [rf"$I_{index}$"] + [str(inventory.get(name, 0)) for name in ("ATP", "ADP", "NAD+", "Orthophosphate")]
+        values += ["yes" if row["net_inventory_feasible"] else "no", outcome["status"]]
+        values += [str(outcome["explored_states"]), str(len(outcome["certificate"])) if outcome["realizable"] else "--"]
+        rows.append(" & ".join(values) + r" \\")
+    return "\n".join(rows) + "\n"
+
+
 def formose_route_table(report):
     rows = ["% Generated from crn-supplement-audit.json."]
     qualitative = sorted(report["qualitative_routes"], key=lambda row: row["target"].count("C"))
@@ -134,6 +146,7 @@ def generated_blocks(paper=PAPER):
             "kegg-modules": kegg_table(read("crn-kegg.json")),
             "glycolysis-flux": glycolysis_flux_table(read("crn-kegg.json")),
             "glycolysis-currency-control": glycolysis_currency_table(read("crn-review-experiments.json")),
+            "glycolysis-inventory-controls": glycolysis_inventory_table(read("crn-review-experiments.json")),
             "formose-routes": formose_route_table(read("crn-supplement-audit.json")),
             "formose-inventories": formose_inventory_table(read("crn-supplement-audit.json")),
         },

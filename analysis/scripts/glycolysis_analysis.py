@@ -10,13 +10,13 @@ from pathlib import Path
 
 def build_analysis() -> dict[str, object]:
     """Run the structural analysis and replay the returned certificate."""
-    from Experiment.CRN.benchmarks import (
+    from Experiments.CRN.benchmarks import (
         GLYCOLYSIS_FLUX,
         analyze_kegg_module,
         build_kegg_crn,
     )
-    from Experiment.CRN.benchmarks.kegg import _species_labels
-    from Experiment.CRN.tools.common import environment
+    from Experiments.CRN.benchmarks.kegg import _species_labels
+    from Experiments.CRN.tools.common import environment
     from synkit.CRN.Pathway.realizability import PathwayRealizability
     from synkit.CRN.Props.stoich import conserved_moieties
 
@@ -179,6 +179,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    from Experiment.CRN.tools.common import native_experiment
+    from Experiments.CRN.tools.common import native_experiment
 
     raise SystemExit(native_experiment(main)())

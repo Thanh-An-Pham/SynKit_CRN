@@ -238,10 +238,13 @@ Malik-Sheriff RS, Glont M, Nguyen TVN, Tiwari K, Roberts MG, Xavier A, Vu MT,
   sharing computational models in life science. Nucleic Acids Research
   48(D1):D407--D415, \doi{10.1093/nar/gkz1055}
 
-\bibitem[{Phan and Weinbauer(2026)}]{synkit165release}
-Phan TL, Weinbauer K (2026) {SynKit}, version 1.6.5.
-  \url{https://github.com/TieuLongPhan/SynKit/releases/tag/v1.6.5}, released 30
-  October 2026
+\bibitem[{Phan and Weinbauer(2026)}]{synkit170snapshot}
+Phan TL, Weinbauer K (2026) {SynKit}, version 1.7.0 development snapshot.
+  Unreleased development source checkout,
+  \urlprefix\url{https://github.com/TieuLongPhan/SynKit}, source-file hashes,
+  native build identifiers and runtime environments are recorded in the
+  accompanying experiment reports; public versioned release and archival DOI
+  pending
 
 \bibitem[{Harris et~al(2020)Harris, Millman, van~der Walt, Gommers, Virtanen,
   Cournapeau, Wieser, Taylor, Berg, Smith et~al}]{harris2020numpy}
