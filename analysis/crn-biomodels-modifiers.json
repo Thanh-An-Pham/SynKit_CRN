@@ -1,0 +1,100 @@
+{
+  "schema": "crn-biomodels-modifiers/1",
+  "date": "2026-11-10",
+  "source": "analysis/scripts/biomodels_modifiers.py",
+  "inputs": "BioModels files checked against the SHA-256 hashes in crn-biomodels.json",
+  "environment": {
+    "python": "3.11.13",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "synkit": "1.6.5",
+    "numpy": "2.4.2",
+    "networkx": "3.5"
+  },
+  "models": [
+    {
+      "model_id": "BIOMD0000000001",
+      "n_modifier_refs": 0,
+      "deficiency_kept": 0,
+      "deficiency_cancelled": 0,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 0
+    },
+    {
+      "model_id": "BIOMD0000000010",
+      "n_modifier_refs": 5,
+      "deficiency_kept": 0,
+      "deficiency_cancelled": 0,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 5
+    },
+    {
+      "model_id": "BIOMD0000000051",
+      "n_modifier_refs": 5,
+      "deficiency_kept": 8,
+      "deficiency_cancelled": 8,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 13
+    },
+    {
+      "model_id": "BIOMD0000000064",
+      "n_modifier_refs": 10,
+      "deficiency_kept": 0,
+      "deficiency_cancelled": 0,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 0
+    },
+    {
+      "model_id": "BIOMD0000000108",
+      "n_modifier_refs": 2,
+      "deficiency_kept": 8,
+      "deficiency_cancelled": 8,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 8
+    },
+    {
+      "model_id": "BIOMD0000000404",
+      "n_modifier_refs": 2,
+      "deficiency_kept": 13,
+      "deficiency_cancelled": 11,
+      "n_cancelled_participants": 2,
+      "deficiency_modifiers": 15
+    },
+    {
+      "model_id": "BIOMD0000000637",
+      "n_modifier_refs": 0,
+      "deficiency_kept": 9,
+      "deficiency_cancelled": 9,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 9
+    },
+    {
+      "model_id": "BIOMD0000000019",
+      "n_modifier_refs": 0,
+      "deficiency_kept": 41,
+      "deficiency_cancelled": 41,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 41
+    },
+    {
+      "model_id": "BIOMD0000000175",
+      "n_modifier_refs": 142,
+      "deficiency_kept": 6,
+      "deficiency_cancelled": 6,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 8
+    },
+    {
+      "model_id": "BIOMD0000000255",
+      "n_modifier_refs": 0,
+      "deficiency_kept": 317,
+      "deficiency_cancelled": 317,
+      "n_cancelled_participants": 0,
+      "deficiency_modifiers": 317
+    },
+    {
+      "model_id": "BIOMD0000000562",
+      "n_modifier_refs": 0,
+      "reaction_free": true
+    }
+  ]
+}

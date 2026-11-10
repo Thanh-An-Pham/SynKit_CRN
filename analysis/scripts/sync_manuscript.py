@@ -31,6 +31,19 @@ def biomodels_table(report):
     return "\n".join(rows) + "\n"
 
 
+def biomodels_modifier_table(report):
+    rows = ["% Generated from crn-biomodels-modifiers.json."]
+    for model in report["models"]:
+        if model.get("reaction_free"):
+            continue
+        values = [rf"\texttt{{{model['model_id']}}}", model["n_modifier_refs"]]
+        values += [model[key] for key in (
+            "deficiency_kept", "deficiency_cancelled", "deficiency_modifiers"
+        )]
+        rows.append(" & ".join(map(str, values)) + r" \\")
+    return "\n".join(rows) + "\n"
+
+
 def kegg_table(report):
     rows = ["% Generated from crn-kegg.json."]
     for model in report["modules"]:
@@ -53,16 +66,6 @@ def glycolysis_flux_table(report):
             rf"\texttt{{{first}}} & {flux['flux'][first]} & "
             rf"\texttt{{{second}}} & {flux['flux'][second]} \\"
         )
-    return "\n".join(rows) + "\n"
-
-
-def glycolysis_participant_table(report):
-    rows = ["% Generated from crn-review-experiments.json."]
-    for arm in report["representation"]["catalyst_arms"]:
-        values = ["Retained" if arm["arm"] == "intact" else "Cancelled", arm["catalyst_tokens"]]
-        values += [arm[key] for key in ("n_complexes", "n_linkage_classes", "deficiency")]
-        values.append("fires" if arm["outcome"]["realizable"] else "blocked")
-        rows.append(" & ".join(map(str, values)) + r" \\")
     return "\n".join(rows) + "\n"
 
 
@@ -127,9 +130,9 @@ def generated_blocks(paper=PAPER):
             "formose-dpo-comparison": dpo_table(),
             "review-macros": si_macros,
             "biomodels-models": biomodels_table(read("crn-biomodels.json")),
+            "biomodels-modifiers": biomodels_modifier_table(read("crn-biomodels-modifiers.json")),
             "kegg-modules": kegg_table(read("crn-kegg.json")),
             "glycolysis-flux": glycolysis_flux_table(read("crn-kegg.json")),
-            "glycolysis-participant-control": glycolysis_participant_table(read("crn-review-experiments.json")),
             "glycolysis-currency-control": glycolysis_currency_table(read("crn-review-experiments.json")),
             "formose-routes": formose_route_table(read("crn-supplement-audit.json")),
             "formose-inventories": formose_inventory_table(read("crn-supplement-audit.json")),

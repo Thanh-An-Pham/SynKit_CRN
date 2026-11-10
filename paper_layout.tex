@@ -42,7 +42,10 @@
 % print style. The family keeps its old name, \scArial, so the figure sources
 % need no change. Only the visual abstract (a PDF from visual_abstract.py)
 % keeps Arial and colour.
-\newfontfamily\scArial{Latin Modern Roman}[NFSSFamily=scArial,Ligatures=TeX]
+% Load by file name (shipped with TeX Live) so no system-installed font is needed.
+\newfontfamily\scArial{lmroman10}[NFSSFamily=scArial,Ligatures=TeX,
+  Extension=.otf,UprightFont=*-regular,BoldFont=*-bold,
+  ItalicFont=*-italic,BoldItalicFont=*-bolditalic]
 % Keep manuscript mathematics unchanged; select Arial letters and numerals
 % only inside figures. TeX supplies specialist mathematical symbols.
 \RequirePackage[subdued,italic]{mathastext}
@@ -212,3 +215,18 @@
 \fi
 
 }
+
+% Revision markup (10 Nov 2026 review round).
+%   \rev{...}         changed or added text, shown red
+%   \revdel{...}      marks where text was removed (shown only while marking is on)
+%   \revtodo{n}{...}  numbered note: this line still needs work (shown only while marking is on)
+% For the clean submission version, change \showrevisionstrue to \showrevisionsfalse:
+% \rev text then prints in black, and the deletion marks and notes disappear.
+\newif\ifshowrevisions
+\showrevisionstrue
+\AtBeginDocument{%
+  \definecolor{revRed}{rgb}{0.82,0,0}%
+  \definecolor{revTodo}{rgb}{0,0.32,0.75}}
+\DeclareRobustCommand{\rev}[1]{\ifshowrevisions\textcolor{revRed}{#1}\else#1\fi}
+\DeclareRobustCommand{\revdel}[1]{\ifshowrevisions\textcolor{revRed}{\footnotesize[removed: #1]}\fi}
+\DeclareRobustCommand{\revtodo}[2]{\ifshowrevisions\textcolor{revTodo}{\footnotesize\textbf{[To do #1.]}~#2}\fi}

@@ -238,7 +238,7 @@ Both formulations agreed for every benchmark, confirming consistency among compl
 \subsection{Numerical nullspaces and exact integer conservation laws}
 \label{si:numerical}
 
-A conservation law is a non-zero integer vector $y$ with $y^T \mathbf{S} = 0$. Floating-point nullspace routines return approximate bases, and rounding scaled vectors to integers is a common shortcut. We compared this heuristic with \synkit's exact rational solver on the twelve reference networks (Table~\ref{tab:reference_audit}). SVD residuals were of order $10^{-16}$ on closed networks, but after scaling by $10^3$ and rounding, the recovered vectors violated $y^T \mathbf{S} = 0$ on three models: Michaelis--Menten, reversible Michaelis--Menten, and the one-site futile cycle. \synkit's exact elimination returned valid integer vectors in every case.
+A conservation law is a non-zero integer vector $y$ with $y^T \mathbf{S} = 0$. Floating-point nullspace routines return approximate bases, and rounding scaled vectors to integers is a common shortcut. We compared this heuristic with \synkit's exact rational solver on the twelve reference networks (Table~\ref{tab:reference_audit}). SVD residuals were of order $10^{-16}$ on closed networks, but after scaling by $10^3$ and rounding, the recovered vectors violated $y^T \mathbf{S} = 0$ on three models: Michaelis--Menten, reversible Michaelis--Menten, and the one-site futile cycle. \synkit's exact elimination returned valid integer vectors in every case. \revtodo{S1}{Replace the scale-and-round baseline with cdd or clingo enumeration on every network (main-text note 5; report B3).}
 
 
 
@@ -266,11 +266,11 @@ Fig.~\ref{fig:network_families} illustrates the three benchmark families. Fig.~\
 \section{BioModels: structural SBML interoperability}
 \label{si:biomodels}
 
-The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \texttt{SBML} exchange across a size-stratified selection from \texttt{BioModels}: ten models contain reaction structures and pass export and re-import checks without loss of stoichiometric multiplicities, while \texttt{BIOMD0000000562} serves as a reaction-free control. Across the selected models, \synkit preserves topological reaction networks and stoichiometric multiplicities.
+The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \texttt{SBML} exchange across a size-stratified selection from \texttt{BioModels}: ten models contain reaction structures and pass export and re-import checks without loss of stoichiometric multiplicities, while \texttt{BIOMD0000000562} serves as a reaction-free control. Across the selected models, \synkit preserves topological reaction networks and stoichiometric multiplicities. \rev{As an independent check, \texttt{analysis/scripts/crnt\_from\_xml.py} recomputes complexes, linkage classes, rank and deficiency directly from each \texttt{SBML} reaction list, using only the Python standard library and exact rational arithmetic; it agrees with Table~\ref{tab:biomodels_models} on all ten reaction-bearing models.}
 
 \begin{table}[htbp]
 \centering
-\caption{BioModels input inventory and structural results. $m$: species, $r$: directed reactions, $s$: exact rank, $\delta$: deficiency, P: minimal conserved pools, S: minimal siphons, RT: supported structural round trip, and Covered: every minimal siphon contains a conserved-pool support. Coverage is the sufficient persistence condition used in the main text, including the vacuous case of no siphons. Failure does not prove extinction. Dashes mark analyses inapplicable to the reaction-free control.}
+\caption{BioModels input inventory and structural results. $m$: species, $r$: directed reactions, $s$: exact rank, $\delta$: deficiency, P: minimal conserved pools, S: minimal siphons, RT: supported structural round trip, and Covered: every minimal siphon contains a conserved-pool support. Coverage is the sufficient persistence condition used in the main text, including the vacuous case of no siphons. Failure does not prove extinction. Dashes mark analyses inapplicable to the reaction-free control. \rev{Row \texttt{BIOMD0000000637} corrected (10 Nov): $s$, $\delta$ and P are 9, 9 and 3, previously 6, 0 and 6, after a fix to the \texttt{SBML} import of reversible reactions.} \revtodo{S2}{Regenerate this table from the \synkit release (main-text note 10), and state the reading of an omitted \texttt{reversible} attribute here (report C1).}}
 \label{tab:biomodels_models}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -286,12 +286,38 @@ Model & $m$ & $r$ & $s$ & $\delta$ & P & S & RT & Covered \\
 \texttt{BIOMD0000000064} & 26 & 17 & 17 & 0 & 11 & 8 & yes & no \\
 \texttt{BIOMD0000000108} & 9 & 17 & 7 & 8 & 2 & 2 & yes & yes \\
 \texttt{BIOMD0000000404} & 29 & 35 & 19 & 13 & 10 & 10 & yes & no \\
-\texttt{BIOMD0000000637} & 12 & 35 & 6 & 0 & 6 & 3 & yes & yes \\
+\texttt{BIOMD0000000637} & 12 & 35 & 9 & 9 & 3 & 3 & yes & yes \\
 \texttt{BIOMD0000000019} & 100 & 125 & 81 & 41 & 19 & 20 & yes & no \\
 \texttt{BIOMD0000000175} & 120 & 102 & 94 & 6 & 30 & 26 & yes & no \\
 \texttt{BIOMD0000000255} & 504 & 827 & 486 & 317 & 17 & 75 & yes & no \\
 \texttt{BIOMD0000000562} & 0 & 0 & -- & -- & -- & -- & -- & -- \\
 % END GENERATED: biomodels-models
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{\rev{Catalyst conventions in the \texttt{BioModels} entries. Mod.: number of \texttt{SBML} modifier references, which the reader does not import. $\delta$ is the deficiency with species listed on both sides kept (as imported), with those species cancelled as in net-stoichiometry tools, and with every modifier added to both sides of its reaction. The reaction-free control \texttt{BIOMD0000000562} is omitted. Input files are those of Table~\ref{tab:biomodels_models}, checked by SHA-256.}}
+\label{tab:biomodels_modifiers}
+\small
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+Model & Mod. & $\delta$ kept & $\delta$ cancelled & $\delta$ with modifiers \\
+\midrule
+% BEGIN GENERATED: biomodels-modifiers
+% Generated from crn-biomodels-modifiers.json.
+\texttt{BIOMD0000000001} & 0 & 0 & 0 & 0 \\
+\texttt{BIOMD0000000010} & 5 & 0 & 0 & 5 \\
+\texttt{BIOMD0000000051} & 5 & 8 & 8 & 13 \\
+\texttt{BIOMD0000000064} & 10 & 0 & 0 & 0 \\
+\texttt{BIOMD0000000108} & 2 & 8 & 8 & 8 \\
+\texttt{BIOMD0000000404} & 2 & 13 & 11 & 15 \\
+\texttt{BIOMD0000000637} & 0 & 9 & 9 & 9 \\
+\texttt{BIOMD0000000019} & 0 & 41 & 41 & 41 \\
+\texttt{BIOMD0000000175} & 142 & 6 & 6 & 8 \\
+\texttt{BIOMD0000000255} & 0 & 317 & 317 & 317 \\
+% END GENERATED: biomodels-modifiers
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -324,7 +350,7 @@ Module & $m$ & $r$ & $n$ & $\ell$ & $s$ & $\delta$ & P & S \\
 
 \subsection{Glucose-to-pyruvate pathway realization and invariants}
 
-Table~\ref{tab:glycolysis_flux} lists the reaction multiset converting one glucose to two pyruvates across a preparatory phase (reactions firing once) and payoff phase (firing twice). Aldolase (\texttt{R01068}) and triosephosphate isomerase (\texttt{R01015}) produce two glyceraldehyde 3-phosphate equivalents, directing payoff enzymes (\texttt{R01061}--\texttt{R00200}) to fire twice. State-space search yields a certified 15-step sequence (Fig.~5b) preserving the weighted three-carbon backbone ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).
+Table~\ref{tab:glycolysis_flux} lists the reaction multiset converting one glucose to two pyruvates across a preparatory phase (reactions firing once) and payoff phase (firing twice). Aldolase (\texttt{R01068}) and triosephosphate isomerase (\texttt{R01015}) produce two glyceraldehyde 3-phosphate equivalents, directing payoff enzymes (\texttt{R01061}--\texttt{R00200}) to fire twice. State-space search yields a certified 15-step sequence (Fig.~5b \revtodo{S3}{use Fig.~\ref{main:fig:glycolysis}b so the number follows renumbering.}) preserving the weighted three-carbon backbone ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).
 
 \begin{table}[htbp]
 \centering
@@ -346,28 +372,9 @@ Reaction & Count & Reaction & Count \\
 \end{tabular*}
 \end{table}
 
-\subsection{Catalytic gating and cofactor boundary controls}
+\subsection{\texorpdfstring{\rev{Generic compound identifiers}}{Generic compound identifiers} and cofactor boundary controls}
 
-Table~\ref{tab:glycolysis_participant} evaluates participant reduction on glucokinase (\texttt{R02189}), which couples glucose phosphorylation to polyphosphate hydrolysis. Net stoichiometric reduction preserves the stoichiometric matrix $\mathbf S$, but it drops deficiency ($\delta: 1 \to 0$) and destroys catalytic gating by allowing spontaneous firing without polyphosphate. Retaining the shared participant enforces this donor requirement.
-
-\begin{table}[htbp]
-\centering
-\caption{Shared-polyphosphate control for a single prescribed \texttt{R02189} firing. The glucose inventory is one in every row. $n$: complexes, $\ell$: linkage classes, and $\delta$: deficiency.}
-\label{tab:glycolysis_participant}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrl@{}}
-\toprule
-Shared participant & PolyP tokens & $n$ & $\ell$ & $\delta$ & Decision \\
-\midrule
-% BEGIN GENERATED: glycolysis-participant-control
-% Generated from crn-review-experiments.json.
-Retained & 0 & 16 & 4 & 1 & blocked \\
-Retained & 1 & 16 & 4 & 1 & fires \\
-Cancelled & 0 & 14 & 3 & 0 & fires \\
-Cancelled & 1 & 14 & 3 & 0 & fires \\
-% END GENERATED: glycolysis-participant-control
-\bottomrule
-\end{tabular*}
-\end{table}
+\rev{\texttt{KEGG} writes polyphosphate glucokinase (\texttt{R02189}, EC~2.7.1.63) as \texttt{C00404 + C00267 <=> C00404 + C00668}. The identifier \texttt{C00404} names a polyphosphate chain of any length, so (Phosphate)$_n$ on the left and (Phosphate)$_{n-1}$ on the right share it and the polymer appears on both sides. Counting phosphorus shows that one phosphate moves from the polymer to glucose: polyphosphate is a phosphoryl donor, not a retained catalyst. \synkit keeps the equation as written, so in the reduced glycolysis model the polymer is a species that this reaction never consumes. We therefore do not use \texttt{R02189} as an example of participant retention; the main text uses the catalysts of \texttt{BIOMD0000000404} instead (Table~\ref{tab:biomodels_modifiers}).} \revdel{Table on shared-polyphosphate control (participant retained versus cancelled)}
 
 \clearpage
 
@@ -405,7 +412,7 @@ Table~\ref{tab:formose_dpo_comparison} compares the full API runtime of \texttt{
 
 \begin{table}[htbp]
 \centering
-\caption{Full API runtime comparison. Times are median cumulative seconds from seeds over 20 timed runs after three warm-ups. Native \texttt{SynReactor} uses its C++ controller and DPO kernel with implicit hydrogen counts, whereas \texttt{M{\O}D} and \texttt{MolFoundry} use explicit hydrogen vertices. Rule preparation and network construction are included for every tool. Counts describe identical completed species and stoichiometric reaction sets. Each expansion has a 180~s time limit and an 8~GiB per-process address-space limit.}
+\caption{Full API runtime comparison. \revtodo{S4}{The \texttt{SynReactor} C++ DPO column was produced with code that is not in the \synkit~1.6.5 release; rerun from the new release (main-text notes 3, 8, 10; report A4).} Times are median cumulative seconds from seeds over 20 timed runs after three warm-ups. Native \texttt{SynReactor} uses its C++ controller and DPO kernel with implicit hydrogen counts, whereas \texttt{M{\O}D} and \texttt{MolFoundry} use explicit hydrogen vertices. Rule preparation and network construction are included for every tool. Counts describe identical completed species and stoichiometric reaction sets. Each expansion has a 180~s time limit and an 8~GiB per-process address-space limit.}
 \label{tab:formose_dpo_comparison}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -455,7 +462,7 @@ $T_{6}$ & 3 & 4 & $2r_{1}+r_{3}+r_{7}$ \\
 
 \clearpage
 
-Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor inventories. Formaldehyde is $C_1$ and glycolaldehyde is $C_2$. Every positive sequence is confirmed by a replayable firing sequence, while negative decisions are established by exhaustive search over the prescribed multiset. For an independent check, the same reaction multisets and initial markings are supplied to \texttt{MolFoundry}'s \texttt{FlowSolution}, without optimizing a new hyperflow. Its \texttt{is\_realizable()} method and SMT certificate enumeration agree with all ten \synkit decisions. All three positive certificates are independently replayed, checking enabling before every firing, the requested reaction multiplicities, and target production. This comparison concerns the prescribed routes, rather than unrestricted target reachability.
+Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor inventories. Formaldehyde is $C_1$ and glycolaldehyde is $C_2$. Every positive sequence is confirmed by a replayable firing sequence, while negative decisions are established by exhaustive search over the prescribed multiset. For an independent check, the same reaction multisets and initial markings are supplied to \texttt{MolFoundry}'s \texttt{FlowSolution}, without optimizing a new hyperflow. Its \texttt{is\_realizable()} method and SMT certificate enumeration agree with all ten \synkit decisions. All three positive certificates are independently replayed, checking enabling before every firing, the requested reaction multiplicities, and target production. This comparison concerns the prescribed routes, rather than unrestricted target reachability. \revtodo{S5}{Explain that the two routes consume no formaldehyde, so equal-carbon inventories differ only in glycolaldehyde count (main-text note 9; report B2).}
 
 \begin{table}[htbp]
 \centering

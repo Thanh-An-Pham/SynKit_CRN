@@ -7,6 +7,40 @@
     "reaction_free_models_are_flagged": true
   },
   "claim_boundary": "This is an interoperability and scale probe over a small, hand-picked sample of curated models. It is not a systematic survey of BioModels and supports no claim about coverage of the repository.",
+  "corrections": [
+    {
+      "date": "2026-11-10",
+      "evidence": [
+        "review/rerun-20261110/crn-biomodels.fixed-importer.json",
+        "review/rerun-20261110/synkit-sbml-reversible-fix.patch"
+      ],
+      "fields": {
+        "deficiency": [
+          0,
+          9
+        ],
+        "n_complexes": [
+          25,
+          23
+        ],
+        "n_conserved_moieties": [
+          6,
+          3
+        ],
+        "n_linkage_classes": [
+          19,
+          5
+        ],
+        "rank": [
+          6,
+          9
+        ]
+      },
+      "model_id": "BIOMD0000000637",
+      "reason": "SynKit 1.6.5 crn_from_sbml gave the backward copy of each reversible=\"true\" reaction the forward source_node_id, so SynCRN.to_digraph() merged both directions into one node. Values recomputed with that importer fixed (source_node_id=f\"{rid}_rev\"); all other fields, models, timings and the environment record are unchanged from the reference run.",
+      "regenerate": "Rerun Experiment/CRN/studies/biomodels.py on the reference machine once the fix is released."
+    }
+  ],
   "environment": {
     "cpu_count": 22,
     "crn_backend": {
@@ -271,20 +305,20 @@
     {
       "bytes": 131400,
       "crnt_seconds": 0.0013660620024893433,
-      "deficiency": 0,
+      "deficiency": 9,
       "download_url": "https://www.ebi.ac.uk/biomodels/model/download/BIOMD0000000637?filename=BIOMD0000000637_url.xml",
       "model_id": "BIOMD0000000637",
       "moiety_seconds": 0.0011370860156603158,
-      "n_complexes": 25,
-      "n_conserved_moieties": 6,
-      "n_linkage_classes": 19,
+      "n_complexes": 23,
+      "n_conserved_moieties": 3,
+      "n_linkage_classes": 5,
       "n_minimal_siphons": 3,
       "n_reactions": 35,
       "n_species": 12,
       "parse_seconds": 0.0029396690079011023,
       "persistence_seconds": 0.000719470001058653,
       "persistent": true,
-      "rank": 6,
+      "rank": 9,
       "roundtrip_ok": true,
       "roundtrip_scope": "species ids/labels/SMILES/source ids and directed reaction ids/labels/stoichiometric multisets/source ids; excludes kinetic laws, events, rules, and package-specific semantics",
       "roundtrip_seconds": 0.0018068810168188065,
