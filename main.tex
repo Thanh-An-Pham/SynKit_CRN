@@ -224,6 +224,11 @@
 \newcommand{\synkitcrn}{\texttt{SynKit CRN}\xspace}
 \hyphenation{SynKit Bio-in-for-mat-ics Reactome Wiki-Pathways}
 
+% Revision markup: \showrevisionstrue shows changes in red; set \showrevisionsfalse for the clean version.
+\newif\ifshowrevisions
+\showrevisionstrue
+\DeclareRobustCommand{\rev}[1]{\ifshowrevisions\textcolor{red}{#1}\else#1\fi}
+
 \emergencystretch=2em
 \tolerance=2000
 \hbadness=2000
@@ -459,7 +464,7 @@ The broader benchmark suite evaluates scalability across directed chains, revers
 \subsection{Structural \texttt{SBML} round-trip validation in \texttt{BioModels}}
 \label{sec:results_biomodels}
 
-To test real-world structural interoperability and scalability, we evaluated eleven curated \texttt{BioModels}~\cite{maliksheriff2020biomodels} entries spanning diverse sizes, including ten reaction networks and one qualitative network control (\texttt{SBML-qual}). All ten reaction-bearing models round-trip through the \texttt{SBML} reader and writer without loss of stoichiometry, and their ranks and deficiencies agree with an independent exact-rational computation from the \texttt{SBML} reaction lists (Table~\ref{supp:tab:biomodels_models}). Even on the largest model (\texttt{BIOMD0000000255}, with 504 species and 1\,654 directed reactions), \synkit identifies 23 minimal siphons in 1.2~s and 17 exact conserved pools in 9.74~s (Fig.~\ref{fig:evidence_overview}a). Testing siphon coverage by conserved pools gives a sufficient condition for structural protection from extinction. In \texttt{BIOMD0000000255} and the 100-species model \texttt{BIOMD0000000019} (19 siphons, 19 pools), at least one minimal siphon contains no conserved-pool support, so the sufficient persistence condition~\cite{angeli2007persistence} cannot certify these models. This does not imply that any species goes extinct; it identifies the species sets that a kinetic analysis should examine first. The qualitative control \texttt{BIOMD0000000562} is correctly identified as reaction-free for Core structural analysis.
+To test real-world structural interoperability and scalability, we evaluated eleven curated \texttt{BioModels}~\cite{maliksheriff2020biomodels} entries spanning diverse sizes, including ten reaction networks and one qualitative network control (\texttt{SBML-qual}). All ten reaction-bearing models round-trip through the \texttt{SBML} reader and writer without loss of stoichiometry, and their ranks and deficiencies agree with an independent exact-rational computation from the \texttt{SBML} reaction lists (Table~\ref{supp:tab:biomodels_models}). Even on the largest model (\texttt{BIOMD0000000255}, with 504 species and 1\,654 directed reactions), \synkit identifies 23 minimal siphons in 1.2~s and 17 exact conserved pools in 9.74~s (Fig.~\ref{fig:evidence_overview}a). Testing siphon coverage by conserved pools gives a sufficient condition for structural protection from extinction. \rev{In four of the ten models (\texttt{BIOMD0000000064}, \texttt{BIOMD0000000019}, \texttt{BIOMD0000000175} and \texttt{BIOMD0000000255}),} at least one minimal siphon contains no conserved-pool support, so the sufficient persistence condition~\cite{angeli2007persistence} cannot certify these models\rev{ (Table~\ref{supp:tab:biomodels_models})}. This does not imply that any species goes extinct; it identifies the species sets that a kinetic analysis should examine first. The qualitative control \texttt{BIOMD0000000562} is correctly identified as reaction-free for Core structural analysis.
 
 Participant retention matters in curated models as well. In \texttt{BIOMD0000000404}, two dephosphorylation reactions of phosphorylated CheY (\texttt{Yp}) list their catalysts, the phosphatase CheZ (\texttt{Z}) and the receptor complex \texttt{Tasp\_WA}, as both reactant and product, for example $\texttt{Yp}+\texttt{Z}\to\texttt{Y}+\texttt{Z}$. Cancelling these participants, as net-stoichiometry tools do, leaves $\mathbf S$ unchanged but lowers the deficiency from 13 to 11 (Table~\ref{supp:tab:biomodels_modifiers}), and it lets dephosphorylation fire without CheZ.
 
@@ -482,7 +487,7 @@ From a single initial glucose molecule, the prescribed glycolytic flux yields a 
 \begin{figure}[!htbp]
     \centering
     \input{Figure/glycolysis.tex}
-    \caption{Conserved pools and pathway realizability in reduced \texttt{KEGG} glycolysis (\texttt{M00001}). \textbf{(a)}~Pathway schematic showing the retained polyphosphate participant and the ferredoxin bypass (dots: carbons, circled P: phosphate). \textbf{(b)}~Token markings along the certified 15-step conversion of one glucose to two pyruvates (single dot: one token, ringed dot: two tokens). Black lines trace consumed intermediates, gray lines carry unchanged pools, column headers name enzymes, and the dashed line marks aldolase cleavage. Shaded rows indicate hexoses, with pool weights $w$ on the right. Bottom rows trace total carbohydrate tokens and the invariant weighted pool ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).}
+    \caption{Conserved pools and pathway realizability in reduced \texttt{KEGG} glycolysis (\texttt{M00001}). \textbf{(a)}~Pathway schematic showing \rev{the \texttt{KEGG} polyphosphate entry (\texttt{R02189}), kept as written (Section~\ref{sec:representation}),} and the ferredoxin bypass (dots: carbons, circled P: phosphate). \textbf{(b)}~Token markings along the certified 15-step conversion of one glucose to two pyruvates (single dot: one token, ringed dot: two tokens). Black lines trace consumed intermediates, gray lines carry unchanged pools, column headers name enzymes, and the dashed line marks aldolase cleavage. Shaded rows indicate hexoses, with pool weights $w$ on the right. Bottom rows trace total carbohydrate tokens and the invariant weighted pool ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).}
     \label{fig:glycolysis}
 \end{figure}
 

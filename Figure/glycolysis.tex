@@ -73,8 +73,8 @@
 \node[font=\scSmall,text=black,inner sep=0.8pt,align=center]
   at (5.24,-2.68) {Fd$_{\rm ox}\!\to\,$Fd$_{\rm red}$\\bypass};
 
-\node[catalyst,font=\scSmall,text=black] (poly) at (1.235,-2.30) {PolyP};
-\draw[cat,dashed] (poly.north) -- ($(glc)!0.50!(g6p)$);
+\node[cofactor,font=\scSmall,text=black] (poly) at (1.235,-2.30) {\rev{PolyP}};
+\draw[reac] (poly.north) -- ($(glc)!0.50!(g6p)$);
 \end{scope}
 
 \node[anchor=north west,inner sep=0pt] at (0,\ry)

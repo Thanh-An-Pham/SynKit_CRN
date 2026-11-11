@@ -265,6 +265,11 @@
 \newcommand{\synkitcrn}{\texttt{SynKit CRN}\xspace}
 
 \hyphenation{SynKit Bio-in-for-mat-ics Reactome Wiki-Pathways}
+
+% Revision markup, as in main.tex (needed because main.aux labels may contain \rev).
+\newif\ifshowrevisions
+\showrevisionstrue
+\DeclareRobustCommand{\rev}[1]{\ifshowrevisions\textcolor{red}{#1}\else#1\fi}
 \emergencystretch=2em
 \tolerance=2000
 \hbadness=2000
