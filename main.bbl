@@ -1,4 +1,4 @@
-\begin{thebibliography}{40}
+\begin{thebibliography}{43}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -43,6 +43,17 @@ Jakob~Lykke Andersen, Christoph Flamm, Daniel Merkle, and Peter~F. Stadler.
   9761 of \emph{Lecture Notes in Computer Science}, pages 73--88. Springer,
   2016.
 \newblock \doi{10.1007/978-3-319-40530-8_5}.
+
+\bibitem[Phan et~al.(2025{\natexlab{a}})Phan, Weinbauer, Gonz{\'a}lez~Laffitte,
+  Pan, Merkle, Andersen, Fagerberg, Flamm, and Stadler]{phan2025syntemp}
+Tieu-Long Phan, Klaus Weinbauer, Marcos~E. Gonz{\'a}lez~Laffitte, Yingjie Pan,
+  Daniel Merkle, Jakob~L. Andersen, Rolf Fagerberg, Christoph Flamm, and
+  Peter~F. Stadler.
+\newblock {SynTemp}: Efficient extraction of graph-based reaction rules from
+  large-scale reaction databases.
+\newblock \emph{Journal of Chemical Information and Modeling}, 65\penalty0
+  (6):\penalty0 2882--2896, 2025{\natexlab{a}}.
+\newblock \doi{10.1021/acs.jcim.4c01795}.
 
 \bibitem[Famili and Palsson(2003)]{famili2003leftnullspace}
 Iman Famili and Bernhard~O Palsson.
@@ -174,15 +185,15 @@ Alexander Butlerow.
   295--298, 1861.
 \newblock \doi{10.1002/jlac.18611200308}.
 
-\bibitem[Phan et~al.(2025)Phan, Gonz{\'a}lez~Laffitte, Weinbauer, Merkle,
-  Andersen, Fagerberg, Gatter, and Stadler]{phan2025synkit}
+\bibitem[Phan et~al.(2025{\natexlab{b}})Phan, Gonz{\'a}lez~Laffitte, Weinbauer,
+  Merkle, Andersen, Fagerberg, Gatter, and Stadler]{phan2025synkit}
 Tieu-Long Phan, Marcos~E. Gonz{\'a}lez~Laffitte, Klaus Weinbauer, Daniel
   Merkle, Jakob~Lykke Andersen, Rolf Fagerberg, Thomas Gatter, and Peter~F.
   Stadler.
 \newblock {SynKit}: A graph-based {Python} framework for rule-based reaction
   modeling and analysis.
 \newblock \emph{Journal of Chemical Information and Modeling}, 65\penalty0
-  (24):\penalty0 13012--13019, 2025.
+  (24):\penalty0 13012--13019, 2025{\natexlab{b}}.
 \newblock \doi{10.1021/acs.jcim.5c02123}.
 
 \bibitem[Hagberg et~al.(2008)Hagberg, Swart, and Schult]{hagberg2008networkx}
@@ -199,6 +210,24 @@ Stefan M{\"u}ller, Christoph Flamm, and Peter~F. Stadler.
 \newblock \emph{Journal of Cheminformatics}, 14\penalty0 (1):\penalty0 63,
   2022.
 \newblock \doi{10.1186/s13321-022-00621-8}.
+
+\bibitem[Phan et~al.(2026)Phan, Merkle, Phan, Flamm, and
+  Stadler]{phan2026realizability}
+Tuyet-Minh Phan, Daniel Merkle, Tieu-Long Phan, Christoph Flamm, and Peter~F.
+  Stadler.
+\newblock On the realizability of abstract reaction networks with real
+  molecules and reactions.
+\newblock arXiv preprint, 2026.
+\newblock URL \url{https://arxiv.org/abs/2608.04635}.
+\newblock arXiv:2608.04635.
+
+\bibitem[Phan(2026)]{phan2026lewis}
+Tieu-Long Phan.
+\newblock Lewis-labeled graphs: Curly arrows and fishhooks as executable
+  electron transfers.
+\newblock arXiv preprint, 2026.
+\newblock URL \url{https://arxiv.org/abs/2607.26088}.
+\newblock arXiv:2607.26088.
 
 \bibitem[Colom and Silva(1991)]{colom1991convex}
 Jos{\'e}~Manuel Colom and Manuel Silva.
@@ -331,13 +360,11 @@ Rahuman~S Malik-Sheriff, Mihai Glont, Tung V~N Nguyen, Krishna Tiwari,
   2020.
 \newblock \doi{10.1093/nar/gkz1055}.
 
-\bibitem[Phan and Weinbauer(2026)]{synkit170snapshot}
+\bibitem[Phan and Weinbauer(2026)]{synkit170release}
 Tieu~Long Phan and Klaus Weinbauer.
-\newblock {SynKit}, version 1.7.0 development snapshot.
-\newblock Unreleased development source checkout, 2026.
-\newblock URL \url{https://github.com/TieuLongPhan/SynKit}.
-\newblock Source-file hashes, native build identifiers and runtime environments
-  are recorded in the accompanying experiment reports; public versioned release
-  and archival DOI pending.
+\newblock {SynKit}, version 1.7.0.
+\newblock Zenodo. \doi{10.5281/zenodo.24135298}, 2026.
+\newblock URL \url{https://zenodo.org/records/24135298}.
+\newblock Released 11 November 2026.
 
 \end{thebibliography}

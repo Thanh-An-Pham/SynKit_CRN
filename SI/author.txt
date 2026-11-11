@@ -1,0 +1,233 @@
+================================================================================
+BMC BIOINFORMATICS — SUBMISSION INFORMATION
+================================================================================
+
+Prepared from the current SynKit CRN manuscript, using the Springer Nature
+submission-field layout in ../../synepd_paper/SI/author.txt. Author ORCIDs and
+the TACsy funding recipient were copied from that source; the author order,
+affiliations, abstract, contributions and declarations follow ../main.tex.
+
+Journal: BMC Bioinformatics
+Article type: Software article (select "Software" if that is the portal label).
+This is a copy-and-paste preparation file; it does not record a submission.
+Bracketed notes are preparation instructions, not text to paste.
+
+================================================================================
+MANUSCRIPT DETAILS (Details Tab)
+================================================================================
+
+[Collection (optional)]
+Leave unselected unless submitting to a particular collection by arrangement.
+
+[Title]
+On the Conservation Laws and Pathway Realizability of Biochemical Reaction Networks
+
+[Abstract]
+Background: Conserved metabolite pools and substrate availability constrain biochemical pathways before kinetic parameters are known. These properties are usually evaluated on incompatible mathematical abstractions: stoichiometric nullspaces omit shared catalytic participants, while graph reachability ignores token multiplicities. Because participants that appear identically on both reaction sides are eliminated under net stoichiometry despite being required for firing, standard reductions can destroy catalytic gating and alter deficiency.
+
+Results: We present the chemical reaction network (CRN) submodule of SynKit, an open-source Python toolkit with an optimized C++ core. Networks imported from KEGG, structural SBML models, or generative rules share a bipartite representation preserving distinct reactant and product incidences. The toolkit computes exact conservation laws, minimal semiflows and siphons, deficiency, and discrete firing certificates for prescribed reaction multisets. Twelve reference networks match analytical values and agree with CRNT4SBML across eight structural invariants. Ten reaction-bearing BioModels entries, up to 504 species and 1,654 directed reactions, pass structural round trips. In one model, cancelling shared catalysts leaves net stoichiometry unchanged but lowers deficiency from 13 to 11. Matched formose expansions reach identical sets of 10,572 species and 11,239 reactions across six depths in SynKit, MØD, and MolFoundry. For a prescribed glycolytic flux with ADP, NAD+ and phosphate supplied, one initial ATP gives a non-negative predicted final inventory yet blocks execution. Two initial ATP permit a 15-step certificate. In the 37-species formose network, conservation weights reproduce carbon counts. Two prescribed target routes require two or three glycolaldehyde molecules and consume no formaldehyde, explaining their different outcomes across inventories with equal carbon budgets.
+
+Conclusions: Stoichiometric conservation is necessary but insufficient to guarantee pathway execution. By unifying conservation analysis, deficiency invariants, and Petri-net reachability on a single incidence representation with exact rational arithmetic, SynKit makes participant retention, cofactor boundaries, and precursor constraints explicit and testable. Source code, recorded benchmarks, and reproducible analysis workflows accompany the manuscript.
+
+[Keywords — enter individually if required]
+Chemical reaction networks
+Chemical reaction network theory
+Petri nets
+Conserved moieties
+Stoichiometry
+Pathway realizability
+SBML
+
+[Cover letter — draft for BMC Bioinformatics]
+Dear Editor,
+
+We submit our manuscript entitled "On the Conservation Laws and Pathway Realizability of Biochemical Reaction Networks" for consideration as a Software article in BMC Bioinformatics.
+
+The manuscript presents the chemical reaction network submodule of SynKit, an open-source Python toolkit with an optimized C++ core. It combines exact conservation analysis, minimal semiflow and siphon enumeration, chemical reaction network deficiency, and discrete pathway verification on a shared representation that retains separate reactant and product incidences. This allows researchers to examine conservation, catalytic requirements, and finite substrate inventories without changing the underlying reaction model between analyses.
+
+We validate structural quantities on twelve reference networks and compare eight invariants with CRNT4SBML. Ten reaction-bearing BioModels entries pass structural SBML round trips. Matched formose expansions agree with MØD and MolFoundry on the generated species and reaction sets. Glycolysis and formose case studies demonstrate why a balanced net conversion or conserved carbon budget alone cannot establish that a prescribed reaction sequence can execute from a specified initial inventory.
+
+The work addresses computational analysis and modelling of biochemical networks, with applications in systems biology and pathway analysis. It provides reproducible workflows and explicit certificates that connect structural network properties to discrete pathway feasibility. The software is distributed under the MIT License at https://github.com/TieuLongPhan/SynKit. Experiments are available at https://github.com/TieuLongPhan/SynKit/tree/v1.7.0/Experiment/CRN. This study uses version 1.7.0 (https://doi.org/10.5281/zenodo.24135298).
+
+The authors declare that they have no competing interests. Both authors have read and approved the final manuscript.
+
+[Before using this letter, confirm the following sentence for THIS manuscript;
+the corresponding declaration in the SynEPD letter applies to that paper only.]
+The manuscript has not been published and is not under consideration for publication elsewhere. Both authors have approved its submission to BMC Bioinformatics.
+
+Thank you for considering our manuscript.
+
+Sincerely,
+Tieu-Long Phan, on behalf of both authors
+Bioinformatics Group, Leipzig University
+Härtelstraße 16–18, D-04107 Leipzig, Germany
+Department of Mathematics and Computer Science, University of Southern Denmark
+DK-5230 Odense M, Denmark
+Email: tieu@bioinf.uni-leipzig.de
+
+================================================================================
+AFFILIATED INSTITUTIONS (Authors Tab -> Affiliated institutions)
+================================================================================
+
+[Institution 1]
+Institution name: Leipzig University
+Institution country or territory: Germany
+Institution city: Leipzig
+Institution details: Bioinformatics Group, Department of Computer Science & Interdisciplinary Center for Bioinformatics & School for Embedded and Composite Artificial Intelligence (SECAI), Härtelstraße 16–18, D-04107
+
+[Institution 2]
+Institution name: University of Southern Denmark
+Institution country or territory: Denmark
+Institution city: Odense M
+Institution details: Department of Mathematics and Computer Science, DK-5230
+
+================================================================================
+AUTHORS' INFORMATION (Authors Tab -> Authors' information)
+================================================================================
+
+[Preserve this order; it matches the current SynKit CRN manuscript.]
+
+--- Author 1 ---
+Given names: Thanh-An
+Family name: Pham
+Email: thanh-an.pham@uni-leipzig.de
+Primary affiliation: Leipzig University
+Other affiliation: None
+ORCID: 0000-0003-0271-2696
+Corresponding author: No
+
+--- Author 2 (Corresponding Author) ---
+Given names: Tieu-Long
+Family name: Phan
+Email: tieu@bioinf.uni-leipzig.de
+Primary affiliation: Leipzig University
+Other affiliation: University of Southern Denmark
+ORCID: 0000-0002-3532-2064
+Corresponding author: Yes
+
+================================================================================
+DECLARATIONS TAB
+================================================================================
+
+1. Data availability
+--------------------------------------------------------------------------------
+Select: Yes. I used or generated research data in this study.
+
+Text to paste (matches the current manuscript's availability statement):
+The CRN submodule is distributed with SynKit under the MIT License. The source code is available at https://github.com/TieuLongPhan/SynKit, and the experiments at https://github.com/TieuLongPhan/SynKit/tree/v1.7.0/Experiment/CRN. This study uses version 1.7.0 (https://doi.org/10.5281/zenodo.24135298). KEGG pathways remain subject to KEGG terms, and BioModels entries are distributed under the CC0 1.0 Public Domain Dedication.
+
+2. Acknowledgements (optional)
+--------------------------------------------------------------------------------
+Not applicable.
+
+3. Research funding
+--------------------------------------------------------------------------------
+Select: Yes, this research did receive funding.
+
+[Funding entry — TACsy / EU]
+Author with funding: Tieu-Long Phan
+Funder name: European Commission
+Grant ID: 101072930
+Programme/project: Horizon Europe Marie Skłodowska-Curie Doctoral Network;
+TACsy — Training Alliance for Computational Systems Chemistry
+
+[Full funding paragraph, if asked as free text]
+This project has received funding from the European Union's Horizon Europe Doctoral Network programme under the Marie-Skłodowska-Curie grant agreement No 101072930 (TACsy, Training Alliance for Computational systems chemistry). Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union. Neither the European Union nor the granting authority can be held responsible for them.
+
+[Only the funding declared in the SynKit CRN manuscript is included here.]
+
+4. Code availability (if separate from data availability)
+--------------------------------------------------------------------------------
+The SynKit source code is available at https://github.com/TieuLongPhan/SynKit under the MIT License, and the experiments at https://github.com/TieuLongPhan/SynKit/tree/v1.7.0/Experiment/CRN. This study uses version 1.7.0 (https://doi.org/10.5281/zenodo.24135298).
+
+5. Competing interests
+--------------------------------------------------------------------------------
+Select: No competing interests.
+
+Text to paste:
+The authors declare that they have no competing interests.
+
+6. Authors' contributions (CRediT)
+--------------------------------------------------------------------------------
+Thanh-An Pham: Software; Validation; Writing – original draft; Writing – review and editing.
+Tieu-Long Phan: Conceptualization; Methodology; Software; Validation; Writing – original draft; Writing – review and editing.
+
+[Free-text contribution statement]
+Author contributions are reported using the CRediT taxonomy. T.-A.P.: Software, Validation, Writing (original draft), Writing (review and editing). T.-L.P.: Conceptualization, Methodology, Software, Validation, Writing (original draft), Writing (review and editing). Both authors read and approved the final manuscript.
+
+7. Ethics approval and consent to participate
+--------------------------------------------------------------------------------
+Not applicable.
+
+8. Consent for publication
+--------------------------------------------------------------------------------
+Not applicable.
+
+9. Use of generative AI (if asked)
+--------------------------------------------------------------------------------
+Claude Opus (Anthropic) was used for language editing and TikZ figure formatting. The authors reviewed, verified, and take full responsibility for all manuscript content.
+
+[This reproduces the current manuscript disclosure; update it if the actual
+use of generative AI in the manuscript changes.]
+
+================================================================================
+SOFTWARE AVAILABILITY AND REQUIREMENTS (if requested)
+================================================================================
+
+Project name: SynKit — chemical reaction network (CRN) submodule
+Project home page: https://github.com/TieuLongPhan/SynKit
+Version used: 1.7.0
+Release DOI: https://doi.org/10.5281/zenodo.24135298
+Release record: https://zenodo.org/records/24135298
+Operating systems: OS-independent package; the recorded experiments were run on Linux x86_64. Other platforms were not verified by this submission preparation.
+Programming languages: Python and C++
+Other requirements: Python >=3.10 and the dependencies declared in pyproject.toml. Building the structural C++ backend requires CMake >=3.20, a C++17 compiler and Boost headers. The native generative controller uses C++20 and an RDKit C++ development SDK; see Experiment/CRN for experiment-specific setup and constraints.
+License: MIT
+Restrictions on non-academic use of SynKit: None under the MIT License. Third-party input data remain subject to their own terms.
+
+================================================================================
+ADDITIONAL FILES
+================================================================================
+
+[Supplementary Information]
+Local file: SI/si.pdf
+File format: PDF
+Suggested title: Supplementary Information for "On the Conservation Laws and Pathway Realizability of Biochemical Reaction Networks"
+Description: Python interface example; reference-network validation; runtime scaling; BioModels structural SBML interoperability; KEGG module and glycolysis controls; formose expansion and precursor requirements.
+
+[Software and experiment materials]
+SynKit version 1.7.0: https://zenodo.org/records/24135298
+DOI: https://doi.org/10.5281/zenodo.24135298
+Experiments: https://github.com/TieuLongPhan/SynKit/tree/v1.7.0/Experiment/CRN
+
+[Related published work — if the portal requests it]
+This manuscript describes the CRN submodule of the existing SynKit framework.
+The original SynKit framework paper is cited in the manuscript. The present
+work focuses on exact reaction-network structure and prescribed-pathway
+realizability; disclose this relationship in any related-work field.
+
+[Suggested / opposed reviewers — optional]
+No names have been copied from the other papers. Enter only reviewers selected
+for this manuscript, with verified affiliations and contact details.
+
+[Submission declarations and optional services]
+Complete originality, exclusive submission, author approval, third-party
+permissions, preprint posting and publishing-agreement choices according to
+the actual status and the authors' preferences. No portal choices were made
+and no submission was sent by preparing this file.
+
+================================================================================
+SOURCES
+================================================================================
+
+Local template: ../../synepd_paper/SI/author.txt
+Author ORCID cross-check: ../../synepd_paper/sn-article.tex
+Current manuscript: ../main.tex
+Software metadata: SynKit/pyproject.toml and Experiment/CRN/README.md
+Recorded experiment environment: ../analysis/summary.json
+
+BMC Bioinformatics submission guidelines:
+https://link.springer.com/journal/12859/submission-guidelines
+
+BMC Bioinformatics Software article instructions:
+https://link.springer.com/journal/12859/submission-guidelines/software-article

@@ -266,10 +266,6 @@
 
 \hyphenation{SynKit Bio-in-for-mat-ics Reactome Wiki-Pathways}
 
-% Revision markup, as in main.tex (needed because main.aux labels may contain \rev).
-\newif\ifshowrevisions
-\showrevisionstrue
-\DeclareRobustCommand{\rev}[1]{\ifshowrevisions\textcolor{red}{#1}\else#1\fi}
 \emergencystretch=2em
 \tolerance=2000
 \hbadness=2000
@@ -322,8 +318,7 @@ Thanh-An Pham: \href{mailto:thanh-an.pham@uni-leipzig.de}{thanh-an.pham@uni-leip
 \section{Python interface example}
 \label{si:software}
 
-Code Example~\ref{lst:usage} illustrates network construction, exact structural analysis, and discrete pathway verification through \synkit's Python interface. The script builds a 14-species glycolysis model (with currency metabolites omitted), evaluates chemical reaction network theory (CRNT) invariants and deficiency, isolates conserved pools and minimal siphons, and verifies that one glucose token can reach two pyruvates via an exact 15-step firing sequence.
-Run this example from the \synkit source tree or unpacked source distribution: the research modules under \texttt{Experiment/CRN} are distributed with the source, separately from the installed runtime wheel.
+Code Example~\ref{lst:usage} shows network construction and analysis through \synkit's Python interface. We use a 14-species glycolysis model with currency metabolites omitted to calculate CRNT invariants, conserved pools and minimal siphons, then verify that one glucose token reaches two pyruvates in 15 firings. Run the example from the source tree or unpacked source distribution. The research modules under \texttt{Experiment/CRN} are distributed separately from the installed runtime wheel.
 
 \begin{lstlisting}[float=htbp,caption={Python analysis of reduced \texttt{KEGG} glycolysis (\texttt{M00001}): network construction, exact structural analysis, discrete pathway verification, and \texttt{SBML} export.},label={lst:usage}]
 from synkit.CRN import (build_native, native_backend, crnt_summary,
@@ -353,11 +348,11 @@ with native_backend(library):
 \section{Reference-network validation and numerical comparison}
 \label{si:validation}
 
-Table~\ref{tab:reference_audit} details the literature sources, targeted structural validation properties, and conservation-law audit for the twelve reference networks.
+Table~\ref{tab:reference_audit} lists the sources, validation objectives, and conservation-law residuals for the twelve reference networks.
 
 \begin{table}[htbp]
 \centering
-\caption{Reference reaction networks: literature sources, targeted structural validation properties, and conservation-law numerical audit. SVD residual reports $\max|\mathbf S^TB|$ for a floating-point basis $B$, Rounded invalid counts columns of $\operatorname{round}(1000B)$ with non-zero integer residuals, and Exact residual evaluates \synkit's integer basis. The open reactor has a zero-dimensional conservation space.}
+\caption{Sources, validation objectives, and conservation-law residuals for the reference reaction networks. SVD residual reports $\max|\mathbf S^TB|$ for a floating-point basis $B$. Rounded invalid counts columns of $\operatorname{round}(1000B)$ with non-zero integer residuals. Exact residual evaluates \synkit's integer basis. The open reactor has a zero-dimensional conservation space.}
 \label{tab:reference_audit}
 \label{tab:si_validation_sources}
 \label{tab:numerical_audit}
@@ -391,7 +386,7 @@ We cross-checked deficiency using two formulations. With species-by-complex matr
 \delta \;=\; n-\ell-\operatorname{rank}(\mathbf S)
 \;=\; \operatorname{rank}(\mathbf I_a)-\operatorname{rank}(\mathbf Y\mathbf I_a).
 \end{equation}
-Both formulations agreed for every benchmark, confirming consistency among complex partitioning, rank computation, and stoichiometric assembly. Fig.~\ref{fig:deficiency} illustrates the cross-check and the theorem verdicts on the Edelstein network.
+Both formulations give the same deficiency for every benchmark, checking complex partitioning, exact rank computation, and stoichiometric assembly. Fig.~\ref{fig:deficiency} shows the cross-check and deficiency-theorem results for the Edelstein network.
 
 \begin{figure}[!htbp]
     \centering
@@ -403,12 +398,12 @@ Both formulations agreed for every benchmark, confirming consistency among compl
 \subsection{Numerical nullspaces and exact integer conservation laws}
 \label{si:numerical}
 
-We audit integer representatives $y$ satisfying $y^T\mathbf S=0$ on the twelve reference networks (Table~\ref{tab:reference_audit}). The floating-point basis $B$ is computed by \texttt{scipy.linalg.null\_space} applied to $\mathbf S^T$. Its maximum absolute residual ranges from zero to $5.3\times10^{-16}$; irreversible isomerization and the Edelstein network have zero reported residual. We separately evaluate the heuristic $\operatorname{round}(10^3B)$ on the integer matrix. It produces vectors with non-zero exact residuals in Michaelis--Menten, reversible Michaelis--Menten, and the one-site futile cycle. This audit demonstrates the effect of this particular scaling and rounding choice on integer identities. \synkit's exact rational elimination returns a basis of the expected dimension for every network, including the empty basis for the open reactor; every returned integer vector satisfies the conservation identity exactly.
+We compare numerical and exact conservation identities on the twelve reference networks (Table~\ref{tab:reference_audit}). We compute the floating-point basis $B$ by applying \texttt{scipy.linalg.null\_space} to $\mathbf S^T$, with residuals ranging from zero to $5.3\times10^{-16}$. Small floating-point residuals do not ensure that scaling and rounding preserve an exact integer identity. The heuristic $\operatorname{round}(10^3B)$ produces non-zero exact residuals in Michaelis--Menten, reversible Michaelis--Menten, and the one-site futile cycle. This finding concerns that specific scaling and rounding choice. \synkit's rational elimination returns the expected basis dimension, including zero for the open reactor, and every integer vector satisfies $y^T\mathbf S=0$ exactly.
 
 \section{Computational cost across network families}
 \label{si:scaling}
 
-Fig.~\ref{fig:network_families} illustrates the three benchmark families. The complete scaling report contains 60 measurements: three families, four requested sizes, and five tasks. Fig.~\ref{fig:performance_diagnostics} shows the 48 measurements for four structural analyses, with numbers beside the random-sparse siphon points giving the number of minimal siphons. The remaining twelve measurements are standalone exact-rank computations; the reversible-chain rank timings also appear in Fig.~\ref{main:fig:scaling}c.
+We measure five tasks at four sizes in three network families (Fig.~\ref{fig:network_families}), giving 60 completed measurements. Fig.~\ref{fig:performance_diagnostics} shows 48 measurements for structural analyses. The twelve standalone exact-rank measurements are omitted from this figure. Reversible-chain rank timings appear in Fig.~\ref{main:fig:scaling}c.
 
 \begin{figure}[!htbp]
     \centering
@@ -420,18 +415,18 @@ Fig.~\ref{fig:network_families} illustrates the three benchmark families. The co
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\linewidth]{../Figure/performance_diagnostics.pdf}
-    \caption{Structural analysis runtimes across directed-chain, reversible-chain, and random-sparse networks. \textbf{(a)}~Minimal-siphon enumeration, where numbers beside random-sparse points give minimal siphon counts. \textbf{(b)}~Exact CRNT analysis. \textbf{(c)}~Graph canonicalization. \textbf{(d)}~Exact conserved-pool enumeration. Points and connecting lines show 48 completed single-run measurements across these four tasks. Line styles and markers distinguish the three families. All 60 requested measurements, including twelve standalone exact-rank computations, complete.}
+    \caption{Single-run structural analysis runtimes for the three network families. \textbf{(a)}~Minimal-siphon enumeration. Annotations give random-sparse siphon counts. \textbf{(b)}~Exact CRNT analysis. \textbf{(c)}~Graph canonicalization. \textbf{(d)}~Exact conserved-pool enumeration. Line styles and markers distinguish families.}
     \label{fig:performance_diagnostics}
 \end{figure}
 
 \section{BioModels: structural SBML interoperability}
 \label{si:biomodels}
 
-The eleven entries in Table~\ref{tab:biomodels_models} benchmark structural \texttt{SBML} exchange across a size-stratified selection from \texttt{BioModels}: ten reaction-bearing models pass export and re-import checks without loss of integer stoichiometric multiplicities, while \texttt{BIOMD0000000562} serves as a reaction-free control. The packaged independent reference, \texttt{sbml\_reference.py} in \texttt{Experiment/CRN/studies}, computes eight shared CRNT quantities directly from the \texttt{SBML} XML using only the Python standard library and exact rational arithmetic. The participant-conventions study compares this reference with the public importer for the retained, cancelled and modifier-added readings of every reaction-bearing model. Inputs are verified against the packaged SHA-256 manifest. Reversible reactions are expanded into distinct directed steps: an omitted flag means true in Level~2; Level~3 requires an explicit flag, with a strict error or lenient warning when absent. The BioModels enumeration uses a 1\,000\,000-node budget; incomplete searches are flagged and excluded from completed counts and timings.
+The size-stratified selection in Table~\ref{tab:biomodels_models} contains ten reaction-bearing \texttt{BioModels} entries and the reaction-free control \texttt{BIOMD0000000562}. All ten reaction networks pass export and re-import checks without loss of integer stoichiometric multiplicities. The independent \texttt{sbml\_reference.py} in \texttt{Experiment/CRN/studies} computes eight shared CRNT quantities from XML using only the Python standard library and exact rational arithmetic. We compare its results with the public importer under the retained, canceled and modifier-added readings of the reactions. We verify inputs against the packaged SHA-256 manifest. Reversible reactions expand into directed steps. Omitted reversibility flags default to true in Level~2. In Level~3 they trigger a strict error or lenient warning. Enumeration has a 1\,000\,000-node budget. Incomplete searches are flagged and excluded from completed counts and timings.
 
 \begin{table}[htbp]
 \centering
-\caption{BioModels input inventory and structural results from the version~1.7.0 source snapshot. $m$: species, $r$: directed reactions after reversibility expansion, $s$: exact rank, $\delta$: deficiency, P: minimal conserved pools, S: minimal siphons, RT: supported structural round trip, and Covered: every minimal siphon contains a conserved-pool support. Level~2 omitted reversibility flags default to true. Coverage is the sufficient persistence condition used in the main text, including the vacuous case of no siphons; failure does not prove extinction. Dashes denote unavailable quantities or analyses inapplicable to the reaction-free control; completion status is recorded in the accompanying report.}
+\caption{BioModels results computed with SynKit version~1.7.0. $m$: species, $r$: directed reactions, $s$: exact rank, $\delta$: deficiency, P: minimal conserved pools, S: minimal siphons, RT: supported structural round trip, Covered: every minimal siphon contains a conserved-pool support (vacuously true with no siphons). Coverage failure does not prove extinction. Dashes mark inapplicable reaction-free analyses. Reports record completion status.}
 \label{tab:biomodels_models}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -456,7 +451,7 @@ Model & $m$ & $r$ & $s$ & $\delta$ & P & S & RT & Covered \\
 
 \begin{table}[htbp]
 \centering
-\caption{Catalyst conventions in the \texttt{BioModels} entries. Mod.: number of \texttt{SBML} modifier references, which the reader does not import. $\delta$ is the deficiency with species listed on both sides kept (as imported), with those species cancelled as in net-stoichiometry tools, and with every modifier added to both sides of its reaction. The reaction-free control \texttt{BIOMD0000000562} is omitted. Input files are those of Table~\ref{tab:biomodels_models}, checked by SHA-256.}
+\caption{Catalyst conventions in the \texttt{BioModels} entries. Mod.: number of \texttt{SBML} modifier references, which the reader does not import. $\delta$ is the deficiency with species listed on both sides kept (as imported), with those species canceled as in net-stoichiometry tools, and with every modifier added to both sides of its reaction. The reaction-free control \texttt{BIOMD0000000562} is omitted. Input files are those of Table~\ref{tab:biomodels_models}, checked by SHA-256.}
 \label{tab:biomodels_modifiers}
 \small
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
@@ -481,7 +476,7 @@ Model & Mod. & $\delta$ kept & $\delta$ cancelled & $\delta$ with modifiers \\
 \label{si:kegg}
 \label{sec:si_case_glycolysis}
 
-Table~\ref{tab:kegg_modules} summarizes structural deficiency and conserved moiety pools across four KEGG pathway modules: glycolysis (\texttt{M00001}), pyruvate oxidation (\texttt{M00307}), citrate cycle (\texttt{M00009}), and pentose phosphate (\texttt{M00004}). Conserved pools isolate nucleotide pairs, quinones, ferredoxins, and coenzyme~A without manual curation.
+Table~\ref{tab:kegg_modules} summarizes structural deficiency and conserved pools in glycolysis (\texttt{M00001}), pyruvate oxidation (\texttt{M00307}), citrate cycle (\texttt{M00009}), and pentose phosphate (\texttt{M00004}). The conserved pools recover nucleotide pairs, quinones, ferredoxins, and coenzyme~A without manual curation.
 
 \begin{table}[htbp]
 \centering
@@ -502,7 +497,7 @@ Module & $m$ & $r$ & $n$ & $\ell$ & $s$ & $\delta$ & P & S \\
 
 \subsection{Glucose-to-pyruvate pathway realization and invariants}
 
-Table~\ref{tab:glycolysis_flux} lists the reaction multiset converting one glucose to two pyruvates across a preparatory phase (reactions firing once) and payoff phase (firing twice). Aldolase (\texttt{R01068}) and triosephosphate isomerase (\texttt{R01015}) produce two glyceraldehyde 3-phosphate equivalents, directing payoff enzymes (\texttt{R01061}--\texttt{R00200}) to fire twice. State-space search yields a certified 15-step sequence (Fig.~\ref{main:fig:glycolysis}b) preserving the weighted three-carbon backbone ($2\times\text{hexoses} + 1\times\text{trioses} = 2$).
+Table~\ref{tab:glycolysis_flux} specifies the reaction multiset converting one glucose to two pyruvates. Preparatory reactions fire once. Aldolase (\texttt{R01068}) and triosephosphate isomerase (\texttt{R01015}) supply two glyceraldehyde 3-phosphate equivalents, so each payoff reaction fires twice. State-space search yields a certified 15-step sequence (Fig.~\ref{main:fig:glycolysis}b). Every firing preserves the weighted three-carbon backbone, $2\times\text{hexoses} + 1\times\text{trioses} = 2$.
 
 \begin{table}[htbp]
 \centering
@@ -523,9 +518,9 @@ Reaction & Count & Reaction & Count \\
 
 \subsection{\texorpdfstring{Generic compound identifiers}{Generic compound identifiers} and cofactor boundary controls}
 
-\texttt{KEGG} writes polyphosphate glucokinase (\texttt{R02189}, EC~2.7.1.63) as \texttt{C00404 + C00267 <=> C00404 + C00668}. The identifier \texttt{C00404} names a polyphosphate chain of any length, so (Phosphate)$_n$ on the left and (Phosphate)$_{n-1}$ on the right share it and the polymer appears on both sides. Counting phosphorus shows that one phosphate moves from the polymer to glucose: polyphosphate is a phosphoryl donor, not a retained catalyst. \synkit keeps the equation as written, so in the reduced glycolysis model the polymer is a species that this reaction never consumes. We therefore do not use \texttt{R02189} as an example of participant retention; the main text uses the catalysts of \texttt{BIOMD0000000404} instead (Table~\ref{tab:biomodels_modifiers}).
+In polyphosphate glucokinase (\texttt{R02189}, EC~2.7.1.63), \texttt{KEGG} uses the generic identifier \texttt{C00404} for both (Phosphate)$_n$ and (Phosphate)$_{n-1}$, writing \texttt{C00404 + C00267 <=> C00404 + C00668}. Chemically, one phosphate moves from the polymer to glucose, so the polymer is a phosphoryl donor. \synkit retains the equation literally, making the polymer token unchanged in the reduced model. This generic-identifier effect therefore differs from the catalyst retention illustrated by \texttt{BIOMD0000000404} (Table~\ref{tab:biomodels_modifiers}).
 
-Table~\ref{tab:glycolysis_currency} tests the prescribed reaction multiset from one glucose token and zero tokens of every other species. Removing currency metabolites permits the 15-step carbon-backbone certificate (14 species). Retaining them (24 species) leaves hexokinase without ATP, and no reaction of the requested multiset can fire from the initial marking. The negative result concerns this flux and inventory.
+In Table~\ref{tab:glycolysis_currency}, we keep the prescribed multiset fixed and start from one glucose token with all other species absent. Retaining currency metabolites leaves hexokinase without ATP and no requested reaction enabled. Removing them permits the 15-step carbon-backbone certificate. The negative result applies to this multiset and initial inventory.
 
 \begin{table}[htbp]
 \centering
@@ -543,13 +538,13 @@ Retained & 24 & 15 & unrealizable & -- \\
 
 \subsection{Initial cofactor inventories and firing order}
 
-Table~\ref{tab:glycolysis_inventory_controls} holds the full prescribed reaction multiset fixed and varies only the initial inventory. From glucose alone ($I_0$), the adenylate set $\{\mathrm{ATP},\mathrm{ADP}\}$ is an empty siphon in the selected reaction subnet, which rules out ATP-dependent startup. Supplying ATP alone ($I_1$, $I_2$) still leaves net deficits of two ADP, two NAD$^+$ and two orthophosphate tokens. Adding NAD$^+$ removes only its deficit ($I_3$); adding phosphate as well still leaves an ADP deficit ($I_4$). These obstructions follow already from $m_0+\mathbf Sf\not\ge0$.
+Table~\ref{tab:glycolysis_inventory_controls} holds the full prescribed reaction multiset fixed and varies only the initial inventory. From glucose alone ($I_0$), the adenylate set $\{\mathrm{ATP},\mathrm{ADP}\}$ is an empty siphon in the selected reaction subnet, which rules out ATP-dependent startup. Supplying ATP alone ($I_1$, $I_2$) still leaves net deficits of two ADP, two NAD$^+$ and two orthophosphate tokens. Adding NAD$^+$ removes only its deficit ($I_3$). Adding phosphate as well still leaves an ADP deficit ($I_4$). These obstructions follow already from $m_0+\mathbf Sf\not\ge0$.
 
-Inventory $I_5$ supplies one ATP, two ADP, two NAD$^+$ and two orthophosphate tokens alongside glucose. Its predicted final inventory is non-negative, but the prescribed multiset is unrealizable: two ATP-consuming preparatory steps must occur before any ATP-producing payoff reaction. Exhaustive search stops after three markings. With two initial ATP instead ($I_6$), an independently replayed 15-step certificate completes the same multiset after exploring 30 markings. The final inventory is two pyruvates, four ATP, two NADH, two water and two protons, with no unlisted tokens. No case receives replenishment during firing. This paired control distinguishes aggregate stoichiometric sufficiency from an enabled firing order.
+Inventory $I_5$ supplies one ATP, two ADP, two NAD$^+$ and two orthophosphate tokens alongside glucose. Its predicted final inventory is non-negative, but the prescribed multiset is unrealizable because two ATP-consuming preparatory steps must occur before any ATP-producing payoff reaction. Exhaustive search stops after three markings. With two initial ATP instead ($I_6$), an independently replayed 15-step certificate completes the same multiset after exploring 30 markings. The final inventory is two pyruvates, four ATP, two NADH, two water and two protons, with no unlisted tokens. No case receives replenishment during firing.
 
 \begin{table}[htbp]
 \centering
-\caption{Initial-inventory controls for the prescribed full glycolytic flux. Each case starts with one glucose and the listed cofactor tokens, with zero tokens of all other species. $\mathrm P_i$ denotes orthophosphate; Net tests $m_0+\mathbf Sf\ge0$, States counts explored markings, and Length is the verified certificate length. Negative decisions are exhaustive for the prescribed multiset.}
+\caption{Initial-inventory controls for the prescribed full glycolytic flux. Each case starts with one glucose and the listed cofactor tokens, with zero tokens of all other species. $\mathrm P_i$ denotes orthophosphate. Net tests $m_0+\mathbf Sf\ge0$, States counts explored markings, and Length is the verified certificate length. Negative decisions are exhaustive for the prescribed multiset.}
 \label{tab:glycolysis_inventory_controls}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
@@ -571,15 +566,15 @@ $I_6$ & 2 & 2 & 2 & 2 & yes & realizable & 30 & 15 \\
 \section{Formose networks: expansion and precursor requirements}
 \label{sec:si_case_formose}
 
-The formose reaction system serves as a benchmark for rule-based graph transformation, exact mass conservation, and discrete pathway realizability in open-ended reaction spaces. Graph transformation explores carbohydrate condensation from formaldehyde ($C_1$) and glycolaldehyde ($C_2$) seeds through recursive aldol coupling and enediol-mediated keto-enol tautomerization.
+Formose expansion starts from formaldehyde ($C_1$) and glycolaldehyde ($C_2$), using aldol coupling and enediol-mediated keto-enol tautomerization.
 
 \subsection{Network growth and stoichiometric carbon conservation}
 
-Table~\ref{tab:formose_dpo_comparison} reports network growth from the formaldehyde and glycolaldehyde seeds. After four iterations, the network contains 37 species and 44 reactions and reaches species with ten carbon atoms ($C_{10}$). Exact nullspace analysis of its stoichiometric matrix identifies a single positive conservation semiflow whose weights match the carbon atom count of every species, confirming carbon conservation across the generated reactions.
+After four expansion iterations (Table~\ref{tab:formose_dpo_comparison}), the network contains 37 species and 44 reactions and reaches species with ten carbon atoms ($C_{10}$). Exact nullspace analysis identifies a single primitive positive conservation semiflow. Its weight for every species equals that species' carbon atom count, confirming carbon conservation across all generated reactions.
 
 \subsection{Comparative rule expansion benchmarking}
 
-Table~\ref{tab:formose_dpo_comparison} compares the full API runtime of \texttt{SynReactor} DPO against \texttt{M{\O}D} and \texttt{MolFoundry} across six expansion depths from fresh formaldehyde and glycolaldehyde seeds. Timings are evaluated across 20 timed repetitions after three warm-ups with all tool processes bound to one logical CPU. Each tool uses its native rule format, and generated molecules are canonicalized without explicit hydrogens to evaluate exact network equivalence. Across all completed depths, all three tools generate identical species sets and directed stoichiometric reactions, validating algorithmic equivalence.
+We compare full API runtimes for \texttt{SynReactor} DPO, \texttt{M{\O}D}, and \texttt{MolFoundry} in Table~\ref{tab:formose_dpo_comparison}. Each tool runs on one logical CPU from fresh formaldehyde and glycolaldehyde seeds using its native rule format. We canonicalize molecules without explicit hydrogens before comparing outputs. All three tools produce identical species and directed stoichiometric reaction sets at each of the six expansion depths.
 
 \begin{table}[htbp]
 \centering
@@ -626,11 +621,11 @@ $T_{6}$ & 3 & 4 & $2r_{1}+r_{3}+r_{7}$ \\
 \label{fig:formose_reaction_motifs}
 \end{figure}
 
-Table~\ref{tab:formose_exact_benchmark} evaluates five initial precursor inventories. Formaldehyde is $C_1$ and glycolaldehyde is $C_2$. Every positive sequence is confirmed by a replayable firing sequence, while negative decisions are established by exhaustive search over the prescribed multiset. For an independent check, the same reaction multisets and initial markings are supplied to \texttt{MolFoundry}'s \texttt{FlowSolution}, without optimizing a new hyperflow. Its \texttt{is\_realizable()} method and SMT certificate enumeration agree with all ten \synkit decisions. All three positive certificates are independently replayed, checking enabling before every firing, the requested reaction multiplicities, and target production. This comparison concerns the prescribed routes, rather than unrestricted target reachability. Both prescribed routes consume no formaldehyde: their different outcomes among the equal-carbon inventories follow from glycolaldehyde counts.
+We test both target routes from five initial precursor inventories (Table~\ref{tab:formose_exact_benchmark}). For an independent comparison, we supply the same prescribed reaction multisets and initial markings to \texttt{MolFoundry}'s \texttt{FlowSolution}, without optimizing a new hyperflow. Its \texttt{is\_realizable()} method and SMT certificate enumeration agree with all ten \synkit decisions. We independently replay all three positive certificates, checking enabling before every firing, the requested reaction multiplicities, and target production. Negative decisions come from exhaustive search over the prescribed multiset. They do not rule out other routes to the targets.
 
 \begin{table}[htbp]
 \centering
-\caption{Realizability of the prescribed tetrose and hexose routes across five precursor inventories. Counts denote molecules and total carbon counts carbon tokens. Yes indicates a verified certificate and No an exhaustive negative decision for the selected multiset.}
+\caption{Realizability of the prescribed tetrose and hexose routes across five precursor inventories. Counts denote molecules. Total carbon counts carbon tokens. Yes indicates a verified certificate and No an exhaustive negative decision for the selected multiset.}
 \label{tab:formose_exact_benchmark}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
 \toprule
@@ -645,8 +640,9 @@ $M_5$ & 0 & 3 & 6 & yes & yes \\
 \end{tabular*}
 \end{table}
 
-The tetrose route converts glycolaldehyde to enediol ($r_1$) and couples that intermediate with a second glycolaldehyde ($r_3$). This motif requires two glycolaldehyde precursors and consumes no formaldehyde, so inventories $M_4$ and $M_5$ support it while $M_3$ (containing only one glycolaldehyde) cannot. The hexose route requires two successive aldol couplings consuming two enediol equivalents, demanding three glycolaldehyde precursors in total ($2r_1 + r_3 + r_7$), which only pool $M_5$ satisfies. Consequently, the selected multisets have different realizability outcomes in the three six-carbon inventories ($M_3$, $M_4$, and $M_5$). The negative decisions do not exclude alternative target-producing multisets from these mixed inventories.\par
-An independent structural obstruction applies to a formaldehyde-only inventory: one eight-species minimal siphon of the generated network contains glycolaldehyde (\texttt{O=CCO}), its enediol (\texttt{OC=CO}), and both targets, but excludes formaldehyde (\texttt{C=O}). If all eight species are absent initially, no reaction can produce a member, so formaldehyde alone cannot initiate either target. Each inventory $M_1$--$M_5$ already marks this siphon through glycolaldehyde; their selected-route decisions therefore require the separate multiplicity analysis above.
+The tetrose route first converts glycolaldehyde to enediol ($r_1$), then couples it with a second glycolaldehyde ($r_3$). It therefore requires two glycolaldehydes and is supported by $M_4$ and $M_5$. The hexose route adds a second enediol through $r_7$, requiring three glycolaldehydes in total, which only $M_5$ supplies (Fig.~\ref{fig:formose_reaction_motifs}). Neither route consumes formaldehyde. The equal-carbon inventories $M_3$ to $M_5$ differ in realizability because they supply different numbers of the required precursor. We do not test alternative target-producing multisets from these inventories.
+
+An independent structural obstruction applies to formaldehyde alone. An eight-species minimal siphon contains glycolaldehyde (\texttt{O=CCO}), its enediol (\texttt{OC=CO}), and both targets, but excludes formaldehyde (\texttt{C=O}). If all eight species are absent initially, no reaction can produce a member, so formaldehyde alone cannot initiate either target. All five tested inventories already mark this siphon through glycolaldehyde. Their selected-route decisions therefore require the separate multiplicity analysis above.
 
 \bibliography{../refs}
 
